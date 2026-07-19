@@ -11,42 +11,170 @@
   --violet: #72538d;
 }
 
-[data-md-color-scheme="default"] body { background: var(--paper); color: var(--ink); }
-.md-grid { max-width: 92rem; }
-.md-content__inner { max-width: 56rem; margin-inline: auto; }
-.md-typeset { font-size: .84rem; line-height: 1.78; }
-.md-typeset p, .md-typeset li { max-width: 76ch; }
-.md-typeset h1, .md-typeset h2, .md-typeset h3 { font-family: var(--math-serif); color: inherit; letter-spacing: -.025em; }
-.md-typeset h1 { font-size: 2.65rem; line-height: 1.08; margin-bottom: 1.1rem; }
-.md-typeset h2 { margin-top: 2.8rem; padding-top: .55rem; border-top: 1px solid var(--line); }
-.md-typeset h3 { margin-top: 2rem; }
-.md-typeset .arithmatex { overflow-x: auto; padding: .15rem .1rem; }
-.md-typeset .admonition, .md-typeset details {
-  border: 1px solid var(--line); border-left-width: .28rem; border-radius: .65rem;
-  box-shadow: 0 10px 28px rgba(23,32,51,.055); background: rgba(255,255,255,.58);
+[data-md-color-scheme="default"] body {
+  background: var(--paper);
+  color: var(--ink);
 }
-.md-typeset .admonition-title, .md-typeset summary { font-weight: 750; letter-spacing: .015em; }
+
+/* Keep the page readable instead of stretching it across the full viewport. */
+.md-grid {
+  max-width: 82rem;
+}
+
+.md-content__inner {
+  max-width: 49rem;
+  margin-inline: auto;
+  padding-top: 1.2rem;
+}
+
+.md-typeset {
+  font-size: .88rem;
+  line-height: 1.72;
+}
+
+.md-typeset > p,
+.md-typeset li,
+.md-typeset .admonition > p:not(.admonition-title),
+.md-typeset details > p:not(.admonition-title) {
+  max-width: 72ch;
+}
+
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3 {
+  font-family: var(--math-serif);
+  color: inherit;
+  letter-spacing: -.02em;
+}
+
+.md-typeset h1 {
+  font-size: 2.45rem;
+  line-height: 1.08;
+  margin: 0 0 1.2rem;
+}
+
+.md-typeset h2 {
+  margin-top: 2.6rem;
+  padding-top: .55rem;
+  border-top: 1px solid var(--line);
+}
+
+.md-typeset h3 {
+  margin-top: 2rem;
+}
+
+.md-typeset .arithmatex {
+  overflow-x: auto;
+  padding: .15rem .1rem;
+}
+
+.md-typeset .admonition,
+.md-typeset details {
+  border: 1px solid var(--line);
+  border-left-width: .28rem;
+  border-radius: .65rem;
+  box-shadow: 0 8px 24px rgba(23,32,51,.05);
+  background: rgba(255,255,255,.58);
+}
+
+/* Material uses a paragraph for the title. It must span the whole box. */
+.md-typeset .admonition-title,
+.md-typeset summary {
+  max-width: none !important;
+  width: auto;
+  margin-right: 0;
+  font-weight: 750;
+  letter-spacing: .015em;
+}
+
 .md-typeset .admonition.definition { border-left-color: var(--blue); }
 .md-typeset .admonition.theorem { border-left-color: var(--violet); }
 .md-typeset .admonition.proof { border-left-color: var(--green); }
 .md-typeset .admonition.example { border-left-color: var(--gold); }
+
 .hero {
-  margin: 0 0 2rem; padding: clamp(1.8rem,5vw,4rem); border-radius: 1.2rem;
-  background: linear-gradient(135deg,#10233f,#315f86); color: white;
+  margin: 0 0 2rem;
+  padding: clamp(1.8rem,5vw,4rem);
+  border-radius: 1.2rem;
+  background: linear-gradient(135deg,#10233f,#315f86);
+  color: white;
   box-shadow: 0 24px 64px rgba(16,35,63,.23);
 }
-.hero h1 { color: white; margin: 0; max-width: 13ch; font-size: clamp(2.8rem,7vw,5.5rem); }
-.hero p { max-width: 45rem; color: rgba(255,255,255,.84); font-size: 1.15rem; }
-.chapter-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; margin:1.5rem 0; }
-.chapter-card { display:block; padding:1.2rem 1.3rem; border:1px solid var(--line); border-radius:.85rem; background:rgba(255,255,255,.62); text-decoration:none; color:inherit; box-shadow:0 10px 28px rgba(23,32,51,.06); }
-.chapter-card:hover { transform:translateY(-2px); transition:.15s ease; }
-.chapter-card strong { display:block; font-family:var(--math-serif); font-size:1.25rem; margin-bottom:.35rem; }
-.math-figure { margin:1.6rem auto 2rem; padding:1rem; max-width:48rem; border:1px solid var(--line); border-radius:.8rem; background:rgba(255,255,255,.5); }
-.math-figure svg { width:100%; height:auto; display:block; }
-.fig-axis { stroke:currentColor; stroke-width:2; }
-.fig-main { stroke:#4f85b4; stroke-width:4; fill:none; }
-.fig-helper { stroke:#8f99a8; stroke-width:2; stroke-dasharray:8 7; fill:none; }
-.fig-dot { fill:#f29d49; stroke:currentColor; stroke-width:1.5; }
-.fig-label { fill:currentColor; font: 18px "Source Sans 3", sans-serif; }
-.fig-caption { fill:currentColor; opacity:.7; font: 17px "Source Sans 3", sans-serif; }
-@media (max-width:700px){ .chapter-grid{grid-template-columns:1fr}.md-typeset h1{font-size:2.15rem}.md-content__inner{padding-inline:.3rem} }
+
+.hero h1 {
+  color: white;
+  margin: 0;
+  max-width: 13ch;
+  font-size: clamp(2.8rem,7vw,5.5rem);
+}
+
+.hero p {
+  max-width: 45rem;
+  color: rgba(255,255,255,.84);
+  font-size: 1.15rem;
+}
+
+.chapter-grid {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.chapter-card {
+  display: block;
+  padding: 1.2rem 1.3rem;
+  border: 1px solid var(--line);
+  border-radius: .85rem;
+  background: rgba(255,255,255,.62);
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 10px 28px rgba(23,32,51,.06);
+}
+
+.chapter-card:hover {
+  transform: translateY(-2px);
+  transition: .15s ease;
+}
+
+.chapter-card strong {
+  display: block;
+  font-family: var(--math-serif);
+  font-size: 1.25rem;
+  margin-bottom: .35rem;
+}
+
+.math-figure {
+  margin: 1.5rem auto 2rem;
+  padding: .75rem;
+  max-width: 40rem;
+  border: 1px solid var(--line);
+  border-radius: .8rem;
+  background: rgba(255,255,255,.5);
+}
+
+.math-figure svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.fig-axis { stroke: currentColor; stroke-width: 2; }
+.fig-main { stroke: #4f85b4; stroke-width: 4; fill: none; }
+.fig-helper { stroke: #8f99a8; stroke-width: 2; stroke-dasharray: 8 7; fill: none; }
+.fig-dot { fill: #f29d49; stroke: currentColor; stroke-width: 1.5; }
+.fig-label { fill: currentColor; font: 18px "Source Sans 3", sans-serif; }
+.fig-caption { fill: currentColor; opacity: .7; font: 17px "Source Sans 3", sans-serif; }
+
+@media (max-width: 1220px) {
+  .md-sidebar--secondary {
+    display: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .chapter-grid { grid-template-columns: 1fr; }
+  .md-typeset h1 { font-size: 2.05rem; }
+  .md-content__inner { padding-inline: .45rem; }
+  .math-figure { padding: .35rem; }
+}
