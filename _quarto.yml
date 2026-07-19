@@ -53,6 +53,7 @@ format:
     theme:
       light: [litera, styles.scss]
       dark: [darkly, styles.scss]
+    css: chapter.css
     toc: true
     toc-depth: 3
     toc-title: "On this page"
