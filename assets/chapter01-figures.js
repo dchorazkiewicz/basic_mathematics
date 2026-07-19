@@ -1,0 +1,38 @@
+(() => {
+  const NS='http://www.w3.org/2000/svg';
+  const E=(n,a={},t='')=>{const e=document.createElementNS(NS,n);Object.entries(a).forEach(([k,v])=>e.setAttribute(k,v));if(t)e.textContent=t;return e};
+  const svg=(w=760,h=360)=>{const s=E('svg',{viewBox:`0 0 ${w} ${h}`,role:'img','aria-hidden':'true'});s.classList.add('chapter-figure-svg');return s};
+  const line=(s,x1,y1,x2,y2,c='main',dash='')=>s.append(E('line',{x1,y1,x2,y2,class:c,'stroke-dasharray':dash}));
+  const dot=(s,x,y,l='',dx=8,dy=-8)=>{s.append(E('circle',{cx:x,cy:y,r:4,class:'dot'}));if(l)s.append(E('text',{x:x+dx,y:y+dy,class:'label'},l));};
+  const txt=(s,x,y,t,c='label',anchor='middle')=>s.append(E('text',{x,y,class:c,'text-anchor':anchor},t));
+  const axes=(s,cx,cy,xr,yr)=>{line(s,cx-xr,cy,cx+xr,cy,'axis');line(s,cx,cy+yr,cx,cy-yr,'axis');txt(s,cx+xr-6,cy-10,'x','label','end');txt(s,cx+12,cy-yr+16,'y','label','start');};
+  const path=(s,d,c='main',fill='none')=>s.append(E('path',{d,class:c,fill}));
+  const figs={
+    timeline(){const s=svg(800,190);line(s,60,105,740,105,'axis');dot(s,130,105);dot(s,665,105);txt(s,130,65,"c. 300 BC",'label');txt(s,130,87,"Euclid's Elements",'small');txt(s,665,65,'1637','label');txt(s,665,87,"Descartes' La Géométrie",'small');line(s,130,140,665,140,'helper');txt(s,398,166,'about 1900 years','small');return s},
+    plane(){const s=svg(760,330);s.append(E('rect',{x:55,y:35,width:650,height:230,rx:12,class:'plane'}));[[130,100],[220,205],[335,82],[455,215],[565,105],[650,190]].forEach(p=>dot(s,...p));txt(s,380,305,'a Euclidean plane','caption');return s},
+    firstLine(){const s=this.plane();line(s,105,220,665,90,'main');dot(s,190,200,'A',-18,22);dot(s,590,107,'B',10,-12);txt(s,380,305,'the first constructed line','caption');return s},
+    origin(){const s=svg(760,330);s.append(E('rect',{x:55,y:35,width:650,height:230,rx:12,class:'plane'}));line(s,100,210,660,85,'main');dot(s,380,147,'O',10,22);txt(s,380,305,'a point chosen on the first line','caption');return s},
+    axes(){const s=svg(700,390);axes(s,350,210,270,150);dot(s,350,210,'O',-22,24);path(s,'M365 210 v-18 h18','helper');return s},
+    orientation(){const s=this.axes();txt(s,615,184,'positive x','small');txt(s,365,72,'positive y','small','start');txt(s,145,235,'negative x','small');txt(s,310,345,'negative y','small');return s},
+    unit(){const s=svg(720,520);axes(s,360,255,290,205);[45,90,135].forEach((r,i)=>{s.append(E('circle',{cx:360,cy:255,r,class:`construction c${i}`}));});for(let k=-3;k<=3;k++){if(!k)continue;line(s,360+k*45,248,360+k*45,262,'tick');txt(s,360+k*45,282,String(k),'small');line(s,353,255-k*45,367,255-k*45,'tick');txt(s,340,260-k*45,String(k),'small','end');}txt(s,360,500,'one common unit transferred along both axes','caption');return s},
+    bisection(){const s=svg(700,210);line(s,90,105,610,105,'axis');['0','1/4','1/2','3/4','1'].forEach((t,i)=>{const x=100+i*125;line(s,x,95,x,115,'tick');txt(s,x,145,t,'label');});txt(s,350,55,'successive bisections of one unit','caption');return s},
+    projection(){const s=svg(700,410);axes(s,120,330,500,260);const x=440,y=120;line(s,x,y,x,330,'helper','8 8');line(s,x,y,120,y,'helper','8 8');dot(s,x,y,'P',10,-12);dot(s,x,330,'Pₓ',-8,28);dot(s,120,y,'Pᵧ',-42,5);return s},
+    distance(){const s=svg(700,420);axes(s,100,335,530,270);const P=[220,275],Q=[500,105],R=[500,275];line(s,...P,...Q,'main');line(s,...P,...R,'helper');line(s,...R,...Q,'helper');dot(s,...P,'P',-22,24);dot(s,...Q,'Q',10,-12);txt(s,360,300,'|x₂−x₁|','small');txt(s,525,190,'|y₂−y₁|','small','start');path(s,'M482 275 v-18 h18','helper');return s},
+    triangle(){const s=svg(700,430);axes(s,300,335,270,260);const A=[170,335],B=[520,335],C=[380,95];path(s,`M${A} L${B} L${C} Z`,'main');dot(s,...A,'A=(-2,0)',-8,28);dot(s,...B,'B=(3,0)',10,28);dot(s,...C,'C=(1,3)',0,-14);return s},
+    circleDisk(){const s=svg(760,370);[[205,'circle',false],[555,'disk',true]].forEach(([cx,l,f])=>{axes(s,cx,165,130,125);s.append(E('circle',{cx,cy:165,r:85,class:f?'disk':'main'}));txt(s,cx,315,l,'caption');});return s},
+    curves(){const s=svg(760,600);const centers=[[190,150],[570,150],[190,445],[570,445]];centers.forEach(([x,y])=>axes(s,x,y,135,105));s.append(E('circle',{cx:190,cy:150,r:65,class:'main'}));s.append(E('ellipse',{cx:570,cy:150,rx:100,ry:60,class:'main'}));path(s,'M110 445 C125 350 165 350 185 445 C205 540 245 540 270 445','main');path(s,'M490 445 C515 540 555 540 575 445 C595 350 635 350 650 445','main');path(s,'M485 510 Q570 310 655 510','main');['circle','ellipse','hyperbola','parabola'].forEach((t,i)=>txt(s,centers[i][0],centers[i][1]+135,t,'caption'));return s},
+    sine(){const s=svg(820,310);axes(s,410,155,360,105);let d='';for(let i=0;i<=720;i++){const x=50+i,y=155-70*Math.sin((i/720)*4*Math.PI-2*Math.PI);d+=(i?'L':'M')+x+' '+y;}path(s,d,'main');txt(s,410,285,'y = sin x','caption');return s},
+    intersections(){const s=svg(700,470);axes(s,340,390,285,320);path(s,'M95 390 Q340 -40 585 390','main');line(s,80,430,610,80,'secondary');dot(s,250,310,'(-1,1)',-45,-12);dot(s,500,110,'(2,4)',10,-10);return s},
+    postulate1(){const s=svg(620,230);dot(s,150,150,'A',-4,28);dot(s,470,75,'B',0,-15);line(s,150,150,470,75,'main');return s},
+    postulate2(){const s=svg(620,230);dot(s,140,115,'A',0,28);dot(s,380,115,'B',0,28);line(s,140,115,380,115,'main');line(s,380,115,540,115,'helper','8 7');txt(s,540,145,'C','label');return s},
+    postulate3(){const s=svg(620,330);s.append(E('circle',{cx:300,cy:150,r:95,class:'helper'}));dot(s,300,150,'O',-22,25);dot(s,395,150,'A',12,6);line(s,300,150,395,150,'main');txt(s,350,140,'r','small');return s},
+    postulate4(){const s=svg(700,300);line(s,80,160,300,160,'main');line(s,190,55,190,250,'main');path(s,'M205 160 v-20 h-15','helper');line(s,420,220,630,85,'main');line(s,445,70,610,240,'main');txt(s,350,280,'all right angles are congruent','caption');return s},
+    parallel(){const s=svg(700,310);line(s,70,105,630,70,'main');line(s,70,230,630,195,'main');line(s,270,285,400,25,'helper');return s},
+    perpBisector(){const s=svg(700,430);dot(s,220,215,'A',0,30);dot(s,480,215,'B',0,30);s.append(E('circle',{cx:220,cy:215,r:190,class:'construction'}));s.append(E('circle',{cx:480,cy:215,r:190,class:'construction'}));line(s,350,35,350,395,'main');dot(s,350,75,'P',10,-8);dot(s,350,355,'Q',10,18);line(s,220,215,480,215,'secondary');return s},
+    thales(){const s=svg(700,440);const A=[350,55],B=[110,360],C=[610,360],D=[230,205],E=[480,205];path(s,`M${A}L${B}L${C}Z`,'main');line(s,...D,...E,'secondary');[A,B,C,D,E].forEach((p,i)=>dot(s,...p,'ABCDE'[i],i===3?-20:10,i<1?-10:22));txt(s,355,190,'DE ∥ BC','small');return s},
+    trig(){const s=svg(720,400);const A=[90,320],B=[590,320],C=[590,85],D=[400,320],E=[400,175];path(s,`M${A}L${B}L${C}Z`,'main');line(s,...D,...E,'secondary');path(s,'M560 320 v-25 h30','helper');txt(s,440,345,'a','small');txt(s,615,205,'b','small');txt(s,345,170,'h','small');txt(s,285,345,"a'",'small');txt(s,380,245,"b'",'small');return s},
+    angle(){const s=svg(650,350);const O=[120,280],A=[540,280],B=[360,65];path(s,`M${O} L${A} A420 420 0 0 0 ${B} Z`,'anglefill','#dceafa');line(s,...O,...A,'axis');line(s,...O,...B,'axis');dot(s,...O,'O',-22,25);txt(s,210,240,'α','label');return s},
+    cosine(){const s=svg(700,430);const O=[110,350],A=[590,350],B=[300,70];path(s,`M${O}L${A}L${B}Z`,'main');dot(s,...O,'O',-22,25);dot(s,...A,'A',10,22);dot(s,...B,'B',0,-15);txt(s,225,190,'|OB|','small');txt(s,430,190,'|AB|','small');txt(s,350,375,'|OA|','small');txt(s,185,315,'α','label');return s}
+  };
+  document.querySelectorAll('[data-figure]').forEach(el=>{const f=figs[el.dataset.figure];if(f){el.replaceChildren(f.call(figs));}});
+})();
