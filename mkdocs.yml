@@ -1,0 +1,74 @@
+site_name: Mathematical Stories
+site_description: A constructive mathematical text
+site_url: https://dchorazkiewicz.github.io/basic_mathematics/
+repo_url: https://github.com/dchorazkiewicz/basic_mathematics
+repo_name: dchorazkiewicz/basic_mathematics
+
+strict: true
+
+theme:
+  name: material
+  language: en
+  font:
+    text: Source Sans 3
+    code: JetBrains Mono
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: deep orange
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: amber
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - navigation.footer
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+
+nav:
+  - Home: index.md
+  - Cartesian Geometry and Coordinates:
+      - chapter-01/index.md
+      - Constructing Cartesian coordinates: chapter-01/constructing-coordinates.md
+      - Graphs and intersections: chapter-01/graphs-and-intersections.md
+      - Euclidean reference: chapter-01/euclidean-reference.md
+      - Review exercises: chapter-01/review-exercises.md
+
+markdown_extensions:
+  - attr_list
+  - md_in_html
+  - tables
+  - footnotes
+  - def_list
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - admonition
+  - toc:
+      permalink: true
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+extra_css:
+  - stylesheets/extra.css
+
+copyright: Copyright &copy; Damian Chorążkiewicz
