@@ -1,0 +1,95 @@
+---
+title: Prosta przez dwa punkty
+description: Przykładowa strona pokazująca skład matematyczny, dowód i rozwijane rachunki.
+sidebar:
+  order: 2
+---
+
+import Environment from '../../../components/math/Environment.astro';
+import Proof from '../../../components/math/Proof.astro';
+import Details from '../../../components/math/Details.astro';
+
+Niech \(A=(x_1,y_1)\) i \(B=(x_2,y_2)\) będą różnymi punktami płaszczyzny. Wektor
+
+$$
+\vect v=B-A=(x_2-x_1,\,y_2-y_1)
+$$
+
+wyznacza kierunek prostej przechodzącej przez te punkty.
+
+<Environment kind="definition" title="Postać parametryczna prostej">
+
+Prostą przechodzącą przez \(A\) i \(B\) opisujemy równaniem
+
+$$
+\ell:\quad P(t)=A+t(B-A),\qquad t\in\R.
+$$
+
+</Environment>
+
+## Wieloliniowe wyprowadzenie
+
+Tak — dłuższe przekształcenia typu `align` są normalnym elementem dokumentu:
+
+$$
+\begin{aligned}
+P(t)
+  &= (x_1,y_1)+t\bigl((x_2,y_2)-(x_1,y_1)\bigr) \\
+  &= (x_1,y_1)+t(x_2-x_1,\,y_2-y_1) \\
+  &= \bigl(x_1+t(x_2-x_1),\,y_1+t(y_2-y_1)\bigr).
+\end{aligned}
+$$
+
+<Environment kind="theorem" title="Jednoznaczność prostej">
+
+Przez dwa różne punkty płaszczyzny przechodzi dokładnie jedna prosta.
+
+</Environment>
+
+<Proof>
+
+Istnienie daje bezpośrednio opis parametryczny
+
+$$
+P(t)=A+t(B-A).
+$$
+
+Jeżeli inna prosta przechodzi przez \(A\) i \(B\), to jej wektor kierunkowy musi być równoległy do \(B-A\). Obie proste mają zatem ten sam punkt i ten sam kierunek, więc są identyczne.
+
+</Proof>
+
+<Details summary="Pokaż pełne sprawdzenie, że punkty A i B należą do prostej">
+
+Dla \(t=0\) otrzymujemy
+
+$$
+P(0)=A+0(B-A)=A.
+$$
+
+Dla \(t=1\) otrzymujemy
+
+$$
+\begin{aligned}
+P(1)
+  &= A+(B-A) \\
+  &= A+B-A \\
+  &= B.
+\end{aligned}
+$$
+
+</Details>
+
+<Environment kind="example" title="Przykład liczbowy">
+
+Dla \(A=(1,2)\) i \(B=(4,-1)\):
+
+$$
+\begin{aligned}
+B-A &= (3,-3),\\
+P(t) &= (1,2)+t(3,-3),\\
+x(t) &= 1+3t,\\
+y(t) &= 2-3t.
+\end{aligned}
+$$
+
+</Environment>
