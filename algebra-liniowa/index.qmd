@@ -1,0 +1,5 @@
+---
+title: "Algebra liniowa"
+---
+
+Macierze, układy równań, wektory i przekształcenia liniowe. Ta podstrona jest na razie tylko miejscem w minimalnym szkielecie serwisu.
