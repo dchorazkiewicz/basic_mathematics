@@ -1,5 +1,4 @@
 import { defineConfig } from 'astro/config';
-import mdx from '@astrojs/mdx';
 import starlight from '@astrojs/starlight';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
@@ -12,9 +11,13 @@ export default defineConfig({
       title: 'Basic Mathematics',
       description: 'Interaktywny dokument matematyczny: geometria analityczna, algebra liniowa i analiza.',
       customCss: ['./src/styles/custom.css'],
-      social: {
-        github: 'https://github.com/dchorazkiewicz/basic_mathematics'
-      },
+      social: [
+        {
+          icon: 'github',
+          label: 'GitHub',
+          href: 'https://github.com/dchorazkiewicz/basic_mathematics'
+        }
+      ],
       sidebar: [
         {
           label: 'Geometria analityczna',
@@ -32,8 +35,7 @@ export default defineConfig({
           autogenerate: { directory: 'analiza' }
         }
       ]
-    }),
-    mdx()
+    })
   ],
   markdown: {
     remarkPlugins: [remarkMath],
