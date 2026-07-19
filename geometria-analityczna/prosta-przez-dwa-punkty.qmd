@@ -1,0 +1,75 @@
+---
+title: "Prosta przez dwa punkty"
+---
+
+Niech \(A=(x_1,y_1)\) i \(B=(x_2,y_2)\) będą różnymi punktami. Wektor
+
+$$
+\vec v=B-A=(x_2-x_1,\,y_2-y_1)
+$$
+
+wyznacza kierunek prostej.
+
+::: {.definition}
+**Definicja.** Prostą przechodzącą przez \(A\) i \(B\) opisuje równanie
+
+$$
+\ell:\qquad P(t)=A+t(B-A),\qquad t\in\mathbb R.
+$$
+:::
+
+## Wieloliniowe wyprowadzenie
+
+Wieloliniowe rachunki działają przez standardowe środowiska MathJaxa:
+
+$$
+\begin{aligned}
+P(t)
+  &= (x_1,y_1)+t\bigl((x_2,y_2)-(x_1,y_1)\bigr) \\
+  &= (x_1,y_1)+t(x_2-x_1,\,y_2-y_1) \\
+  &= \bigl(x_1+t(x_2-x_1),\,y_1+t(y_2-y_1)\bigr).
+\end{aligned}
+$$
+
+::: {.theorem}
+**Twierdzenie.** Przez dwa różne punkty płaszczyzny przechodzi dokładnie jedna prosta.
+:::
+
+::: {.proof}
+Istnienie wynika z podanego równania parametrycznego. Każda inna prosta przechodząca przez \(A\) i \(B\) musi mieć kierunek równoległy do \(B-A\). Ma więc ten sam punkt i ten sam kierunek, a zatem jest tą samą prostą.
+:::
+
+<details>
+<summary>Pokaż pełne sprawdzenie punktów A i B</summary>
+
+Dla \(t=0\):
+
+$$
+P(0)=A+0(B-A)=A.
+$$
+
+Dla \(t=1\):
+
+$$
+\begin{aligned}
+P(1)
+  &= A+(B-A) \\
+  &= A+B-A \\
+  &= B.
+\end{aligned}
+$$
+
+</details>
+
+::: {.example}
+**Przykład.** Dla \(A=(1,2)\) i \(B=(4,-1)\):
+
+$$
+\begin{aligned}
+B-A &= (3,-3),\\
+P(t) &= (1,2)+t(3,-3),\\
+x(t) &= 1+3t,\\
+y(t) &= 2-3t.
+\end{aligned}
+$$
+:::
