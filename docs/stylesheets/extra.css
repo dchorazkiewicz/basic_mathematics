@@ -16,10 +16,7 @@
   color: var(--ink);
 }
 
-/* Keep the page readable instead of stretching it across the full viewport. */
-.md-grid {
-  max-width: 82rem;
-}
+.md-grid { max-width: 82rem; }
 
 .md-content__inner {
   max-width: 49rem;
@@ -59,9 +56,7 @@
   border-top: 1px solid var(--line);
 }
 
-.md-typeset h3 {
-  margin-top: 2rem;
-}
+.md-typeset h3 { margin-top: 2rem; }
 
 .md-typeset .arithmatex {
   overflow-x: auto;
@@ -77,7 +72,6 @@
   background: rgba(255,255,255,.58);
 }
 
-/* Material uses a paragraph for the title. It must span the whole box. */
 .md-typeset .admonition-title,
 .md-typeset summary {
   max-width: none !important;
@@ -91,58 +85,6 @@
 .md-typeset .admonition.theorem { border-left-color: var(--violet); }
 .md-typeset .admonition.proof { border-left-color: var(--green); }
 .md-typeset .admonition.example { border-left-color: var(--gold); }
-
-.hero {
-  margin: 0 0 2rem;
-  padding: clamp(1.8rem,5vw,4rem);
-  border-radius: 1.2rem;
-  background: linear-gradient(135deg,#10233f,#315f86);
-  color: white;
-  box-shadow: 0 24px 64px rgba(16,35,63,.23);
-}
-
-.hero h1 {
-  color: white;
-  margin: 0;
-  max-width: 13ch;
-  font-size: clamp(2.8rem,7vw,5.5rem);
-}
-
-.hero p {
-  max-width: 45rem;
-  color: rgba(255,255,255,.84);
-  font-size: 1.15rem;
-}
-
-.chapter-grid {
-  display: grid;
-  grid-template-columns: repeat(2,minmax(0,1fr));
-  gap: 1rem;
-  margin: 1.5rem 0;
-}
-
-.chapter-card {
-  display: block;
-  padding: 1.2rem 1.3rem;
-  border: 1px solid var(--line);
-  border-radius: .85rem;
-  background: rgba(255,255,255,.62);
-  text-decoration: none;
-  color: inherit;
-  box-shadow: 0 10px 28px rgba(23,32,51,.06);
-}
-
-.chapter-card:hover {
-  transform: translateY(-2px);
-  transition: .15s ease;
-}
-
-.chapter-card strong {
-  display: block;
-  font-family: var(--math-serif);
-  font-size: 1.25rem;
-  margin-bottom: .35rem;
-}
 
 .math-figure {
   margin: 1.5rem auto 2rem;
@@ -166,15 +108,133 @@
 .fig-label { fill: currentColor; font: 18px "Source Sans 3", sans-serif; }
 .fig-caption { fill: currentColor; opacity: .7; font: 17px "Source Sans 3", sans-serif; }
 
+/* Home page: a quiet course index, not a marketing landing page. */
+.md-content:has(.home-intro) .md-content__inner {
+  max-width: 58rem;
+  padding-top: 3.6rem;
+}
+
+.home-intro {
+  max-width: 48rem;
+  padding: 0 0 2.6rem;
+}
+
+.home-kicker {
+  margin-bottom: 1rem;
+  color: var(--blue);
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .14em;
+}
+
+.home-intro h1 {
+  max-width: 15ch;
+  margin: 0 0 1.2rem;
+  font-size: clamp(2.8rem, 6vw, 4.6rem);
+  line-height: .98;
+  letter-spacing: -.045em;
+}
+
+.home-intro p {
+  max-width: 43rem !important;
+  margin: 0 0 1.5rem;
+  color: var(--muted);
+  font-size: 1.08rem;
+  line-height: 1.65;
+}
+
+.home-start {
+  display: inline-block;
+  padding-bottom: .18rem;
+  border-bottom: 1px solid currentColor;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.home-divider {
+  height: 1px;
+  margin-bottom: 2rem;
+  background: var(--line);
+}
+
+.home-section-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: .6rem;
+}
+
+.home-section-heading span {
+  font-family: var(--math-serif);
+  font-size: 1.55rem;
+  font-weight: 700;
+}
+
+.home-section-heading p {
+  margin: 0;
+  color: var(--muted);
+  font-size: .84rem;
+}
+
+.chapter-list {
+  border-top: 1px solid var(--line);
+}
+
+.chapter-row {
+  display: grid;
+  grid-template-columns: 2.4rem 1fr 1.5rem;
+  gap: 1rem;
+  align-items: center;
+  padding: 1.15rem .2rem;
+  border-bottom: 1px solid var(--line);
+  color: inherit;
+  text-decoration: none;
+  transition: padding-left .15s ease, color .15s ease;
+}
+
+.chapter-row:hover {
+  padding-left: .45rem;
+  color: var(--blue);
+}
+
+.chapter-number {
+  color: var(--muted);
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+}
+
+.chapter-copy strong {
+  display: block;
+  margin-bottom: .12rem;
+  font-family: var(--math-serif);
+  font-size: 1.08rem;
+}
+
+.chapter-copy small {
+  display: block;
+  color: var(--muted);
+  font-size: .82rem;
+  line-height: 1.45;
+}
+
+.chapter-arrow {
+  font-size: 1.1rem;
+  text-align: right;
+}
+
 @media (max-width: 1220px) {
-  .md-sidebar--secondary {
-    display: none;
-  }
+  .md-sidebar--secondary { display: none; }
 }
 
 @media (max-width: 700px) {
-  .chapter-grid { grid-template-columns: 1fr; }
   .md-typeset h1 { font-size: 2.05rem; }
   .md-content__inner { padding-inline: .45rem; }
   .math-figure { padding: .35rem; }
+  .md-content:has(.home-intro) .md-content__inner { padding-top: 2rem; }
+  .home-intro h1 { font-size: 2.8rem; }
+  .home-section-heading { display: block; }
+  .home-section-heading p { margin-top: .35rem; }
+  .chapter-row { grid-template-columns: 2rem 1fr 1rem; gap: .65rem; }
 }
