@@ -3,7 +3,7 @@ project:
   output-dir: _site
 
 website:
-  title: "Basic Mathematics"
+  title: "Mathematical Stories"
   site-url: "https://dchorazkiewicz.github.io/basic_mathematics/"
   repo-url: "https://github.com/dchorazkiewicz/basic_mathematics"
   repo-actions: [source, issue]
@@ -17,13 +17,9 @@ website:
     pinned: true
     left:
       - href: index.qmd
-        text: Start
-      - href: geometria-analityczna/index.qmd
-        text: Geometria analityczna
-      - href: algebra-liniowa/index.qmd
-        text: Algebra liniowa
-      - href: analiza/index.qmd
-        text: Analiza matematyczna
+        text: Home
+      - href: chapter-01/index.qmd
+        text: Cartesian Geometry and Coordinates
     right:
       - icon: github
         href: "https://github.com/dchorazkiewicz/basic_mathematics"
@@ -35,21 +31,21 @@ website:
     border: false
     contents:
       - href: index.qmd
-        text: Start
-      - section: "Geometria analityczna"
-        href: geometria-analityczna/index.qmd
+        text: Home
+      - section: "Chapter 1 — Cartesian Geometry and Coordinates"
+        href: chapter-01/index.qmd
         contents:
-          - href: geometria-analityczna/prosta-przez-dwa-punkty.qmd
-            text: Prosta przez dwa punkty
-      - section: "Algebra liniowa"
-        href: algebra-liniowa/index.qmd
-        contents: []
-      - section: "Analiza matematyczna"
-        href: analiza/index.qmd
-        contents: []
+          - href: chapter-01/constructing-coordinates.qmd
+            text: Constructing Cartesian coordinates
+          - href: chapter-01/graphs-and-intersections.qmd
+            text: Graphs and intersections
+          - href: chapter-01/euclidean-reference.qmd
+            text: Euclidean reference
+          - href: chapter-01/review-exercises.qmd
+            text: Review exercises
   page-footer:
-    left: "Basic Mathematics"
-    right: "Dokument matematyczny publikowany w Quarto"
+    left: "Mathematical Stories"
+    right: "An interactive mathematical text"
     border: true
 
 format:
@@ -59,11 +55,11 @@ format:
       dark: [darkly, styles.scss]
     toc: true
     toc-depth: 3
-    toc-title: "Na tej stronie"
+    toc-title: "On this page"
     number-sections: true
     html-math-method: mathjax
     smooth-scroll: true
-    code-copy: true
     anchor-sections: true
+    include-after-body: figures.html
 
-lang: pl
+lang: en
