@@ -2,7 +2,7 @@
 title: "Prosta przez dwa punkty"
 ---
 
-Niech \(A=(x_1,y_1)\) i \(B=(x_2,y_2)\) będą różnymi punktami. Wektor
+Niech $A=(x_1,y_1)$ i $B=(x_2,y_2)$ będą różnymi punktami. Wektor
 
 $$
 \vec v=B-A=(x_2-x_1,\,y_2-y_1)
@@ -11,7 +11,7 @@ $$
 wyznacza kierunek prostej.
 
 ::: {.definition}
-**Definicja.** Prostą przechodzącą przez \(A\) i \(B\) opisuje równanie
+**Definicja.** Prostą przechodzącą przez $A$ i $B$ opisuje równanie
 
 $$
 \ell:\qquad P(t)=A+t(B-A),\qquad t\in\mathbb R.
@@ -36,19 +36,19 @@ $$
 :::
 
 ::: {.proof}
-Istnienie wynika z podanego równania parametrycznego. Każda inna prosta przechodząca przez \(A\) i \(B\) musi mieć kierunek równoległy do \(B-A\). Ma więc ten sam punkt i ten sam kierunek, a zatem jest tą samą prostą.
+Istnienie wynika z podanego równania parametrycznego. Każda inna prosta przechodząca przez $A$ i $B$ musi mieć kierunek równoległy do $B-A$. Ma więc ten sam punkt i ten sam kierunek, a zatem jest tą samą prostą.
 :::
 
 <details>
 <summary>Pokaż pełne sprawdzenie punktów A i B</summary>
 
-Dla \(t=0\):
+Dla $t=0$:
 
 $$
 P(0)=A+0(B-A)=A.
 $$
 
-Dla \(t=1\):
+Dla $t=1$:
 
 $$
 \begin{aligned}
@@ -62,7 +62,7 @@ $$
 </details>
 
 ::: {.example}
-**Przykład.** Dla \(A=(1,2)\) i \(B=(4,-1)\):
+**Przykład.** Dla $A=(1,2)$ i $B=(4,-1)$:
 
 $$
 \begin{aligned}
