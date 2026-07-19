@@ -1,0 +1,44 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "Basic Mathematics"
+  site-url: "https://dchorazkiewicz.github.io/basic_mathematics/"
+  repo-url: "https://github.com/dchorazkiewicz/basic_mathematics"
+  repo-actions: [source, issue]
+  search: true
+  page-navigation: true
+  sidebar:
+    style: docked
+    collapse-level: 2
+    contents:
+      - href: index.qmd
+        text: Start
+      - section: "Geometria analityczna"
+        contents:
+          - href: geometria-analityczna/index.qmd
+            text: Wprowadzenie
+          - href: geometria-analityczna/prosta-przez-dwa-punkty.qmd
+            text: Prosta przez dwa punkty
+      - section: "Algebra liniowa"
+        contents:
+          - href: algebra-liniowa/index.qmd
+            text: Wprowadzenie
+      - section: "Analiza matematyczna"
+        contents:
+          - href: analiza/index.qmd
+            text: Wprowadzenie
+
+format:
+  html:
+    theme:
+      light: [cosmo, styles.scss]
+      dark: [darkly, styles.scss]
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    html-math-method: mathjax
+    smooth-scroll: true
+
+lang: pl
