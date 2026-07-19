@@ -1,0 +1,494 @@
+---
+title: "Euclidean Reference for Self-Study"
+---
+
+The following material preserves the geometric background behind the Cartesian construction. It is included so that the chapter remains self-contained, but it is not intended to occupy the same lecture time as coordinates, graphs, and intersections.
+
+## Three different levels must not be confused
+
+::: {.math-box .core}
+<span class="math-box-title">The logical hierarchy</span>
+
+1. *Euclid's postulates* describe the geometric world being assumed.
+2. *Straightedge-and-compass rules* describe which elementary drawings and intersections may be used in a construction.
+3. *Derived constructions* must be built from those elementary operations and justified by a proof.
+:::
+
+::: {.math-box .remark}
+A perpendicular bisector, a perpendicular through a point, an angle bisector, or a parallel through a point is not treated as a primitive permission. Each must be constructed from the elementary toolkit and then justified.
+:::
+
+## Euclid's five postulates
+
+The following are the five postulates used in the first book of Euclid's *Elements*. They specify the elementary geometric operations and relations from which the later constructions begin. The diagrams illustrate their meaning; they are not proofs.
+
+### Postulate I: joining two points
+
+::: {.math-box .core}
+A straight segment can be drawn from any point to any other point.
+:::
+
+<div class="chapter-figure" data-figure="postulate1"></div>
+
+### Postulate II: extending a segment
+
+::: {.math-box .core}
+A finite straight segment can be extended continuously in the same straight line.
+:::
+
+<div class="chapter-figure" data-figure="postulate2"></div>
+
+### Postulate III: drawing a circle
+
+::: {.math-box .core}
+A circle can be drawn with any chosen centre and any chosen radius.
+:::
+
+<div class="chapter-figure" data-figure="postulate3"></div>
+
+::: {.math-box .interpretation}
+<span class="math-box-title">Why the circle postulate matters</span>
+This postulate permits a length to be copied geometrically without first assigning a number to it. The compass transfers a geometric magnitude directly.
+:::
+
+### Postulate IV: equality of right angles
+
+::: {.math-box .core}
+All right angles are congruent.
+:::
+
+<div class="chapter-figure" data-figure="postulate4"></div>
+
+::: {.math-box .remark}
+This postulate does not say that a perpendicular may simply be drawn without construction. It says that once right angles have been constructed, they are all congruent.
+:::
+
+### Postulate V: the parallel postulate
+
+::: {.math-box .core}
+If a transversal meets two straight lines and the interior angles on one side sum to less than two right angles, then the two lines, when extended, meet on that side.
+:::
+
+<div class="chapter-figure" data-figure="parallel"></div>
+
+::: {.math-box .interpretation}
+<span class="math-box-title">Modern working form</span>
+A familiar equivalent is Playfair's formulation: through a point outside a given line there passes exactly one parallel to that line. We shall use that form later, after the relation between the two formulations has been made clear.
+:::
+
+::: {.math-box .summary}
+<span class="math-box-title">What the postulates provide</span>
+The first three postulates provide elementary constructions, the fourth makes right angles comparable, and the fifth controls parallelism. Together they specify the geometric world available before coordinates and algebra are introduced.
+:::
+
+## Elementary rules for straightedge-and-compass work
+
+For explicit constructions we use the following operational rules.
+
+::: {.math-box .core}
+<span class="math-box-title">The elementary construction toolkit</span>
+
+1. Through two already constructed distinct points, draw the straight line.
+2. With an already constructed point as centre and an already constructed segment as radius, draw a circle.
+3. Retain intersection points of two constructed lines, a line and a circle, or two circles whenever such intersections exist.
+:::
+
+::: {.math-box .interpretation}
+<span class="math-box-title">How new objects are produced</span>
+The first two rules are operational forms of Euclid's first three postulates. The third rule explains how new constructible points arise: they are intersections of objects already obtained. Every later construction in this chapter must be reducible to this toolkit.
+:::
+
+## Constructions derived from the toolkit
+
+The following objects are not added as new primitive permissions. Each is constructed from lines, circles, and their intersections.
+
+### The perpendicular bisector and the midpoint
+
+::: {.math-box .derivation}
+<span class="math-box-title">Construction</span>
+Let $A$ and $B$ be distinct points. Draw two circles with the same radius, one centred at $A$ and one centred at $B$, choosing the radius larger than half of $|AB|$. Let their intersection points be $P$ and $Q$.
+
+Because $P$ lies on both circles,
+
+$$
+|PA|=|PB|,
+$$
+
+and similarly,
+
+$$
+|QA|=|QB|.
+$$
+
+Thus both $P$ and $Q$ are equidistant from $A$ and $B$.
+:::
+
+<div class="chapter-figure" data-figure="perpBisector"></div>
+
+::: {.theorem}
+The line $PQ$ is the perpendicular bisector of $AB$. Its intersection with $AB$ is the midpoint of $AB$. Thus both midpoint and perpendicularity are constructed from equal radii and intersections.
+:::
+
+### A perpendicular through a point on a line
+
+::: {.math-box .derivation}
+<span class="math-box-title">Construction</span>
+Let $P$ lie on a line $\ell$.
+
+**Step 1.** Draw a circle centred at $P$. It meets $\ell$ at two points $A$ and $B$. Since $|PA|=|PB|$, the point $P$ is the midpoint of $AB$.
+
+**Step 2.** Apply the perpendicular-bisector construction to $AB$. The resulting perpendicular bisector passes through its midpoint $P$.
+:::
+
+::: {.theorem}
+The constructed line $m$ passes through $P$ and is perpendicular to $\ell$.
+:::
+
+### A perpendicular through a point outside a line
+
+::: {.math-box .derivation}
+<span class="math-box-title">Construction</span>
+Let $P$ lie outside a line $\ell$.
+
+**Step 1.** Draw a circle centred at $P$ with radius large enough to meet $\ell$ at two points $A$ and $B$. Then $|PA|=|PB|$, so $P$ lies on the perpendicular bisector of $AB$.
+
+**Step 2.** Draw equal-radius circles centred at $A$ and $B$, chosen so that they meet again at a second point $Q$. The points $P$ and $Q$ are both equidistant from $A$ and $B$.
+:::
+
+::: {.theorem}
+The line $PQ$ is the perpendicular bisector of $AB$ and therefore is perpendicular to $\ell$ through the prescribed external point $P$.
+:::
+
+### Bisecting an angle
+
+::: {.math-box .derivation}
+<span class="math-box-title">Construction and justification</span>
+Let two rays with common endpoint $O$ form an angle. Draw a circle centred at $O$ meeting the rays at $A$ and $B$. Then draw equal-radius circles centred at $A$ and $B$, and let one of their intersections inside the angle be $P$. Since
+
+$$
+|OA|=|OB|,
+\qquad
+|AP|=|BP|,
+\qquad
+|OP|=|OP|,
+$$
+
+the triangles $OAP$ and $OBP$ are congruent.
+:::
+
+::: {.theorem}
+The congruence of $OAP$ and $OBP$ gives
+
+$$
+\angle AOP=\angle POB.
+$$
+
+Therefore the ray $OP$ bisects the angle.
+:::
+
+### Constructing a parallel through a point
+
+::: {.math-box .derivation}
+<span class="math-box-title">Construction</span>
+Let $P$ lie outside a line $\ell$. First construct a line $m$ through $P$ perpendicular to $\ell$. Then construct a line $n$ through $P$ perpendicular to $m$.
+
+The transversal $m$ forms equal corresponding right angles with $n$ and $\ell$. By the converse of the corresponding-angles theorem, the two lines are parallel.
+:::
+
+::: {.theorem}
+The constructed line satisfies
+
+$$
+\boxed{n\parallel\ell}.
+$$
+
+The fifth postulate, equivalently Playfair's postulate, guarantees that this is the unique parallel to $\ell$ through $P$.
+:::
+
+## Parallel lines and proportional segments
+
+A central fact of Euclidean geometry is that parallel lines preserve ratios. This is the content of Thales' theorem in the form needed here.
+
+::: {.theorem}
+Let $D$ lie on $AB$ and $E$ lie on $AC$ in a triangle $ABC$. If
+
+$$
+DE\parallel BC,
+$$
+
+then
+
+$$
+\boxed{
+\frac{AD}{AB}=\frac{AE}{AC}=\frac{DE}{BC}
+}.
+$$
+:::
+
+<div class="chapter-figure" data-figure="thales"></div>
+
+::: {.proof}
+Because $DE\parallel BC$, corresponding angles in triangles $ADE$ and $ABC$ are equal. The triangles therefore have the same three angles and differ only by one common scale factor. Every corresponding side is multiplied by that same factor, which gives the three equal ratios.
+:::
+
+::: {.definition}
+Two triangles are *similar* when their corresponding angles are equal. In that case their corresponding side lengths are proportional.
+:::
+
+::: {.math-box .interpretation}
+<span class="math-box-title">What similarity preserves</span>
+Similarity changes the size of a figure while preserving its shape. It is the reason ratios of corresponding lengths can depend only on angles and later makes trigonometric ratios well defined.
+:::
+
+## Sine and cosine before coordinates
+
+Take a right triangle containing an acute angle $\alpha$. Let $h$ denote the hypotenuse, let $a$ be the leg adjacent to $\alpha$, and let $b$ be the leg opposite $\alpha$.
+
+<div class="chapter-figure" data-figure="trig"></div>
+
+$$
+\frac{a'}{a}=\frac{b'}{b}=\frac{h'}{h},
+\qquad
+\frac{a'}{h'}=\frac{a}{h},
+\qquad
+\frac{b'}{h'}=\frac{b}{h}.
+$$
+
+::: {.proof}
+All right triangles containing the same acute angle are similar. Corresponding side lengths therefore differ by one common scale factor, which cancels in the ratios $a/h$ and $b/h$. These ratios depend on the angle, not on the size of the triangle chosen to represent it.
+:::
+
+::: {.definition}
+For an acute geometric angle $\alpha$,
+
+$$
+\boxed{
+\cos\alpha=\frac{a}{h},
+\qquad
+\sin\alpha=\frac{b}{h}
+}.
+$$
+:::
+
+::: {.definition}
+For a right angle,
+
+$$
+\boxed{\cos\alpha=0}.
+$$
+
+If $\alpha$ is obtuse and $\beta$ is its acute supplement, define
+
+$$
+\boxed{\cos\alpha=-\cos\beta}.
+$$
+
+Thus cosine is positive for acute angles, zero for a right angle, and negative for obtuse angles.
+:::
+
+::: {.math-box .interpretation}
+<span class="math-box-title">Trigonometry is geometric before it is coordinate-based</span>
+Sine and cosine are ratios determined by similarity. Their definitions do not require Cartesian axes or ordered pairs. Coordinates will later provide a new way to calculate and use these same geometric quantities.
+:::
+
+::: {.math-box .derivation}
+<span class="math-box-title">The fundamental identity</span>
+For an acute angle, the Pythagorean theorem gives
+
+$$
+a^2+b^2=h^2.
+$$
+
+Dividing by $h^2$ yields
+
+$$
+\left(\frac{a}{h}\right)^2+\left(\frac{b}{h}\right)^2=1.
+$$
+
+Substituting the definitions of cosine and sine gives the identity below.
+:::
+
+::: {.theorem}
+For every angle in the geometric range considered here,
+
+$$
+\boxed{\cos^2\alpha+\sin^2\alpha=1}.
+$$
+
+For acute angles this is a direct reformulation of the Pythagorean theorem.
+:::
+
+## Angles and their numerical measure
+
+::: {.math-box .core}
+<span class="math-box-title">Angle and angle measure are different objects</span>
+An angle exists geometrically before it is assigned a number. We can compare, copy, add, and bisect angles without degrees or radians. A numerical angle measure requires an additional choice of unit.
+:::
+
+::: {.definition}
+Let $r_1$ and $r_2$ be two rays with the same initial point $O$. The rays, together with a choice of one of the two regions between them, determine an angle $\alpha$ with vertex $O$.
+:::
+
+::: {.math-box .remark}
+The angle is the chosen geometric region. It is neither the small arc drawn near the vertex nor a number. The arc is only a graphical mark indicating which region has been selected.
+:::
+
+<div class="chapter-figure" data-figure="angle"></div>
+
+### Why circles give a consistent measure
+
+Draw a circle centred at $O$. The rays cut from the circle an arc corresponding to the chosen angle.
+
+::: {.theorem}
+For every Euclidean circle, the ratio of circumference $C$ to diameter $D$ is the same constant:
+
+$$
+\frac{C}{D}=\pi.
+$$
+
+Since $D=2r$, every circle of radius $r$ has circumference
+
+$$
+\boxed{C=2\pi r}.
+$$
+:::
+
+::: {.proof}
+Similarity implies that enlarging a circle by a factor $\lambda$ multiplies its diameter, circumference, and corresponding arc lengths by $\lambda$. If the same rays cut arc lengths $s_1,s_2$ from circles of radii $r_1,r_2$, then
+
+$$
+\frac{s_1}{s_2}=\frac{r_1}{r_2},
+\qquad\text{hence}\qquad
+\frac{s_1}{r_1}=\frac{s_2}{r_2}.
+$$
+
+The quotient therefore depends only on the angle.
+:::
+
+::: {.definition}
+Let $s$ be the length of the selected arc on a circle of radius $r$ centred at the vertex. The radian measure of $\alpha$ is
+
+$$
+\boxed{m_{\mathrm{rad}}(\alpha)=\frac{s}{r}}.
+$$
+:::
+
+::: {.math-box .derivation}
+<span class="math-box-title">Full turn, half-turn, and right angle</span>
+For a full turn, $s=2\pi r$, so
+
+$$
+m_{\mathrm{rad}}(\text{full turn})=2\pi.
+$$
+
+A half-turn therefore has measure $\pi$, and a quarter-turn has measure $\pi/2$.
+:::
+
+::: {.definition}
+Degrees provide a second numerical scale. A full turn is assigned $360^\circ$, so
+
+$$
+2\pi\text{ radians}=360^\circ,
+\qquad
+\boxed{
+m_{\deg}(\alpha)=\frac{180^\circ}{\pi}\,m_{\mathrm{rad}}(\alpha)
+}.
+$$
+:::
+
+::: {.example}
+A constructible right angle has the two numerical descriptions
+
+$$
+m_{\mathrm{rad}}(\text{right angle})=\frac{\pi}{2},
+\qquad
+m_{\deg}(\text{right angle})=90^\circ.
+$$
+
+The geometric angle is the same object; only the chosen numerical scale changes.
+:::
+
+### Sine and cosine as functions of a number
+
+The trigonometric ratios were first defined for acute geometric angles. We now extend them to a full turn. For $t\in[0,2\pi)$, let $\beta\in[0,\pi/2]$ be the acute reference angle between the direction of $t$ and the nearest horizontal ray. The magnitudes $\sin\beta$ and $\cos\beta$ come from the right-triangle definition; their signs are determined by the quadrant:
+
+$$
+\begin{array}{c|cc}
+&\cos t&\sin t\\ \hline
+0\le t\le \pi/2&+\cos\beta&+\sin\beta\\
+\pi/2\le t\le \pi&-\cos\beta&+\sin\beta\\
+\pi\le t\le 3\pi/2&-\cos\beta&-\sin\beta\\
+3\pi/2\le t<2\pi&+\cos\beta&-\sin\beta
+\end{array}
+$$
+
+::: {.definition}
+For arbitrary real $t$, define sine and cosine periodically:
+
+$$
+\boxed{
+\sin(t+2\pi k)=\sin t,
+\qquad
+\cos(t+2\pi k)=\cos t,
+\qquad k\in\mathbb Z
+}.
+$$
+:::
+
+::: {.math-box .interpretation}
+<span class="math-box-title">From a geometric angle to a numerical input</span>
+If $t=m_{\mathrm{rad}}(\alpha)$, then $\cos t$ is the same value as the geometric cosine $\cos\alpha$. The notation $\cos t$ therefore treats the numerical measure as an input while preserving the earlier geometric meaning.
+:::
+
+### The Euclidean law of cosines
+
+Directly measuring an arc is often difficult. A triangle provides another way to recover the measure of an angle. Choose points
+
+$$
+A\in r_1\setminus\{O\},
+\qquad
+B\in r_2\setminus\{O\}.
+$$
+
+The points form the Euclidean triangle $OAB$.
+
+<div class="chapter-figure" data-figure="cosine"></div>
+
+::: {.theorem}
+If $\alpha=\angle AOB$, then
+
+$$
+\boxed{
+|AB|^2=|OA|^2+|OB|^2-2|OA|\,|OB|\cos\alpha
+}.
+$$
+
+Equivalently, the last factor may be written as $\cos(m_{\mathrm{rad}}(\alpha))$.
+:::
+
+::: {.math-box .derivation}
+<span class="math-box-title">Recovering the angle from side lengths</span>
+Solving the law of cosines for the angle measure gives
+
+$$
+\boxed{
+m_{\mathrm{rad}}(\alpha)=
+\arccos\left(
+\frac{|OA|^2+|OB|^2-|AB|^2}{2|OA|\,|OB|}
+\right)
+}.
+$$
+
+Later, coordinates will provide an arithmetic method for calculating the three Euclidean lengths in this formula.
+:::
+
+::: {.math-box .remark}
+At this point no vector has been introduced. We have only Euclidean objects, postulates, constructions, similarity, trigonometric ratios, numerical angle measure, and the Euclidean law of cosines. Vectors will appear only after the Cartesian coordinate system has been constructed.
+:::
+
+::: {.math-box .summary}
+<span class="math-box-title">What numerical measurement adds</span>
+The angle is geometric; radians and degrees are numerical descriptions of it. Similarity makes the radian quotient $s/r$ independent of scale, while the law of cosines allows the same angle to be recovered from three side lengths.
+:::
+
+**What the Cartesian construction uses.** The coordinate plane needs perpendicular axes, an origin, chosen directions, a common unit, and orthogonal projection. The detailed Euclidean reference explains the geometric background of those ingredients; the Cartesian section shows how they become a numerical language.
