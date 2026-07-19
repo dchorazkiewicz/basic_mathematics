@@ -9,36 +9,61 @@ website:
   repo-actions: [source, issue]
   search: true
   page-navigation: true
+  bread-crumbs: true
+  back-to-top-navigation: true
+  navbar:
+    background: "#10233f"
+    foreground: light
+    pinned: true
+    left:
+      - href: index.qmd
+        text: Start
+      - href: geometria-analityczna/index.qmd
+        text: Geometria analityczna
+      - href: algebra-liniowa/index.qmd
+        text: Algebra liniowa
+      - href: analiza/index.qmd
+        text: Analiza matematyczna
+    right:
+      - icon: github
+        href: "https://github.com/dchorazkiewicz/basic_mathematics"
+        aria-label: GitHub
   sidebar:
-    style: docked
+    style: floating
+    search: false
     collapse-level: 2
+    border: false
     contents:
       - href: index.qmd
         text: Start
       - section: "Geometria analityczna"
+        href: geometria-analityczna/index.qmd
         contents:
-          - href: geometria-analityczna/index.qmd
-            text: Wprowadzenie
           - href: geometria-analityczna/prosta-przez-dwa-punkty.qmd
             text: Prosta przez dwa punkty
       - section: "Algebra liniowa"
-        contents:
-          - href: algebra-liniowa/index.qmd
-            text: Wprowadzenie
+        href: algebra-liniowa/index.qmd
+        contents: []
       - section: "Analiza matematyczna"
-        contents:
-          - href: analiza/index.qmd
-            text: Wprowadzenie
+        href: analiza/index.qmd
+        contents: []
+  page-footer:
+    left: "Basic Mathematics"
+    right: "Dokument matematyczny publikowany w Quarto"
+    border: true
 
 format:
   html:
     theme:
-      light: [cosmo, styles.scss]
+      light: [litera, styles.scss]
       dark: [darkly, styles.scss]
     toc: true
     toc-depth: 3
+    toc-title: "Na tej stronie"
     number-sections: true
     html-math-method: mathjax
     smooth-scroll: true
+    code-copy: true
+    anchor-sections: true
 
 lang: pl
