@@ -1,0 +1,229 @@
+---
+title: "Constructing and Using Cartesian Coordinates"
+---
+
+The preceding section established the Euclidean objects and constructions available before coordinates. We now make the additional choices that turn that plane into a Cartesian coordinate plane: axes, an origin, directions, and a common numerical scale.
+
+## The plane before coordinates
+
+We begin with an ordinary Euclidean plane: a set of points in which we may construct lines and circles.
+
+<div class="chapter-figure" data-figure="plane"></div>
+
+## First construction: a straight line
+
+::: {.math-box .derivation}
+<span class="math-box-title">First choice</span>
+Choose two distinct points of the plane and construct the unique straight line through them.
+:::
+
+::: {.math-box .core}
+<span class="math-box-title">What has and has not been created</span>
+At this stage we have only a chosen Euclidean line. It is not yet a coordinate axis: there is no second line, no origin, no positive direction, and no numerical scale.
+:::
+
+<div class="chapter-figure" data-figure="firstLine"></div>
+
+## Second construction: a point on the line
+
+::: {.math-box .derivation}
+<span class="math-box-title">Second choice</span>
+Choose an arbitrary point $O$ on the constructed line.
+:::
+
+::: {.math-box .core}
+<span class="math-box-title">A chosen point is not yet an origin</span>
+The point $O$ will later become the common zero of both coordinate axes, but it becomes an origin only after the second axis, orientations, and numerical scale have been constructed.
+:::
+
+<div class="chapter-figure" data-figure="origin"></div>
+
+## Third construction: the perpendicular line
+
+::: {.math-box .derivation}
+<span class="math-box-title">Third construction</span>
+Through $O$, construct the unique line perpendicular to the first line. The two constructed lines now intersect at a right angle.
+:::
+
+::: {.definition}
+We call the first line the $x$-axis, the perpendicular line the $y$-axis, and their intersection $O$ the origin.
+:::
+
+<div class="chapter-figure" data-figure="axes"></div>
+
+::: {.math-box .core}
+<span class="math-box-title">What has now been created</span>
+Only after the perpendicular line has been constructed do we have the geometric framework of two coordinate axes with a common origin.
+:::
+
+::: {.math-box .remark}
+The axes are perpendicular because this was required in their Euclidean construction. No coordinate formula and no numerical angle measure was used to create that right angle.
+:::
+
+## Choosing positive and negative directions
+
+::: {.math-box .derivation}
+<span class="math-box-title">Choosing orientations</span>
+Each axis is divided by $O$ into two opposite rays. Choose one ray on the $x$-axis as positive and one ray on the $y$-axis as positive. The opposite rays are then called negative.
+:::
+
+::: {.math-box .core}
+<span class="math-box-title">Orientation is a choice</span>
+The Euclidean plane does not force which ray should be positive. Reversing one orientation produces a different coordinate system on the same geometric plane.
+:::
+
+<div class="chapter-figure" data-figure="orientation"></div>
+
+::: {.math-box .interpretation}
+<span class="math-box-title">What signs will mean</span>
+A positive or negative coordinate will record on which oriented side of the origin the corresponding projection lies. The sign is not a geometric length; it is directional information supplied by the chosen orientation.
+:::
+
+## Constructing a common unit length
+
+Place the point of the compass at the origin $O$ and draw a circle with any chosen radius. This radius becomes the unit length. The circle meets each axis in two points. On the positive parts of the axes these points are labelled $1$, and on the negative parts they are labelled $-1$.
+
+To construct the next marks, keep the same compass opening. Place the compass at the point $1$ on the $x$-axis and draw another circle. Its next intersection with the positive part of the axis gives the point $2$. Repeating the same step gives $3,4,\ldots$. Moving in the opposite direction constructs $-2,-3,-4,\ldots$. The same construction is carried out on the $y$-axis.
+
+<div class="chapter-figure" data-figure="unit"></div>
+
+## Refining the scale by bisection
+
+::: {.math-box .derivation}
+<span class="math-box-title">Constructing finer marks</span>
+The compass-and-straightedge construction does not stop at integer marks. Bisecting each unit segment constructs halves. Bisecting again constructs quarters, then eighths, and so on. Repeating this process on every integer interval and on both sides of the origin gives all dyadic marks
+
+$$
+\boxed{\frac{k}{2^n}},
+\qquad k\in\mathbb Z,
+\quad n\in\mathbb N.
+$$
+:::
+
+<div class="chapter-figure" data-figure="bisection"></div>
+
+::: {.theorem}
+The dyadic marks are dense on the axis: every nonempty interval contains a number of the form $k/2^n$. They provide arbitrarily fine numerical approximations to positions on the line.
+:::
+
+::: {.definition}
+**Continuity assumption.** Once an origin, a positive direction, and a unit length are fixed on a Euclidean line, every point of the line corresponds to exactly one real number, and every real number corresponds to exactly one point of the line.
+:::
+
+::: {.math-box .interpretation}
+<span class="math-box-title">What continuity contributes</span>
+Finite straightedge-and-compass operations construct many particular positions, including every dyadic mark, but not every real position. Continuity supplies the complete real scale. After this additional assumption, every point of each axis has a unique signed real label.
+:::
+
+## Assigning coordinates by orthogonal projection
+
+::: {.math-box .core}
+<span class="math-box-title">When coordinates can be assigned</span>
+Only after the axes, orientations, common unit, refined scale, and real labels have been constructed can an arbitrary point of the plane receive a coordinate pair.
+:::
+
+::: {.math-box .derivation}
+<span class="math-box-title">Constructing the two coordinate values</span>
+Let $P$ be any point of the plane. Through $P$, construct the line perpendicular to the $x$-axis; it meets that axis at a unique point $P_x$. Through $P$, construct the line perpendicular to the $y$-axis; it meets that axis at a unique point $P_y$.
+:::
+
+<div class="chapter-figure" data-figure="projection"></div>
+
+::: {.definition}
+If the signed real labels of $P_x$ and $P_y$ are $x$ and $y$, respectively, the coordinates of $P$ are the ordered pair
+
+$$
+\boxed{P\longleftrightarrow(x,y)}.
+$$
+:::
+
+::: {.proof}
+The construction is unambiguous because the perpendicular through a given point to a given line is unique. Conversely, given real numbers $x$ and $y$, locate the corresponding points on the axes and construct through them lines perpendicular to the respective axes. The two lines meet in exactly one point.
+:::
+
+::: {.theorem}
+Once the two perpendicular axes, their positive directions, and a common unit are fixed, orthogonal projection gives a one-to-one correspondence
+
+$$
+\boxed{
+\text{points of the Euclidean plane}
+\longleftrightarrow
+\text{pairs }(x,y)\in\mathbb R^2
+}.
+$$
+:::
+
+::: {.math-box .interpretation}
+<span class="math-box-title">Coordinates are addresses</span>
+The ordered pair is the numerical address of a geometric point in the chosen coordinate system. It is not the point itself and it is not the source of the geometry.
+:::
+
+## The coordinate formula for Euclidean distance
+
+The Euclidean distance between two points is the length of the straight segment joining them. Coordinates now allow this geometric length to be calculated.
+
+::: {.math-box .core}
+<span class="math-box-title">The question</span>
+Given the Cartesian coordinates of two points, how can the already existing Euclidean length of the segment between them be recovered algebraically?
+:::
+
+For points
+
+$$
+P=(x_1,y_1),
+\qquad
+Q=(x_2,y_2),
+$$
+
+their projections show that the horizontal and vertical separations have lengths
+
+$$
+|x_2-x_1|
+\qquad\text{and}\qquad
+|y_2-y_1|.
+$$
+
+Together with the segment $PQ$, these two perpendicular segments form a right triangle. Here “right” refers to the Euclidean right angle already used in the construction; no numerical measure of that angle is required.
+
+<div class="chapter-figure" data-figure="distance"></div>
+
+::: {.math-box .derivation}
+<span class="math-box-title">From the right triangle to the formula</span>
+By the Pythagorean theorem,
+
+$$
+d_E(P,Q)^2=(x_2-x_1)^2+(y_2-y_1)^2.
+$$
+
+Distance is nonnegative, so taking the nonnegative square root gives the desired coordinate expression.
+:::
+
+::: {.theorem}
+For points $P=(x_1,y_1)$ and $Q=(x_2,y_2)$ in the Cartesian plane,
+
+$$
+\boxed{
+d_E(P,Q)=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}
+}.
+$$
+:::
+
+::: {.math-box .interpretation}
+<span class="math-box-title">What the formula means</span>
+The formula does not create a new notion of distance. It is the numerical coordinate expression of the Euclidean segment length already present in the plane. This is the first major payoff of the Cartesian construction: a geometric magnitude has become computable by algebra.
+:::
+
+::: {.math-box .summary}
+<span class="math-box-title">From Euclidean plane to Cartesian distance</span>
+
+1. Begin with a Euclidean plane containing no chosen coordinates.
+2. Construct one straight line.
+3. Choose a point $O$ on that line.
+4. Construct through $O$ the perpendicular line, and only then name the two lines as coordinate axes and $O$ as their origin.
+5. Choose positive directions on both axes.
+6. Choose one common unit length and transfer it with a compass in both positive and negative directions to construct the integer marks.
+7. Repeatedly bisect intervals to construct the dense family of dyadic marks.
+8. Use Euclidean continuity to identify every axis position with a real number.
+9. Assign to every point its unique pair of orthogonal projections.
+10. Derive the coordinate distance formula from the resulting right triangle and the Pythagorean theorem.
+:::
