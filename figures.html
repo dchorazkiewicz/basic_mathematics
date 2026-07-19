@@ -1,1 +1,70 @@
-<script defer src="/basic_mathematics/assets/chapter01-figures.js?v=2"></script>
+<script>
+(() => {
+  const NS = 'http://www.w3.org/2000/svg';
+  const make = (name, attrs = {}, text = '') => {
+    const el = document.createElementNS(NS, name);
+    for (const [key, value] of Object.entries(attrs)) el.setAttribute(key, String(value));
+    if (text) el.textContent = text;
+    return el;
+  };
+  const svg = (w = 760, h = 360) => {
+    const s = make('svg', { viewBox: `0 0 ${w} ${h}`, role: 'img' });
+    s.classList.add('chapter-figure-svg');
+    return s;
+  };
+  const line = (s, x1, y1, x2, y2, cls = 'main', dash = '') => s.append(make('line', { x1, y1, x2, y2, class: cls, 'stroke-dasharray': dash }));
+  const dot = (s, x, y, label = '', dx = 9, dy = -10) => {
+    s.append(make('circle', { cx: x, cy: y, r: 4, class: 'dot' }));
+    if (label) s.append(make('text', { x: x + dx, y: y + dy, class: 'label' }, label));
+  };
+  const text = (s, x, y, value, cls = 'label', anchor = 'middle') => s.append(make('text', { x, y, class: cls, 'text-anchor': anchor }, value));
+  const path = (s, d, cls = 'main', fill = 'none') => s.append(make('path', { d, class: cls, fill }));
+  const axes = (s, cx, cy, xr, yr) => {
+    line(s, cx - xr, cy, cx + xr, cy, 'axis');
+    line(s, cx, cy + yr, cx, cy - yr, 'axis');
+    text(s, cx + xr - 8, cy - 10, 'x', 'label', 'end');
+    text(s, cx + 12, cy - yr + 18, 'y', 'label', 'start');
+  };
+
+  const renderers = {
+    timeline() { const s = svg(800,190); line(s,60,105,740,105,'axis'); dot(s,130,105); dot(s,665,105); text(s,130,65,'c. 300 BC'); text(s,130,87,"Euclid's Elements",'small'); text(s,665,65,'1637'); text(s,665,87,"Descartes' La Géométrie",'small'); line(s,130,140,665,140,'helper'); text(s,398,166,'about 1900 years','small'); return s; },
+    plane() { const s=svg(760,330); s.append(make('rect',{x:55,y:35,width:650,height:230,rx:12,class:'plane'})); [[130,100],[220,205],[335,82],[455,215],[565,105],[650,190]].forEach(p=>dot(s,p[0],p[1])); text(s,380,305,'a Euclidean plane','caption'); return s; },
+    firstLine() { const s=this.plane(); line(s,105,220,665,90,'main'); dot(s,190,200,'A',-18,22); dot(s,590,107,'B',10,-12); text(s,380,305,'the first constructed line','caption'); return s; },
+    origin() { const s=svg(760,330); s.append(make('rect',{x:55,y:35,width:650,height:230,rx:12,class:'plane'})); line(s,100,210,660,85,'main'); dot(s,380,147,'O',10,22); text(s,380,305,'a point chosen on the first line','caption'); return s; },
+    axes() { const s=svg(700,390); axes(s,350,210,270,150); dot(s,350,210,'O',-22,24); path(s,'M365 210 v-18 h18','helper'); return s; },
+    orientation() { const s=this.axes(); text(s,615,184,'positive x','small'); text(s,365,72,'positive y','small','start'); text(s,145,235,'negative x','small'); text(s,310,345,'negative y','small'); return s; },
+    unit() { const s=svg(720,520); axes(s,360,255,290,205); [45,90,135].forEach((r,i)=>s.append(make('circle',{cx:360,cy:255,r,class:`construction c${i}`}))); for(let k=-3;k<=3;k++){ if(!k) continue; line(s,360+k*45,248,360+k*45,262,'tick'); text(s,360+k*45,282,String(k),'small'); line(s,353,255-k*45,367,255-k*45,'tick'); text(s,340,260-k*45,String(k),'small','end'); } text(s,360,500,'one common unit transferred along both axes','caption'); return s; },
+    bisection() { const s=svg(700,210); line(s,90,105,610,105,'axis'); ['0','1/4','1/2','3/4','1'].forEach((t,i)=>{ const x=100+i*125; line(s,x,95,x,115,'tick'); text(s,x,145,t); }); text(s,350,55,'successive bisections of one unit','caption'); return s; },
+    projection() { const s=svg(700,410); axes(s,120,330,500,260); const x=440,y=120; line(s,x,y,x,330,'helper','8 8'); line(s,x,y,120,y,'helper','8 8'); dot(s,x,y,'P',10,-12); dot(s,x,330,'Pₓ',-8,28); dot(s,120,y,'Pᵧ',-42,5); return s; },
+    distance() { const s=svg(700,420); axes(s,100,335,530,270); const P=[220,275],Q=[500,105],R=[500,275]; line(s,P[0],P[1],Q[0],Q[1],'main'); line(s,P[0],P[1],R[0],R[1],'helper'); line(s,R[0],R[1],Q[0],Q[1],'helper'); dot(s,P[0],P[1],'P',-22,24); dot(s,Q[0],Q[1],'Q',10,-12); text(s,360,300,'|x₂−x₁|','small'); text(s,525,190,'|y₂−y₁|','small','start'); path(s,'M482 275 v-18 h18','helper'); return s; },
+    triangle() { const s=svg(700,430); axes(s,300,335,270,260); path(s,'M170 335 L520 335 L380 95 Z','main'); dot(s,170,335,'A=(-2,0)',-8,28); dot(s,520,335,'B=(3,0)',10,28); dot(s,380,95,'C=(1,3)',0,-14); return s; },
+    circleDisk() { const s=svg(760,370); [[205,'circle',false],[555,'disk',true]].forEach(([cx,label,filled])=>{ axes(s,cx,165,130,125); s.append(make('circle',{cx,cy:165,r:85,class:filled?'disk':'main'})); text(s,cx,315,label,'caption'); }); return s; },
+    curves() { const s=svg(760,600); [[190,150],[570,150],[190,445],[570,445]].forEach(([x,y])=>axes(s,x,y,135,105)); s.append(make('circle',{cx:190,cy:150,r:65,class:'main'})); s.append(make('ellipse',{cx:570,cy:150,rx:100,ry:60,class:'main'})); path(s,'M105 520 C130 350 160 350 188 445 C215 540 245 540 275 370','main'); path(s,'M275 520 C250 350 220 350 192 445 C165 540 135 540 105 370','main'); path(s,'M485 510 Q570 310 655 510','main'); ['circle','ellipse','hyperbola','parabola'].forEach((v,i)=>text(s,[190,570,190,570][i],[285,285,580,580][i],v,'caption')); return s; },
+    sine() { const s=svg(820,310); axes(s,410,155,360,105); let d=''; for(let i=0;i<=720;i++){ const x=50+i, y=155-70*Math.sin((i/720)*4*Math.PI-2*Math.PI); d += `${i?'L':'M'}${x} ${y}`; } path(s,d,'main'); text(s,410,285,'y = sin x','caption'); return s; },
+    intersections() { const s=svg(700,470); axes(s,340,390,285,320); path(s,'M95 390 Q340 -40 585 390','main'); line(s,80,430,610,80,'secondary'); dot(s,250,310,'(-1,1)',-45,-12); dot(s,500,110,'(2,4)',10,-10); return s; },
+    postulate1() { const s=svg(620,230); dot(s,150,150,'A',-4,28); dot(s,470,75,'B',0,-15); line(s,150,150,470,75,'main'); return s; },
+    postulate2() { const s=svg(620,230); dot(s,140,115,'A',0,28); dot(s,380,115,'B',0,28); line(s,140,115,380,115,'main'); line(s,380,115,540,115,'helper','8 7'); text(s,540,145,'C'); return s; },
+    postulate3() { const s=svg(620,330); s.append(make('circle',{cx:300,cy:150,r:95,class:'helper'})); dot(s,300,150,'O',-22,25); dot(s,395,150,'A',12,6); line(s,300,150,395,150,'main'); text(s,350,140,'r','small'); return s; },
+    postulate4() { const s=svg(700,300); line(s,80,160,300,160,'main'); line(s,190,55,190,250,'main'); path(s,'M205 160 v-20 h-15','helper'); line(s,420,220,630,85,'main'); line(s,445,70,610,240,'main'); text(s,350,280,'all right angles are congruent','caption'); return s; },
+    parallel() { const s=svg(700,310); line(s,70,105,630,70,'main'); line(s,70,230,630,195,'main'); line(s,270,285,400,25,'helper'); return s; },
+    perpBisector() { const s=svg(700,430); dot(s,220,215,'A',0,30); dot(s,480,215,'B',0,30); s.append(make('circle',{cx:220,cy:215,r:190,class:'construction'})); s.append(make('circle',{cx:480,cy:215,r:190,class:'construction'})); line(s,350,35,350,395,'main'); dot(s,350,75,'P',10,-8); dot(s,350,355,'Q',10,18); line(s,220,215,480,215,'secondary'); return s; },
+    perpendicularOnLine() { return this.perpBisector(); },
+    perpendicularOutside() { const s=this.perpBisector(); text(s,350,42,'P','label'); return s; },
+    thales() { const s=svg(700,440); path(s,'M350 55 L110 360 L610 360 Z','main'); line(s,230,205,480,205,'secondary'); [[350,55,'A'],[110,360,'B'],[610,360,'C'],[230,205,'D'],[480,205,'E']].forEach(([x,y,l])=>dot(s,x,y,l,10,y<100?-10:22)); text(s,355,190,'DE ∥ BC','small'); return s; },
+    trig() { const s=svg(720,400); path(s,'M90 320 L590 320 L590 85 Z','main'); line(s,400,320,400,175,'secondary'); path(s,'M560 320 v-25 h30','helper'); text(s,440,345,'a','small'); text(s,615,205,'b','small'); text(s,345,170,'h','small'); text(s,285,345,"a'",'small'); text(s,380,245,"b'",'small'); return s; },
+    angle() { const s=svg(650,350); path(s,'M120 280 L540 280 A420 420 0 0 0 360 65 Z','anglefill','#dceafa'); line(s,120,280,540,280,'axis'); line(s,120,280,360,65,'axis'); dot(s,120,280,'O',-22,25); text(s,210,240,'α'); return s; },
+    cosine() { const s=svg(700,430); path(s,'M110 350 L590 350 L300 70 Z','main'); dot(s,110,350,'O',-22,25); dot(s,590,350,'A',10,22); dot(s,300,70,'B',0,-15); text(s,225,190,'|OB|','small'); text(s,430,190,'|AB|','small'); text(s,350,375,'|OA|','small'); text(s,185,315,'α'); return s; }
+  };
+
+  const render = () => {
+    document.querySelectorAll('[data-figure]').forEach((container) => {
+      const fn = renderers[container.dataset.figure];
+      if (typeof fn === 'function') container.replaceChildren(fn.call(renderers));
+      else container.textContent = `Figure: ${container.dataset.figure}`;
+    });
+  };
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', render, { once: true });
+  else render();
+})();
+</script>
