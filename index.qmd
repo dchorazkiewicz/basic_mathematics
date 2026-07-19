@@ -1,33 +1,48 @@
 ---
-title: "Basic Mathematics"
-subtitle: "Geometria analityczna, algebra liniowa i analiza matematyczna"
+title: ""
+page-layout: full
+toc: false
 listing: false
 ---
 
-To jest minimalny prototyp internetowego dokumentu matematycznego. Treść jest podzielona hierarchicznie, wzory są składane przez MathJax, a dłuższe dowody i rachunki mogą być zwijane.
+::: {.hero-shell}
+# Matematyka jako struktura, przestrzeń i zmiana
 
-::: {.grid}
-::: {.g-col-12 .g-col-md-4}
-## Geometria analityczna
-
-Punkty, wektory, proste i płaszczyzny.
-
-[Przejdź do działu](geometria-analityczna/index.qmd)
+Jedna spójna ścieżka przez geometrię analityczną, algebrę liniową i analizę matematyczną — z pełnym rachunkiem, argumentacją i interaktywnymi ilustracjami tam, gdzie obraz mówi więcej niż kolejny akapit.
 :::
 
-::: {.g-col-12 .g-col-md-4}
-## Algebra liniowa
-
-Macierze, układy równań i przekształcenia liniowe.
-
-[Przejdź do działu](algebra-liniowa/index.qmd)
+::: {.section-kicker}
+Trzy główne obszary
 :::
 
-::: {.g-col-12 .g-col-md-4}
-## Analiza matematyczna
+::: {.course-grid}
+<a class="course-card geometry" href="geometria-analityczna/index.html">
+<div>
+<h2>Geometria analityczna</h2>
+<p>Punkty, wektory, proste i płaszczyzny. Geometria opisana równaniami, ale bez utraty rysunku i intuicji.</p>
+</div>
+<div class="card-link">Otwórz dział →</div>
+</a>
 
-Funkcje, granice, pochodne i całki.
+<a class="course-card algebra" href="algebra-liniowa/index.html">
+<div>
+<h2>Algebra liniowa</h2>
+<p>Macierze, układy równań i przekształcenia liniowe jako język struktury oraz zmiany współrzędnych.</p>
+</div>
+<div class="card-link">Otwórz dział →</div>
+</a>
 
-[Przejdź do działu](analiza/index.qmd)
+<a class="course-card calculus" href="analiza/index.html">
+<div>
+<h2>Analiza matematyczna</h2>
+<p>Funkcje, granice, pochodne i całki jako narzędzia do opisu zmienności, lokalności i akumulacji.</p>
+</div>
+<div class="card-link">Otwórz dział →</div>
+</a>
 :::
-:::
+
+## Jak zbudowany jest materiał
+
+Każdy temat ma własną stronę. Główna narracja pozostaje czytelna, natomiast dłuższe dowody, techniczne rachunki i warianty rozwiązań mogą być rozwijane dopiero wtedy, gdy są potrzebne. Wzory są składane przez MathJax, więc dostępne są między innymi środowiska wieloliniowe, macierze, układy równań i numerowane zależności.
+
+Na początek zobacz przykładową stronę: [prosta przez dwa punkty](geometria-analityczna/prosta-przez-dwa-punkty.qmd).
