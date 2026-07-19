@@ -1,0 +1,46 @@
+/*-- scss:defaults --*/
+$font-family-sans-serif: Georgia, "Times New Roman", serif;
+$headings-font-family: Inter, system-ui, sans-serif;
+$body-font-size: 1.08rem;
+$line-height-base: 1.72;
+
+/*-- scss:rules --*/
+.quarto-title-block .title {
+  letter-spacing: -0.02em;
+}
+
+.math-display {
+  overflow-x: auto;
+  padding-block: 0.35rem;
+}
+
+.theorem,
+.definition,
+.example {
+  margin: 1.5rem 0;
+  padding: 1rem 1.15rem;
+  border-left: 0.25rem solid var(--bs-primary);
+  background: color-mix(in srgb, var(--bs-primary) 6%, transparent);
+}
+
+.proof {
+  margin: 1.25rem 0;
+}
+
+.proof::before {
+  content: "Dowód. ";
+  font-weight: 700;
+  font-style: italic;
+}
+
+details {
+  margin: 1.25rem 0;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--bs-border-color);
+  border-radius: 0.35rem;
+}
+
+details > summary {
+  cursor: pointer;
+  font-weight: 700;
+}
