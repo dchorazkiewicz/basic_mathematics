@@ -1,46 +1,280 @@
 /*-- scss:defaults --*/
-$font-family-sans-serif: Georgia, "Times New Roman", serif;
-$headings-font-family: Inter, system-ui, sans-serif;
-$body-font-size: 1.08rem;
-$line-height-base: 1.72;
+$font-family-sans-serif: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+$headings-font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
+$body-font-size: 1.075rem;
+$line-height-base: 1.75;
+$primary: #315f86;
+$link-color: #2d628e;
+$link-hover-color: #163f64;
+$navbar-bg: #10233f;
+$navbar-fg: #f7f9fc;
+$border-radius: 0.75rem;
 
 /*-- scss:rules --*/
-.quarto-title-block .title {
-  letter-spacing: -0.02em;
+:root {
+  --bm-ink: #172033;
+  --bm-muted: #647084;
+  --bm-paper: #fbfaf7;
+  --bm-panel: #f3f6fa;
+  --bm-line: rgba(29, 49, 78, 0.14);
+  --bm-blue: #315f86;
+  --bm-gold: #b17b24;
+  --bm-violet: #73558c;
+  --bm-green: #397460;
 }
 
+body {
+  color: var(--bm-ink);
+  background:
+    radial-gradient(circle at top right, rgba(49, 95, 134, 0.055), transparent 32rem),
+    var(--bm-paper);
+}
+
+.navbar {
+  box-shadow: 0 8px 28px rgba(10, 28, 52, 0.16);
+}
+
+.navbar-title {
+  font-family: $headings-font-family;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.sidebar-navigation {
+  font-size: 0.96rem;
+}
+
+.sidebar-item-container .active {
+  font-weight: 700;
+}
+
+#quarto-content {
+  max-width: 1500px;
+}
+
+main.content {
+  max-width: 54rem;
+}
+
+.quarto-title-block .title {
+  font-size: clamp(2.2rem, 4vw, 3.6rem);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+}
+
+.quarto-title-block .subtitle {
+  max-width: 46rem;
+  color: var(--bm-muted);
+  font-size: 1.25rem;
+}
+
+h1, h2, h3, h4 {
+  color: var(--bm-ink);
+}
+
+h2 {
+  margin-top: 3.2rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--bm-line);
+}
+
+p, li {
+  max-width: 74ch;
+}
+
+.math.display,
 .math-display {
+  margin: 1.7rem 0;
   overflow-x: auto;
-  padding-block: 0.35rem;
+  padding: 0.65rem 0.25rem;
 }
 
 .theorem,
 .definition,
-.example {
-  margin: 1.5rem 0;
-  padding: 1rem 1.15rem;
-  border-left: 0.25rem solid var(--bs-primary);
-  background: color-mix(in srgb, var(--bs-primary) 6%, transparent);
+.example,
+.lemma,
+.corollary,
+.proposition {
+  position: relative;
+  margin: 1.75rem 0;
+  padding: 1.15rem 1.3rem 1.2rem;
+  border: 1px solid var(--bm-line);
+  border-left: 0.32rem solid var(--bm-blue);
+  border-radius: 0.7rem;
+  background: rgba(49, 95, 134, 0.045);
+  box-shadow: 0 10px 28px rgba(27, 45, 72, 0.055);
 }
 
+.definition { border-left-color: var(--bm-blue); }
+.theorem, .lemma, .corollary, .proposition { border-left-color: var(--bm-violet); }
+.example { border-left-color: var(--bm-gold); }
+
 .proof {
-  margin: 1.25rem 0;
+  margin: 1.6rem 0;
+  padding: 0.2rem 0 0.2rem 1.15rem;
+  border-left: 2px solid var(--bm-line);
 }
 
 .proof::before {
   content: "Dowód. ";
+  font-family: $headings-font-family;
   font-weight: 700;
   font-style: italic;
 }
 
+.proof::after {
+  content: "□";
+  display: block;
+  margin-top: 0.65rem;
+  text-align: right;
+  font-size: 1.1rem;
+}
+
 details {
-  margin: 1.25rem 0;
-  padding: 0.8rem 1rem;
-  border: 1px solid var(--bs-border-color);
-  border-radius: 0.35rem;
+  margin: 1.4rem 0;
+  border: 1px solid var(--bm-line);
+  border-radius: 0.7rem;
+  background: rgba(255, 255, 255, 0.55);
+  box-shadow: 0 8px 24px rgba(27, 45, 72, 0.045);
 }
 
 details > summary {
   cursor: pointer;
+  padding: 0.95rem 1.1rem;
   font-weight: 700;
+  color: var(--bm-blue);
+}
+
+details[open] > summary {
+  border-bottom: 1px solid var(--bm-line);
+}
+
+details > :not(summary) {
+  margin-left: 1.1rem;
+  margin-right: 1.1rem;
+}
+
+.hero-shell {
+  margin: -1rem 0 2.6rem;
+  padding: clamp(2rem, 5vw, 4.2rem);
+  border: 1px solid rgba(49, 95, 134, 0.14);
+  border-radius: 1.25rem;
+  background:
+    linear-gradient(135deg, rgba(16, 35, 63, 0.98), rgba(49, 95, 134, 0.94)),
+    #10233f;
+  color: white;
+  box-shadow: 0 22px 60px rgba(16, 35, 63, 0.24);
+}
+
+.hero-shell h1 {
+  max-width: 13ch;
+  margin: 0;
+  color: white;
+  font-size: clamp(2.8rem, 7vw, 5.6rem);
+  line-height: 0.96;
+  letter-spacing: -0.05em;
+}
+
+.hero-shell p {
+  max-width: 42rem;
+  margin: 1.4rem 0 0;
+  color: rgba(255, 255, 255, 0.84);
+  font-size: 1.2rem;
+}
+
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.1rem;
+  margin: 2rem 0 3rem;
+}
+
+.course-card {
+  position: relative;
+  display: flex;
+  min-height: 15rem;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.45rem;
+  overflow: hidden;
+  border: 1px solid var(--bm-line);
+  border-radius: 1rem;
+  color: inherit;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: 0 14px 36px rgba(27, 45, 72, 0.075);
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+}
+
+.course-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0.32rem;
+  background: var(--card-accent, var(--bm-blue));
+}
+
+.course-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(49, 95, 134, 0.34);
+  box-shadow: 0 22px 52px rgba(27, 45, 72, 0.13);
+}
+
+.course-card h2 {
+  margin: 0 0 0.75rem;
+  padding: 0;
+  border: 0;
+  font-size: 1.65rem;
+}
+
+.course-card p {
+  color: var(--bm-muted);
+}
+
+.course-card .card-link {
+  margin-top: 1.4rem;
+  color: var(--card-accent, var(--bm-blue));
+  font-weight: 750;
+}
+
+.course-card.geometry { --card-accent: var(--bm-blue); }
+.course-card.algebra { --card-accent: var(--bm-violet); }
+.course-card.calculus { --card-accent: var(--bm-green); }
+
+.section-kicker {
+  margin-bottom: 0.55rem;
+  color: var(--bm-blue);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 900px) {
+  .course-grid {
+    grid-template-columns: 1fr;
+  }
+
+  main.content {
+    max-width: 100%;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bm-ink: #edf2f8;
+    --bm-muted: #aeb9c8;
+    --bm-paper: #101722;
+    --bm-panel: #182231;
+    --bm-line: rgba(221, 232, 244, 0.15);
+  }
+
+  body {
+    background: var(--bm-paper);
+  }
+
+  .course-card,
+  details {
+    background: rgba(255, 255, 255, 0.035);
+  }
 }
