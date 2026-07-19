@@ -1,0 +1,5 @@
+---
+title: "Analiza matematyczna"
+---
+
+Funkcje, granice, pochodne i całki. Ta podstrona jest na razie tylko miejscem w minimalnym szkielecie serwisu.
