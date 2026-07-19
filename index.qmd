@@ -1,0 +1,33 @@
+---
+title: "Basic Mathematics"
+subtitle: "Geometria analityczna, algebra liniowa i analiza matematyczna"
+listing: false
+---
+
+To jest minimalny prototyp internetowego dokumentu matematycznego. Treść jest podzielona hierarchicznie, wzory są składane przez MathJax, a dłuższe dowody i rachunki mogą być zwijane.
+
+::: {.grid}
+::: {.g-col-12 .g-col-md-4}
+## Geometria analityczna
+
+Punkty, wektory, proste i płaszczyzny.
+
+[Przejdź do działu](geometria-analityczna/index.qmd)
+:::
+
+::: {.g-col-12 .g-col-md-4}
+## Algebra liniowa
+
+Macierze, układy równań i przekształcenia liniowe.
+
+[Przejdź do działu](algebra-liniowa/index.qmd)
+:::
+
+::: {.g-col-12 .g-col-md-4}
+## Analiza matematyczna
+
+Funkcje, granice, pochodne i całki.
+
+[Przejdź do działu](analiza/index.qmd)
+:::
+:::
