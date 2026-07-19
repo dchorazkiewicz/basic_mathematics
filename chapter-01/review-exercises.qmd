@@ -1,0 +1,103 @@
+---
+title: "Review Exercises"
+---
+
+## Elementary computational and graphical exercises
+
+::: {.exercise-list}
+1. Plot the points
+
+   $$
+   A=(3,2),\qquad B=(-2,4),\qquad C=(-3,-1),\qquad D=(2,-3).
+   $$
+
+   For each point, state its quadrant and draw its orthogonal projections onto both axes.
+
+2. For $P=(-4,3)$, write the two projection points on the coordinate axes and compute the distances from $P$ to the $x$-axis, the $y$-axis, and the origin.
+
+3. A point has horizontal coordinate $-5$ and vertical coordinate $2$. Construct it from the axes by orthogonal projection. Repeat for a point with coordinates $(0,-4)$ and explain what is special about its position.
+
+4. Compute and illustrate with right triangles the distances
+
+   $$
+   d\bigl((1,2),(4,6)\bigr),
+   \qquad
+   d\bigl((-2,1),(4,1)\bigr),
+   \qquad
+   d\bigl((-3,-2),(1,1)\bigr).
+   $$
+
+5. Find the midpoint of the segment joining $A=(-2,1)$ and $B=(4,5)$. Verify that the midpoint is equally distant from both endpoints.
+
+6. A point has coordinates $P=(6,-4)$ when one unit on each axis has its original length. Find its coordinates when one new unit is equal to two old units and the origin and axis directions remain unchanged.
+
+7. A point has coordinates $P=(5,3)$. Move the origin to the old point $(2,1)$ without changing the units or axis directions. Compute the coordinates of $P$ in the new system.
+
+8. A point has coordinates $P=(4,-2)$. Reverse only the positive direction of the $x$-axis, leaving the origin, unit, and $y$-axis unchanged. Find the new coordinates and draw both descriptions of the same point.
+
+9. Prepare a value table for
+
+   $$
+   y=-2x+4
+   $$
+
+   at five convenient integer values of $x$. Plot the points, draw the line, and find its intersections with both coordinate axes.
+
+10. Plot on one coordinate system
+
+    $$
+    y=x+2,
+    \qquad
+    y=x^2.
+    $$
+
+    Find their common points algebraically and verify each point in both equations.
+:::
+
+## Development and reasoning exercises
+
+::: {.exercise-list}
+1. Describe how to construct a Cartesian coordinate system starting only from a plane, one chosen point, one chosen line through that point, and the ability to construct perpendicular lines. Identify every additional choice that must be made before points can receive numerical coordinates.
+
+2. Explain why a geometric point is not the same object as an ordered pair. Choose one fixed point and describe it in two coordinate systems with different origins. State precisely what changes and what remains unchanged.
+
+3. Derive
+
+   $$
+   d(P,Q)=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}
+   $$
+
+   from the horizontal and vertical displacements between $P=(x_1,y_1)$ and $Q=(x_2,y_2)$. Include a diagram and explain where perpendicularity is used.
+
+4. A drawing uses twice the scale horizontally as vertically. Explain why the picture of
+
+   $$
+   x^2+y^2=4
+   $$
+
+   may look like an ellipse even though the equation describes a circle. Explain what information belongs to the geometry and what information belongs only to the drawing convention.
+
+5. Find all points on the $x$-axis whose distance from $P=(2,3)$ is $5$. Before calculating, predict geometrically how many solutions can occur. Then solve and explain why the algebra agrees with the picture.
+
+6. A point is described by $(6,2)$. A new coordinate system is obtained by moving the origin to $(2,-1)$, reversing the $x$-axis direction, and replacing the old unit by a unit twice as long. Compute the new coordinates by treating these three changes one at a time, and explain why the order of the reasoning matters.
+
+7. Three vertices of an axis-aligned rectangle are
+
+   $$
+   A=(-2,-1),\qquad B=(3,-1),\qquad C=(3,2).
+   $$
+
+   Find the fourth vertex and compute the side and diagonal lengths. Explain how the coordinate description makes the rectangle structure visible without measuring angles numerically.
+
+8. The line $y=2x-3$ and the parabola $y=x^2-2$ are drawn in the same coordinate system. Find their common points and explain why solving
+
+   $$
+   2x-3=x^2-2
+   $$
+
+   is exactly the algebraic version of asking for points that belong to both curves.
+
+9. Orthogonal projection assigns to every point of the plane one number on each axis. Explain why two different points cannot receive the same ordered pair. Then explain why every ordered pair of real numbers determines exactly one point of the plane.
+
+10. The construction of a scale begins with integer marks and repeated bisection. Explain what points can be labelled after finitely many bisections and why an additional continuity assumption is needed to regard every point of the axis as having a real coordinate. Keep the argument geometric rather than set-theoretic.
+:::
