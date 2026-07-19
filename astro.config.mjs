@@ -10,7 +10,7 @@ export default defineConfig({
   integrations: [
     starlight({
       title: 'Basic Mathematics',
-      description: 'Interaktywny wykład z geometrii analitycznej, algebry liniowej i analizy matematycznej.',
+      description: 'Interaktywny dokument matematyczny: geometria analityczna, algebra liniowa i analiza.',
       customCss: ['./src/styles/custom.css'],
       social: {
         github: 'https://github.com/dchorazkiewicz/basic_mathematics'
@@ -19,43 +19,17 @@ export default defineConfig({
         {
           label: 'Geometria analityczna',
           collapsed: false,
-          items: [
-            { label: 'Wprowadzenie', slug: 'geometria-analityczna/' },
-            { label: 'Punkty i współrzędne', slug: 'geometria-analityczna/punkty-i-wspolrzedne' },
-            { label: 'Wektory', slug: 'geometria-analityczna/wektory' },
-            { label: 'Proste', slug: 'geometria-analityczna/proste' },
-            { label: 'Płaszczyzny', slug: 'geometria-analityczna/plaszczyzny' }
-          ]
+          autogenerate: { directory: 'geometria-analityczna' }
         },
         {
           label: 'Algebra liniowa',
           collapsed: false,
-          items: [
-            { label: 'Wprowadzenie', slug: 'algebra-liniowa/' },
-            { label: 'Macierze', slug: 'algebra-liniowa/macierze' },
-            { label: 'Wyznaczniki', slug: 'algebra-liniowa/wyznaczniki' },
-            { label: 'Układy równań', slug: 'algebra-liniowa/uklady-rownan' },
-            { label: 'Przekształcenia liniowe', slug: 'algebra-liniowa/przeksztalcenia-liniowe' }
-          ]
+          autogenerate: { directory: 'algebra-liniowa' }
         },
         {
           label: 'Analiza matematyczna',
           collapsed: false,
-          items: [
-            { label: 'Wprowadzenie', slug: 'analiza/' },
-            { label: 'Funkcje', slug: 'analiza/funkcje' },
-            { label: 'Granice', slug: 'analiza/granice' },
-            { label: 'Pochodne', slug: 'analiza/pochodne' },
-            { label: 'Całki', slug: 'analiza/calki' }
-          ]
-        },
-        {
-          label: 'Warsztat autora',
-          collapsed: true,
-          items: [
-            { label: 'Skład matematyczny', slug: 'warsztat/sklad-matematyczny' },
-            { label: 'Komponenty dokumentu', slug: 'warsztat/komponenty' }
-          ]
+          autogenerate: { directory: 'analiza' }
         }
       ]
     }),
@@ -66,7 +40,6 @@ export default defineConfig({
     rehypePlugins: [[rehypeKatex, {
       throwOnError: false,
       strict: false,
-      trust: false,
       macros: {
         '\\R': '\\mathbb{R}',
         '\\N': '\\mathbb{N}',
