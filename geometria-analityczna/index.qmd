@@ -1,0 +1,14 @@
+---
+title: "Geometria analityczna"
+---
+
+Geometria analityczna opisuje figury za pomocą współrzędnych i równań, ale zachowuje ich geometryczne znaczenie.
+
+## W tym dziale
+
+- punkty i układy współrzędnych,
+- wektory,
+- proste,
+- płaszczyzny.
+
+[Zobacz przykładową stronę: prosta przez dwa punkty](prosta-przez-dwa-punkty.qmd)
