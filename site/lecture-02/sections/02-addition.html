@@ -1,0 +1,35 @@
+<section id="addition" class="section">
+  <h2>Addition, opposite vectors, and subtraction</h2>
+  <p>Let $\mathbf a=[a_1,a_2]$ and $\mathbf b=[b_1,b_2]$. Choose representatives head to tail: $\overrightarrow{PQ}$ represents $\mathbf a$ and $\overrightarrow{QR}$ represents $\mathbf b$. The arrow $\overrightarrow{PR}$ records the combined change.</p>
+
+  <figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
+    <div class="figure-toolbar">
+      <div><span class="figure-title">Vector addition</span><span class="figure-step-title">Head-to-tail and parallelogram constructions describe the same sum.</span></div>
+      <button class="icon-button" type="button" data-fullscreen aria-label="Open vector addition figure in full screen">⛶</button>
+    </div>
+    <div class="curve-switcher" role="group" aria-label="Choose an addition view">
+      <button class="curve-mode is-active" type="button" data-addition-mode="head">Head to tail</button>
+      <button class="curve-mode" type="button" data-addition-mode="parallelogram">Parallelogram</button>
+      <button class="curve-mode" type="button" data-addition-mode="subtract">Subtraction</button>
+    </div>
+    <div class="figure-stage jsx-stage"><div id="vector-addition-board" class="jxgbox" data-vector-addition></div></div>
+    <figcaption class="figure-caption">Drag the endpoints of $\mathbf a$ and $\mathbf b$. The resultant updates from the geometry.</figcaption>
+  </figure>
+
+  <div class="derivation">
+    <h3>Why the coordinates add</h3>
+    <p>Since $Q=P+(a_1,a_2)$ and $R=Q+(b_1,b_2)$,</p>
+    <div class="display-math">$$R=P+(a_1+b_1,\,a_2+b_2).$$</div>
+    <p>Therefore the combined displacement depends only on $\mathbf a$ and $\mathbf b$:</p>
+    <div class="display-math">$$\boxed{\mathbf a+\mathbf b=[a_1+b_1,\,a_2+b_2].}$$</div>
+  </div>
+
+  <p>The parallelogram construction shows geometrically that the order does not matter:</p>
+  <div class="display-math">$$\boxed{\mathbf a+\mathbf b=\mathbf b+\mathbf a.}$$</div>
+
+  <p>The opposite vector has the same length and direction line but reversed orientation:</p>
+  <div class="display-math">$$-\mathbf a=[-a_1,-a_2],\qquad \mathbf a+(-\mathbf a)=\mathbf0.$$</div>
+  <p>Subtraction is addition of the opposite:</p>
+  <div class="display-math">$$\boxed{\mathbf a-\mathbf b=[a_1-b_1,\,a_2-b_2].}$$</div>
+  <p>It is also the missing displacement in $(\mathbf a-\mathbf b)+\mathbf b=\mathbf a$.</p>
+</section>
