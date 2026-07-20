@@ -6,7 +6,8 @@
     'sections/04-distance.html',
     'sections/05-graphs.html',
     'sections/06-relations.html',
-    'sections/07-equation-families.html'
+    'sections/07-parametric-curves.html',
+    'sections/08-intersections-regions.html'
   ];
 
   const loadScript = (src) => new Promise((resolve, reject) => {
@@ -38,7 +39,8 @@
     await loadScript('../assets/distance-geometry.js');
     await loadScript('../assets/function-machine.js');
     await loadScript('../assets/circle-relation.js');
-    await loadScript('../assets/equation-families.js');
+    await loadScript('../assets/parametric-curves.js');
+    await loadScript('../assets/intersections-regions.js');
   }
 
   loadLecture().catch((error) => {
