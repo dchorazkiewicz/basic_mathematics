@@ -8,6 +8,7 @@
   const value = panel.querySelector('[data-parametric-value]');
   const formula = panel.querySelector('[data-parametric-form]');
   const pointReadout = panel.querySelector('[data-parametric-point]');
+  const BASE_VIEW = [-5.5, 5, 5.5, -5];
 
   const modes = {
     circle: {
@@ -29,7 +30,7 @@
 
   const state = { mode: 'circle', t: 0 };
   const board = JXG.JSXGraph.initBoard(host.id, {
-    boundingbox: [-5.5, 5, 5.5, -5], axis: true, grid: true,
+    boundingbox: BASE_VIEW, axis: true, grid: true,
     showNavigation: false, showCopyright: false, keepAspectRatio: true,
     pan: { enabled: false }, zoom: { enabled: false }
   });
@@ -41,16 +42,16 @@
     () => modes[state.mode].max
   ], { strokeColor: '#2f6f9f', strokeWidth: 4, fixed: true, highlight: false });
 
-  const movingPoint = board.create('point', [
+  board.create('point', [
     () => modes[state.mode].x(state.t),
     () => modes[state.mode].y(state.t)
   ], { name: 'P(t)', size: 6, fillColor: '#b1782b', strokeColor: '#b1782b', fixed: true, highlight: false });
 
-  const projectionX = board.create('segment', [
+  board.create('segment', [
     () => [modes[state.mode].x(state.t), modes[state.mode].y(state.t)],
     () => [modes[state.mode].x(state.t), 0]
   ], { strokeColor: '#9aa7b2', dash: 2, strokeWidth: 2, fixed: true, highlight: false });
-  const projectionY = board.create('segment', [
+  board.create('segment', [
     () => [modes[state.mode].x(state.t), modes[state.mode].y(state.t)],
     () => [0, modes[state.mode].y(state.t)]
   ], { strokeColor: '#9aa7b2', dash: 2, strokeWidth: 2, fixed: true, highlight: false });
@@ -83,8 +84,9 @@
   buttons.forEach(button => button.addEventListener('click', () => setMode(button.dataset.parametricMode)));
   slider.addEventListener('input', () => { state.t = Number(slider.value); render(); });
 
-  const resize = () => { board.resizeContainer(host.clientWidth, host.clientHeight); board.fullUpdate(); };
-  document.addEventListener('fullscreenchange', () => setTimeout(resize, 80));
-  window.addEventListener('resize', resize);
+  if (window.LectureJSX?.keepBoardFitted) {
+    window.LectureJSX.keepBoardFitted({ board, host, boundingBox: BASE_VIEW });
+  }
+
   setMode('circle');
 })();
