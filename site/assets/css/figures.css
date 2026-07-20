@@ -18,8 +18,9 @@
 
 .curve-switcher { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 12px; }
 .curve-mode.is-active { border-color: var(--blue); background: var(--blue-soft); color: var(--navy); }
-.parameter-controls { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; margin-top: 14px; }
+.parameter-controls { display: grid; grid-template-columns: repeat(var(--parameter-count, 3), minmax(0,1fr)); gap: 14px; margin-top: 14px; }
 .parameter-control { display: grid; gap: 6px; padding: 10px 12px; border: 1px solid rgba(24,33,43,.09); border-radius: 10px; background: rgba(255,255,255,.46); font-size: .82rem; }
+.parameter-control[hidden] { display: none; }
 .parameter-control > span { color: var(--muted); font-weight: 600; }
 .parameter-control output { color: var(--ink); }
 .parameter-control input { width: 100%; accent-color: var(--blue); }
