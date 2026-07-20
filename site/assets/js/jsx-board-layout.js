@@ -8,6 +8,16 @@
     let scheduled = false;
     let resizing = false;
 
+    /* JSXGraph may alter a bounding-box array while preserving aspect ratio.
+       Wrap the method once so repeated lecture steps never mutate their
+       shared FULL_VIEW or FOCUS_VIEW constants. */
+    if (!board.__lectureBoundingBoxGuard) {
+      const setBoundingBox = board.setBoundingBox.bind(board);
+      board.setBoundingBox = (box, ...args) =>
+        setBoundingBox(Array.isArray(box) ? [...box] : box, ...args);
+      board.__lectureBoundingBoxGuard = true;
+    }
+
     const getBoundingBox = () => {
       const value = typeof boundingBox === 'function' ? boundingBox() : boundingBox;
       return Array.isArray(value) ? [...value] : value;
