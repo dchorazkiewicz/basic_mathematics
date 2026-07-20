@@ -96,28 +96,20 @@
     semidisk
   };
 
-  function resetView() {
-    board.setBoundingBox(VIEW, true);
-  }
-
   function setMode(mode) {
     currentMode = mode;
     clear();
-    resetView();
+    board.setBoundingBox(VIEW, true);
     renderers[mode]();
     buttons.forEach(button => button.classList.toggle('is-active', button.dataset.regionMode === mode));
     board.fullUpdate();
   }
 
-  function resizeAndRestoreView() {
-    board.resizeContainer(host.clientWidth, host.clientHeight);
-    resetView();
-    board.fullUpdate();
-  }
-
   buttons.forEach(button => button.addEventListener('click', () => setMode(button.dataset.regionMode)));
-  document.addEventListener('fullscreenchange', () => setTimeout(resizeAndRestoreView, 100));
-  window.addEventListener('resize', () => requestAnimationFrame(resizeAndRestoreView));
+
+  if (window.LectureJSX?.keepBoardFitted) {
+    window.LectureJSX.keepBoardFitted({ board, host, boundingBox: VIEW });
+  }
 
   setMode(currentMode);
 })();
