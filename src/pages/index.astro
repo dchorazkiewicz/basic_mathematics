@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { courseAreas } from '../data/course';
+const base = import.meta.env.BASE_URL;
+---
+<BaseLayout title="Course map">
+  <section class="reading-column">
+    <div class="eyebrow">A twelve-lecture mathematical course</div>
+    <h1>Mathematical Stories</h1>
+    <p class="lede">A visual and rigorous route through analytical geometry, linear algebra, and calculus. The course is organised by lectures rather than by software pages: each lecture is a coherent mathematical story with text, derivations, figures, and presentation-ready interactive moments.</p>
+  </section>
+
+  <section class="course-map" id="course-map" aria-label="Course lectures">
+    {courseAreas.map((area) => (
+      <div class="area">
+        <div class="area-header">
+          <h2>{area.title}</h2>
+          <p>{area.note}</p>
+        </div>
+        <div class="lecture-list">
+          {area.lectures.map((lecture) => lecture.ready ? (
+            <a class="lecture-card is-prototype" href={`${base}lectures/${lecture.slug}/`}>
+              <span class="lecture-number">L{lecture.number}</span>
+              <span>
+                <strong>{lecture.title}</strong>
+                <span>{lecture.summary}</span>
+              </span>
+            </a>
+          ) : (
+            <div class="lecture-card" aria-disabled="true">
+              <span class="lecture-number">L{lecture.number}</span>
+              <span>
+                <strong>{lecture.title}</strong>
+                <span>{lecture.summary}</span>
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    ))}
+  </section>
+</BaseLayout>
