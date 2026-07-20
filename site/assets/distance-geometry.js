@@ -74,10 +74,25 @@
   ], { color: '#b1782b', fontSize: 17, ...fixed });
 
   board.create('text', [
-    () => (P.X() + Q.X()) / 2 - 0.55,
-    () => (P.Y() + Q.Y()) / 2 + 0.34,
+    () => {
+      const dx = Q.X() - P.X();
+      const dy = Q.Y() - P.Y();
+      const length = Math.hypot(dx, dy) || 1;
+      return (P.X() + Q.X()) / 2 - 0.62 * dy / length - 0.45;
+    },
+    () => {
+      const dx = Q.X() - P.X();
+      const dy = Q.Y() - P.Y();
+      const length = Math.hypot(dx, dy) || 1;
+      return (P.Y() + Q.Y()) / 2 + 0.62 * dx / length;
+    },
     () => `dₑ(P,Q) = ${Math.hypot(Q.X() - P.X(), Q.Y() - P.Y()).toFixed(2)}`
-  ], { color: '#17324d', fontSize: 18, ...fixed });
+  ], {
+    color: '#7a3f73',
+    fontSize: 18,
+    cssClass: 'distance-hypotenuse-label',
+    ...fixed
+  });
 
   board.create('text', [0.2, 5.05, 'Move P or Q: the right triangle and all three lengths update automatically.'], {
     color: '#66717d', fontSize: 16, ...fixed
