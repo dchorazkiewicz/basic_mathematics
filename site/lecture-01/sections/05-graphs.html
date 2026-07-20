@@ -1,15 +1,49 @@
 <section id="graphs" class="section">
   <h2>Equations as geometric descriptions</h2>
-  <p>Once points have numerical addresses, an equation or inequality can select a subset of the plane.</p>
-  <div class="math-block">
-    $$
-    \begin{aligned}
-    x^2+y^2 &= 4 &&\text{circle},\\
-    x^2+y^2 &\le 4 &&\text{disk},\\
-    y &= x+2 &&\text{straight line},\\
-    y &= x^2 &&\text{parabola}.
-    \end{aligned}
-    $$
+  <p>An equation does not merely produce a number. It selects points whose coordinates satisfy a common condition. Changing a parameter changes the geometric set continuously.</p>
+
+  <figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
+    <div class="figure-toolbar">
+      <div>
+        <span class="figure-title">Families of equations</span>
+        <span class="figure-step-title" data-current-equation>(x − 0)² + (y − 0)² = 4</span>
+      </div>
+      <button class="icon-button" type="button" data-fullscreen aria-label="Open equation families in full screen">⛶</button>
+    </div>
+
+    <div class="curve-switcher" role="group" aria-label="Choose a geometric family">
+      <button class="curve-mode is-active" type="button" data-curve-mode="circle">Circle</button>
+      <button class="curve-mode" type="button" data-curve-mode="disk">Disk</button>
+      <button class="curve-mode" type="button" data-curve-mode="line">Line</button>
+      <button class="curve-mode" type="button" data-curve-mode="parabola">Parabola</button>
+    </div>
+
+    <div class="figure-stage jsx-stage">
+      <div id="equation-family-board" class="jxgbox" data-equation-families aria-label="Interactive parameterized graphs of a circle, disk, line and parabola"></div>
+    </div>
+
+    <div class="parameter-controls" aria-label="Graph parameters">
+      <label class="parameter-control" data-parameter>
+        <span><span data-parameter-label>h</span> = <output data-parameter-value>0</output></span>
+        <input type="range" aria-label="First parameter">
+      </label>
+      <label class="parameter-control" data-parameter>
+        <span><span data-parameter-label>k</span> = <output data-parameter-value>0</output></span>
+        <input type="range" aria-label="Second parameter">
+      </label>
+      <label class="parameter-control" data-parameter>
+        <span><span data-parameter-label>r</span> = <output data-parameter-value>2</output></span>
+        <input type="range" aria-label="Third parameter">
+      </label>
+    </div>
+
+    <figcaption class="figure-caption">Switch between geometric families and move the sliders. The graph and its equation change together.</figcaption>
+  </figure>
+
+  <p>The same algebraic language describes qualitatively different sets: a boundary, a filled region, an unbounded line or a curved graph. Parameters control position, scale and shape.</p>
+
+  <div class="statement">
+    <div class="statement-label">Intersection principle</div>
+    <p>A point lying on two curves satisfies both equations simultaneously. For example, intersections of $y=x^2$ and $y=x+2$ are exactly the solutions of $x^2=x+2$.</p>
   </div>
-  <p>An intersection point satisfies several conditions simultaneously. For example, solving $x^2=x+2$ gives the common points of the parabola $y=x^2$ and the line $y=x+2$.</p>
 </section>
