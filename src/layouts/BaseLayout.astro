@@ -1,0 +1,45 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'Mathematical Stories — a modern mathematical lecture medium.' } = Astro.props;
+const base = import.meta.env.BASE_URL;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#142c46" />
+    <title>{title} · Mathematical Stories</title>
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          tags: 'ams',
+          packages: {'[+]': ['ams']}
+        },
+        options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'] }
+      };
+    </script>
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href={base}>Mathematical Stories</a>
+      <div class="header-actions">
+        <a href={`${base}#course-map`}>12 lectures</a>
+        <a href="https://github.com/dchorazkiewicz/basic_mathematics" rel="noreferrer">GitHub</a>
+      </div>
+    </header>
+    <main class="course-shell">
+      <slot />
+    </main>
+  </body>
+</html>
