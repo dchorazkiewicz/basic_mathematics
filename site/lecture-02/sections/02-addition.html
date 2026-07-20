@@ -9,16 +9,15 @@
 
   <figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
     <div class="figure-toolbar">
-      <div><span class="figure-title">Addition and subtraction of free vectors</span><span class="figure-step-title">Head-to-tail, parallelogram, and missing-displacement views.</span></div>
-      <button class="icon-button" type="button" data-fullscreen aria-label="Open vector addition figure in full screen">⛶</button>
+      <div>
+        <span class="figure-title">From three points to vector addition</span>
+        <span class="figure-step-title">Move $P$, $Q$, or $R$ and follow the two consecutive anchored vectors.</span>
+      </div>
+      <button class="icon-button" type="button" data-fullscreen aria-label="Open point-chain addition figure in full screen">⛶</button>
     </div>
-    <div class="curve-switcher" role="group" aria-label="Choose an addition view">
-      <button class="curve-mode is-active" type="button" data-addition-mode="head">Head to tail</button>
-      <button class="curve-mode" type="button" data-addition-mode="parallelogram">Parallelogram</button>
-      <button class="curve-mode" type="button" data-addition-mode="subtract">Subtraction</button>
-    </div>
-    <div class="figure-stage jsx-stage"><div id="vector-addition-board" class="jxgbox" data-vector-addition></div></div>
-    <figcaption class="figure-caption">The same geometric operations as in the TeX diagrams, now with movable vectors.</figcaption>
+    <div class="figure-stage jsx-stage"><div id="vector-chain-board" class="jxgbox" data-vector-chain></div></div>
+    <div class="relation-readout" data-vector-chain-readout></div>
+    <figcaption class="figure-caption">The first vector is represented by $\overrightarrow{PQ}$, the second by $\overrightarrow{QR}$, and their sum by the direct arrow $\overrightarrow{PR}$.</figcaption>
   </figure>
 
   <div class="derivation">
@@ -44,7 +43,26 @@
   <div class="display-math">$$\mathbf a+(-\mathbf a)=\mathbf0.$$</div>
   <p>Geometrically it has the same length and lies on the same direction line as $\mathbf a$, but its orientation is reversed.</p>
 
-  <h3>Subtraction as the missing displacement</h3>
+  <h3>Subtraction as addition of the opposite vector</h3>
+
+  <figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
+    <div class="figure-toolbar">
+      <div>
+        <span class="figure-title">Opposite vector and subtraction</span>
+        <span class="figure-step-title">First reverse $\mathbf b$, then add $-\mathbf b$ to $\mathbf a$.</span>
+      </div>
+      <button class="icon-button" type="button" data-fullscreen aria-label="Open opposite vector and subtraction figure in full screen">⛶</button>
+    </div>
+    <div class="curve-switcher" role="group" aria-label="Choose a subtraction construction step">
+      <button class="curve-mode is-active" type="button" data-subtraction-step="opposite">Construct $-\mathbf b$</button>
+      <button class="curve-mode" type="button" data-subtraction-step="add">Add $\mathbf a+(-\mathbf b)$</button>
+      <button class="curve-mode" type="button" data-subtraction-step="check">Check the missing vector</button>
+    </div>
+    <div class="figure-stage jsx-stage"><div id="vector-subtraction-board" class="jxgbox" data-vector-subtraction></div></div>
+    <div class="relation-readout" data-vector-subtraction-readout></div>
+    <figcaption class="figure-caption">The opposite vector reverses orientation without changing length. Subtraction is then ordinary vector addition with this reversed vector.</figcaption>
+  </figure>
+
   <p>Subtraction is defined by adding the opposite vector:</p>
   <div class="display-math">$$\boxed{\mathbf a-\mathbf b=\mathbf a+(-\mathbf b)=[a_1-b_1,\,a_2-b_2].}$$</div>
   <p>It is the missing vector in the equation</p>
