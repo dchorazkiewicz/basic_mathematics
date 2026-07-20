@@ -2,15 +2,21 @@
   const host = document.querySelector('[data-intersections-regions]');
   if (!host || !window.JXG) return;
 
+  const VIEW = [-5.5, 5.5, 5.5, -5.5];
   const panel = host.closest('[data-fullscreen-panel]');
   const buttons = [...panel.querySelectorAll('[data-region-mode]')];
   const conditions = panel.querySelector('[data-region-conditions]');
   const description = panel.querySelector('[data-region-description]');
 
   const board = JXG.JSXGraph.initBoard(host.id, {
-    boundingbox: [-5.5, 5.5, 5.5, -5.5], axis: true, grid: true,
-    showNavigation: false, showCopyright: false, keepAspectRatio: true,
-    pan: { enabled: false }, zoom: { enabled: false }
+    boundingbox: VIEW,
+    axis: true,
+    grid: true,
+    showNavigation: false,
+    showCopyright: false,
+    keepAspectRatio: true,
+    pan: { enabled: false },
+    zoom: { enabled: false }
   });
 
   const styles = {
@@ -21,12 +27,15 @@
   };
 
   let scene = [];
+  let currentMode = 'parabola-line';
+
   const keep = object => { scene.push(object); return object; };
   const clear = () => { scene.forEach(object => board.removeObject(object)); scene = []; };
 
   function polygon(points) {
     return keep(board.create('polygon', points, styles.region));
   }
+
   function point(x, y, name) {
     return keep(board.create('point', [x, y], { ...styles.point, name }));
   }
@@ -35,23 +44,19 @@
     conditions.textContent = 'y ≥ x² − 2  and  y ≤ x + 2';
     description.textContent = 'The shaded set lies above the parabola and below the line. Its endpoints are the exact intersections of the two boundary curves.';
 
-    const discriminant = Math.sqrt(17);
-    const left = (1 - discriminant) / 2;
-    const right = (1 + discriminant) / 2;
-    const samples = 140;
-    const upperBoundary = [];
-    const lowerBoundary = [];
+    const sqrt17 = Math.sqrt(17);
+    const left = (1 - sqrt17) / 2;
+    const right = (1 + sqrt17) / 2;
+    const upper = [];
+    const lower = [];
 
-    for (let i = 0; i <= samples; i += 1) {
-      const x = left + (right - left) * i / samples;
-      upperBoundary.push([x, x + 2]);
-    }
-    for (let i = samples; i >= 0; i -= 1) {
-      const x = left + (right - left) * i / samples;
-      lowerBoundary.push([x, x * x - 2]);
+    for (let i = 0; i <= 180; i += 1) {
+      const x = left + (right - left) * i / 180;
+      upper.push([x, x + 2]);
+      lower.unshift([x, x * x - 2]);
     }
 
-    polygon([...upperBoundary, ...lowerBoundary]);
+    polygon([...upper, ...lower]);
     keep(board.create('functiongraph', [x => x * x - 2], styles.curveA));
     keep(board.create('functiongraph', [x => x + 2], styles.curveB));
     point(left, left + 2, 'A');
@@ -85,17 +90,34 @@
     point(3, 0, 'B');
   }
 
-  const renderers = { 'parabola-line': parabolaLine, 'absolute-lines': absoluteLines, semidisk };
+  const renderers = {
+    'parabola-line': parabolaLine,
+    'absolute-lines': absoluteLines,
+    semidisk
+  };
+
+  function resetView() {
+    board.setBoundingBox(VIEW, true);
+  }
+
   function setMode(mode) {
+    currentMode = mode;
     clear();
+    resetView();
     renderers[mode]();
     buttons.forEach(button => button.classList.toggle('is-active', button.dataset.regionMode === mode));
     board.fullUpdate();
   }
 
+  function resizeAndRestoreView() {
+    board.resizeContainer(host.clientWidth, host.clientHeight);
+    resetView();
+    board.fullUpdate();
+  }
+
   buttons.forEach(button => button.addEventListener('click', () => setMode(button.dataset.regionMode)));
-  const resize = () => { board.resizeContainer(host.clientWidth, host.clientHeight); board.fullUpdate(); };
-  document.addEventListener('fullscreenchange', () => setTimeout(resize, 80));
-  window.addEventListener('resize', resize);
-  setMode('parabola-line');
+  document.addEventListener('fullscreenchange', () => setTimeout(resizeAndRestoreView, 100));
+  window.addEventListener('resize', () => requestAnimationFrame(resizeAndRestoreView));
+
+  setMode(currentMode);
 })();
