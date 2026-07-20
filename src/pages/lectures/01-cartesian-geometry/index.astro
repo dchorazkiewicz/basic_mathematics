@@ -1,0 +1,149 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import FocusStage from '../../../components/FocusStage.astro';
+import CartesianConstruction from '../../../components/CartesianConstruction.astro';
+const base = import.meta.env.BASE_URL;
+---
+<BaseLayout title="Lecture 1 — Cartesian Geometry and Coordinates" description="A constructive introduction to Cartesian coordinates with presentation-ready full-screen figures.">
+  <article class="reading-column">
+    <header class="lecture-head">
+      <div class="lecture-meta">
+        <span>Lecture 01 · Analytical Geometry</span>
+        <a href={base}>Course map</a>
+      </div>
+      <div class="eyebrow">From geometric construction to numerical description</div>
+      <h1>Cartesian Geometry and Coordinates</h1>
+      <p class="lede">We begin with a Euclidean plane that has no coordinates. By making a sequence of geometric choices—two perpendicular axes, an origin, orientations, and a common unit—we construct the Cartesian plane and obtain an algebraic language for points, graphs, intersections, and distance.</p>
+      <nav class="section-index" aria-label="Lecture sections">
+        <a href="#before">Before coordinates</a>
+        <a href="#construction">Construction</a>
+        <a href="#projection">Coordinates</a>
+        <a href="#distance">Distance</a>
+        <a href="#graphs">Graphs</a>
+      </nav>
+    </header>
+
+    <section id="before">
+      <h2>The plane before coordinates</h2>
+      <p>The Cartesian coordinate system is familiar from school, but it is often introduced as a finished grid. Here we reverse the usual order. We first ask what geometric objects exist before any numbers are attached to the plane.</p>
+
+      <div class="observation">
+        <span class="block-label">Geometric starting point</span>
+        <p>Points, straight lines, right angles, lengths, and perpendicular constructions are already meaningful. Coordinates do not create these objects. They provide numerical addresses after a reference system has been chosen.</p>
+      </div>
+
+      <FocusStage caption="A Euclidean plane contains geometric objects, but no privileged origin, axis, or scale.">
+        <svg class="figure-svg" viewBox="0 0 820 430" role="img" aria-label="A Euclidean plane before coordinates">
+          <rect x="35" y="30" width="750" height="330" rx="28" fill="#fbfaf6" stroke="#d9d6cd" stroke-width="2" />
+          <circle cx="145" cy="120" r="7" fill="#d99b4a" /><circle cx="260" cy="275" r="7" fill="#d99b4a" />
+          <circle cx="390" cy="95" r="7" fill="#d99b4a" /><circle cx="520" cy="260" r="7" fill="#d99b4a" />
+          <circle cx="670" cy="135" r="7" fill="#d99b4a" /><circle cx="715" cy="290" r="7" fill="#d99b4a" />
+          <path d="M105 315 C235 75 515 340 735 90" fill="none" stroke="#7093a8" stroke-width="3" />
+          <text x="410" y="405" text-anchor="middle" class="demo-soft">no origin · no axes · no numerical scale</text>
+        </svg>
+      </FocusStage>
+    </section>
+
+    <section id="construction">
+      <h2>Constructing the coordinate system</h2>
+      <p>The construction is not one arbitrary drawing. It is a chain of explicit choices. Each step adds one new piece of structure while preserving the underlying Euclidean plane.</p>
+
+      <CartesianConstruction />
+
+      <div class="definition">
+        <span class="block-label">Definition</span>
+        <p>After choosing two perpendicular oriented axes with a common origin $O$ and a common unit, we call the resulting structure a <em>Cartesian coordinate system</em>.</p>
+      </div>
+
+      <details class="derivation">
+        <summary>Why a common unit is essential</summary>
+        <p>Using different units on the two axes would still assign ordered pairs to points, but ordinary drawings would no longer preserve Euclidean shape. A circle could appear as an ellipse. Choosing one common unit makes equal numerical increments represent equal geometric lengths in both directions.</p>
+      </details>
+    </section>
+
+    <section id="projection">
+      <h2>Coordinates by orthogonal projection</h2>
+      <p>Let $P$ be a point of the plane. Through $P$, construct a perpendicular to the $x$-axis and a perpendicular to the $y$-axis. Their intersection points with the axes carry two signed real labels, $x$ and $y$.</p>
+
+      <FocusStage caption="Orthogonal projection assigns one signed number from each axis to the point P.">
+        <svg class="figure-svg" viewBox="0 0 820 520" role="img" aria-label="Orthogonal projection of a point onto coordinate axes">
+          <line x1="90" y1="390" x2="740" y2="390" class="demo-axis" />
+          <line x1="175" y1="460" x2="175" y2="55" class="demo-axis" />
+          <path d="M740 390 l-18 -8 l0 16 z" fill="#20374d" /><path d="M175 55 l-8 18 l16 0 z" fill="#20374d" />
+          <circle cx="550" cy="135" r="9" class="demo-point" />
+          <line x1="550" y1="135" x2="550" y2="390" class="demo-helper" />
+          <line x1="550" y1="135" x2="175" y2="135" class="demo-helper" />
+          <circle cx="550" cy="390" r="6" class="demo-point" /><circle cx="175" cy="135" r="6" class="demo-point" />
+          <text x="568" y="125" class="demo-label">P</text>
+          <text x="540" y="425" class="demo-label">x</text><text x="142" y="142" class="demo-label">y</text>
+          <text x="615" y="205" class="demo-label">P ↔ (x, y)</text>
+        </svg>
+      </FocusStage>
+
+      <div class="theorem">
+        <span class="block-label">Coordinate correspondence</span>
+        <p>Once the axes, orientations, and common unit are fixed, orthogonal projection gives a one-to-one correspondence</p>
+        <div class="math-display">$$\text{points of the Euclidean plane}\longleftrightarrow (x,y)\in\mathbb{R}^2.$$</div>
+      </div>
+
+      <p class="proof">The perpendicular through a given point to a given line is unique. Conversely, the perpendiculars through the axis points labelled $x$ and $y$ meet in exactly one point.</p>
+    </section>
+
+    <section id="distance">
+      <h2>Recovering Euclidean distance</h2>
+      <p>Coordinates allow us to calculate a length that already exists geometrically. For $P=(x_1,y_1)$ and $Q=(x_2,y_2)$, the horizontal and vertical separations form the legs of a right triangle.</p>
+
+      <FocusStage caption="The coordinate distance formula is the Pythagorean theorem written in the language of projections.">
+        <svg class="figure-svg" viewBox="0 0 860 520" role="img" aria-label="Distance formula derived from a right triangle">
+          <line x1="110" y1="420" x2="770" y2="420" class="demo-axis" />
+          <line x1="150" y1="470" x2="150" y2="70" class="demo-axis" />
+          <circle cx="285" cy="345" r="8" class="demo-point" /><circle cx="650" cy="135" r="8" class="demo-point" />
+          <line x1="285" y1="345" x2="650" y2="135" stroke="#2e6f95" stroke-width="5" />
+          <line x1="285" y1="345" x2="650" y2="345" class="demo-helper" />
+          <line x1="650" y1="345" x2="650" y2="135" class="demo-helper" />
+          <path d="M625 345 v-25 h25" fill="none" stroke="#667083" stroke-width="2" />
+          <text x="260" y="380" class="demo-label">P</text><text x="668" y="126" class="demo-label">Q</text>
+          <text x="460" y="380" class="demo-soft">|x₂ − x₁|</text><text x="675" y="250" class="demo-soft">|y₂ − y₁|</text>
+          <text x="430" y="220" class="demo-label">d(P,Q)</text>
+        </svg>
+      </FocusStage>
+
+      <details class="derivation" open>
+        <summary>Derivation</summary>
+        <div class="math-display">$$
+        \begin{aligned}
+        d(P,Q)^2
+          &= (x_2-x_1)^2+(y_2-y_1)^2,\\[4pt]
+        d(P,Q)
+          &= \sqrt{(x_2-x_1)^2+(y_2-y_1)^2}.
+        \end{aligned}
+        $$</div>
+      </details>
+
+      <div class="observation">
+        <span class="block-label">Interpretation</span>
+        <p>The formula does not define a new artificial distance. It is the numerical expression of the Euclidean segment length already present before coordinates were introduced.</p>
+      </div>
+    </section>
+
+    <section id="graphs">
+      <h2>Equations select geometric sets</h2>
+      <p>Once points have numerical addresses, equations and inequalities become conditions selecting subsets of the plane. The same coordinate system can display a line, a circle, a parabola, and their intersections.</p>
+
+      <div class="definition">
+        <span class="block-label">Graph</span>
+        <p>The graph of a condition in $x$ and $y$ is the set of all points whose coordinates satisfy that condition.</p>
+      </div>
+
+      <div class="math-display">$$
+      \begin{array}{rcll}
+      y&=&x+2, & \text{a line},\\[2pt]
+      x^2+y^2&=&4, & \text{a circle},\\[2pt]
+      y&=&x^2, & \text{a parabola}.
+      \end{array}
+      $$</div>
+
+      <p>A common point of two graphs satisfies both conditions. Solving a system of equations is therefore the algebraic version of locating an intersection.</p>
+    </section>
+  </article>
+</BaseLayout>
