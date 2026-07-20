@@ -7,7 +7,8 @@
     'sections/05-graphs.html',
     'sections/06-relations.html',
     'sections/07-parametric-curves.html',
-    'sections/08-intersections-regions.html'
+    'sections/08-intersections-regions.html',
+    'sections/09-exercises.html'
   ];
 
   const loadScript = (src) => new Promise((resolve, reject) => {
