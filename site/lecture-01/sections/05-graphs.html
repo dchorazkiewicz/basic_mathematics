@@ -6,7 +6,11 @@
     <div class="figure-toolbar">
       <div>
         <span class="figure-title">Families of equations</span>
-        <span class="figure-step-title" data-current-equation>(x − 0)² + (y − 0)² = 4</span>
+        <div class="equation-readout">
+          <div><span class="equation-readout-label">General form</span><span class="figure-step-title" data-general-equation>(x − h)² + (y − k)² = r²</span></div>
+          <div><span class="equation-readout-label">Current values</span><span class="figure-step-title current-equation" data-current-equation>(x − 0)² + (y − 0)² = 4</span></div>
+          <p class="parameter-meaning" data-parameter-meaning>h and k locate the centre; r is the radius.</p>
+        </div>
       </div>
       <button class="icon-button" type="button" data-fullscreen aria-label="Open equation families in full screen">⛶</button>
     </div>
@@ -37,7 +41,7 @@
       </label>
     </div>
 
-    <figcaption class="figure-caption">Switch between geometric families and move the sliders. The graph and its equation change together.</figcaption>
+    <figcaption class="figure-caption">The general formula stays visible while the sliders substitute concrete parameter values into it.</figcaption>
   </figure>
 
   <p>The same algebraic language describes qualitatively different sets: a boundary, a filled region, an unbounded line or a curved graph. Parameters control position, scale and shape.</p>
