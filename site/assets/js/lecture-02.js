@@ -34,7 +34,7 @@
 
     await loadScript('../assets/js/fullscreen.js');
     await loadScript('../assets/js/jsx-board-layout.js');
-    await loadScript('../assets/point-arithmetic.js');
+    await loadScript('../assets/point-arithmetic.js?v=20260720-2');
     await loadScript('../assets/vector-equivalence.js');
     await loadScript('../assets/vector-addition.js');
     await loadScript('../assets/vector-scaling.js');
