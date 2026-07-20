@@ -1,0 +1,148 @@
+---
+import FocusStage from './FocusStage.astro';
+---
+<FocusStage caption="Cartesian construction · use ← →, Space, F, or the controls" label="Present construction fullscreen">
+  <div class="cartesian-demo" data-cartesian-demo tabindex="0">
+    <svg viewBox="0 0 960 600" role="img" aria-labelledby="cartesian-title cartesian-desc">
+      <title id="cartesian-title">Construction of a Cartesian coordinate system</title>
+      <desc id="cartesian-desc">A step-by-step geometric construction from a plane to coordinates of a point.</desc>
+
+      <rect class="demo-plane" x="42" y="40" width="876" height="480" rx="28" />
+      <text class="demo-soft" x="480" y="556" text-anchor="middle">Euclidean plane</text>
+
+      <g class="demo-step" data-step="1" data-entrance="scale">
+        <circle class="demo-point" cx="220" cy="340" r="8" />
+        <circle class="demo-point" cx="740" cy="205" r="8" />
+        <text class="demo-label" x="194" y="375">A</text>
+        <text class="demo-label" x="757" y="198">B</text>
+      </g>
+
+      <g class="demo-step" data-step="2">
+        <line class="demo-axis" x1="135" y1="362" x2="825" y2="183" />
+      </g>
+
+      <g class="demo-step" data-step="3" data-entrance="scale">
+        <circle class="demo-point" cx="480" cy="272" r="8" />
+        <text class="demo-label" x="495" y="302">O</text>
+      </g>
+
+      <g class="demo-step" data-step="4">
+        <line class="demo-axis" x1="393" y1="74" x2="567" y2="470" />
+        <path class="demo-helper" d="M494 269 l-10 -22 l-22 10" />
+      </g>
+
+      <g class="demo-step" data-step="5">
+        <path class="demo-axis" d="M785 194 l-18 -4 l10 15" />
+        <path class="demo-axis" d="M405 101 l-5 18 l15 -8" />
+        <text class="demo-soft" x="806" y="180">+x</text>
+        <text class="demo-soft" x="380" y="83">+y</text>
+      </g>
+
+      <g class="demo-step" data-step="6">
+        <circle class="demo-construction" cx="480" cy="272" r="86" />
+        <circle class="demo-point" cx="563" cy="251" r="6" />
+        <circle class="demo-point" cx="517" cy="194" r="6" />
+        <text class="demo-soft" x="575" y="245">1</text>
+        <text class="demo-soft" x="526" y="183">1</text>
+      </g>
+
+      <g class="demo-step" data-step="7">
+        <line class="demo-grid" x1="210" y1="341" x2="296" y2="319" />
+        <line class="demo-grid" x1="296" y1="319" x2="382" y2="297" />
+        <line class="demo-grid" x1="578" y1="247" x2="664" y2="225" />
+        <line class="demo-grid" x1="431" y1="160" x2="468" y2="244" />
+        <line class="demo-grid" x1="529" y1="384" x2="492" y2="300" />
+        <text class="demo-soft" x="380" y="325">−1</text>
+        <text class="demo-soft" x="662" y="250">2</text>
+        <text class="demo-soft" x="433" y="150">2</text>
+        <text class="demo-soft" x="535" y="410">−1</text>
+      </g>
+
+      <g class="demo-step" data-step="8" data-entrance="scale">
+        <circle class="demo-point" cx="675" cy="120" r="9" />
+        <text class="demo-label" x="692" y="112">P</text>
+        <line class="demo-helper" x1="675" y1="120" x2="638" y2="205" />
+        <line class="demo-helper" x1="675" y1="120" x2="503" y2="164" />
+        <text class="demo-label" x="704" y="158">P ↔ (x, y)</text>
+      </g>
+    </svg>
+
+    <div class="demo-controls">
+      <button type="button" data-demo-prev aria-label="Previous construction step">← Previous</button>
+      <button class="primary" type="button" data-demo-next>Next →</button>
+      <button type="button" data-demo-play>Play</button>
+      <button type="button" data-demo-reset>Reset</button>
+      <span class="demo-status" data-demo-status>Plane before coordinates · 0/8</span>
+    </div>
+  </div>
+</FocusStage>
+
+<script>
+  const labels = [
+    'Plane before coordinates',
+    'Choose two points',
+    'Construct the first line',
+    'Choose the origin',
+    'Construct the perpendicular axis',
+    'Choose positive directions',
+    'Transfer a common unit',
+    'Refine the numerical scale',
+    'Assign coordinates by projection'
+  ];
+
+  const wireDemo = (demo: HTMLElement) => {
+    if (demo.dataset.ready === 'true') return;
+    demo.dataset.ready = 'true';
+    const steps = Array.from(demo.querySelectorAll<SVGGElement>('[data-step]'));
+    const status = demo.querySelector<HTMLElement>('[data-demo-status]');
+    const playButton = demo.querySelector<HTMLButtonElement>('[data-demo-play]');
+    let current = 0;
+    let timer: number | undefined;
+
+    const render = () => {
+      steps.forEach((step) => {
+        const index = Number(step.dataset.step ?? 0);
+        step.classList.toggle('is-visible', index <= current);
+      });
+      if (status) status.textContent = `${labels[current]} · ${current}/8`;
+    };
+
+    const stop = () => {
+      if (timer) window.clearInterval(timer);
+      timer = undefined;
+      if (playButton) playButton.textContent = 'Play';
+    };
+
+    const next = () => { current = Math.min(8, current + 1); render(); if (current === 8) stop(); };
+    const previous = () => { stop(); current = Math.max(0, current - 1); render(); };
+    const reset = () => { stop(); current = 0; render(); };
+    const play = () => {
+      if (timer) { stop(); return; }
+      if (current === 8) current = 0;
+      if (playButton) playButton.textContent = 'Pause';
+      render();
+      timer = window.setInterval(next, 1100);
+    };
+
+    demo.querySelector('[data-demo-next]')?.addEventListener('click', next);
+    demo.querySelector('[data-demo-prev]')?.addEventListener('click', previous);
+    demo.querySelector('[data-demo-reset]')?.addEventListener('click', reset);
+    playButton?.addEventListener('click', play);
+    demo.addEventListener('keydown', async (event) => {
+      if (event.key === 'ArrowRight') { event.preventDefault(); next(); }
+      if (event.key === 'ArrowLeft') { event.preventDefault(); previous(); }
+      if (event.key === ' ') { event.preventDefault(); play(); }
+      if (event.key.toLowerCase() === 'f') {
+        event.preventDefault();
+        const stage = demo.closest<HTMLElement>('[data-focus-stage]');
+        if (!stage) return;
+        if (document.fullscreenElement === stage) await document.exitFullscreen();
+        else await stage.requestFullscreen();
+      }
+    });
+    render();
+  };
+
+  document.querySelectorAll<HTMLElement>('[data-cartesian-demo]').forEach(wireDemo);
+  document.addEventListener('astro:page-load', () => document.querySelectorAll<HTMLElement>('[data-cartesian-demo]').forEach(wireDemo));
+</script>
