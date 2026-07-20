@@ -74,7 +74,6 @@
   text([3.15, .35], 'positive x', 'directions', { fontSize: 18 });
   text([.28, 2.55], 'positive y', 'directions', { fontSize: 18 });
 
-  /* OU is only a temporary choice used to set the compass opening. */
   segment([0, 0], [1, 0], 'unit', { strokeColor: colors.gold, strokeWidth: 5 });
   point([1, 0], 'U', 'unit', { label: { offset: [8, -26], fontSize: 18 } });
   text([.35, .28], 'unit length', 'unit', { color: colors.gold });
@@ -112,7 +111,6 @@
   }), 'circle-y-minus-2');
   tickY(-2, 'mark-y-minus-2');
 
-  /* Refinement is isolated on [0,1]. Labels are kept to a minimum. */
   add(board.create('segment', [[0, 0], [1, 0]], {
     strokeColor: colors.blue, strokeWidth: 4, ...fixed
   }), 'focus');
@@ -151,8 +149,6 @@
   }), 'bisect-quarter-helpers');
   focusTick(.25, 'quarters');
   focusTick(.75, 'quarters');
-
-  /* One more refinement: eighth marks, deliberately without labels. */
   [.125, .375, .625, .875].forEach(value => focusTick(value, 'eighths', .04));
 
   for (let x = -4; x <= 4; x += .5) {
@@ -228,22 +224,26 @@
   let current = 0;
   let timer = null;
 
+  const currentView = () => steps[current]?.bbox || FULL_VIEW;
+
   function render() {
     const step = steps[current];
     hideAll();
     showKeys(step.keys);
-    board.setBoundingBox(step.bbox || FULL_VIEW, true);
+    board.setBoundingBox(currentView(), true);
     board.fullUpdate();
     status.textContent = `Step ${current + 1} of ${steps.length}`;
     stepTitle.textContent = step.title;
     previous.disabled = current === 0;
     next.disabled = current === steps.length - 1;
   }
+
   function stop() {
     if (timer) clearInterval(timer);
     timer = null;
     play.textContent = 'Play';
   }
+
   function advance() {
     if (current < steps.length - 1) {
       current += 1;
@@ -262,14 +262,13 @@
     timer = setInterval(advance, 1800);
   });
 
-  document.addEventListener('fullscreenchange', () => setTimeout(() => {
-    board.resizeContainer(host.clientWidth, host.clientHeight);
-    board.fullUpdate();
-  }, 80));
-  window.addEventListener('resize', () => {
-    board.resizeContainer(host.clientWidth, host.clientHeight);
-    board.fullUpdate();
-  });
-
   render();
+
+  if (window.LectureJSX?.keepBoardFitted) {
+    window.LectureJSX.keepBoardFitted({
+      board,
+      host,
+      boundingBox: currentView
+    });
+  }
 })();
