@@ -34,6 +34,7 @@
     await loadScript('../assets/js/fullscreen.js');
     await loadScript('../assets/cartesian-construction.js');
     await loadScript('../assets/distance-geometry.js');
+    await loadScript('../assets/equation-families.js');
   }
 
   loadLecture().catch((error) => {
