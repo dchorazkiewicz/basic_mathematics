@@ -1,0 +1,24 @@
+<section id="angle" class="section">
+  <h2>The angle between two vectors</h2>
+  <p>The ordinary angle between two nonzero vectors is the smaller, unoriented separation between their directions. It is the unique $\theta\in[0,\pi]$ satisfying</p>
+  <div class="display-math">$$\boxed{\cos\theta=\frac{\mathbf u\cdot\mathbf v}{\|\mathbf u\|\,\|\mathbf v\|}.}$$</div>
+  <p>The interval $[0,\pi]$ chooses the smaller angle: directions of $10^\circ$ and $350^\circ$ are separated by $20^\circ$, not $340^\circ$.</p>
+
+  <div class="statement">
+    <div class="statement-label">Principal cases</div>
+    <div class="display-math">$$\theta=0\iff\text{same direction},\qquad \theta=\frac\pi2\iff\text{perpendicular},\qquad \theta=\pi\iff\text{opposite directions}.$$</div>
+  </div>
+
+  <h3>Why the dot product can be expanded</h3>
+  <p>The coordinate definition makes its algebraic behaviour visible. For $\mathbf u=[u_1,u_2]$, $\mathbf v=[v_1,v_2]$, and $\mathbf w=[w_1,w_2]$,</p>
+  <div class="display-math">$$\begin{aligned}(\mathbf u+\mathbf w)\cdot\mathbf v&=(u_1+w_1)v_1+(u_2+w_2)v_2\\&=\mathbf u\cdot\mathbf v+\mathbf w\cdot\mathbf v,\\(\lambda\mathbf u)\cdot\mathbf v&=\lambda(\mathbf u\cdot\mathbf v),\\\mathbf u\cdot\mathbf v&=\mathbf v\cdot\mathbf u.\end{aligned}$$</div>
+  <p>In particular,</p>
+  <div class="display-math">$$\boxed{\mathbf u\cdot\mathbf u=\|\mathbf u\|^2.}$$</div>
+  <p>These identities are not formal rules imported from elsewhere. They are direct consequences of coordinate arithmetic and justify later expansions such as $(\mathbf u-\mathbf v)\cdot(\mathbf u-\mathbf v)$.</p>
+
+  <h3>The cosine theorem as a vector identity</h3>
+  <p>The triangle with sides $\mathbf u$, $\mathbf v$, and $\mathbf u-\mathbf v$ satisfies</p>
+  <div class="display-math">$$\|\mathbf u-\mathbf v\|^2=\|\mathbf u\|^2+\|\mathbf v\|^2-2\|\mathbf u\|\,\|\mathbf v\|\cos\theta.$$</div>
+  <p>Expanding the left-hand side with the dot product gives the same relation and recovers</p>
+  <div class="display-math">$$\mathbf u\cdot\mathbf v=\|\mathbf u\|\,\|\mathbf v\|\cos\theta.$$</div>
+</section>
