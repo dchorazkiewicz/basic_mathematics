@@ -35,6 +35,7 @@
     }
 
     await loadScript('../assets/js/fullscreen.js');
+    await loadScript('../assets/js/jsx-board-layout.js');
     await loadScript('../assets/cartesian-construction.js');
     await loadScript('../assets/distance-geometry.js');
     await loadScript('../assets/function-machine.js');
