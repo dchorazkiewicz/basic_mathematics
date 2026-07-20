@@ -2,8 +2,9 @@
   const host = document.querySelector('[data-distance-geometry]');
   if (!host || !window.JXG) return;
 
+  const BASE_VIEW = [-1, 5.6, 7.4, -1.2];
   const board = JXG.JSXGraph.initBoard(host.id, {
-    boundingbox: [-1, 5.6, 7.4, -1.2],
+    boundingbox: BASE_VIEW,
     axis: true,
     grid: false,
     showNavigation: false,
@@ -39,15 +40,9 @@
     label: { offset: [10, -24], fontSize: 18 }, ...fixed
   });
 
-  board.create('segment', [P, Q], {
-    strokeColor: '#17324d', strokeWidth: 4, ...fixed
-  });
-  board.create('segment', [P, R], {
-    strokeColor: '#2f6f9f', strokeWidth: 4, ...fixed
-  });
-  board.create('segment', [R, Q], {
-    strokeColor: '#b1782b', strokeWidth: 4, ...fixed
-  });
+  board.create('segment', [P, Q], { strokeColor: '#17324d', strokeWidth: 4, ...fixed });
+  board.create('segment', [P, R], { strokeColor: '#2f6f9f', strokeWidth: 4, ...fixed });
+  board.create('segment', [R, Q], { strokeColor: '#b1782b', strokeWidth: 4, ...fixed });
 
   board.create('polygon', [
     [() => R.X() - 0.28, () => R.Y()],
@@ -98,11 +93,7 @@
     color: '#66717d', fontSize: 16, ...fixed
   });
 
-  const panel = host.closest('[data-fullscreen-panel]');
-  const resize = () => {
-    board.resizeContainer(host.clientWidth, host.clientHeight);
-    board.fullUpdate();
-  };
-  document.addEventListener('fullscreenchange', () => setTimeout(resize, 80));
-  window.addEventListener('resize', resize);
+  if (window.LectureJSX?.keepBoardFitted) {
+    window.LectureJSX.keepBoardFitted({ board, host, boundingBox: BASE_VIEW });
+  }
 })();
