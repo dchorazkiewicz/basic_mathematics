@@ -6,33 +6,43 @@
   const buttons = [...panel.querySelectorAll('[data-curve-mode]')];
   const controls = [...panel.querySelectorAll('[data-parameter]')];
   const controlsGrid = panel.querySelector('.parameter-controls');
-  const equation = panel.querySelector('[data-current-equation]');
+  const generalEquation = panel.querySelector('[data-general-equation]');
+  const currentEquation = panel.querySelector('[data-current-equation]');
+  const parameterMeaning = panel.querySelector('[data-parameter-meaning]');
 
   const state = { mode: 'circle', p1: 0, p2: 0, p3: 2 };
   const configs = {
     circle: {
+      general: '(x − h)² + (y − k)² = r²',
+      meaning: 'h and k locate the centre; r is the radius.',
       parameters: [
-        { label: 'h', min: -3, max: 3, step: 0.5, value: 0, name: 'horizontal centre' },
-        { label: 'k', min: -3, max: 3, step: 0.5, value: 0, name: 'vertical centre' },
+        { label: 'h', min: -3, max: 3, step: 0.5, value: 0, name: 'horizontal centre coordinate' },
+        { label: 'k', min: -3, max: 3, step: 0.5, value: 0, name: 'vertical centre coordinate' },
         { label: 'r', min: 0.5, max: 4, step: 0.5, value: 2, name: 'radius' }
       ]
     },
     disk: {
+      general: '(x − h)² + (y − k)² ≤ r²',
+      meaning: 'h and k locate the centre; r determines the radius of the filled disk.',
       parameters: [
-        { label: 'h', min: -3, max: 3, step: 0.5, value: 0, name: 'horizontal centre' },
-        { label: 'k', min: -3, max: 3, step: 0.5, value: 0, name: 'vertical centre' },
+        { label: 'h', min: -3, max: 3, step: 0.5, value: 0, name: 'horizontal centre coordinate' },
+        { label: 'k', min: -3, max: 3, step: 0.5, value: 0, name: 'vertical centre coordinate' },
         { label: 'r', min: 0.5, max: 4, step: 0.5, value: 2, name: 'radius' }
       ]
     },
     line: {
+      general: 'y = mx + b',
+      meaning: 'm is the slope; b is the y-intercept.',
       parameters: [
         { label: 'm', min: -3, max: 3, step: 0.25, value: 1, name: 'slope' },
         { label: 'b', min: -4, max: 4, step: 0.5, value: 2, name: 'vertical intercept' }
       ]
     },
     parabola: {
+      general: 'y = a(x − h)² + k',
+      meaning: 'a controls opening and vertical scale; (h,k) is the vertex.',
       parameters: [
-        { label: 'a', min: -2, max: 2, step: 0.25, value: 1, name: 'opening and vertical scale' },
+        { label: 'a', min: -2, max: 2, step: 0.25, value: 1, name: 'opening direction and vertical scale' },
         { label: 'h', min: -3, max: 3, step: 0.5, value: 0, name: 'horizontal vertex coordinate' },
         { label: 'k', min: -3, max: 3, step: 0.5, value: 0, name: 'vertical vertex coordinate' }
       ]
@@ -70,12 +80,12 @@
 
   const format = value => {
     const rounded = Math.round(value * 100) / 100;
-    return Number.isInteger(rounded) ? String(rounded) : String(rounded);
+    return String(rounded);
   };
   const signed = value => value < 0 ? `− ${format(Math.abs(value))}` : `+ ${format(value)}`;
   const shifted = (symbol, value) => value === 0 ? symbol : value > 0 ? `(${symbol} − ${format(value)})` : `(${symbol} + ${format(Math.abs(value))})`;
 
-  function equationText() {
+  function substitutedEquation() {
     if (state.mode === 'circle' || state.mode === 'disk') {
       const relation = state.mode === 'circle' ? '=' : '≤';
       return `${shifted('x', state.p1)}² + ${shifted('y', state.p2)}² ${relation} ${format(state.p3 ** 2)}`;
@@ -85,11 +95,14 @@
   }
 
   function updateObjects() {
+    const config = configs[state.mode];
     const isCircle = state.mode === 'circle' || state.mode === 'disk';
     circle.setAttribute({ visible: isCircle, fillOpacity: state.mode === 'disk' ? 0.18 : 0 });
     line.setAttribute({ visible: state.mode === 'line' });
     parabola.setAttribute({ visible: state.mode === 'parabola' });
-    equation.textContent = equationText();
+    generalEquation.textContent = config.general;
+    currentEquation.textContent = substitutedEquation();
+    parameterMeaning.textContent = config.meaning;
     board.fullUpdate();
   }
 
