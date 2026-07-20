@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Lecture 1 — Cartesian Geometry and Coordinates">
+  <title>Lecture 1 · Cartesian Geometry and Coordinates</title>
+  <link rel="stylesheet" href="../assets/styles.css">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams'
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+  <script defer src="../assets/app.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="../">Mathematical Stories</a>
+    <nav class="header-links" aria-label="Primary navigation">
+      <a href="../#course-map">Course map</a>
+      <a href="https://github.com/dchorazkiewicz/basic_mathematics">GitHub</a>
+    </nav>
+  </header>
+
+  <div class="lecture-shell">
+    <aside class="lecture-nav" aria-label="Lecture contents">
+      <div class="nav-label">Lecture 01</div>
+      <a href="#before-coordinates">Before coordinates</a>
+      <a href="#construction">Constructing the system</a>
+      <a href="#coordinates">Coordinates</a>
+      <a href="#distance">Distance</a>
+      <a href="#graphs">Graphs and equations</a>
+    </aside>
+
+    <main class="lecture-main">
+      <header class="lecture-header">
+        <p class="eyebrow">Lecture 01 · Analytical Geometry</p>
+        <h1>Cartesian Geometry and Coordinates</h1>
+        <p>We begin with Euclidean geometry and construct, step by step, the numerical language that turns points into ordered pairs and geometric relations into equations.</p>
+      </header>
+
+      <section id="before-coordinates" class="section">
+        <h2>Before coordinates</h2>
+        <p>A Euclidean plane already contains points, straight lines, right angles and lengths. Coordinates do not create these objects. They provide a systematic numerical description after we make several explicit choices.</p>
+
+        <div class="statement">
+          <div class="statement-label">Available geometry</div>
+          <p>Before coordinates we may construct lines through points, perpendicular lines, circles, intersections and lengths. What is missing is an origin, orientation and numerical scale.</p>
+        </div>
+      </section>
+
+      <section id="construction" class="section">
+        <h2>Constructing the Cartesian system</h2>
+        <p>The figure below is the central object of this lecture. During presentation it can be opened full screen and advanced one step at a time. Use the buttons, the arrow keys, <strong>Space</strong> to play and <strong>F</strong> for full screen.</p>
+
+        <figure class="figure-panel" data-fullscreen-panel data-sequence tabindex="0">
+          <div class="figure-toolbar">
+            <span class="figure-title">Construction sequence · Cartesian plane</span>
+            <button class="icon-button" type="button" data-fullscreen aria-label="Open figure in full screen">⛶</button>
+          </div>
+          <div class="figure-stage">
+            <svg viewBox="0 0 900 560" role="img" aria-labelledby="construction-title construction-desc">
+              <title id="construction-title">Sequential construction of a Cartesian coordinate system</title>
+              <desc id="construction-desc">A plane, two points, a line, an origin, a perpendicular axis, orientations, unit marks and an arbitrary point with projections.</desc>
+
+              <rect x="55" y="45" width="790" height="430" rx="24" fill="#f7f8f8" stroke="#d8dde1" />
+
+              <g class="sequence-step" data-step>
+                <text x="450" y="515" text-anchor="middle" fill="#66717d" font-family="Inter, sans-serif" font-size="18">Euclidean plane</text>
+              </g>
+
+              <g class="sequence-step" data-step>
+                <circle cx="260" cy="330" r="7" fill="#b1782b" />
+                <circle cx="650" cy="215" r="7" fill="#b1782b" />
+                <text x="238" y="360" fill="#18212b" font-family="Source Serif 4, serif" font-size="24">A</text>
+                <text x="665" y="205" fill="#18212b" font-family="Source Serif 4, serif" font-size="24">B</text>
+              </g>
+
+              <g class="sequence-step draw-line" data-step>
+                <line x1="150" y1="362" x2="760" y2="182" stroke="#2f6f9f" stroke-width="5" stroke-linecap="round" />
+              </g>
+
+              <g class="sequence-step" data-step>
+                <circle cx="450" cy="274" r="8" fill="#17324d" />
+                <text x="462" y="302" fill="#18212b" font-family="Source Serif 4, serif" font-size="24">O</text>
+              </g>
+
+              <g class="sequence-step draw-line" data-step>
+                <line x1="347" y1="-10" x2="553" y2="560" stroke="#2f6f9f" stroke-width="5" stroke-linecap="round" />
+                <path d="M468 269 v-20 h20" fill="none" stroke="#66717d" stroke-width="2" />
+              </g>
+
+              <g class="sequence-step" data-step>
+                <path d="M730 191 l28 -9 -21 21" fill="#2f6f9f" />
+                <path d="M357 24 l-10 -28 24 17" fill="#2f6f9f" />
+                <text x="730" y="160" fill="#66717d" font-family="Inter, sans-serif" font-size="17">positive x</text>
+                <text x="385" y="46" fill="#66717d" font-family="Inter, sans-serif" font-size="17">positive y</text>
+              </g>
+
+              <g class="sequence-step" data-step>
+                <circle cx="450" cy="274" r="72" fill="none" stroke="#b1782b" stroke-width="2" stroke-dasharray="8 8" />
+                <circle cx="519" cy="254" r="5" fill="#b1782b" />
+                <circle cx="426" cy="206" r="5" fill="#b1782b" />
+                <text x="530" y="278" fill="#18212b" font-family="Inter, sans-serif" font-size="17">1</text>
+                <text x="402" y="194" fill="#18212b" font-family="Inter, sans-serif" font-size="17">1</text>
+              </g>
+
+              <g class="sequence-step" data-step>
+                <g stroke="#66717d" stroke-width="2">
+                  <line x1="381" y1="294" x2="388" y2="312" />
+                  <line x1="312" y1="314" x2="319" y2="332" />
+                  <line x1="588" y1="231" x2="595" y2="249" />
+                  <line x1="657" y1="211" x2="664" y2="229" />
+                  <line x1="474" y1="342" x2="492" y2="335" />
+                  <line x1="498" y1="410" x2="516" y2="403" />
+                  <line x1="402" y1="138" x2="420" y2="131" />
+                  <line x1="378" y1="70" x2="396" y2="63" />
+                </g>
+                <g fill="#66717d" font-family="Inter, sans-serif" font-size="16">
+                  <text x="365" y="330">−1</text><text x="294" y="350">−2</text>
+                  <text x="593" y="224">2</text><text x="665" y="205">3</text>
+                  <text x="500" y="350">−1</text><text x="522" y="418">−2</text>
+                  <text x="385" y="128">2</text><text x="358" y="58">3</text>
+                </g>
+              </g>
+
+              <g class="sequence-step" data-step>
+                <circle cx="650" cy="95" r="8" fill="#3f735f" />
+                <text x="666" y="87" fill="#18212b" font-family="Source Serif 4, serif" font-size="24">P</text>
+                <line x1="650" y1="95" x2="696" y2="222" stroke="#3f735f" stroke-width="2" stroke-dasharray="8 7" />
+                <line x1="650" y1="95" x2="404" y2="187" stroke="#3f735f" stroke-width="2" stroke-dasharray="8 7" />
+                <text x="660" y="135" fill="#3f735f" font-family="Inter, sans-serif" font-size="17">P = (x, y)</text>
+              </g>
+            </svg>
+          </div>
+          <div class="sequence-controls">
+            <button class="control-button" type="button" data-previous>Previous</button>
+            <button class="control-button" type="button" data-next>Next</button>
+            <button class="control-button" type="button" data-play>Play</button>
+            <button class="control-button" type="button" data-reset>Reset</button>
+            <span class="sequence-status" data-status></span>
+          </div>
+          <figcaption class="figure-caption">The coordinate system is not assumed at the beginning. It is assembled from a sequence of Euclidean constructions and choices.</figcaption>
+        </figure>
+
+        <div class="statement">
+          <div class="statement-label">Construction principle</div>
+          <p>Each new layer depends on the previous one: first a line, then an origin, a perpendicular axis, orientations, a common unit and finally a numerical scale.</p>
+        </div>
+      </section>
+
+      <section id="coordinates" class="section">
+        <h2>Assigning coordinates</h2>
+        <p>Let $P$ be any point of the plane. Through $P$, construct perpendiculars to both axes. Their intersection points with the axes determine two signed real numbers $x$ and $y$.</p>
+
+        <div class="statement theorem">
+          <div class="statement-label">Coordinate correspondence</div>
+          <p>Once two perpendicular axes, their positive directions and a common unit are fixed, orthogonal projection establishes a one-to-one correspondence between points of the Euclidean plane and ordered pairs $(x,y)\in\mathbb{R}^2$.</p>
+        </div>
+
+        <details>
+          <summary>Show the proof</summary>
+          <div class="statement proof">
+            <div class="statement-label">Proof</div>
+            <p>For every point $P$, the perpendicular to each axis is unique, so the two projections are uniquely determined. Conversely, for fixed real numbers $x$ and $y$, the perpendiculars through the corresponding points on the axes meet in exactly one point. Therefore the correspondence is bijective. $\square$</p>
+          </div>
+        </details>
+      </section>
+
+      <section id="distance" class="section">
+        <h2>The coordinate formula for distance</h2>
+        <p>For points $P=(x_1,y_1)$ and $Q=(x_2,y_2)$, the horizontal and vertical separations form the legs of a Euclidean right triangle.</p>
+
+        <div class="math-block">
+          $$
+          \begin{aligned}
+          d_E(P,Q)^2
+            &= (x_2-x_1)^2+(y_2-y_1)^2,\\
+          d_E(P,Q)
+            &= \sqrt{(x_2-x_1)^2+(y_2-y_1)^2}.
+          \end{aligned}
+          $$
+        </div>
+
+        <div class="statement theorem">
+          <div class="statement-label">Interpretation</div>
+          <p>The formula does not invent distance. It translates the already existing Euclidean length of the segment $PQ$ into arithmetic performed on coordinates.</p>
+        </div>
+      </section>
+
+      <section id="graphs" class="section">
+        <h2>Equations as geometric descriptions</h2>
+        <p>Once points have numerical addresses, an equation or inequality can select a subset of the plane.</p>
+
+        <div class="math-block">
+          $$
+          \begin{aligned}
+          x^2+y^2 &= 4 &&\text{circle},\\
+          x^2+y^2 &\le 4 &&\text{disk},\\
+          y &= x+2 &&\text{straight line},\\
+          y &= x^2 &&\text{parabola}.
+          \end{aligned}
+          $$
+        </div>
+
+        <p>An intersection point satisfies several conditions simultaneously. For example, solving $x^2=x+2$ gives the common points of the parabola $y=x^2$ and the line $y=x+2$.</p>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
