@@ -28,6 +28,31 @@
 
   <p>At this stage these are arithmetic operations on ordered pairs. They are useful computational rules, but their geometric meaning has not yet been established. The first expression to acquire such a meaning will be the difference $Q-P$.</p>
 
+  <figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
+    <div class="figure-toolbar">
+      <div>
+        <span class="figure-title">Arithmetic on Cartesian points</span>
+        <span class="figure-step-title">Move $P$ and $Q$, then compare the four coordinatewise operations.</span>
+      </div>
+      <button class="icon-button" type="button" data-fullscreen aria-label="Open point arithmetic figure in full screen">⛶</button>
+    </div>
+    <div class="curve-switcher" role="group" aria-label="Choose a point operation">
+      <button class="curve-mode is-active" type="button" data-point-operation="sum">Addition</button>
+      <button class="curve-mode" type="button" data-point-operation="opposite">Opposite point</button>
+      <button class="curve-mode" type="button" data-point-operation="difference">Subtraction</button>
+      <button class="curve-mode" type="button" data-point-operation="scalar">Scalar multiplication</button>
+    </div>
+    <div class="figure-stage jsx-stage"><div id="point-arithmetic-board" class="jxgbox" data-point-arithmetic></div></div>
+    <div class="parameter-controls" data-point-lambda-control hidden>
+      <label class="parameter-control">
+        <span>$\lambda$ = <output data-point-lambda-output>1.5</output></span>
+        <input type="range" min="-3" max="3" step="0.25" value="1.5" data-point-lambda-slider>
+      </label>
+    </div>
+    <div class="relation-readout"><span data-point-operation-readout></span></div>
+    <figcaption class="figure-caption">The figure visualises arithmetic on ordered pairs. The interpretation of $Q-P$ as a directed displacement is introduced immediately afterwards.</figcaption>
+  </figure>
+
   <h3>An ordered pair of points determines an anchored vector</h3>
 
   <p>The ordered pair $(P,Q)$ determines an arrow beginning at $P$ and ending at $Q$. We denote it by</p>
