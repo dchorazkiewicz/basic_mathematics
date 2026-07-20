@@ -8,6 +8,11 @@
     let scheduled = false;
     let resizing = false;
 
+    const getBoundingBox = () => {
+      const value = typeof boundingBox === 'function' ? boundingBox() : boundingBox;
+      return Array.isArray(value) ? [...value] : value;
+    };
+
     const fit = async () => {
       if (scheduled || resizing) return;
       scheduled = true;
@@ -29,7 +34,7 @@
       const height = Math.max(1, rect.height - parseFloat(styles.paddingTop) - parseFloat(styles.paddingBottom));
 
       board.resizeContainer(Math.round(width), Math.round(height));
-      board.setBoundingBox(typeof boundingBox === 'function' ? boundingBox() : boundingBox, true);
+      board.setBoundingBox(getBoundingBox(), true);
       board.fullUpdate();
       resizing = false;
     };
