@@ -11,10 +11,11 @@
   const inputReadout = panel.querySelector('[data-relation-input]');
   const solutionsReadout = panel.querySelector('[data-relation-solutions]');
   const pointsReadout = panel.querySelector('[data-relation-points]');
+  const BASE_VIEW = [-5, 5, 5, -5];
   const state = { r: 3, x: 1 };
 
   const board = JXG.JSXGraph.initBoard(host.id, {
-    boundingbox: [-5, 5, 5, -5], axis: true, grid: true,
+    boundingbox: BASE_VIEW, axis: true, grid: true,
     showNavigation: false, showCopyright: false, keepAspectRatio: true,
     pan: { enabled: false }, zoom: { enabled: false }
   });
@@ -62,8 +63,9 @@
   rSlider.addEventListener('input', () => { state.r = Number(rSlider.value); render(); });
   xSlider.addEventListener('input', () => { state.x = Number(xSlider.value); render(); });
 
-  const resize = () => { board.resizeContainer(host.clientWidth, host.clientHeight); board.fullUpdate(); };
-  document.addEventListener('fullscreenchange', () => setTimeout(resize, 80));
-  window.addEventListener('resize', resize);
+  if (window.LectureJSX?.keepBoardFitted) {
+    window.LectureJSX.keepBoardFitted({ board, host, boundingBox: BASE_VIEW });
+  }
+
   render();
 })();
