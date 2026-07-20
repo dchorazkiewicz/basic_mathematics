@@ -1,0 +1,32 @@
+---
+interface Props {
+  caption?: string;
+  label?: string;
+}
+const { caption = '', label = 'Open fullscreen' } = Astro.props;
+---
+<section class="focus-stage" data-focus-stage>
+  <div class="focus-stage__toolbar">
+    <button class="icon-button" type="button" data-fullscreen aria-label={label} title={label}>⛶</button>
+  </div>
+  <div class="focus-stage__body">
+    <slot />
+  </div>
+  {caption && <div class="focus-stage__caption">{caption}</div>}
+</section>
+
+<script>
+  const wireStages = () => {
+    document.querySelectorAll<HTMLElement>('[data-focus-stage]').forEach((stage) => {
+      if (stage.dataset.ready === 'true') return;
+      stage.dataset.ready = 'true';
+      const button = stage.querySelector<HTMLButtonElement>('[data-fullscreen]');
+      button?.addEventListener('click', async () => {
+        if (document.fullscreenElement === stage) await document.exitFullscreen();
+        else await stage.requestFullscreen();
+      });
+    });
+  };
+  wireStages();
+  document.addEventListener('astro:page-load', wireStages);
+</script>
