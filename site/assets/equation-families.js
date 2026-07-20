@@ -5,21 +5,37 @@
   const panel = host.closest('[data-fullscreen-panel]');
   const buttons = [...panel.querySelectorAll('[data-curve-mode]')];
   const controls = [...panel.querySelectorAll('[data-parameter]')];
+  const controlsGrid = panel.querySelector('.parameter-controls');
   const equation = panel.querySelector('[data-current-equation]');
 
   const state = { mode: 'circle', p1: 0, p2: 0, p3: 2 };
   const configs = {
     circle: {
-      labels: ['h', 'k', 'r'], min: [-3, -3, 0.5], max: [3, 3, 4], step: [0.5, 0.5, 0.5], defaults: [0, 0, 2]
+      parameters: [
+        { label: 'h', min: -3, max: 3, step: 0.5, value: 0, name: 'horizontal centre' },
+        { label: 'k', min: -3, max: 3, step: 0.5, value: 0, name: 'vertical centre' },
+        { label: 'r', min: 0.5, max: 4, step: 0.5, value: 2, name: 'radius' }
+      ]
     },
     disk: {
-      labels: ['h', 'k', 'r'], min: [-3, -3, 0.5], max: [3, 3, 4], step: [0.5, 0.5, 0.5], defaults: [0, 0, 2]
+      parameters: [
+        { label: 'h', min: -3, max: 3, step: 0.5, value: 0, name: 'horizontal centre' },
+        { label: 'k', min: -3, max: 3, step: 0.5, value: 0, name: 'vertical centre' },
+        { label: 'r', min: 0.5, max: 4, step: 0.5, value: 2, name: 'radius' }
+      ]
     },
     line: {
-      labels: ['m', 'b', ''], min: [-3, -4, 0], max: [3, 4, 0], step: [0.25, 0.5, 1], defaults: [1, 2, 0]
+      parameters: [
+        { label: 'm', min: -3, max: 3, step: 0.25, value: 1, name: 'slope' },
+        { label: 'b', min: -4, max: 4, step: 0.5, value: 2, name: 'vertical intercept' }
+      ]
     },
     parabola: {
-      labels: ['a', 'h', 'k'], min: [-2, -3, -3], max: [2, 3, 3], step: [0.25, 0.5, 0.5], defaults: [1, 0, 0]
+      parameters: [
+        { label: 'a', min: -2, max: 2, step: 0.25, value: 1, name: 'opening and vertical scale' },
+        { label: 'h', min: -3, max: 3, step: 0.5, value: 0, name: 'horizontal vertex coordinate' },
+        { label: 'k', min: -3, max: 3, step: 0.5, value: 0, name: 'vertical vertex coordinate' }
+      ]
     }
   };
 
@@ -64,18 +80,13 @@
       const relation = state.mode === 'circle' ? '=' : '≤';
       return `${shifted('x', state.p1)}² + ${shifted('y', state.p2)}² ${relation} ${format(state.p3 ** 2)}`;
     }
-    if (state.mode === 'line') {
-      return `y = ${format(state.p1)}x ${signed(state.p2)}`;
-    }
+    if (state.mode === 'line') return `y = ${format(state.p1)}x ${signed(state.p2)}`;
     return `y = ${format(state.p1)}${shifted('x', state.p2)}² ${signed(state.p3)}`;
   }
 
   function updateObjects() {
     const isCircle = state.mode === 'circle' || state.mode === 'disk';
-    circle.setAttribute({
-      visible: isCircle,
-      fillOpacity: state.mode === 'disk' ? 0.18 : 0
-    });
+    circle.setAttribute({ visible: isCircle, fillOpacity: state.mode === 'disk' ? 0.18 : 0 });
     line.setAttribute({ visible: state.mode === 'line' });
     parabola.setAttribute({ visible: state.mode === 'parabola' });
     equation.textContent = equationText();
@@ -83,23 +94,32 @@
   }
 
   function configureControls() {
-    const config = configs[state.mode];
-    [state.p1, state.p2, state.p3] = config.defaults;
+    const parameters = configs[state.mode].parameters;
+    state.p1 = parameters[0]?.value ?? 0;
+    state.p2 = parameters[1]?.value ?? 0;
+    state.p3 = parameters[2]?.value ?? 0;
+    controlsGrid?.style.setProperty('--parameter-count', String(parameters.length));
 
     controls.forEach((control, index) => {
+      const parameter = parameters[index];
       const label = control.querySelector('[data-parameter-label]');
       const value = control.querySelector('[data-parameter-value]');
       const input = control.querySelector('input');
-      const enabled = Boolean(config.labels[index]);
 
-      control.hidden = !enabled;
-      if (!enabled) return;
-      label.textContent = config.labels[index];
-      input.min = config.min[index];
-      input.max = config.max[index];
-      input.step = config.step[index];
-      input.value = config.defaults[index];
-      value.textContent = format(config.defaults[index]);
+      control.hidden = !parameter;
+      if (!parameter) {
+        input.disabled = true;
+        return;
+      }
+
+      input.disabled = false;
+      label.textContent = parameter.label;
+      input.min = parameter.min;
+      input.max = parameter.max;
+      input.step = parameter.step;
+      input.value = parameter.value;
+      input.setAttribute('aria-label', `${state.mode}: ${parameter.name}`);
+      value.textContent = format(parameter.value);
     });
 
     buttons.forEach(button => button.classList.toggle('is-active', button.dataset.curveMode === state.mode));
