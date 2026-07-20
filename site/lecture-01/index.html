@@ -6,6 +6,7 @@
   <meta name="description" content="Lecture 1 — Cartesian Geometry and Coordinates">
   <title>Lecture 1 · Cartesian Geometry and Coordinates</title>
   <link rel="stylesheet" href="../assets/styles.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsxgraph@1.10.1/distrib/jsxgraph.css">
   <script>
     window.MathJax = {
       tex: {
@@ -17,7 +18,9 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/jsxgraph@1.10.1/distrib/jsxgraphcore.js"></script>
   <script defer src="../assets/app.js"></script>
+  <script defer src="../assets/cartesian-construction.js"></script>
 </head>
 <body>
   <header class="site-header">
@@ -48,7 +51,6 @@
       <section id="before-coordinates" class="section">
         <h2>Before coordinates</h2>
         <p>A Euclidean plane already contains points, straight lines, right angles and lengths. Coordinates do not create these objects. They provide a systematic numerical description after we make several explicit choices.</p>
-
         <div class="statement">
           <div class="statement-label">Available geometry</div>
           <p>Before coordinates we may construct lines through points, perpendicular lines, circles, intersections and lengths. What is missing is an origin, orientation and numerical scale.</p>
@@ -57,119 +59,18 @@
 
       <section id="construction" class="section">
         <h2>Constructing the Cartesian system</h2>
-        <p>The figure below is the central object of this lecture. During presentation it can be opened full screen and advanced one step at a time. Use the buttons, the arrow keys, <strong>Space</strong> to play and <strong>F</strong> for full screen.</p>
+        <p>The sequence below distinguishes permanent objects from temporary construction aids. Compass circles and bisectors disappear after they have produced the required mark. Open the figure full screen during a lecture and move through the construction one step at a time.</p>
 
-        <figure class="figure-panel" data-fullscreen-panel data-sequence tabindex="0">
+        <figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
           <div class="figure-toolbar">
-            <span class="figure-title">Construction sequence · Cartesian plane</span>
+            <div>
+              <span class="figure-title">Construction sequence · Cartesian plane</span>
+              <span class="figure-step-title" data-step-title>Euclidean plane</span>
+            </div>
             <button class="icon-button" type="button" data-fullscreen aria-label="Open figure in full screen">⛶</button>
           </div>
-          <div class="figure-stage">
-            <svg viewBox="0 0 900 560" role="img" aria-labelledby="construction-title construction-desc">
-              <title id="construction-title">Sequential construction of a Cartesian coordinate system</title>
-              <desc id="construction-desc">A plane, two points, a horizontal axis, an origin, a vertical perpendicular axis, orientations, unit marks and an arbitrary point with orthogonal projections on a light coordinate grid.</desc>
-
-              <rect x="55" y="45" width="790" height="430" rx="24" fill="#f7f8f8" stroke="#d8dde1" />
-
-              <g class="sequence-step" data-step>
-                <text x="450" y="515" text-anchor="middle" fill="#66717d" font-family="Inter, sans-serif" font-size="18">Euclidean plane</text>
-              </g>
-
-              <g class="sequence-step" data-step>
-                <circle cx="275" cy="280" r="7" fill="#b1782b" />
-                <circle cx="625" cy="280" r="7" fill="#b1782b" />
-                <text x="254" y="316" fill="#18212b" font-family="Source Serif 4, serif" font-size="24">A</text>
-                <text x="640" y="316" fill="#18212b" font-family="Source Serif 4, serif" font-size="24">B</text>
-              </g>
-
-              <g class="sequence-step draw-line" data-step>
-                <line x1="135" y1="280" x2="765" y2="280" stroke="#2f6f9f" stroke-width="5" stroke-linecap="round" />
-              </g>
-
-              <g class="sequence-step" data-step>
-                <circle cx="450" cy="280" r="8" fill="#17324d" />
-                <text x="465" y="316" fill="#18212b" font-family="Source Serif 4, serif" font-size="24">O</text>
-              </g>
-
-              <g class="sequence-step draw-line" data-step>
-                <line x1="450" y1="80" x2="450" y2="455" stroke="#2f6f9f" stroke-width="5" stroke-linecap="round" />
-                <path d="M450 280 h28 v-28" fill="none" stroke="#66717d" stroke-width="3" />
-              </g>
-
-              <g class="sequence-step" data-step>
-                <path d="M765 280 l-24 -12 v24 z" fill="#2f6f9f" />
-                <path d="M450 80 l-12 24 h24 z" fill="#2f6f9f" />
-                <text x="718" y="252" fill="#66717d" font-family="Inter, sans-serif" font-size="17">positive x</text>
-                <text x="470" y="102" fill="#66717d" font-family="Inter, sans-serif" font-size="17">positive y</text>
-              </g>
-
-              <g class="sequence-step" data-step>
-                <circle cx="450" cy="280" r="70" fill="none" stroke="#b1782b" stroke-width="2" stroke-dasharray="8 8" />
-                <circle cx="520" cy="280" r="5" fill="#b1782b" />
-                <circle cx="450" cy="210" r="5" fill="#b1782b" />
-                <text x="515" y="306" fill="#18212b" font-family="Inter, sans-serif" font-size="17">1</text>
-                <text x="430" y="204" fill="#18212b" font-family="Inter, sans-serif" font-size="17">1</text>
-              </g>
-
-              <g class="sequence-step" data-step>
-                <g stroke="#66717d" stroke-width="2">
-                  <line x1="310" y1="270" x2="310" y2="290" />
-                  <line x1="380" y1="270" x2="380" y2="290" />
-                  <line x1="520" y1="270" x2="520" y2="290" />
-                  <line x1="590" y1="270" x2="590" y2="290" />
-                  <line x1="440" y1="350" x2="460" y2="350" />
-                  <line x1="440" y1="420" x2="460" y2="420" />
-                  <line x1="440" y1="210" x2="460" y2="210" />
-                  <line x1="440" y1="140" x2="460" y2="140" />
-                </g>
-                <g fill="#66717d" font-family="Inter, sans-serif" font-size="16">
-                  <text x="297" y="316">−2</text><text x="368" y="316">−1</text>
-                  <text x="514" y="316">1</text><text x="584" y="316">2</text>
-                  <text x="418" y="356">−1</text><text x="418" y="426">−2</text>
-                  <text x="423" y="216">1</text><text x="423" y="146">2</text>
-                </g>
-              </g>
-
-              <g class="sequence-step" data-step>
-                <g stroke="#9eb6c8" stroke-width="1" opacity="0.42">
-                  <line x1="100" y1="140" x2="800" y2="140" />
-                  <line x1="100" y1="175" x2="800" y2="175" />
-                  <line x1="100" y1="210" x2="800" y2="210" />
-                  <line x1="100" y1="245" x2="800" y2="245" />
-                  <line x1="100" y1="315" x2="800" y2="315" />
-                  <line x1="100" y1="350" x2="800" y2="350" />
-                  <line x1="100" y1="385" x2="800" y2="385" />
-                  <line x1="100" y1="420" x2="800" y2="420" />
-                  <line x1="135" y1="105" x2="135" y2="455" />
-                  <line x1="170" y1="105" x2="170" y2="455" />
-                  <line x1="205" y1="105" x2="205" y2="455" />
-                  <line x1="240" y1="105" x2="240" y2="455" />
-                  <line x1="275" y1="105" x2="275" y2="455" />
-                  <line x1="310" y1="105" x2="310" y2="455" />
-                  <line x1="345" y1="105" x2="345" y2="455" />
-                  <line x1="380" y1="105" x2="380" y2="455" />
-                  <line x1="415" y1="105" x2="415" y2="455" />
-                  <line x1="485" y1="105" x2="485" y2="455" />
-                  <line x1="520" y1="105" x2="520" y2="455" />
-                  <line x1="555" y1="105" x2="555" y2="455" />
-                  <line x1="590" y1="105" x2="590" y2="455" />
-                  <line x1="625" y1="105" x2="625" y2="455" />
-                  <line x1="660" y1="105" x2="660" y2="455" />
-                  <line x1="695" y1="105" x2="695" y2="455" />
-                  <line x1="730" y1="105" x2="730" y2="455" />
-                  <line x1="765" y1="105" x2="765" y2="455" />
-                </g>
-                <circle cx="625" cy="175" r="8" fill="#3f735f" />
-                <text x="641" y="165" fill="#18212b" font-family="Source Serif 4, serif" font-size="24">P</text>
-                <line x1="625" y1="175" x2="625" y2="280" stroke="#3f735f" stroke-width="2.5" stroke-dasharray="8 7" />
-                <line x1="625" y1="175" x2="450" y2="175" stroke="#3f735f" stroke-width="2.5" stroke-dasharray="8 7" />
-                <circle cx="625" cy="280" r="5" fill="#3f735f" />
-                <circle cx="450" cy="175" r="5" fill="#3f735f" />
-                <text x="640" y="258" fill="#3f735f" font-family="Inter, sans-serif" font-size="16">x</text>
-                <text x="465" y="165" fill="#3f735f" font-family="Inter, sans-serif" font-size="16">y</text>
-                <text x="650" y="205" fill="#3f735f" font-family="Inter, sans-serif" font-size="17">P = (x, y)</text>
-              </g>
-            </svg>
+          <div class="figure-stage jsx-stage">
+            <div id="cartesian-board" class="jxgbox" data-cartesian-construction aria-label="Interactive construction of a Cartesian coordinate system"></div>
           </div>
           <div class="sequence-controls">
             <button class="control-button" type="button" data-previous>Previous</button>
@@ -178,24 +79,22 @@
             <button class="control-button" type="button" data-reset>Reset</button>
             <span class="sequence-status" data-status></span>
           </div>
-          <figcaption class="figure-caption">The coordinate system is not assumed at the beginning. It is assembled from a sequence of Euclidean constructions and choices.</figcaption>
+          <figcaption class="figure-caption">Temporary construction objects are removed after each operation. The final coordinate system retains only the axes, origin, orientations and scale.</figcaption>
         </figure>
 
         <div class="statement">
           <div class="statement-label">Construction principle</div>
-          <p>Each new layer depends on the previous one: first a line, then an origin, a perpendicular axis, orientations, a common unit and finally a numerical scale.</p>
+          <p>The scale is not drawn at once. A fixed compass opening is transferred successively along each axis. The interval is then refined by geometric bisection before coordinates are assigned by orthogonal projection.</p>
         </div>
       </section>
 
       <section id="coordinates" class="section">
         <h2>Assigning coordinates</h2>
         <p>Let $P$ be any point of the plane. Through $P$, construct perpendiculars to both axes. Their intersection points with the axes determine two signed real numbers $x$ and $y$.</p>
-
         <div class="statement theorem">
           <div class="statement-label">Coordinate correspondence</div>
           <p>Once two perpendicular axes, their positive directions and a common unit are fixed, orthogonal projection establishes a one-to-one correspondence between points of the Euclidean plane and ordered pairs $(x,y)\in\mathbb{R}^2$.</p>
         </div>
-
         <details>
           <summary>Show the proof</summary>
           <div class="statement proof">
@@ -208,18 +107,14 @@
       <section id="distance" class="section">
         <h2>The coordinate formula for distance</h2>
         <p>For points $P=(x_1,y_1)$ and $Q=(x_2,y_2)$, the horizontal and vertical separations form the legs of a Euclidean right triangle.</p>
-
         <div class="math-block">
           $$
           \begin{aligned}
-          d_E(P,Q)^2
-            &= (x_2-x_1)^2+(y_2-y_1)^2,\\
-          d_E(P,Q)
-            &= \sqrt{(x_2-x_1)^2+(y_2-y_1)^2}.
+          d_E(P,Q)^2 &= (x_2-x_1)^2+(y_2-y_1)^2,\\
+          d_E(P,Q) &= \sqrt{(x_2-x_1)^2+(y_2-y_1)^2}.
           \end{aligned}
           $$
         </div>
-
         <div class="statement theorem">
           <div class="statement-label">Interpretation</div>
           <p>The formula does not invent distance. It translates the already existing Euclidean length of the segment $PQ$ into arithmetic performed on coordinates.</p>
@@ -229,7 +124,6 @@
       <section id="graphs" class="section">
         <h2>Equations as geometric descriptions</h2>
         <p>Once points have numerical addresses, an equation or inequality can select a subset of the plane.</p>
-
         <div class="math-block">
           $$
           \begin{aligned}
@@ -240,7 +134,6 @@
           \end{aligned}
           $$
         </div>
-
         <p>An intersection point satisfies several conditions simultaneously. For example, solving $x^2=x+2$ gives the common points of the parabola $y=x^2$ and the line $y=x+2$.</p>
       </section>
     </main>
