@@ -1,0 +1,36 @@
+<section id="tests" class="section">
+  <h2>Parallelism and perpendicularity from one angle comparison</h2>
+  <p>Let $\mathbf u$ and $\mathbf v$ have inclination angles $\alpha$ and $\beta$. The directed turn $\beta-\alpha$ contains both geometric tests: its sine detects parallel directions and its cosine detects perpendicular directions.</p>
+
+  <figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
+    <div class="figure-toolbar">
+      <div><span class="figure-title">Two vectors, two coordinate tests</span><span class="figure-step-title" data-tests-readout>Move the endpoints of $\mathbf u$ and $\mathbf v$.</span></div>
+      <button class="icon-button" type="button" data-fullscreen aria-label="Open vector tests figure in full screen">⛶</button>
+    </div>
+    <div class="figure-stage jsx-stage"><div id="vector-tests-board" class="jxgbox" data-vector-tests></div></div>
+    <div class="relation-readout"><span data-determinant-readout></span><span data-dot-readout></span><span data-angle-readout></span></div>
+    <figcaption class="figure-caption">The determinant-like expression measures directional independence; the dot product measures angular alignment.</figcaption>
+  </figure>
+
+  <div class="derivation">
+    <h3>Parallelism from the sine difference identity</h3>
+    <div class="display-math">$$\sin(\beta-\alpha)=\frac{u_1v_2-u_2v_1}{\|\mathbf u\|\,\|\mathbf v\|}.$$</div>
+    <p>For nonzero vectors the denominator is nonzero. Parallel directions occur exactly when the sine vanishes:</p>
+    <div class="display-math">$$\boxed{\mathbf u\parallel\mathbf v\iff u_1v_2-u_2v_1=0.}$$</div>
+    <p>Equivalently, one vector is a nonzero scalar multiple of the other.</p>
+  </div>
+
+  <div class="derivation">
+    <h3>Perpendicularity from the cosine difference identity</h3>
+    <div class="display-math">$$\cos(\beta-\alpha)=\frac{u_1v_1+u_2v_2}{\|\mathbf u\|\,\|\mathbf v\|}.$$</div>
+    <p>This motivates the coordinate definition</p>
+    <div class="display-math">$$\boxed{\mathbf u\cdot\mathbf v=u_1v_1+u_2v_2}$$</div>
+    <p>and gives the test</p>
+    <div class="display-math">$$\boxed{\mathbf u\perp\mathbf v\iff\mathbf u\cdot\mathbf v=0.}$$</div>
+  </div>
+
+  <div class="statement">
+    <div class="statement-label">Geometric meaning of the signs</div>
+    <p>The dot product is positive for an acute angle, zero for a right angle, and negative for an obtuse angle. The quantity $u_1v_2-u_2v_1$ is zero exactly when the two directions fail to span area.</p>
+  </div>
+</section>
