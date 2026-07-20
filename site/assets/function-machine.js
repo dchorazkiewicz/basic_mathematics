@@ -12,9 +12,10 @@
   const outputStep = panel.querySelector('[data-output-step]');
   const pointStep = panel.querySelector('[data-point-step]');
 
+  const BASE_VIEW = [-5, 6, 5, -6];
   const state = { mode: 'linear', x: 1 };
   const board = JXG.JSXGraph.initBoard(host.id, {
-    boundingbox: [-5, 6, 5, -6], axis: true, grid: true,
+    boundingbox: BASE_VIEW, axis: true, grid: true,
     showNavigation: false, showCopyright: false, keepAspectRatio: true,
     pan: { enabled: false }, zoom: { enabled: false }
   });
@@ -71,8 +72,9 @@
     render(true);
   }));
 
-  const resize = () => { board.resizeContainer(host.clientWidth, host.clientHeight); board.fullUpdate(); };
-  document.addEventListener('fullscreenchange', () => setTimeout(resize, 80));
-  window.addEventListener('resize', resize);
+  if (window.LectureJSX?.keepBoardFitted) {
+    window.LectureJSX.keepBoardFitted({ board, host, boundingBox: BASE_VIEW });
+  }
+
   render(true);
 })();
