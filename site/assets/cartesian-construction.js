@@ -49,6 +49,9 @@
     segment([-.13, value], [.13, value], key);
     text([-.45, value - .08], String(value), key);
   };
+  const focusTick = (value, key, height = .055) => {
+    segment([value, -height], [value, height], key, { strokeColor: colors.gold, strokeWidth: 3 });
+  };
 
   point([-2.8, 0], 'A', 'points');
   point([2.8, 0], 'B', 'points');
@@ -71,12 +74,11 @@
   text([3.15, .35], 'positive x', 'directions', { fontSize: 18 });
   text([.28, 2.55], 'positive y', 'directions', { fontSize: 18 });
 
-  /* The unit is the segment OU on the axis itself. */
+  /* OU is only a temporary choice used to set the compass opening. */
   segment([0, 0], [1, 0], 'unit', { strokeColor: colors.gold, strokeWidth: 5 });
   point([1, 0], 'U', 'unit', { label: { offset: [8, -26], fontSize: 18 } });
   text([.35, .28], 'unit length', 'unit', { color: colors.gold });
 
-  /* First compass circle: it determines ±1 on both axes simultaneously. */
   add(board.create('circle', [[0, 0], 1], {
     strokeColor: colors.gold, strokeWidth: 2, dash: 2, fillOpacity: 0, ...fixed
   }), 'circle-origin');
@@ -85,7 +87,6 @@
   tickY(-1, 'marks-one');
   tickY(1, 'marks-one');
 
-  /* Every following circle is shown before the new mark exists. */
   add(board.create('circle', [[1, 0], 1], {
     strokeColor: colors.gold, strokeWidth: 2, dash: 2, fillOpacity: 0, ...fixed
   }), 'circle-x-plus-2');
@@ -111,24 +112,48 @@
   }), 'circle-y-minus-2');
   tickY(-2, 'mark-y-minus-2');
 
-  /* Scale refinement is shown separately on one interval. */
+  /* Refinement is isolated on [0,1]. Labels are kept to a minimum. */
   add(board.create('segment', [[0, 0], [1, 0]], {
     strokeColor: colors.blue, strokeWidth: 4, ...fixed
   }), 'focus');
   point([0, 0], '0', 'focus', { size: 3, fillColor: colors.ink, strokeColor: colors.ink });
   point([1, 0], '1', 'focus', { size: 3, fillColor: colors.ink, strokeColor: colors.ink });
+
   add(board.create('circle', [[0, 0], .72], {
     strokeColor: colors.helper, strokeWidth: 2, dash: 2, fillOpacity: 0, ...fixed
-  }), 'bisect-helpers');
+  }), 'bisect-half-helpers');
   add(board.create('circle', [[1, 0], .72], {
     strokeColor: colors.helper, strokeWidth: 2, dash: 2, fillOpacity: 0, ...fixed
-  }), 'bisect-helpers');
+  }), 'bisect-half-helpers');
   add(board.create('line', [[.5, -1], [.5, 1]], {
     strokeColor: colors.helper, strokeWidth: 2, dash: 2, ...fixed
-  }), 'bisect-helpers');
-  point([.5, 0], '1/2', 'half');
-  point([.25, 0], '1/4', 'quarter');
-  point([.75, 0], '3/4', 'quarter');
+  }), 'bisect-half-helpers');
+  focusTick(.5, 'half');
+  text([.455, -.18], '1/2', 'half', { color: colors.ink, fontSize: 15 });
+
+  add(board.create('circle', [[0, 0], .36], {
+    strokeColor: colors.helper, strokeWidth: 2, dash: 2, fillOpacity: 0, ...fixed
+  }), 'bisect-quarter-helpers');
+  add(board.create('circle', [[.5, 0], .36], {
+    strokeColor: colors.helper, strokeWidth: 2, dash: 2, fillOpacity: 0, ...fixed
+  }), 'bisect-quarter-helpers');
+  add(board.create('line', [[.25, -.65], [.25, .65]], {
+    strokeColor: colors.helper, strokeWidth: 2, dash: 2, ...fixed
+  }), 'bisect-quarter-helpers');
+  add(board.create('circle', [[.5, 0], .36], {
+    strokeColor: colors.helper, strokeWidth: 2, dash: 2, fillOpacity: 0, ...fixed
+  }), 'bisect-quarter-helpers');
+  add(board.create('circle', [[1, 0], .36], {
+    strokeColor: colors.helper, strokeWidth: 2, dash: 2, fillOpacity: 0, ...fixed
+  }), 'bisect-quarter-helpers');
+  add(board.create('line', [[.75, -.65], [.75, .65]], {
+    strokeColor: colors.helper, strokeWidth: 2, dash: 2, ...fixed
+  }), 'bisect-quarter-helpers');
+  focusTick(.25, 'quarters');
+  focusTick(.75, 'quarters');
+
+  /* One more refinement: eighth marks, deliberately without labels. */
+  [.125, .375, .625, .875].forEach(value => focusTick(value, 'eighths', .04));
 
   for (let x = -4; x <= 4; x += .5) {
     add(board.create('segment', [[x, -2.5], [x, 2.5]], {
@@ -152,7 +177,7 @@
   text([2.85, 1.1], 'P = (x, y)', 'coordinates', { color: colors.green, fontSize: 18 });
 
   const baseAxes = ['xaxis', 'origin', 'yaxis', 'rightangle', 'directions'];
-  const firstMarks = [...baseAxes, 'unit', 'marks-one'];
+  const firstMarks = [...baseAxes, 'marks-one'];
   const xPlus2 = [...firstMarks, 'mark-x-plus-2'];
   const xPlus3 = [...xPlus2, 'mark-x-plus-3'];
   const xMinus2 = [...xPlus3, 'mark-x-minus-2'];
@@ -166,23 +191,26 @@
     { title: 'Choose the origin O on the line', keys: ['xaxis', 'origin'] },
     { title: 'Construct the perpendicular axis through O', keys: ['xaxis', 'origin', 'yaxis', 'rightangle'] },
     { title: 'Choose the positive directions', keys: baseAxes },
-    { title: 'Choose the unit segment OU on the horizontal axis', keys: [...baseAxes, 'unit'] },
-    { title: 'Draw the circle centred at O with radius OU', keys: [...baseAxes, 'unit', 'circle-origin'] },
-    { title: 'The intersections determine ±1 on both axes', keys: firstMarks },
-    { title: 'Move the same radius to the constructed point +1', keys: [...firstMarks, 'circle-x-plus-2'] },
-    { title: 'The new intersection determines +2', keys: xPlus2 },
-    { title: 'Move the same radius from +2', keys: [...xPlus2, 'circle-x-plus-3'] },
-    { title: 'The new intersection determines +3', keys: xPlus3 },
+    { title: 'Choose the unit segment OU', keys: [...baseAxes, 'unit'] },
+    { title: 'Set the compass to OU and draw the circle centred at O', keys: [...baseAxes, 'unit', 'circle-origin'] },
+    { title: 'Keep only the four marks ±1', keys: firstMarks },
+    { title: 'Use the mark +1 as the next compass centre', keys: [...firstMarks, 'circle-x-plus-2'] },
+    { title: 'Keep the newly constructed mark +2', keys: xPlus2 },
+    { title: 'Repeat from +2', keys: [...xPlus2, 'circle-x-plus-3'] },
+    { title: 'Keep the newly constructed mark +3', keys: xPlus3 },
     { title: 'Repeat from −1 in the negative direction', keys: [...xPlus3, 'circle-x-minus-2'] },
-    { title: 'The new intersection determines −2', keys: xMinus2 },
+    { title: 'Keep the newly constructed mark −2', keys: xMinus2 },
     { title: 'Repeat from +1 on the vertical axis', keys: [...xMinus2, 'circle-y-plus-2'] },
-    { title: 'The new intersection determines vertical +2', keys: yPlus2 },
+    { title: 'Keep the newly constructed vertical mark +2', keys: yPlus2 },
     { title: 'Repeat from −1 on the vertical axis', keys: [...yPlus2, 'circle-y-minus-2'] },
-    { title: 'The new intersection determines vertical −2', keys: allIntegerMarks },
-    { title: 'Focus on the single unit interval [0,1]', keys: ['focus'], bbox: FOCUS_VIEW },
-    { title: 'Construct its midpoint using equal-radius circles', keys: ['focus', 'bisect-helpers'], bbox: FOCUS_VIEW },
-    { title: 'Remove the helpers and retain the mark 1/2', keys: ['focus', 'half'], bbox: FOCUS_VIEW },
-    { title: 'Bisect again to obtain quarter marks', keys: ['focus', 'half', 'quarter'], bbox: FOCUS_VIEW },
+    { title: 'Keep the newly constructed vertical mark −2', keys: allIntegerMarks },
+    { title: 'Focus on the unit interval [0,1]', keys: ['focus'], bbox: FOCUS_VIEW },
+    { title: 'Construct the midpoint', keys: ['focus', 'bisect-half-helpers'], bbox: FOCUS_VIEW },
+    { title: 'Remove the helpers and keep 1/2', keys: ['focus', 'half'], bbox: FOCUS_VIEW },
+    { title: 'Bisect both half-intervals', keys: ['focus', 'half', 'bisect-quarter-helpers'], bbox: FOCUS_VIEW },
+    { title: 'Remove the helpers and keep the quarter marks', keys: ['focus', 'half', 'quarters'], bbox: FOCUS_VIEW },
+    { title: 'Repeat once more to obtain eighth marks', keys: ['focus', 'half', 'quarters', 'eighths'], bbox: FOCUS_VIEW },
+    { title: 'The same process gives arbitrarily fine dyadic marks', keys: ['focus', 'half', 'quarters', 'eighths'], bbox: FOCUS_VIEW },
     { title: 'Return to the completed coordinate axes', keys: allIntegerMarks },
     { title: 'Choose an arbitrary point P', keys: [...allIntegerMarks, 'point-p'] },
     { title: 'Project P orthogonally onto both axes', keys: [...allIntegerMarks, 'point-p', 'projection'] },
