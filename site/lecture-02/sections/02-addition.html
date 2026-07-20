@@ -8,7 +8,7 @@
 
   <div class="statement">
     <div class="statement-label">The problem</div>
-    <p>Given the two free vectors represented by $\overrightarrow{PQ}$ and $\overrightarrow{QR}$, construct one free vector that represents their combined effect. This geometric problem is what forces the definition of vector addition.</p>
+    <p>Given the two free vectors represented by $\overrightarrow{PQ}$ and $\overrightarrow{QR}$, construct one free vector that represents their combined effect. This geometric problem leads to the definition of vector addition.</p>
   </div>
 
   <figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
@@ -24,7 +24,7 @@
     <figcaption class="figure-caption">The two-step motion and the direct motion have the same initial and final points. The direct anchored vector is therefore the natural candidate for the combined free vector.</figcaption>
   </figure>
 
-  <h3>Why the coordinate formula is forced</h3>
+  <h3>From two successive displacements to vector addition</h3>
   <p>Let the free vector represented by $\overrightarrow{PQ}$ have coordinates</p>
   <div class="display-math">$$\mathbf a=[a_1,a_2],$$</div>
   <p>and let the free vector represented by $\overrightarrow{QR}$ have coordinates</p>
@@ -33,11 +33,27 @@
   <div class="display-math">$$Q=P+(a_1,a_2).$$</div>
   <p>Because $\overrightarrow{QR}$ has coordinate change $(b_1,b_2)$,</p>
   <div class="display-math">$$R=Q+(b_1,b_2).$$</div>
-  <p>Substituting the first relation into the second gives</p>
-  <div class="display-math">$$R=P+(a_1+b_1,\,a_2+b_2).$$</div>
+  <p>Now substitute the expression for the point $Q$ into the formula for the point $R$:</p>
+  <div class="display-math">$$\begin{aligned}
+  R
+  &=Q+(b_1,b_2)\\
+  &=\bigl(P+(a_1,a_2)\bigr)+(b_1,b_2).
+  \end{aligned}$$</div>
+  <p>At this point we are still using the coordinatewise addition of Cartesian points introduced earlier. By associativity,</p>
+  <div class="display-math">$$\begin{aligned}
+  R
+  &=P+\bigl((a_1,a_2)+(b_1,b_2)\bigr).
+  \end{aligned}$$</div>
+  <p>Adding the two ordered pairs coordinatewise gives</p>
+  <div class="display-math">$$\begin{aligned}
+  (a_1,a_2)+(b_1,b_2)
+  &=(a_1+b_1,\,a_2+b_2),
+  \end{aligned}$$</div>
+  <p>and therefore</p>
+  <div class="display-math">$$\boxed{R=P+(a_1+b_1,\,a_2+b_2).}$$</div>
   <p>Hence the direct anchored vector $\overrightarrow{PR}$ has coordinates</p>
   <div class="display-math">$$[\overrightarrow{PR}]=[a_1+b_1,\,a_2+b_2].$$</div>
-  <p>These coordinates depend only on the two free vectors $\mathbf a$ and $\mathbf b$, not on the particular starting point $P$. The geometric construction therefore defines an operation on free vectors:</p>
+  <p>These coordinates depend only on the two free vectors $\mathbf a$ and $\mathbf b$, not on the particular starting point $P$. We therefore define</p>
   <div class="display-math">$$\boxed{\mathbf a+\mathbf b=[\overrightarrow{PR}]=[a_1+b_1,\,a_2+b_2].}$$</div>
 
   <h3>The parallelogram rule and commutativity</h3>
