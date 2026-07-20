@@ -36,7 +36,7 @@
     await loadScript('../assets/js/jsx-board-layout.js');
     await loadScript('../assets/point-arithmetic.js?v=20260720-2');
     await loadScript('../assets/vector-equivalence.js');
-    await loadScript('../assets/vector-addition.js');
+    await loadScript('../assets/vector-addition.js?v=20260720-3');
     await loadScript('../assets/vector-scaling.js');
     await loadScript('../assets/vector-direction.js');
     await loadScript('../assets/vector-tests.js');
