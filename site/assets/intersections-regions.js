@@ -33,21 +33,29 @@
 
   function parabolaLine() {
     conditions.textContent = 'y ≥ x² − 2  and  y ≤ x + 2';
-    description.textContent = 'The shaded set lies above the parabola and below the line; the dark points satisfy both boundary equations.';
-    const left = -1;
-    const right = 2;
-    const top = [];
-    const bottom = [];
-    for (let i = 0; i <= 60; i += 1) {
-      const x = left + (right - left) * i / 60;
-      top.push([x, x + 2]);
-      bottom.unshift([x, x * x - 2]);
+    description.textContent = 'The shaded set lies above the parabola and below the line. Its endpoints are the exact intersections of the two boundary curves.';
+
+    const discriminant = Math.sqrt(17);
+    const left = (1 - discriminant) / 2;
+    const right = (1 + discriminant) / 2;
+    const samples = 140;
+    const upperBoundary = [];
+    const lowerBoundary = [];
+
+    for (let i = 0; i <= samples; i += 1) {
+      const x = left + (right - left) * i / samples;
+      upperBoundary.push([x, x + 2]);
     }
-    polygon([...top, ...bottom]);
+    for (let i = samples; i >= 0; i -= 1) {
+      const x = left + (right - left) * i / samples;
+      lowerBoundary.push([x, x * x - 2]);
+    }
+
+    polygon([...upperBoundary, ...lowerBoundary]);
     keep(board.create('functiongraph', [x => x * x - 2], styles.curveA));
     keep(board.create('functiongraph', [x => x + 2], styles.curveB));
-    point(-1, 1, 'A');
-    point(2, 4, 'B');
+    point(left, left + 2, 'A');
+    point(right, right + 2, 'B');
   }
 
   function absoluteLines() {
@@ -65,8 +73,8 @@
     conditions.textContent = 'x² + y² ≤ 9  and  y ≥ 0';
     description.textContent = 'The region satisfies the disk inequality and the upper-half-plane inequality simultaneously.';
     const points = [[-3, 0]];
-    for (let i = 0; i <= 80; i += 1) {
-      const theta = Math.PI - Math.PI * i / 80;
+    for (let i = 0; i <= 120; i += 1) {
+      const theta = Math.PI - Math.PI * i / 120;
       points.push([3 * Math.cos(theta), 3 * Math.sin(theta)]);
     }
     points.push([3, 0]);
