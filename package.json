@@ -1,0 +1,15 @@
+{
+  "name": "mathematical-stories",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.4",
+    "astro": "^5.0.0",
+    "typescript": "^5.7.0"
+  }
+}
