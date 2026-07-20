@@ -1,0 +1,35 @@
+<section id="projection" class="section">
+  <h2>Projection is forced by the right-angle condition</h2>
+  <p>Let $\mathbf v\neq\mathbf0$. We seek a multiple $\lambda\mathbf v$ such that the remainder $\mathbf u-\lambda\mathbf v$ is perpendicular to $\mathbf v$:</p>
+  <div class="display-math">$$\mathbf u=\lambda\mathbf v+(\mathbf u-\lambda\mathbf v).$$</div>
+
+  <figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
+    <div class="figure-toolbar">
+      <div><span class="figure-title">Orthogonal projection</span><span class="figure-step-title" data-projection-readout>Move $\mathbf u$ and the direction $\mathbf v$.</span></div>
+      <button class="icon-button" type="button" data-fullscreen aria-label="Open vector projection figure in full screen">⛶</button>
+    </div>
+    <div class="figure-stage jsx-stage"><div id="vector-projection-board" class="jxgbox" data-vector-projection></div></div>
+    <div class="relation-readout"><span data-projection-coefficient></span><span data-projection-vector></span><span data-projection-check></span></div>
+    <figcaption class="figure-caption">The foot is chosen on the line spanned by $\mathbf v$ so that the remainder meets that line at a right angle.</figcaption>
+  </figure>
+
+  <div class="derivation">
+    <h3>Solving the geometric condition</h3>
+    <p>Perpendicularity requires</p>
+    <div class="display-math">$$(\mathbf u-\lambda\mathbf v)\cdot\mathbf v=0.$$</div>
+    <p>Expanding gives</p>
+    <div class="display-math">$$\mathbf u\cdot\mathbf v-\lambda(\mathbf v\cdot\mathbf v)=0,$$</div>
+    <p>and therefore</p>
+    <div class="display-math">$$\lambda=\frac{\mathbf u\cdot\mathbf v}{\mathbf v\cdot\mathbf v}.$$</div>
+  </div>
+
+  <div class="statement">
+    <div class="statement-label">Projection formula</div>
+    <div class="display-math">$$\boxed{\operatorname{proj}_{\mathbf v}\mathbf u=\frac{\mathbf u\cdot\mathbf v}{\mathbf v\cdot\mathbf v}\,\mathbf v.}$$</div>
+    <p>The formula is the solution of a geometric requirement. It is not an arbitrary rule to memorise.</p>
+  </div>
+
+  <h3>Orthogonal decomposition</h3>
+  <p>Every vector splits into a component parallel to $\mathbf v$ and a perpendicular remainder:</p>
+  <div class="display-math">$$\boxed{\mathbf u=\operatorname{proj}_{\mathbf v}\mathbf u+\left(\mathbf u-\operatorname{proj}_{\mathbf v}\mathbf u\right).}$$</div>
+</section>
