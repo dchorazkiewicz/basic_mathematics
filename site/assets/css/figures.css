@@ -35,12 +35,18 @@
 .relation-readout { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 14px; }
 .relation-readout span { padding: 7px 10px; border-radius: 999px; background: var(--blue-soft); color: var(--navy); font-size: .82rem; }
 
-.figure-panel:fullscreen { width: 100vw; height: 100vh; margin: 0; padding: 22px; border: 0; border-radius: 0; background: #f4f1eb; display: grid; grid-template-rows: auto minmax(0,1fr) auto; }
-.equation-family-panel:fullscreen, .function-machine-panel:fullscreen, .relation-panel:fullscreen { grid-template-rows: auto auto minmax(0,1fr) auto; }
-.figure-panel:fullscreen .figure-stage { min-height: 0; height: 100%; }
+.figure-panel:fullscreen { width: 100vw; height: 100vh; margin: 0; padding: 18px; border: 0; border-radius: 0; background: #f4f1eb; display: flex; flex-direction: column; gap: 10px; overflow: hidden; }
+.figure-panel:fullscreen .figure-toolbar,
+.figure-panel:fullscreen .curve-switcher,
+.figure-panel:fullscreen .function-workflow,
+.figure-panel:fullscreen .relation-readout,
+.figure-panel:fullscreen .parameter-controls,
+.figure-panel:fullscreen .sequence-controls { flex: 0 0 auto; margin-top: 0; margin-bottom: 0; }
+.figure-panel:fullscreen .function-workflow > div { padding: 7px 10px; }
+.figure-panel:fullscreen .figure-stage { flex: 1 1 auto; min-height: 0; height: auto; padding: 8px; }
 .figure-panel:fullscreen .jsx-stage > .jxgbox { width: 100%; height: 100%; min-height: 0; }
 .figure-panel:fullscreen .figure-caption { display: none; }
-.figure-panel:fullscreen .figure-step-title { font-size: 1.2rem; }
+.figure-panel:fullscreen .figure-step-title { font-size: 1.05rem; }
 
 @media (max-width: 900px) {
   .jsx-stage { min-height: 420px; }
