@@ -17,7 +17,7 @@ const base = import.meta.env.BASE_URL;
     <meta name="description" content={description} />
     <meta name="theme-color" content="#142c46" />
     <title>{title} · Mathematical Stories</title>
-    <script>
+    <script is:inline>
       window.MathJax = {
         tex: {
           inlineMath: [['$', '$'], ['\\(', '\\)']],
@@ -28,7 +28,7 @@ const base = import.meta.env.BASE_URL;
         options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'] }
       };
     </script>
-    <script async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script is:inline async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
   </head>
   <body>
     <header class="site-header">
