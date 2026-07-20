@@ -4,7 +4,9 @@
     'sections/02-cartesian-construction.html',
     'sections/03-coordinates.html',
     'sections/04-distance.html',
-    'sections/05-graphs.html'
+    'sections/05-graphs.html',
+    'sections/06-relations.html',
+    'sections/07-equation-families.html'
   ];
 
   const loadScript = (src) => new Promise((resolve, reject) => {
@@ -34,6 +36,8 @@
     await loadScript('../assets/js/fullscreen.js');
     await loadScript('../assets/cartesian-construction.js');
     await loadScript('../assets/distance-geometry.js');
+    await loadScript('../assets/function-machine.js');
+    await loadScript('../assets/circle-relation.js');
     await loadScript('../assets/equation-families.js');
   }
 
