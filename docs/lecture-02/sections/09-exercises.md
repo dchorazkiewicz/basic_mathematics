@@ -24,7 +24,7 @@ The first ten consolidate calculation and construction. The next ten require exp
 13. Prove that two nonzero plane vectors are parallel exactly when one is a scalar multiple of the other. Discuss positive and negative multiples separately.
 14. Find equal-length vectors with $\|\mathbf u+\mathbf v\|<\|\mathbf u\|$ and explain the cancellation geometrically.
 15. Derive $\mathbf u\cdot\mathbf v=\|\mathbf u\|\|\mathbf v\|\cos\theta$ from the cosine theorem and interpret the sign of the dot product.
-16. Prove from the projection formula that $\mathbf u-\operatorname{proj}_{\mathbf v}\mathbf u$ is perpendicular to $\mathbf v$.
+16. Let $\mathbf r=\mathbf u-\operatorname{proj}_{\mathbf v}\mathbf u$ for $\mathbf v\neq\mathbf0$. Prove that $\mathbf r\perp\mathbf v$, then use $\|\mathbf r\|^2\geq0$ to derive the Cauchy--Schwarz inequality $|\mathbf u\cdot\mathbf v|\leq\|\mathbf u\|\,\|\mathbf v\|$. Determine when equality holds.
 17. Explain why two nonparallel basis vectors give unique coefficients in $\mathbf u=\alpha\mathbf b_1+\beta\mathbf b_2$.
 18. Explain the type difference between $P=(3,2)$ and $\mathbf v=[3,2]$ using one location example and one displacement example.
 19. Find the standard and $B$-coordinates of $[6,2]$ for $\mathbf b_1=[1,1]$, $\mathbf b_2=[1,-1]$. Explain when a basis is well adapted.
