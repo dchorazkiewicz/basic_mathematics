@@ -34,7 +34,13 @@
 
 15. Starting from the cosine theorem for the triangle formed by $\mathbf u$, $\mathbf v$, and $\mathbf u-\mathbf v$, derive $\mathbf u\cdot\mathbf v=\|\mathbf u\|\,\|\mathbf v\|\cos\theta$. Explain why the sign of the dot product distinguishes acute, right, and obtuse angles.
 
-16. Let $\mathbf r=\mathbf u-\operatorname{proj}_{\mathbf v}\mathbf u$. Prove directly from the projection formula that $\mathbf r\cdot\mathbf v=0$. Then interpret the result geometrically.
+16. Let $\mathbf r=\mathbf u-\operatorname{proj}_{\mathbf v}\mathbf u$ for $\mathbf v\neq\mathbf0$. Prove directly that $\mathbf r\cdot\mathbf v=0$. Then use $\|\mathbf r\|^2\geq0$ to derive the Cauchy--Schwarz inequality
+
+    $$
+    |\mathbf u\cdot\mathbf v|\leq\|\mathbf u\|\,\|\mathbf v\|,
+    $$
+
+    and determine exactly when equality holds.
 
 17. Suppose $\mathbf b_1$ and $\mathbf b_2$ are nonparallel. Explain why a vector cannot have two different representations $\mathbf u=\alpha\mathbf b_1+\beta\mathbf b_2=\alpha'\mathbf b_1+\beta'\mathbf b_2$. Reduce the question to a linear combination equal to the zero vector.
 
