@@ -17,13 +17,19 @@ $$
 </figure>
 
 !!! derivation "The right-angle condition determines the coefficient"
-    Perpendicularity requires
+    Write $\mathbf u=[u_1,u_2]$ and $\mathbf v=[v_1,v_2]$. Perpendicularity requires
 
     $$
     (\mathbf u-\lambda\mathbf v)\cdot\mathbf v=0.
     $$
 
-    Using the algebraic properties of the dot product,
+    In coordinates this is
+
+    $$
+    (u_1-\lambda v_1)v_1+(u_2-\lambda v_2)v_2=0,
+    $$
+
+    hence
 
     $$
     \mathbf u\cdot\mathbf v-\lambda(\mathbf v\cdot\mathbf v)=0.
