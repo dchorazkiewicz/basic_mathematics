@@ -25,7 +25,7 @@ $$
 !!! principle "Geometric requirement"
     The foot $H$ lies on the line spanned by $\mathbf v$. The vector from the origin to $H$ is the parallel component $\lambda\mathbf v$, while the vector from $H$ to the endpoint of $\mathbf u$ is the perpendicular remainder. The right-angle condition determines $\lambda$.
 
-??? derivation "Solving the right-angle condition"
+!!! derivation "Solving the right-angle condition"
     Perpendicularity requires
 
     $$
@@ -86,7 +86,7 @@ $$
 
 ### The Cauchy--Schwarz inequality
 
-??? derivation "Derivation from projection"
+!!! derivation "Derivation from projection"
     The parallel component cannot be longer than the whole vector:
 
     $$
@@ -115,7 +115,7 @@ so the angle formula using $\arccos$ is meaningful.
 
 ### The triangle inequality
 
-??? derivation "Derivation from Cauchy--Schwarz"
+!!! derivation "Derivation from Cauchy--Schwarz"
     Using Cauchy--Schwarz,
 
     $$
