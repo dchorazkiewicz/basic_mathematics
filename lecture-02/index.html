@@ -1,0 +1,911 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Lecture 2 — Vectors, Bases, and Coordinate Systems">
+  <title>Lecture 02 · Vectors, Bases, and Coordinate Systems · Mathematical Stories</title>
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/home.css">
+  <link rel="stylesheet" href="../assets/css/lecture.css">
+  <link rel="stylesheet" href="../assets/css/figures.css">
+  <link rel="stylesheet" href="../assets/css/exercises.css">
+  <link rel="stylesheet" href="../assets/css/mkdocs-adapter.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsxgraph@1.10.1/distrib/jsxgraph.css">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams'
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/jsxgraph@1.10.1/distrib/jsxgraphcore.js"></script>
+    
+    
+      
+    
+    <script defer src="../assets/js/fullscreen.js"></script><script defer src="../assets/js/jsx-board-layout.js"></script><script defer src="../assets/point-arithmetic.js"></script><script defer src="../assets/vector-equivalence.js"></script><script defer src="../assets/vector-addition.js"></script><script defer src="../assets/vector-scaling.js"></script><script defer src="../assets/vector-direction.js"></script><script defer src="../assets/vector-tests.js"></script><script defer src="../assets/vector-projection.js"></script><script defer src="../assets/vector-basis.js"></script>
+  
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="..">Mathematical Stories</a>
+    <nav class="header-links" aria-label="Primary navigation">
+      <a href="..#course-map">Course map</a>
+      <a href="https://github.com/dchorazkiewicz/basic_mathematics">GitHub</a>
+    </nav>
+  </header>
+
+  
+    <div class="lecture-shell">
+      <aside class="lecture-nav" aria-label="Lecture contents">
+        <div class="nav-label">Lecture 02</div>
+        
+          <a href="#from-points">From points to vectors</a>
+        
+          <a href="#addition">Addition and subtraction</a>
+        
+          <a href="#scaling">Scaling and combinations</a>
+        
+          <a href="#length-direction">Length and direction</a>
+        
+          <a href="#tests">Parallel and perpendicular</a>
+        
+          <a href="#angle">Angle and dot product</a>
+        
+          <a href="#projection">Projection</a>
+        
+          <a href="#basis">Change of basis</a>
+        
+          <a href="#exercises">Exercises</a>
+        
+      </aside>
+      <main class="lecture-main">
+        <header class="lecture-header">
+          <p class="eyebrow">Lecture 02 · Analytical Geometry</p>
+          <h1>Vectors, Bases, and Coordinate Systems</h1>
+          <p>Coordinates first described locations. We now use coordinate differences to construct directed changes, identify when arrows represent the same vector, and derive the operations and tests used throughout analytical geometry.</p>
+        </header>
+        <h2 id="from-points">From Cartesian points to free vectors<a class="headerlink" href="#from-points" title="Permanent link">&para;</a></h2>
+<p>A point of the Cartesian plane is an ordered pair of real numbers. Let</p>
+<div class="arithmatex">\[
+P=(p_1,p_2),\qquad Q=(q_1,q_2).
+\]</div>
+<p>Before vectors are introduced, we first define several arithmetic operations on such points. These definitions are possible because a point of the Cartesian plane is represented by an ordered pair of numbers.</p>
+<h3 id="arithmetic-operations-on-cartesian-points">Arithmetic operations on Cartesian points<a class="headerlink" href="#arithmetic-operations-on-cartesian-points" title="Permanent link">&para;</a></h3>
+<p>The point</p>
+<div class="arithmatex">\[
+O=(0,0)
+\]</div>
+<p>plays the role of zero.</p>
+<p>Addition of points is defined coordinatewise:</p>
+<div class="arithmatex">\[
+\boxed{P+Q=(p_1+q_1,\,p_2+q_2)}.
+\]</div>
+<p>The point opposite to <span class="arithmatex">\(P\)</span> is</p>
+<div class="arithmatex">\[
+\boxed{-P=(-p_1,-p_2)},
+\]</div>
+<p>so that</p>
+<div class="arithmatex">\[
+P+(-P)=O.
+\]</div>
+<p>Subtraction of points is defined by adding the opposite point:</p>
+<div class="arithmatex">\[
+\boxed{Q-P=Q+(-P)=(q_1-p_1,\,q_2-p_2)}.
+\]</div>
+<p>For a real number <span class="arithmatex">\(\lambda\)</span>, multiplication of a point by a number is also defined coordinatewise:</p>
+<div class="arithmatex">\[
+\boxed{\lambda P=(\lambda p_1,\,\lambda p_2)}.
+\]</div>
+<p>At this stage these are arithmetic operations on ordered pairs. They are useful computational rules, but their geometric meaning has not yet been established. The first expression to acquire such a meaning will be the difference <span class="arithmatex">\(Q-P\)</span>.</p>
+<figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
+  <div class="figure-toolbar">
+    <div>
+      <span class="figure-title">Arithmetic on Cartesian points</span>
+      <span class="figure-step-title">Move $P$ and $Q$, then compare the four coordinatewise operations.</span>
+    </div>
+    <button class="icon-button" type="button" data-fullscreen aria-label="Open point arithmetic figure in full screen">⛶</button>
+  </div>
+  <div class="curve-switcher" role="group" aria-label="Choose a point operation">
+    <button class="curve-mode is-active" type="button" data-point-operation="sum">Addition</button>
+    <button class="curve-mode" type="button" data-point-operation="opposite">Opposite point</button>
+    <button class="curve-mode" type="button" data-point-operation="difference">Subtraction</button>
+    <button class="curve-mode" type="button" data-point-operation="scalar">Scalar multiplication</button>
+  </div>
+  <div class="figure-stage jsx-stage"><div id="point-arithmetic-board" class="jxgbox" data-point-arithmetic></div></div>
+  <div class="parameter-controls" data-point-lambda-control hidden>
+    <label class="parameter-control">
+      <span>$\lambda$ = <output data-point-lambda-output>1.5</output></span>
+      <input type="range" min="-3" max="3" step="0.25" value="1.5" data-point-lambda-slider>
+    </label>
+  </div>
+  <div class="relation-readout"><span data-point-operation-readout></span></div>
+  <figcaption class="figure-caption">The figure visualises arithmetic on ordered pairs. The interpretation of $Q-P$ as a directed displacement is introduced immediately afterwards.</figcaption>
+</figure>
+
+<h3 id="an-ordered-pair-of-points-determines-an-anchored-vector">An ordered pair of points determines an anchored vector<a class="headerlink" href="#an-ordered-pair-of-points-determines-an-anchored-vector" title="Permanent link">&para;</a></h3>
+<p>The ordered pair <span class="arithmatex">\((P,Q)\)</span> determines an arrow beginning at <span class="arithmatex">\(P\)</span> and ending at <span class="arithmatex">\(Q\)</span>. We denote it by</p>
+<div class="arithmatex">\[
+\overrightarrow{PQ}
+\]</div>
+<p>and call it an <em>anchored vector</em>. The order matters: <span class="arithmatex">\(P\)</span> is its initial point and <span class="arithmatex">\(Q\)</span> is its endpoint.</p>
+<figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
+  <div class="figure-toolbar">
+    <div>
+      <span class="figure-title">An anchored vector and its coordinate changes</span>
+      <span class="figure-step-title">The horizontal and vertical changes are $q_1-p_1$ and $q_2-p_2$.</span>
+    </div>
+    <button class="icon-button" type="button" data-fullscreen aria-label="Open vector equivalence figure in full screen">⛶</button>
+  </div>
+  <div class="figure-stage jsx-stage"><div id="vector-equivalence-board" class="jxgbox" data-vector-equivalence></div></div>
+  <figcaption class="figure-caption">The arrow begins at $P$ and ends at $Q$; its coordinates record the two coordinate changes.</figcaption>
+</figure>
+
+<p>The point difference is</p>
+<div class="arithmatex">\[
+Q-P=(q_1-p_1,\,q_2-p_2).
+\]</div>
+<p>The two numbers <span class="arithmatex">\(q_1-p_1\)</span> and <span class="arithmatex">\(q_2-p_2\)</span> are, by definition, the coordinates of the anchored vector <span class="arithmatex">\(\overrightarrow{PQ}\)</span>. Round brackets remain reserved for Cartesian points.</p>
+<p>Its length is the distance between the two points:</p>
+<div class="arithmatex">\[
+\boxed{|\overrightarrow{PQ}|=d_E(P,Q)}.
+\]</div>
+<p>Reversing the order reverses the arrow and changes the signs of both coordinates. The vector <span class="arithmatex">\(\overrightarrow{QP}\)</span> therefore has coordinates</p>
+<div class="arithmatex">\[
+p_1-q_1,\qquad p_2-q_2.
+\]</div>
+<h3 id="when-do-arrows-drawn-in-different-places-represent-the-same-vector">When do arrows drawn in different places represent the same vector?<a class="headerlink" href="#when-do-arrows-drawn-in-different-places-represent-the-same-vector" title="Permanent link">&para;</a></h3>
+<p>We first define equality geometrically. Consider two anchored vectors</p>
+<div class="arithmatex">\[
+\overrightarrow{PQ}\qquad\text{and}\qquad\overrightarrow{P'Q'}.
+\]</div>
+<p>They are called equal when the midpoint of the pair <span class="arithmatex">\(P,Q'\)</span> is also the midpoint of the pair <span class="arithmatex">\(Q,P'\)</span>. Equivalently, the four points form a parallelogram in which the two arrows are opposite directed sides.</p>
+<p>The midpoint condition is</p>
+<div class="arithmatex">\[
+\frac12(P+Q')=\frac12(Q+P').
+\]</div>
+<p>Rearranging this equality gives</p>
+<div class="arithmatex">\[
+Q-P=Q'-P'.
+\]</div>
+<p>We have therefore obtained the coordinate criterion for the geometric relation:</p>
+<div class="arithmatex">\[
+\boxed{\overrightarrow{PQ}=\overrightarrow{P'Q'}\quad\Longleftrightarrow\quad Q-P=Q'-P'}.
+\]</div>
+<p>Thus two anchored vectors are equal precisely when their corresponding coordinates are equal. Their initial points may be different.</p>
+<h3 id="free-vectors">Free vectors<a class="headerlink" href="#free-vectors" title="Permanent link">&para;</a></h3>
+<p>Equality divides all anchored vectors into disjoint classes. Each class contains all arrows representing one and the same directed change. Such a class is called a <em>free vector</em>.</p>
+<p>If <span class="arithmatex">\(\overrightarrow{PQ}\)</span> is one representative of a free vector <span class="arithmatex">\(\mathbf v\)</span>, we write</p>
+<div class="arithmatex">\[
+\boxed{\mathbf v=[\overrightarrow{PQ}]}.
+\]</div>
+<p>Here the square brackets denote the equivalence class of all anchored vectors equal to <span class="arithmatex">\(\overrightarrow{PQ}\)</span>.</p>
+<p>If the common coordinates of these representatives are <span class="arithmatex">\(v_1,v_2\)</span>, then the same free vector is written</p>
+<div class="arithmatex">\[
+\boxed{\mathbf v=[v_1,v_2]}.
+\]</div>
+<p>Thus round brackets distinguish points from vectors:</p>
+<div class="arithmatex">\[
+V=(v_1,v_2)\qquad\text{is a point, whereas}\qquad \mathbf v=[v_1,v_2]\qquad\text{is a free vector}.
+\]</div>
+<p>Since</p>
+<div class="arithmatex">\[
+Q-P=(q_1-p_1,\,q_2-p_2)
+\]</div>
+<p>is a Cartesian point, placing square brackets around this point means the free vector with the same coordinate entries:</p>
+<div class="arithmatex">\[
+\boxed{[\overrightarrow{PQ}]=[Q-P]=[q_1-p_1,\,q_2-p_2]}.
+\]</div>
+<p>The outer square brackets change the type of object: <span class="arithmatex">\((q_1-p_1,q_2-p_2)\)</span> is a point, while <span class="arithmatex">\([q_1-p_1,q_2-p_2]\)</span> is a free vector.</p>
+<p>A particularly convenient representative begins at the origin. If</p>
+<div class="arithmatex">\[
+O=(0,0),\qquad V=(v_1,v_2),
+\]</div>
+<p>then</p>
+<div class="arithmatex">\[
+\mathbf v=[\overrightarrow{OV}]=[V]=[v_1,v_2].
+\]</div>
+<p>This does not identify the point <span class="arithmatex">\(V\)</span> with the vector <span class="arithmatex">\(\mathbf v\)</span>; it gives a canonical representative of the free vector.</p>
+<div class="admonition principle">
+<p class="admonition-title">Order of construction</p>
+<p>Only now, after free vectors have been constructed, do we define operations on them. Each operation will first be described using representatives and then written in coordinates.</p>
+</div>
+<h2 id="addition">Addition, opposite vectors, and subtraction<a class="headerlink" href="#addition" title="Permanent link">&para;</a></h2>
+<h3 id="why-an-operation-of-addition-is-needed">Why an operation of addition is needed<a class="headerlink" href="#why-an-operation-of-addition-is-needed" title="Permanent link">&para;</a></h3>
+<p>Suppose that we begin at a point <span class="arithmatex">\(P\)</span>, move to a point <span class="arithmatex">\(Q\)</span>, and then move from <span class="arithmatex">\(Q\)</span> to a point <span class="arithmatex">\(R\)</span>. These are two consecutive geometric changes:</p>
+<div class="arithmatex">\[
+P\longrightarrow Q\longrightarrow R.
+\]</div>
+<p>The first change is represented by the anchored vector <span class="arithmatex">\(\overrightarrow{PQ}\)</span> and the second by <span class="arithmatex">\(\overrightarrow{QR}\)</span>. But the same journey also produces one direct change from the initial point <span class="arithmatex">\(P\)</span> to the final point <span class="arithmatex">\(R\)</span>, represented by <span class="arithmatex">\(\overrightarrow{PR}\)</span>.</p>
+<div class="admonition problem">
+<p class="admonition-title">The problem</p>
+<p>Given the two free vectors represented by <span class="arithmatex">\(\overrightarrow{PQ}\)</span> and <span class="arithmatex">\(\overrightarrow{QR}\)</span>, construct one free vector that represents their combined effect. This geometric problem leads to the definition of vector addition.</p>
+</div>
+<figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
+  <div class="figure-toolbar">
+    <div>
+      <span class="figure-title">Two consecutive changes and one direct change</span>
+      <span class="figure-step-title">Move $P$, $Q$, or $R$ and compare the route $P\to Q\to R$ with the direct change $P\to R$.</span>
+    </div>
+    <button class="icon-button" type="button" data-fullscreen aria-label="Open point-chain addition figure in full screen">⛶</button>
+  </div>
+  <div class="figure-stage jsx-stage"><div id="vector-chain-board" class="jxgbox" data-vector-chain></div></div>
+  <div class="relation-readout" data-vector-chain-readout></div>
+  <figcaption class="figure-caption">The two-step motion and the direct motion have the same initial and final points. The direct anchored vector is therefore the natural candidate for the combined free vector.</figcaption>
+</figure>
+
+<h3 id="from-two-successive-displacements-to-vector-addition">From two successive displacements to vector addition<a class="headerlink" href="#from-two-successive-displacements-to-vector-addition" title="Permanent link">&para;</a></h3>
+<p>Let the free vector represented by <span class="arithmatex">\(\overrightarrow{PQ}\)</span> have coordinates</p>
+<div class="arithmatex">\[
+\mathbf a=[a_1,a_2],
+\]</div>
+<p>and let the free vector represented by <span class="arithmatex">\(\overrightarrow{QR}\)</span> have coordinates</p>
+<div class="arithmatex">\[
+\mathbf b=[b_1,b_2].
+\]</div>
+<p>Because <span class="arithmatex">\(\overrightarrow{PQ}\)</span> has coordinate change <span class="arithmatex">\((a_1,a_2)\)</span>,</p>
+<div class="arithmatex">\[
+Q=P+(a_1,a_2).
+\]</div>
+<p>Because <span class="arithmatex">\(\overrightarrow{QR}\)</span> has coordinate change <span class="arithmatex">\((b_1,b_2)\)</span>,</p>
+<div class="arithmatex">\[
+R=Q+(b_1,b_2).
+\]</div>
+<p>Now substitute the expression for the point <span class="arithmatex">\(Q\)</span> into the formula for the point <span class="arithmatex">\(R\)</span>:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+R
+  &amp;=Q+(b_1,b_2)\\
+  &amp;=\bigl(P+(a_1,a_2)\bigr)+(b_1,b_2).
+\end{aligned}
+\]</div>
+<p>At this point we are still using the coordinatewise addition of Cartesian points introduced earlier. By associativity,</p>
+<div class="arithmatex">\[
+R=P+\bigl((a_1,a_2)+(b_1,b_2)\bigr).
+\]</div>
+<p>Adding the two ordered pairs coordinatewise gives</p>
+<div class="arithmatex">\[
+(a_1,a_2)+(b_1,b_2)=(a_1+b_1,\,a_2+b_2),
+\]</div>
+<p>and therefore</p>
+<div class="arithmatex">\[
+\boxed{R=P+(a_1+b_1,\,a_2+b_2).}
+\]</div>
+<p>Hence the direct anchored vector <span class="arithmatex">\(\overrightarrow{PR}\)</span> has coordinates</p>
+<div class="arithmatex">\[
+[\overrightarrow{PR}]=[a_1+b_1,\,a_2+b_2].
+\]</div>
+<p>These coordinates depend only on the two free vectors <span class="arithmatex">\(\mathbf a\)</span> and <span class="arithmatex">\(\mathbf b\)</span>, not on the particular starting point <span class="arithmatex">\(P\)</span>. We therefore define</p>
+<div class="arithmatex">\[
+\boxed{\mathbf a+\mathbf b=[\overrightarrow{PR}]=[a_1+b_1,\,a_2+b_2].}
+\]</div>
+<h3 id="the-parallelogram-rule-and-commutativity">The parallelogram rule and commutativity<a class="headerlink" href="#the-parallelogram-rule-and-commutativity" title="Permanent link">&para;</a></h3>
+<p>The same sum can be constructed in the opposite order. Placing a representative of <span class="arithmatex">\(\mathbf b\)</span> first and then one of <span class="arithmatex">\(\mathbf a\)</span> gives the same endpoint. Hence</p>
+<div class="arithmatex">\[
+\boxed{\mathbf a+\mathbf b=\mathbf b+\mathbf a.}
+\]</div>
+<h3 id="opposite-vectors">Opposite vectors<a class="headerlink" href="#opposite-vectors" title="Permanent link">&para;</a></h3>
+<p>For every vector <span class="arithmatex">\(\mathbf a=[a_1,a_2]\)</span> there is an opposite vector</p>
+<div class="arithmatex">\[
+\boxed{-\mathbf a=[-a_1,-a_2]},
+\]</div>
+<p>characterised by</p>
+<div class="arithmatex">\[
+\mathbf a+(-\mathbf a)=\mathbf0.
+\]</div>
+<p>Geometrically it has the same length and lies on the same direction line as <span class="arithmatex">\(\mathbf a\)</span>, but its orientation is reversed.</p>
+<h3 id="subtraction-as-addition-of-the-opposite-vector">Subtraction as addition of the opposite vector<a class="headerlink" href="#subtraction-as-addition-of-the-opposite-vector" title="Permanent link">&para;</a></h3>
+<figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
+  <div class="figure-toolbar">
+    <div>
+      <span class="figure-title">Opposite vector and subtraction</span>
+      <span class="figure-step-title">First reverse $\mathbf b$, then add $-\mathbf b$ to $\mathbf a$.</span>
+    </div>
+    <button class="icon-button" type="button" data-fullscreen aria-label="Open opposite vector and subtraction figure in full screen">⛶</button>
+  </div>
+  <div class="curve-switcher" role="group" aria-label="Choose a subtraction construction step">
+    <button class="curve-mode is-active" type="button" data-subtraction-step="opposite">Construct $-\mathbf b$</button>
+    <button class="curve-mode" type="button" data-subtraction-step="add">Add $\mathbf a+(-\mathbf b)$</button>
+    <button class="curve-mode" type="button" data-subtraction-step="check">Check the missing vector</button>
+  </div>
+  <div class="figure-stage jsx-stage"><div id="vector-subtraction-board" class="jxgbox" data-vector-subtraction></div></div>
+  <div class="relation-readout" data-vector-subtraction-readout></div>
+  <figcaption class="figure-caption">The opposite vector reverses orientation without changing length. Subtraction is then ordinary vector addition with this reversed vector.</figcaption>
+</figure>
+
+<p>Subtraction is defined by adding the opposite vector:</p>
+<div class="arithmatex">\[
+\boxed{\mathbf a-\mathbf b=\mathbf a+(-\mathbf b)=[a_1-b_1,\,a_2-b_2].}
+\]</div>
+<p>It is the missing vector in the equation</p>
+<div class="arithmatex">\[
+(\mathbf a-\mathbf b)+\mathbf b=\mathbf a.
+\]</div>
+<div class="admonition note">
+<p class="admonition-title">Points and vectors</p>
+<p>For any two points <span class="arithmatex">\(P\)</span> and <span class="arithmatex">\(Q\)</span>,</p>
+<div class="arithmatex">\[
+[\overrightarrow{PQ}]=[Q-P].
+\]</div>
+<p>The subtraction is performed on their coordinate descriptions and the result is interpreted as the free vector represented by the arrow from <span class="arithmatex">\(P\)</span> to <span class="arithmatex">\(Q\)</span>.</p>
+</div>
+<h2 id="scaling">Parallel vectors, multiplication by a number, and linear combinations<a class="headerlink" href="#scaling" title="Permanent link">&para;</a></h2>
+<p>Before multiplying a vector by a number, we first identify the geometric relation that this operation is meant to preserve.</p>
+<div class="admonition definition">
+<p class="admonition-title">Parallel vectors from length equalities</p>
+<p>Two nonzero free vectors <span class="arithmatex">\(\mathbf a\)</span> and <span class="arithmatex">\(\mathbf b\)</span> have the same direction and the same orientation when placing them successively produces no shortening:</p>
+<div class="arithmatex">\[
+|\mathbf a+\mathbf b|=|\mathbf a|+|\mathbf b|.
+\]</div>
+<p>They have the same direction and opposite orientations when</p>
+<div class="arithmatex">\[
+|\mathbf a-\mathbf b|=|\mathbf a|+|\mathbf b|.
+\]</div>
+<p>In both cases the vectors are called parallel.</p>
+</div>
+<p>For <span class="arithmatex">\(\mathbf a=[a_1,a_2]\)</span> and <span class="arithmatex">\(\mathbf b=[b_1,b_2]\)</span>, equality in the triangle inequality gives the coordinate criterion</p>
+<div class="arithmatex">\[
+\boxed{\mathbf a\parallel\mathbf b\iff \lambda\mathbf a=\mu\mathbf b}
+\]</div>
+<p>for some real numbers <span class="arithmatex">\(\lambda\)</span> and <span class="arithmatex">\(\mu\)</span> that are not both zero. In the plane this may also be written as</p>
+<div class="arithmatex">\[
+\boxed{a_1b_2-a_2b_1=0.}
+\]</div>
+<p>If <span class="arithmatex">\(\lambda\)</span> and <span class="arithmatex">\(\mu\)</span> have the same sign, the orientations agree; if their signs are opposite, the orientations are opposite.</p>
+<h3 id="multiplication-by-a-real-number">Multiplication by a real number<a class="headerlink" href="#multiplication-by-a-real-number" title="Permanent link">&para;</a></h3>
+<p>If <span class="arithmatex">\(t&gt;0\)</span>, then <span class="arithmatex">\(t\mathbf a\)</span> is parallel to <span class="arithmatex">\(\mathbf a\)</span>, has the same orientation, and</p>
+<div class="arithmatex">\[
+|t\mathbf a|=t|\mathbf a|.
+\]</div>
+<p>If <span class="arithmatex">\(t&lt;0\)</span>, the orientation is reversed and</p>
+<div class="arithmatex">\[
+|t\mathbf a|=|t|\,|\mathbf a|.
+\]</div>
+<p>For <span class="arithmatex">\(t=0\)</span>, the result is the zero vector. In coordinates,</p>
+<div class="arithmatex">\[
+\boxed{t[a_1,a_2]=[ta_1,ta_2].}
+\]</div>
+<figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
+  <div class="figure-toolbar">
+    <div><span class="figure-title">Scaling and combining vectors</span><span class="figure-step-title" data-scaling-readout>$2\mathbf u-\mathbf v$</span></div>
+    <button class="icon-button" type="button" data-fullscreen aria-label="Open scaling figure in full screen">⛶</button>
+  </div>
+  <div class="figure-stage jsx-stage"><div id="vector-scaling-board" class="jxgbox" data-vector-scaling></div></div>
+  <div class="parameter-controls" style="--parameter-count:2">
+    <label class="parameter-control"><span>$a$ = <output data-scale-a>2</output></span><input type="range" min="-3" max="3" step="0.25" value="2" data-scale-a-slider></label>
+    <label class="parameter-control"><span>$b$ = <output data-scale-b>-1</output></span><input type="range" min="-3" max="3" step="0.25" value="-1" data-scale-b-slider></label>
+  </div>
+  <figcaption class="figure-caption">The two scaled displacements are added head to tail to form $a\mathbf u+b\mathbf v$.</figcaption>
+</figure>
+
+<p>Scalar multiplication is compatible with addition:</p>
+<div class="arithmatex">\[
+\boxed{t(\mathbf a+\mathbf b)=t\mathbf a+t\mathbf b},
+\qquad
+\boxed{(s+t)\mathbf a=s\mathbf a+t\mathbf a}.
+\]</div>
+<p>These identities follow from coordinatewise arithmetic, while geometrically they say that scaling commutes with combining directed changes.</p>
+<h3 id="linear-combinations-what-addition-and-scaling-can-build">Linear combinations: what addition and scaling can build<a class="headerlink" href="#linear-combinations-what-addition-and-scaling-can-build" title="Permanent link">&para;</a></h3>
+<div class="admonition definition">
+<p class="admonition-title">Linear combination</p>
+<p>Given vectors <span class="arithmatex">\(\mathbf u,\mathbf v\)</span> and real numbers <span class="arithmatex">\(a,b\)</span>, the vector</p>
+<div class="arithmatex">\[
+\boxed{a\mathbf u+b\mathbf v}
+\]</div>
+<p>is called a linear combination of <span class="arithmatex">\(\mathbf u\)</span> and <span class="arithmatex">\(\mathbf v\)</span>.</p>
+</div>
+<p>First scale <span class="arithmatex">\(\mathbf u\)</span> by <span class="arithmatex">\(a\)</span> and <span class="arithmatex">\(\mathbf v\)</span> by <span class="arithmatex">\(b\)</span>, then add the resulting displacements. A linear combination is therefore not a new operation.</p>
+<div class="admonition note">
+<p class="admonition-title">One direction versus two directions</p>
+<p>A single nonzero vector generates only the line</p>
+<div class="arithmatex">\[
+\{\lambda\mathbf v:\lambda\in\mathbb R\}.
+\]</div>
+<p>Two parallel vectors still generate one line. Two nonparallel vectors provide two independent directions and can generate the whole plane.</p>
+</div>
+<div class="admonition derivation">
+<p class="admonition-title">Why nonparallel directions reach the plane</p>
+<p>If <span class="arithmatex">\(\mathbf u\)</span> and <span class="arithmatex">\(\mathbf v\)</span> are parallel, every multiple of either vector lies on the same line, so every sum <span class="arithmatex">\(a\mathbf u+b\mathbf v\)</span> remains on that line. If they are not parallel, the parallelogram construction decomposes any target displacement into one component along each direction. The two coefficients record those two signed motions.</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">Basis theorem in the plane</p>
+<p>Two nonparallel vectors <span class="arithmatex">\(\mathbf u\)</span> and <span class="arithmatex">\(\mathbf v\)</span> determine every vector in the plane uniquely in the form</p>
+<div class="arithmatex">\[
+\boxed{\mathbf w=a\mathbf u+b\mathbf v}.
+\]</div>
+<p>A basis is precisely such a pair of independent directions, and basis coordinates are the coefficients in this reconstruction.</p>
+</div>
+<h2 id="length-direction">How much motion and in which direction?<a class="headerlink" href="#length-direction" title="Permanent link">&para;</a></h2>
+<p>The coordinate pair of a vector records two changes, but it does not immediately answer two geometric questions:</p>
+<div class="admonition question">
+<p class="admonition-title">Two questions carried by every nonzero vector</p>
+<ol>
+<li>How long is the displacement?</li>
+<li>In which direction does it point?</li>
+</ol>
+</div>
+<p>Let <span class="arithmatex">\(\mathbf v=[v_1,v_2]\)</span> be drawn from the origin. Its endpoint, together with its horizontal and vertical coordinate changes, forms a right triangle. The legs have lengths <span class="arithmatex">\(|v_1|\)</span> and <span class="arithmatex">\(|v_2|\)</span>, while the vector itself is the hypotenuse.</p>
+<figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
+  <div class="figure-toolbar">
+    <div><span class="figure-title">A vector as a right triangle</span><span class="figure-step-title" data-direction-readout>$\mathbf v=[4,3]$</span></div>
+    <button class="icon-button" type="button" data-fullscreen aria-label="Open vector direction figure in full screen">⛶</button>
+  </div>
+  <div class="figure-stage jsx-stage"><div id="vector-direction-board" class="jxgbox" data-vector-direction></div></div>
+  <figcaption class="figure-caption">The vector, its two coordinate changes, and its inclination are displayed simultaneously.</figcaption>
+</figure>
+
+<div class="admonition derivation">
+<p class="admonition-title">Length from the Pythagorean theorem</p>
+<div class="arithmatex">\[
+\|\mathbf v\|^2=v_1^2+v_2^2.
+\]</div>
+<p>The length is nonnegative, so</p>
+<div class="arithmatex">\[
+\boxed{\|\mathbf v\|=\sqrt{v_1^2+v_2^2}}.
+\]</div>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">Euclidean norm</p>
+<p>The Euclidean length, or norm, of <span class="arithmatex">\(\mathbf v=[v_1,v_2]\)</span> is</p>
+<div class="arithmatex">\[
+\boxed{\|\mathbf v\|=\sqrt{v_1^2+v_2^2}}.
+\]</div>
+<p>The double bars distinguish the vector from the number measuring its length.</p>
+</div>
+<div class="admonition consequence">
+<p class="admonition-title">Basic consequences</p>
+<div class="arithmatex">\[
+\boxed{\|\mathbf0\|=0},
+\qquad
+\boxed{\mathbf v\neq\mathbf0\implies\|\mathbf v\|&gt;0}.
+\]</div>
+<p>For points <span class="arithmatex">\(A\)</span> and <span class="arithmatex">\(B\)</span>,</p>
+<div class="arithmatex">\[
+\boxed{d_E(A,B)=\|B-A\|}.
+\]</div>
+</div>
+<p>The vector <span class="arithmatex">\(B-A\)</span> records how to move from <span class="arithmatex">\(A\)</span> to <span class="arithmatex">\(B\)</span>, while its norm records the Euclidean distance travelled. The same object therefore carries both directional and metric information.</p>
+<h3 id="separating-magnitude-from-direction">Separating magnitude from direction<a class="headerlink" href="#separating-magnitude-from-direction" title="Permanent link">&para;</a></h3>
+<p>Assume <span class="arithmatex">\(\mathbf v\neq\mathbf0\)</span> and let <span class="arithmatex">\(\alpha\)</span> be its angle of inclination measured from the positive <span class="arithmatex">\(x\)</span>-axis.</p>
+<div class="admonition derivation">
+<p class="admonition-title">Recovering the coordinates</p>
+<p>The right triangle gives</p>
+<div class="arithmatex">\[
+\cos\alpha=\frac{v_1}{\|\mathbf v\|},
+\qquad
+\sin\alpha=\frac{v_2}{\|\mathbf v\|}.
+\]</div>
+<p>Therefore</p>
+<div class="arithmatex">\[
+v_1=\|\mathbf v\|\cos\alpha,
+\qquad
+v_2=\|\mathbf v\|\sin\alpha.
+\]</div>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">Magnitude-direction decomposition</p>
+<p>Every nonzero vector admits the decomposition</p>
+<div class="arithmatex">\[
+\boxed{\mathbf v=\|\mathbf v\|[\cos\alpha,\sin\alpha]}.
+\]</div>
+<p>The vector <span class="arithmatex">\([\cos\alpha,\sin\alpha]\)</span> has length one.</p>
+</div>
+<div class="admonition interpretation">
+<p class="admonition-title">The two pieces of a vector</p>
+<ul>
+<li><span class="arithmatex">\(\|\mathbf v\|\)</span> says how much displacement occurs;</li>
+<li><span class="arithmatex">\([\cos\alpha,\sin\alpha]\)</span> says in which direction it occurs.</li>
+</ul>
+<p>Thus every nonzero vector is a positive magnitude multiplied by a unit direction.</p>
+</div>
+<h2 id="tests">One angle calculation, two geometric tests<a class="headerlink" href="#tests" title="Permanent link">&para;</a></h2>
+<p>Take two arbitrary nonzero vectors</p>
+<div class="arithmatex">\[
+\mathbf u=[u_1,u_2],\qquad \mathbf v=[v_1,v_2].
+\]</div>
+<p>Let their angles of inclination be <span class="arithmatex">\(\alpha\)</span> and <span class="arithmatex">\(\beta\)</span>. Then</p>
+<div class="arithmatex">\[
+\mathbf u=\|\mathbf u\|[\cos\alpha,\sin\alpha],
+\qquad
+\mathbf v=\|\mathbf v\|[\cos\beta,\sin\beta].
+\]</div>
+<div class="admonition principle">
+<p class="admonition-title">One comparison controls both tests</p>
+<p>The directed turn from <span class="arithmatex">\(\mathbf u\)</span> to <span class="arithmatex">\(\mathbf v\)</span> is <span class="arithmatex">\(\beta-\alpha\)</span>. Its sine detects parallel directions, while its cosine detects perpendicular directions.</p>
+</div>
+<figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
+  <div class="figure-toolbar">
+    <div><span class="figure-title">Two vectors, two coordinate tests</span><span class="figure-step-title" data-tests-readout>Move the endpoints of $\mathbf u$ and $\mathbf v$.</span></div>
+    <button class="icon-button" type="button" data-fullscreen aria-label="Open vector tests figure in full screen">⛶</button>
+  </div>
+  <div class="figure-stage jsx-stage"><div id="vector-tests-board" class="jxgbox" data-vector-tests></div></div>
+  <div class="relation-readout"><span data-determinant-readout></span><span data-dot-readout></span><span data-angle-readout></span></div>
+  <figcaption class="figure-caption">The same angle difference produces both coordinate tests.</figcaption>
+</figure>
+
+<h3 id="parallel-directions-arise-from-the-sine-of-the-angle-difference">Parallel directions arise from the sine of the angle difference<a class="headerlink" href="#parallel-directions-arise-from-the-sine-of-the-angle-difference" title="Permanent link">&para;</a></h3>
+<div class="admonition derivation">
+<p class="admonition-title">Parallelism from <span class="arithmatex">\(\sin(\beta-\alpha)\)</span></p>
+<p>Two nonzero vectors determine the same unoriented direction precisely when</p>
+<div class="arithmatex">\[
+\beta-\alpha\equiv0\pmod\pi,
+\]</div>
+<p>equivalently when <span class="arithmatex">\(\sin(\beta-\alpha)=0\)</span>. Using</p>
+<div class="arithmatex">\[
+\sin(\beta-\alpha)=\sin\beta\cos\alpha-\cos\beta\sin\alpha
+\]</div>
+<p>and substituting the coordinate expressions for the four trigonometric terms gives</p>
+<div class="arithmatex">\[
+\sin(\beta-\alpha)=\frac{u_1v_2-u_2v_1}{\|\mathbf u\|\,\|\mathbf v\|}.
+\]</div>
+<p>The denominator is nonzero, so the sine vanishes exactly when the numerator vanishes.</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">Parallelism test</p>
+<div class="arithmatex">\[
+\boxed{\mathbf u\parallel\mathbf v\iff u_1v_2-u_2v_1=0}.
+\]</div>
+<p>Equivalently,</p>
+<div class="arithmatex">\[
+\boxed{\mathbf u\parallel\mathbf v\iff \mathbf u=\lambda\mathbf v\text{ for some }\lambda\neq0}.
+\]</div>
+</div>
+<div class="admonition proof">
+<p class="admonition-title">Why the determinant condition gives a scalar multiple</p>
+<p>If <span class="arithmatex">\(v_1\neq0\)</span>, set <span class="arithmatex">\(\lambda=u_1/v_1\)</span>. The equality <span class="arithmatex">\(u_1v_2-u_2v_1=0\)</span> then gives <span class="arithmatex">\(u_2=\lambda v_2\)</span>, hence <span class="arithmatex">\(\mathbf u=\lambda\mathbf v\)</span>. If <span class="arithmatex">\(v_1=0\)</span>, then <span class="arithmatex">\(v_2\neq0\)</span> and the same argument uses <span class="arithmatex">\(\lambda=u_2/v_2\)</span>.</p>
+</div>
+<p>The quantity <span class="arithmatex">\(u_1v_2-u_2v_1\)</span> measures whether the two coordinate directions span genuine area. It is zero exactly when both vectors lie on one line.</p>
+<h3 id="the-cosine-of-the-same-difference-reveals-perpendicularity">The cosine of the same difference reveals perpendicularity<a class="headerlink" href="#the-cosine-of-the-same-difference-reveals-perpendicularity" title="Permanent link">&para;</a></h3>
+<div class="admonition derivation">
+<p class="admonition-title">Perpendicularity from <span class="arithmatex">\(\cos(\beta-\alpha)\)</span></p>
+<p>The vectors are perpendicular precisely when</p>
+<div class="arithmatex">\[
+\beta-\alpha\equiv\frac\pi2\pmod\pi,
+\]</div>
+<p>equivalently when <span class="arithmatex">\(\cos(\beta-\alpha)=0\)</span>. The identity</p>
+<div class="arithmatex">\[
+\cos(\beta-\alpha)=\cos\beta\cos\alpha+\sin\beta\sin\alpha
+\]</div>
+<p>gives</p>
+<div class="arithmatex">\[
+\cos(\beta-\alpha)=\frac{u_1v_1+u_2v_2}{\|\mathbf u\|\,\|\mathbf v\|}.
+\]</div>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">Dot product</p>
+<p>For vectors in the plane,</p>
+<div class="arithmatex">\[
+\boxed{\mathbf u\cdot\mathbf v=u_1v_1+u_2v_2}.
+\]</div>
+<p>In three-dimensional space,</p>
+<div class="arithmatex">\[
+\boxed{[u_1,u_2,u_3]\cdot[v_1,v_2,v_3]=u_1v_1+u_2v_2+u_3v_3}.
+\]</div>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">Perpendicularity and angle</p>
+<div class="arithmatex">\[
+\boxed{\mathbf u\perp\mathbf v\iff\mathbf u\cdot\mathbf v=0}.
+\]</div>
+<p>More generally, if <span class="arithmatex">\(\theta\)</span> is the smaller angle between them,</p>
+<div class="arithmatex">\[
+\boxed{\mathbf u\cdot\mathbf v=\|\mathbf u\|\,\|\mathbf v\|\cos\theta}.
+\]</div>
+</div>
+<p>The dot product is positive for an acute angle, zero for a right angle, and negative for an obtuse angle.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>For <span class="arithmatex">\(\mathbf u=[3,2]\)</span> and <span class="arithmatex">\(\mathbf v=[-2,3]\)</span>,</p>
+<div class="arithmatex">\[
+\mathbf u\cdot\mathbf v=3(-2)+2(3)=0.
+\]</div>
+<p>Therefore <span class="arithmatex">\(\cos\theta=0\)</span>, so the vectors are perpendicular.</p>
+</div>
+<div class="admonition summary">
+<p class="admonition-title">Summary</p>
+<p>The sine of the angle difference produces the parallelism test <span class="arithmatex">\(u_1v_2-u_2v_1=0\)</span>. The cosine of the same difference produces the perpendicularity test <span class="arithmatex">\(\mathbf u\cdot\mathbf v=0\)</span>. Neither rule is imposed arbitrarily; both are consequences of the geometry of angle.</p>
+</div>
+<h2 id="angle">The angle between two vectors<a class="headerlink" href="#angle" title="Permanent link">&para;</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Directed turn versus ordinary angle</p>
+<p>The difference of inclination angles <span class="arithmatex">\(\beta-\alpha\)</span> is a directed turn modulo a full turn. The ordinary angle between two nonzero vectors is the smaller, unoriented separation between their directions.</p>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">Angle between vectors</p>
+<p>For nonzero vectors <span class="arithmatex">\(\mathbf u\)</span> and <span class="arithmatex">\(\mathbf v\)</span>, their angle is the unique number <span class="arithmatex">\(\theta\in[0,\pi]\)</span> satisfying</p>
+<div class="arithmatex">\[
+\boxed{\cos\theta=\frac{\mathbf u\cdot\mathbf v}{\|\mathbf u\|\,\|\mathbf v\|}}.
+\]</div>
+</div>
+<p>The interval <span class="arithmatex">\([0,\pi]\)</span> chooses the smaller unoriented angle. Directions with inclinations <span class="arithmatex">\(10^\circ\)</span> and <span class="arithmatex">\(350^\circ\)</span> are separated by <span class="arithmatex">\(20^\circ\)</span>, not <span class="arithmatex">\(340^\circ\)</span>.</p>
+<div class="admonition consequence">
+<p class="admonition-title">Principal relative positions</p>
+<div class="arithmatex">\[
+\theta=0\iff\text{same direction},
+\qquad
+\theta=\frac\pi2\iff\text{perpendicular},
+\qquad
+\theta=\pi\iff\text{opposite directions}.
+\]</div>
+</div>
+<p>The Cauchy--Schwarz inequality guarantees that</p>
+<div class="arithmatex">\[
+-1\leq\frac{\mathbf u\cdot\mathbf v}{\|\mathbf u\|\,\|\mathbf v\|}\leq1,
+\]</div>
+<p>so the angle is well defined. Its proof will emerge from orthogonal projection later in the lecture.</p>
+<h3 id="why-the-dot-product-can-be-expanded">Why the dot product can be expanded<a class="headerlink" href="#why-the-dot-product-can-be-expanded" title="Permanent link">&para;</a></h3>
+<p>Before using the dot product in longer calculations, we verify its behaviour under addition and scalar multiplication.</p>
+<div class="admonition derivation">
+<p class="admonition-title">Algebraic properties of the dot product</p>
+<p>Let <span class="arithmatex">\(\mathbf u=[u_1,u_2]\)</span>, <span class="arithmatex">\(\mathbf v=[v_1,v_2]\)</span>, and <span class="arithmatex">\(\mathbf w=[w_1,w_2]\)</span>. Then</p>
+<div class="arithmatex">\[
+\begin{aligned}
+(\mathbf u+\mathbf w)\cdot\mathbf v
+  &amp;=(u_1+w_1)v_1+(u_2+w_2)v_2\\
+  &amp;=(u_1v_1+u_2v_2)+(w_1v_1+w_2v_2)\\
+  &amp;=\mathbf u\cdot\mathbf v+\mathbf w\cdot\mathbf v.
+\end{aligned}
+\]</div>
+<p>Similarly,</p>
+<div class="arithmatex">\[
+(\lambda\mathbf u)\cdot\mathbf v=\lambda(\mathbf u\cdot\mathbf v).
+\]</div>
+<p>Symmetry of multiplication of real numbers gives</p>
+<div class="arithmatex">\[
+\mathbf u\cdot\mathbf v=\mathbf v\cdot\mathbf u,
+\]</div>
+<p>and finally</p>
+<div class="arithmatex">\[
+\mathbf u\cdot\mathbf u=u_1^2+u_2^2=\|\mathbf u\|^2.
+\]</div>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">Dot-product properties</p>
+<div class="arithmatex">\[
+\begin{aligned}
+(\mathbf u+\mathbf w)\cdot\mathbf v&amp;=\mathbf u\cdot\mathbf v+\mathbf w\cdot\mathbf v,\\
+(\lambda\mathbf u)\cdot\mathbf v&amp;=\lambda(\mathbf u\cdot\mathbf v),\\
+\mathbf u\cdot\mathbf v&amp;=\mathbf v\cdot\mathbf u.
+\end{aligned}
+\]</div>
+<div class="arithmatex">\[
+\boxed{\mathbf u\cdot\mathbf u=\|\mathbf u\|^2}.
+\]</div>
+<p>These properties justify every later expansion involving expressions such as <span class="arithmatex">\((\mathbf u-\mathbf v)\cdot(\mathbf u-\mathbf v)\)</span>.</p>
+</div>
+<h3 id="the-cosine-theorem-emerges-immediately">The cosine theorem emerges immediately<a class="headerlink" href="#the-cosine-theorem-emerges-immediately" title="Permanent link">&para;</a></h3>
+<p>Draw <span class="arithmatex">\(\mathbf u\)</span> and <span class="arithmatex">\(\mathbf v\)</span> from a common point. The displacement from the endpoint of <span class="arithmatex">\(\mathbf v\)</span> to the endpoint of <span class="arithmatex">\(\mathbf u\)</span> is <span class="arithmatex">\(\mathbf u-\mathbf v\)</span>. Thus the three vectors determine a triangle with side lengths <span class="arithmatex">\(\|\mathbf u\|\)</span>, <span class="arithmatex">\(\|\mathbf v\|\)</span>, and <span class="arithmatex">\(\|\mathbf u-\mathbf v\|\)</span>.</p>
+<div class="admonition derivation">
+<p class="admonition-title">Expanding the third side</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\|\mathbf u-\mathbf v\|^2
+  &amp;=(\mathbf u-\mathbf v)\cdot(\mathbf u-\mathbf v)\\
+  &amp;=\mathbf u\cdot\mathbf u-\mathbf u\cdot\mathbf v-\mathbf v\cdot\mathbf u+\mathbf v\cdot\mathbf v\\
+  &amp;=\|\mathbf u\|^2+\|\mathbf v\|^2-2\mathbf u\cdot\mathbf v\\
+  &amp;=\|\mathbf u\|^2+\|\mathbf v\|^2-2\|\mathbf u\|\,\|\mathbf v\|\cos\theta.
+\end{aligned}
+\]</div>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">Cosine theorem</p>
+<p>If <span class="arithmatex">\(a=\|\mathbf u\|\)</span>, <span class="arithmatex">\(b=\|\mathbf v\|\)</span>, and <span class="arithmatex">\(c=\|\mathbf u-\mathbf v\|\)</span>, then</p>
+<div class="arithmatex">\[
+\boxed{c^2=a^2+b^2-2ab\cos\theta}.
+\]</div>
+</div>
+<p>The cosine theorem is not inserted as an external formula. It is the expansion of the squared displacement between the endpoints of two arbitrary vectors. The triangle law is encoded in vector subtraction and the dot product.</p>
+<h2 id="projection">Projection is forced by the right-angle condition<a class="headerlink" href="#projection" title="Permanent link">&para;</a></h2>
+<p>Let <span class="arithmatex">\(\mathbf v\neq\mathbf0\)</span>. We seek a multiple <span class="arithmatex">\(\lambda\mathbf v\)</span> such that the remainder</p>
+<div class="arithmatex">\[
+\mathbf u-\lambda\mathbf v
+\]</div>
+<p>is perpendicular to <span class="arithmatex">\(\mathbf v\)</span>. Geometrically, this means decomposing <span class="arithmatex">\(\mathbf u\)</span> into a component parallel to <span class="arithmatex">\(\mathbf v\)</span> and a component perpendicular to <span class="arithmatex">\(\mathbf v\)</span>:</p>
+<div class="arithmatex">\[
+\mathbf u=\lambda\mathbf v+(\mathbf u-\lambda\mathbf v).
+\]</div>
+<figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
+  <div class="figure-toolbar">
+    <div><span class="figure-title">Orthogonal projection</span><span class="figure-step-title" data-projection-readout>Move $\mathbf u$ and the direction $\mathbf v$.</span></div>
+    <button class="icon-button" type="button" data-fullscreen aria-label="Open vector projection figure in full screen">⛶</button>
+  </div>
+  <div class="figure-stage jsx-stage"><div id="vector-projection-board" class="jxgbox" data-vector-projection></div></div>
+  <div class="relation-readout"><span data-projection-coefficient></span><span data-projection-vector></span><span data-projection-check></span></div>
+  <figcaption class="figure-caption">The point on the line spanned by $\mathbf v$ is determined by the right-angle condition.</figcaption>
+</figure>
+
+<div class="admonition principle">
+<p class="admonition-title">Geometric requirement</p>
+<p>The foot <span class="arithmatex">\(H\)</span> lies on the line spanned by <span class="arithmatex">\(\mathbf v\)</span>. The vector from the origin to <span class="arithmatex">\(H\)</span> is the parallel component <span class="arithmatex">\(\lambda\mathbf v\)</span>, while the vector from <span class="arithmatex">\(H\)</span> to the endpoint of <span class="arithmatex">\(\mathbf u\)</span> is the perpendicular remainder. The right-angle condition determines <span class="arithmatex">\(\lambda\)</span>.</p>
+</div>
+<div class="admonition derivation">
+<p class="admonition-title">Solving the right-angle condition</p>
+<p>Perpendicularity requires</p>
+<div class="arithmatex">\[
+(\mathbf u-\lambda\mathbf v)\cdot\mathbf v=0.
+\]</div>
+<p>Expanding gives</p>
+<div class="arithmatex">\[
+\mathbf u\cdot\mathbf v-\lambda(\mathbf v\cdot\mathbf v)=0,
+\]</div>
+<p>so</p>
+<div class="arithmatex">\[
+\lambda=\frac{\mathbf u\cdot\mathbf v}{\mathbf v\cdot\mathbf v}.
+\]</div>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">Projection formula</p>
+<p>For <span class="arithmatex">\(\mathbf v\neq\mathbf0\)</span>,</p>
+<div class="arithmatex">\[
+\boxed{\operatorname{proj}_{\mathbf v}\mathbf u=\frac{\mathbf u\cdot\mathbf v}{\mathbf v\cdot\mathbf v}\,\mathbf v}.
+\]</div>
+<p>The formula is the solution of a geometric requirement, not a rule to be memorised without explanation.</p>
+</div>
+<h3 id="orthogonal-decomposition-and-its-consequences">Orthogonal decomposition and its consequences<a class="headerlink" href="#orthogonal-decomposition-and-its-consequences" title="Permanent link">&para;</a></h3>
+<div class="admonition definition">
+<p class="admonition-title">Orthogonal decomposition</p>
+<div class="arithmatex">\[
+\boxed{\mathbf u=\operatorname{proj}_{\mathbf v}\mathbf u+\left(\mathbf u-\operatorname{proj}_{\mathbf v}\mathbf u\right)}.
+\]</div>
+<p>The first term is parallel to <span class="arithmatex">\(\mathbf v\)</span> and the second is perpendicular to <span class="arithmatex">\(\mathbf v\)</span>.</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">Pythagorean identity for components</p>
+<div class="arithmatex">\[
+\boxed{\|\mathbf u\|^2=\left\|\operatorname{proj}_{\mathbf v}\mathbf u\right\|^2+\left\|\mathbf u-\operatorname{proj}_{\mathbf v}\mathbf u\right\|^2}.
+\]</div>
+</div>
+<h3 id="scalar-component-and-vector-projection">Scalar component and vector projection<a class="headerlink" href="#scalar-component-and-vector-projection" title="Permanent link">&para;</a></h3>
+<div class="admonition definition">
+<p class="admonition-title">Scalar and vector components</p>
+<p>The signed scalar component of <span class="arithmatex">\(\mathbf u\)</span> in the direction of nonzero <span class="arithmatex">\(\mathbf v\)</span> is</p>
+<div class="arithmatex">\[
+\boxed{\operatorname{comp}_{\mathbf v}\mathbf u=\frac{\mathbf u\cdot\mathbf v}{\|\mathbf v\|}}.
+\]</div>
+<p>The corresponding vector projection is</p>
+<div class="arithmatex">\[
+\boxed{\operatorname{proj}_{\mathbf v}\mathbf u=\operatorname{comp}_{\mathbf v}\mathbf u\frac{\mathbf v}{\|\mathbf v\|}}.
+\]</div>
+<p>The scalar component measures signed length along the chosen direction; multiplying by the unit vector turns that amount back into an actual displacement.</p>
+</div>
+<h3 id="the-cauchy-schwarz-inequality">The Cauchy--Schwarz inequality<a class="headerlink" href="#the-cauchy-schwarz-inequality" title="Permanent link">&para;</a></h3>
+<div class="admonition derivation">
+<p class="admonition-title">Derivation from projection</p>
+<p>The parallel component cannot be longer than the whole vector:</p>
+<div class="arithmatex">\[
+\left|\operatorname{comp}_{\mathbf v}\mathbf u\right|\leq\|\mathbf u\|.
+\]</div>
+<p>Substituting the scalar-component formula gives</p>
+<div class="arithmatex">\[
+\frac{|\mathbf u\cdot\mathbf v|}{\|\mathbf v\|}\leq\|\mathbf u\|.
+\]</div>
+<p>Multiplying by <span class="arithmatex">\(\|\mathbf v\|&gt;0\)</span> yields</p>
+<div class="arithmatex">\[
+\boxed{|\mathbf u\cdot\mathbf v|\leq\|\mathbf u\|\,\|\mathbf v\|}.
+\]</div>
+</div>
+<p>Consequently, for nonzero vectors,</p>
+<div class="arithmatex">\[
+-1\leq\frac{\mathbf u\cdot\mathbf v}{\|\mathbf u\|\,\|\mathbf v\|}\leq1,
+\]</div>
+<p>so the angle formula using <span class="arithmatex">\(\arccos\)</span> is meaningful.</p>
+<h3 id="the-triangle-inequality">The triangle inequality<a class="headerlink" href="#the-triangle-inequality" title="Permanent link">&para;</a></h3>
+<div class="admonition derivation">
+<p class="admonition-title">Derivation from Cauchy--Schwarz</p>
+<p>Using Cauchy--Schwarz,</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\|\mathbf u+\mathbf v\|^2
+  &amp;=\|\mathbf u\|^2+2\mathbf u\cdot\mathbf v+\|\mathbf v\|^2\\
+  &amp;\leq\|\mathbf u\|^2+2\|\mathbf u\|\,\|\mathbf v\|+\|\mathbf v\|^2\\
+  &amp;=(\|\mathbf u\|+\|\mathbf v\|)^2.
+\end{aligned}
+\]</div>
+<p>Both sides are nonnegative, so taking square roots gives</p>
+<div class="arithmatex">\[
+\boxed{\|\mathbf u+\mathbf v\|\leq\|\mathbf u\|+\|\mathbf v\|}.
+\]</div>
+</div>
+<p>The triangle inequality is the algebraic form of the Euclidean fact that the straight segment between two points is no longer than a route that changes direction at an intermediate point.</p>
+<h2 id="basis">One vector in a different basis<a class="headerlink" href="#basis" title="Permanent link">&para;</a></h2>
+<p>A vector does not change when we describe it in another basis. Only the numbers used to reconstruct it from the chosen basis vectors change. One numerical example is enough to see the mechanism.</p>
+<p>Let</p>
+<div class="arithmatex">\[
+\mathbf b_1=[1,1],\qquad \mathbf b_2=[1,-1]
+\]</div>
+<p>and consider</p>
+<div class="arithmatex">\[
+\mathbf v=[4,2].
+\]</div>
+<p>We seek numbers <span class="arithmatex">\(\alpha\)</span> and <span class="arithmatex">\(\beta\)</span> such that</p>
+<div class="arithmatex">\[
+\mathbf v=\alpha\mathbf b_1+\beta\mathbf b_2.
+\]</div>
+<figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
+  <div class="figure-toolbar">
+    <div><span class="figure-title">The same vector, two numerical descriptions</span><span class="figure-step-title" data-basis-readout>$\mathbf v=3\mathbf b_1+\mathbf b_2$</span></div>
+    <button class="icon-button" type="button" data-fullscreen aria-label="Open change of basis figure in full screen">⛶</button>
+  </div>
+  <div class="figure-stage jsx-stage"><div id="vector-basis-board" class="jxgbox" data-vector-basis></div></div>
+  <div class="parameter-controls" style="--parameter-count:2">
+    <label class="parameter-control"><span>$\alpha$ = <output data-basis-alpha>3</output></span><input type="range" min="-3" max="4" step="0.25" value="3" data-basis-alpha-slider></label>
+    <label class="parameter-control"><span>$\beta$ = <output data-basis-beta>1</output></span><input type="range" min="-3" max="4" step="0.25" value="1" data-basis-beta-slider></label>
+  </div>
+  <figcaption class="figure-caption">The sliders show how the same vector is reconstructed from the two chosen basis directions.</figcaption>
+</figure>
+
+<div class="admonition derivation">
+<p class="admonition-title">Solving for the basis coordinates</p>
+<p>Using the Cartesian coordinates of the basis vectors gives</p>
+<div class="arithmatex">\[
+\begin{aligned}
+[4,2]
+  &amp;=\alpha[1,1]+\beta[1,-1]\\
+  &amp;=[\alpha+\beta,\alpha-\beta].
+\end{aligned}
+\]</div>
+<p>Therefore</p>
+<div class="arithmatex">\[
+\alpha+\beta=4,
+\qquad
+\alpha-\beta=2.
+\]</div>
+<p>Solving this small system gives</p>
+<div class="arithmatex">\[
+\alpha=3,
+\qquad
+\beta=1.
+\]</div>
+</div>
+<p>Hence</p>
+<div class="arithmatex">\[
+\boxed{\mathbf v=3\mathbf b_1+\mathbf b_2}
+\]</div>
+<p>and the coordinates of the same vector in the basis <span class="arithmatex">\(B=(\mathbf b_1,\mathbf b_2)\)</span> are</p>
+<div class="arithmatex">\[
+\boxed{[\mathbf v]_B=[3,1]}.
+\]</div>
+<div class="admonition interpretation">
+<p class="admonition-title">What changes and what does not</p>
+<p>The Cartesian coordinates <span class="arithmatex">\([4,2]\)</span> and the basis coordinates <span class="arithmatex">\([3,1]_B\)</span> are two numerical descriptions of the same geometric vector. Changing the basis means solving for the coefficients in one concrete linear combination; no additional general machinery is introduced here.</p>
+</div>
+<h2 id="exercises">Exercises<a class="headerlink" href="#exercises" title="Permanent link">&para;</a></h2>
+<p>The first ten consolidate calculation and construction. The next ten require explanation, proof, comparison, or modelling.</p>
+<p><a class="download-button" download="download" href="lecture-02-exercises/">Download exercises as Markdown</a></p>
+<h3 id="a-elementary-computational-and-graphical-exercises">A. Elementary computational and graphical exercises<a class="headerlink" href="#a-elementary-computational-and-graphical-exercises" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Let <span class="arithmatex">\(A=(1,2)\)</span> and <span class="arithmatex">\(B=(5,-1)\)</span>. Compute <span class="arithmatex">\([\overrightarrow{AB}]\)</span>. Draw equal representatives beginning at <span class="arithmatex">\(O=(0,0)\)</span> and <span class="arithmatex">\(P=(-2,3)\)</span>, and find their endpoints.</li>
+<li>For <span class="arithmatex">\(\mathbf u=[3,-2]\)</span> and <span class="arithmatex">\(\mathbf v=[-1,4]\)</span>, compute <span class="arithmatex">\(\mathbf u+\mathbf v\)</span>, <span class="arithmatex">\(\mathbf u-\mathbf v\)</span>, <span class="arithmatex">\(2\mathbf u\)</span>, and <span class="arithmatex">\(-3\mathbf v\)</span>. Draw the parallelogram for <span class="arithmatex">\(\mathbf u+\mathbf v\)</span>.</li>
+<li>For <span class="arithmatex">\(\mathbf u=[1,2]\)</span> and <span class="arithmatex">\(\mathbf v=[2,-1]\)</span>, compute <span class="arithmatex">\(2\mathbf u-3\mathbf v\)</span> and reproduce it head to tail.</li>
+<li>Compute the lengths and unit vectors for <span class="arithmatex">\([3,4]\)</span>, <span class="arithmatex">\([-5,12]\)</span>, and <span class="arithmatex">\([2,-2]\)</span>.</li>
+<li>Classify the pairs <span class="arithmatex">\([2,1],[6,3]\)</span>; <span class="arithmatex">\([2,1],[1,-2]\)</span>; <span class="arithmatex">\([3,-1],[2,5]\)</span> as parallel, perpendicular, or neither.</li>
+<li>Find the angles between <span class="arithmatex">\([1,0]\)</span> and <span class="arithmatex">\([1,1]\)</span>, and between <span class="arithmatex">\([1,1]\)</span> and <span class="arithmatex">\([-1,1]\)</span>.</li>
+<li>For <span class="arithmatex">\(\mathbf u=[3,1]\)</span> and <span class="arithmatex">\(\mathbf v=[-1,2]\)</span>, compute <span class="arithmatex">\(\|\mathbf u-\mathbf v\|\)</span> directly and from the cosine theorem.</li>
+<li>Project <span class="arithmatex">\([4,3]\)</span> onto <span class="arithmatex">\([1,0]\)</span> and onto <span class="arithmatex">\([1,1]\)</span>. Verify that each remainder is perpendicular to the target direction.</li>
+<li>For <span class="arithmatex">\(\mathbf b_1=[1,1]\)</span>, <span class="arithmatex">\(\mathbf b_2=[1,-1]\)</span>, and <span class="arithmatex">\(\mathbf u=[4,2]\)</span>, find <span class="arithmatex">\([\mathbf u]_B\)</span> and reconstruct <span class="arithmatex">\(\mathbf u\)</span>.</li>
+<li>Starting from <span class="arithmatex">\(P=(2,-1)\)</span>, apply <span class="arithmatex">\([3,2]\)</span>, <span class="arithmatex">\([-1,4]\)</span>, and <span class="arithmatex">\(-2[3,2]\)</span>. Find the endpoint in two ways.</li>
+</ol>
+<h3 id="b-development-and-reasoning-exercises">B. Development and reasoning exercises<a class="headerlink" href="#b-development-and-reasoning-exercises" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Explain with a parallelogram why translating an arrow without changing its directed change does not change the free vector. Give a numerical example.</li>
+<li>Draw <span class="arithmatex">\((\mathbf u+\mathbf v)+\mathbf w\)</span> and <span class="arithmatex">\(\mathbf u+(\mathbf v+\mathbf w)\)</span> for concrete vectors and explain geometrically why the endpoints coincide.</li>
+<li>Prove that two nonzero plane vectors are parallel exactly when one is a scalar multiple of the other. Discuss positive and negative multiples separately.</li>
+<li>Find equal-length vectors with <span class="arithmatex">\(\|\mathbf u+\mathbf v\|&lt;\|\mathbf u\|\)</span> and explain the cancellation geometrically.</li>
+<li>Derive <span class="arithmatex">\(\mathbf u\cdot\mathbf v=\|\mathbf u\|\|\mathbf v\|\cos\theta\)</span> from the cosine theorem and interpret the sign of the dot product.</li>
+<li>Prove from the projection formula that <span class="arithmatex">\(\mathbf u-\operatorname{proj}_{\mathbf v}\mathbf u\)</span> is perpendicular to <span class="arithmatex">\(\mathbf v\)</span>.</li>
+<li>Explain why two nonparallel basis vectors give unique coefficients in <span class="arithmatex">\(\mathbf u=\alpha\mathbf b_1+\beta\mathbf b_2\)</span>.</li>
+<li>Explain the type difference between <span class="arithmatex">\(P=(3,2)\)</span> and <span class="arithmatex">\(\mathbf v=[3,2]\)</span> using one location example and one displacement example.</li>
+<li>Find the standard and <span class="arithmatex">\(B\)</span>-coordinates of <span class="arithmatex">\([6,2]\)</span> for <span class="arithmatex">\(\mathbf b_1=[1,1]\)</span>, <span class="arithmatex">\(\mathbf b_2=[1,-1]\)</span>. Explain when a basis is well adapted.</li>
+<li>Refute the claim that every pair of nonzero vectors is a basis. Give one dependent and one independent example and interpret their linear combinations.</li>
+</ol>
+      </main>
+    </div>
+  
+</body>
+</html>

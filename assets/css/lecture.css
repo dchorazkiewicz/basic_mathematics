@@ -1,0 +1,33 @@
+.lecture-shell { width: min(1220px, calc(100% - 40px)); margin: 0 auto; display: grid; grid-template-columns: 220px minmax(0, 760px); gap: 72px; align-items: start; padding: 56px 0 100px; }
+.lecture-nav { position: sticky; top: 96px; }
+.lecture-nav a { display: block; padding: 7px 0; color: var(--muted); text-decoration: none; font-size: .84rem; }
+.lecture-nav a:hover { color: var(--ink); }
+.lecture-nav .nav-label { margin-bottom: 12px; color: var(--ink); font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.lecture-main { min-width: 0; }
+.lecture-header { margin-bottom: 54px; }
+.lecture-header .eyebrow { margin-bottom: 16px; }
+.lecture-header h1 { margin: 0 0 20px; font-size: clamp(3rem, 6vw, 5.3rem); line-height: .98; font-weight: 600; }
+.lecture-header p { max-width: 640px; margin: 0; color: var(--muted); font-family: var(--serif); font-size: 1.25rem; }
+.section { margin: 0 0 64px; }
+.section h2 { margin: 0 0 18px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 2rem; }
+.section p { font-family: var(--serif); font-size: 1.08rem; }
+.math-block { overflow-x: auto; margin: 26px 0; padding: 18px 22px; background: #f0ede6; border-radius: 10px; }
+.statement { margin: 28px 0; padding: 20px 22px; border-left: 3px solid var(--blue); background: rgba(255,255,255,.48); }
+.statement.theorem { border-left-color: var(--gold); }
+.statement.proof { border-left-color: var(--green); }
+.statement-label { margin-bottom: 8px; color: var(--blue); font-size: .72rem; font-weight: 700; letter-spacing: .11em; text-transform: uppercase; }
+.statement.theorem .statement-label { color: var(--gold); }
+.statement.proof .statement-label { color: var(--green); }
+.statement p { margin: 0; }
+details { margin: 24px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+summary { cursor: pointer; padding: 14px 0; font-weight: 600; }
+details > div { padding: 0 0 18px; }
+
+@media (max-width: 900px) {
+  .lecture-shell { grid-template-columns: 1fr; gap: 0; }
+  .lecture-nav { display: none; }
+}
+@media (max-width: 620px) {
+  .lecture-shell { width: min(100% - 28px, 1120px); }
+  .lecture-header h1 { font-size: 3rem; }
+}

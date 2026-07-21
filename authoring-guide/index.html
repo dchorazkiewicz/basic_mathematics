@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="A course in analytical geometry, linear algebra and calculus.">
+  <title>Authoring and deployment · Mathematical Stories</title>
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/home.css">
+  <link rel="stylesheet" href="../assets/css/lecture.css">
+  <link rel="stylesheet" href="../assets/css/figures.css">
+  <link rel="stylesheet" href="../assets/css/exercises.css">
+  <link rel="stylesheet" href="../assets/css/mkdocs-adapter.css">
+  
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams'
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+  
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="..">Mathematical Stories</a>
+    <nav class="header-links" aria-label="Primary navigation">
+      <a href="..#course-map">Course map</a>
+      <a href="https://github.com/dchorazkiewicz/basic_mathematics">GitHub</a>
+    </nav>
+  </header>
+
+  
+    <main class="standalone-page"><h1 id="authoring-and-deployment">Authoring and deployment<a class="headerlink" href="#authoring-and-deployment" title="Permanent link">&para;</a></h1>
+<h2 id="local-preview">Local preview<a class="headerlink" href="#local-preview" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv
+<span class="nb">source</span><span class="w"> </span>.venv/bin/activate<span class="w">        </span><span class="c1"># Windows: .venv\Scripts\activate</span>
+python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+mkdocs<span class="w"> </span>serve
+</code></pre></div>
+<h2 id="deploy-to-github-pages">Deploy to GitHub Pages<a class="headerlink" href="#deploy-to-github-pages" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>mkdocs<span class="w"> </span>build<span class="w"> </span>--strict
+mkdocs<span class="w"> </span>gh-deploy<span class="w"> </span>--force<span class="w"> </span>--clean
+</code></pre></div>
+<p>Configure GitHub Pages to publish from the root of the <code>gh-pages</code> branch.</p>
+<h2 id="modular-lecture-structure">Modular lecture structure<a class="headerlink" href="#modular-lecture-structure" title="Permanent link">&para;</a></h2>
+<p>Each lecture remains one long reading page, matching the reference site, while its source is split into semantic section modules:</p>
+<div class="highlight"><pre><span></span><code>docs/lecture-02/
+├── index.md
+└── sections/
+    ├── 01-from-points.md
+    ├── 02-addition.md
+    └── ...
+</code></pre></div>
+<p><code>index.md</code> assembles the modules with <code>pymdownx.snippets</code>. All headings, paragraphs, lists, tables, exercises, proofs and formulas are authored in Markdown. HTML is reserved for the internal controls and host elements of interactive figures.</p>
+<h2 id="semantic-mathematical-environments">Semantic mathematical environments<a class="headerlink" href="#semantic-mathematical-environments" title="Permanent link">&para;</a></h2>
+<p>Use Markdown admonitions instead of hand-written HTML wrappers.</p>
+<h3 id="definition">Definition<a class="headerlink" href="#definition" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>!!! definition &quot;Vector norm&quot;
+    For $\mathbf v=[v_1,v_2]$ define
+
+    $$
+    \|\mathbf v\|=\sqrt{v_1^2+v_2^2}.
+    $$
+</code></pre></div>
+<h3 id="theorem">Theorem<a class="headerlink" href="#theorem" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>!!! theorem &quot;Projection theorem&quot;
+    Every vector admits an orthogonal decomposition.
+</code></pre></div>
+<h3 id="long-derivation">Long derivation<a class="headerlink" href="#long-derivation" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>!!! derivation &quot;Eliminating the parameter&quot;
+    First substitute the preceding identity:
+
+    $$
+    \begin{aligned}
+    F(x)
+      &amp;=A(x)+B(x)\\
+      &amp;=C(x)+D(x).
+    \end{aligned}
+    $$
+
+    Continue the argument in ordinary Markdown paragraphs.
+</code></pre></div>
+<h3 id="collapsible-long-proof">Collapsible long proof<a class="headerlink" href="#collapsible-long-proof" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>??? proof &quot;Proof&quot;
+    The proof may contain any number of paragraphs, lists and equations.
+
+    $$
+    \begin{aligned}
+    A<span class="ge">_1 &amp;= A_</span>2 \\
+        &amp;= A_3 \\
+        &amp;= A_4.
+    \end{aligned}
+    $$
+
+    Continue until the argument is complete. $\square$
+</code></pre></div>
+<p>Available styled types include:</p>
+<div class="highlight"><pre><span></span><code>definition, theorem, proof, derivation, principle, interpretation,
+example, problem, question, consequence, summary, warning, note
+</code></pre></div>
+<h2 id="long-proofs-and-multiline-mathematics">Long proofs and multiline mathematics<a class="headerlink" href="#long-proofs-and-multiline-mathematics" title="Permanent link">&para;</a></h2>
+<p>MathJax supports <code>aligned</code>, <code>alignedat</code>, <code>gathered</code>, <code>cases</code>, <code>matrix</code>, <code>pmatrix</code>, and <code>bmatrix</code>. A proof should normally be split into several meaningful display equations rather than one extremely wide formula. On narrow screens, display mathematics receives horizontal scrolling as a fallback.</p>
+<h2 id="interactive-figures-and-fullscreen">Interactive figures and fullscreen<a class="headerlink" href="#interactive-figures-and-fullscreen" title="Permanent link">&para;</a></h2>
+<p>Interactive figures are the one intentional HTML exception because their buttons, sliders and <code>data-*</code> hooks are consumed directly by JavaScript. Keep the host markup local to the section where the figure appears:</p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">figure</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;figure-panel jsx-panel&quot;</span> <span class="na">data-fullscreen-panel</span> <span class="na">tabindex</span><span class="o">=</span><span class="s">&quot;0&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;figure-toolbar&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;figure-title&quot;</span><span class="p">&gt;</span>Figure title<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;icon-button&quot;</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="na">data-fullscreen</span><span class="p">&gt;</span>⛶<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;figure-stage jsx-stage&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;example-board&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;jxgbox&quot;</span> <span class="na">data-example-board</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">figure</span><span class="p">&gt;</span>
+</code></pre></div>
+<p>The <code>data-fullscreen-panel</code> and <code>data-fullscreen</code> attributes activate the same enlargement behaviour as the original custom site. Do not place ordinary prose, definitions, proofs or formulas inside figure markup.</p></main>
+  
+</body>
+</html>

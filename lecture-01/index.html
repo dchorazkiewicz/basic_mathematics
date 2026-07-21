@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Lecture 1 — Cartesian Geometry and Coordinates">
+  <title>Lecture 01 · Cartesian Geometry and Coordinates · Mathematical Stories</title>
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/home.css">
+  <link rel="stylesheet" href="../assets/css/lecture.css">
+  <link rel="stylesheet" href="../assets/css/figures.css">
+  <link rel="stylesheet" href="../assets/css/exercises.css">
+  <link rel="stylesheet" href="../assets/css/mkdocs-adapter.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsxgraph@1.10.1/distrib/jsxgraph.css">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams'
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/jsxgraph@1.10.1/distrib/jsxgraphcore.js"></script>
+    
+    
+      
+    
+    <script defer src="../assets/js/fullscreen.js"></script><script defer src="../assets/js/jsx-board-layout.js"></script><script defer src="../assets/cartesian-construction.js"></script><script defer src="../assets/distance-geometry.js"></script><script defer src="../assets/function-machine.js"></script><script defer src="../assets/circle-relation.js"></script><script defer src="../assets/parametric-curves.js"></script><script defer src="../assets/intersections-regions.js"></script>
+  
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="..">Mathematical Stories</a>
+    <nav class="header-links" aria-label="Primary navigation">
+      <a href="..#course-map">Course map</a>
+      <a href="https://github.com/dchorazkiewicz/basic_mathematics">GitHub</a>
+    </nav>
+  </header>
+
+  
+    <div class="lecture-shell">
+      <aside class="lecture-nav" aria-label="Lecture contents">
+        <div class="nav-label">Lecture 01</div>
+        
+          <a href="#before-coordinates">Before coordinates</a>
+        
+          <a href="#construction">Constructing the system</a>
+        
+          <a href="#coordinates">Coordinates</a>
+        
+          <a href="#distance">Distance</a>
+        
+          <a href="#functions">Functions generate points</a>
+        
+          <a href="#relations">Relations and two outputs</a>
+        
+          <a href="#parametric-curves">Parametric curves</a>
+        
+          <a href="#intersections-regions">Intersections and regions</a>
+        
+          <a href="#exercises">Exercises</a>
+        
+      </aside>
+      <main class="lecture-main">
+        <header class="lecture-header">
+          <p class="eyebrow">Lecture 01 · Analytical Geometry</p>
+          <h1>Cartesian Geometry and Coordinates</h1>
+          <p>We begin with Euclidean geometry and construct, step by step, the numerical language that turns points into ordered pairs and geometric relations into equations.</p>
+        </header>
+        <h2 id="before-coordinates">Before coordinates<a class="headerlink" href="#before-coordinates" title="Permanent link">&para;</a></h2>
+<p>A Euclidean plane already contains points, straight lines, right angles and lengths. Coordinates do not create these objects. They provide a systematic numerical description after we make several explicit choices.</p>
+<div class="admonition note">
+<p class="admonition-title">Available geometry</p>
+<p>Before coordinates we may construct lines through points, perpendicular lines, circles, intersections and lengths. What is missing is an origin, orientation and numerical scale.</p>
+</div>
+<h2 id="construction">Constructing the Cartesian system<a class="headerlink" href="#construction" title="Permanent link">&para;</a></h2>
+<p>The sequence below distinguishes permanent objects from temporary construction aids. Compass circles and bisectors disappear after they have produced the required mark. Open the figure full screen during a lecture and move through the construction one step at a time.</p>
+<figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
+  <div class="figure-toolbar">
+    <div>
+      <span class="figure-title">Construction sequence · Cartesian plane</span>
+      <span class="figure-step-title" data-step-title>Euclidean plane</span>
+    </div>
+    <button class="icon-button" type="button" data-fullscreen aria-label="Open figure in full screen">⛶</button>
+  </div>
+  <div class="figure-stage jsx-stage">
+    <div id="cartesian-board" class="jxgbox" data-cartesian-construction aria-label="Interactive construction of a Cartesian coordinate system"></div>
+  </div>
+  <div class="sequence-controls">
+    <button class="control-button" type="button" data-previous>Previous</button>
+    <button class="control-button" type="button" data-next>Next</button>
+    <button class="control-button" type="button" data-play>Play</button>
+    <button class="control-button" type="button" data-reset>Reset</button>
+    <span class="sequence-status" data-status></span>
+  </div>
+  <figcaption class="figure-caption">Temporary construction objects are removed after each operation. The final coordinate system retains only the axes, origin, orientations and scale.</figcaption>
+</figure>
+
+<div class="admonition principle">
+<p class="admonition-title">Construction principle</p>
+<p>The scale is not drawn at once. A fixed compass opening is transferred successively along each axis. The interval is then refined by geometric bisection before coordinates are assigned by orthogonal projection.</p>
+</div>
+<h2 id="coordinates">Assigning coordinates<a class="headerlink" href="#coordinates" title="Permanent link">&para;</a></h2>
+<p>Let <span class="arithmatex">\(P\)</span> be any point of the plane. Through <span class="arithmatex">\(P\)</span>, construct perpendiculars to both axes. Their intersection points with the axes determine two signed real numbers <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span>.</p>
+<div class="admonition theorem">
+<p class="admonition-title">Coordinate correspondence</p>
+<p>Once two perpendicular axes, their positive directions and a common unit are fixed, orthogonal projection establishes a one-to-one correspondence between points of the Euclidean plane and ordered pairs <span class="arithmatex">\((x,y)\in\mathbb{R}^2\)</span>.</p>
+</div>
+<details class="proof">
+<summary>Proof</summary>
+<p>For every point <span class="arithmatex">\(P\)</span>, the perpendicular to each axis is unique, so the two projections are uniquely determined. Conversely, for fixed real numbers <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span>, the perpendiculars through the corresponding points on the axes meet in exactly one point. Therefore the correspondence is bijective. <span class="arithmatex">\(\square\)</span></p>
+</details>
+<h2 id="distance">The coordinate formula for distance<a class="headerlink" href="#distance" title="Permanent link">&para;</a></h2>
+<p>For points <span class="arithmatex">\(P=(x_1,y_1)\)</span> and <span class="arithmatex">\(Q=(x_2,y_2)\)</span>, introduce the auxiliary point <span class="arithmatex">\(R=(x_2,y_1)\)</span>. Then <span class="arithmatex">\(PR\)</span> is horizontal, <span class="arithmatex">\(RQ\)</span> is vertical, and <span class="arithmatex">\(PQR\)</span> is a right triangle.</p>
+<figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
+  <div class="figure-toolbar">
+    <div>
+      <span class="figure-title">Distance as a right triangle</span>
+      <span class="figure-step-title">Decomposition into horizontal and vertical components</span>
+    </div>
+    <button class="icon-button" type="button" data-fullscreen aria-label="Open distance figure in full screen">⛶</button>
+  </div>
+  <div class="figure-stage jsx-stage">
+    <div id="distance-board" class="jxgbox" data-distance-geometry aria-label="Interactive geometric derivation of the Euclidean distance formula"></div>
+  </div>
+  <figcaption class="figure-caption">Move $P$ or $Q$. The horizontal difference, vertical difference and Euclidean distance update together.</figcaption>
+</figure>
+
+<p>The two legs have lengths <span class="arithmatex">\(|x_2-x_1|\)</span> and <span class="arithmatex">\(|y_2-y_1|\)</span>. Applying the Pythagorean theorem to this visible triangle gives the coordinate formula.</p>
+<div class="arithmatex">\[
+\begin{aligned}
+d_E(P,Q)^2 &amp;= (x_2-x_1)^2+(y_2-y_1)^2,\\
+d_E(P,Q) &amp;= \sqrt{(x_2-x_1)^2+(y_2-y_1)^2}.
+\end{aligned}
+\]</div>
+<div class="admonition interpretation">
+<p class="admonition-title">Interpretation</p>
+<p>The formula does not invent distance. It translates the already existing Euclidean length of the segment <span class="arithmatex">\(PQ\)</span> into arithmetic performed on coordinates.</p>
+</div>
+<h2 id="functions">How a function generates points<a class="headerlink" href="#functions" title="Permanent link">&para;</a></h2>
+<p>A function is a rule that accepts an allowed input <span class="arithmatex">\(x\)</span> and produces exactly one output <span class="arithmatex">\(y=f(x)\)</span>. The ordered pair <span class="arithmatex">\((x,f(x))\)</span> is then placed in the Cartesian plane.</p>
+<figure class="figure-panel jsx-panel function-machine-panel" data-fullscreen-panel tabindex="0">
+  <div class="figure-toolbar">
+    <div>
+      <span class="figure-title">From an input to a point</span>
+      <span class="figure-step-title" data-function-equation>$y=2x+1$</span>
+    </div>
+    <button class="icon-button" type="button" data-fullscreen aria-label="Open function construction in full screen">⛶</button>
+  </div>
+  <div class="curve-switcher" role="group" aria-label="Choose a function">
+    <button class="curve-mode is-active" type="button" data-function-mode="linear">Linear function</button>
+    <button class="curve-mode" type="button" data-function-mode="inverse">Inverse proportionality</button>
+  </div>
+  <div class="function-workflow" aria-live="polite">
+    <div><span class="workflow-label">Choose input</span><strong data-input-step>$x=1$</strong></div>
+    <div><span class="workflow-label">Substitute</span><strong data-substitution-step>$y=2\cdot1+1$</strong></div>
+    <div><span class="workflow-label">Calculate</span><strong data-output-step>$y=3$</strong></div>
+    <div><span class="workflow-label">Plot</span><strong data-point-step>$(1,3)$</strong></div>
+  </div>
+  <div class="figure-stage jsx-stage">
+    <div id="function-machine-board" class="jxgbox" data-function-machine aria-label="Interactive construction of points generated by a function"></div>
+  </div>
+  <div class="parameter-controls function-input-control">
+    <label class="parameter-control">
+      <span>input $x$ = <output data-function-x>1</output></span>
+      <input type="range" min="-4" max="4" step="0.5" value="1" data-function-x-slider aria-label="Input x">
+    </label>
+  </div>
+  <figcaption class="figure-caption">Move the input slider. The substitution, output and point update together. Previously generated points remain faintly visible.</figcaption>
+</figure>
+
+<div class="admonition test">
+<p class="admonition-title">Function test</p>
+<p>For each allowed value of <span class="arithmatex">\(x\)</span>, a function gives one and only one value of <span class="arithmatex">\(y\)</span>. The graph is the collection of all points <span class="arithmatex">\((x,f(x))\)</span>.</p>
+</div>
+<h2 id="relations">When one input gives more than one point<a class="headerlink" href="#relations" title="Permanent link">&para;</a></h2>
+<p>Not every geometric equation defines <span class="arithmatex">\(y\)</span> as a function of <span class="arithmatex">\(x\)</span>. For the circle</p>
+<div class="arithmatex">\[
+x^2+y^2=r^2,
+\]</div>
+<p>fixing <span class="arithmatex">\(x\)</span> may produce two values of <span class="arithmatex">\(y\)</span>:</p>
+<div class="arithmatex">\[
+y=\pm\sqrt{r^2-x^2}.
+\]</div>
+<figure class="figure-panel jsx-panel relation-panel" data-fullscreen-panel tabindex="0">
+  <div class="figure-toolbar">
+    <div>
+      <span class="figure-title">A circle as a relation</span>
+      <span class="figure-step-title" data-relation-equation>$x^2+y^2=9$</span>
+    </div>
+    <button class="icon-button" type="button" data-fullscreen aria-label="Open circle relation in full screen">⛶</button>
+  </div>
+  <div class="relation-readout" aria-live="polite">
+    <span data-relation-input>$x=1$</span>
+    <span data-relation-solutions>$y=\pm\sqrt{8}$</span>
+    <span data-relation-points>two points</span>
+  </div>
+  <div class="figure-stage jsx-stage">
+    <div id="circle-relation-board" class="jxgbox" data-circle-relation aria-label="Interactive vertical-line test for a circle"></div>
+  </div>
+  <div class="parameter-controls" style="--parameter-count:2">
+    <label class="parameter-control">
+      <span>radius $r$ = <output data-relation-r>3</output></span>
+      <input type="range" min="1" max="4" step="0.5" value="3" data-relation-r-slider aria-label="Circle radius">
+    </label>
+    <label class="parameter-control">
+      <span>chosen $x$ = <output data-relation-x>1</output></span>
+      <input type="range" min="-3" max="3" step="0.25" value="1" data-relation-x-slider aria-label="Chosen x coordinate">
+    </label>
+  </div>
+  <figcaption class="figure-caption">The vertical line at the chosen $x$ meets the circle in zero, one or two points. Two intersections mean that the circle is not the graph of a single-valued function $y=f(x)$.</figcaption>
+</figure>
+
+<h2 id="parametric-curves">Curves described by one parameter<a class="headerlink" href="#parametric-curves" title="Permanent link">&para;</a></h2>
+<p>A parametric curve uses one number <span class="arithmatex">\(t\)</span> to produce both coordinates at once:</p>
+<div class="arithmatex">\[
+t\longmapsto (x(t),y(t)).
+\]</div>
+<p>As <span class="arithmatex">\(t\)</span> changes, the point moves. The complete path traced by that moving point is the curve. A circle is therefore still one-dimensional: one parameter is enough to move around it.</p>
+<figure class="figure-panel jsx-panel parametric-panel" data-fullscreen-panel tabindex="0">
+  <div class="figure-toolbar">
+    <div>
+      <span class="figure-title">One parameter, one moving point</span>
+      <span class="equation-general" data-parametric-form>$x(t)=3\cos t,\ y(t)=3\sin t$</span>
+      <span class="figure-step-title" data-parametric-point>$t=0$, point $(3,0)$</span>
+    </div>
+    <button class="icon-button" type="button" data-fullscreen aria-label="Open parametric curve in full screen">⛶</button>
+  </div>
+  <div class="curve-switcher" role="group" aria-label="Choose a parametric curve">
+    <button class="curve-mode is-active" type="button" data-parametric-mode="circle">Circle</button>
+    <button class="curve-mode" type="button" data-parametric-mode="ellipse">Ellipse</button>
+    <button class="curve-mode" type="button" data-parametric-mode="parabola">Parabola</button>
+  </div>
+  <div class="figure-stage jsx-stage">
+    <div id="parametric-board" class="jxgbox" data-parametric-curves aria-label="Interactive parametric curves with a moving point"></div>
+  </div>
+  <label class="parameter-control single-parameter">
+    <span>parameter $t$ = <output data-parametric-value>0.00</output></span>
+    <input type="range" data-parametric-slider min="0" max="6.283" step="0.01" value="0" aria-label="Parameter t">
+  </label>
+  <figcaption class="figure-caption">Move $t$. The point changes both coordinates simultaneously and travels along the curve.</figcaption>
+</figure>
+
+<h2 id="intersections-regions">Intersections and regions defined by conditions<a class="headerlink" href="#intersections-regions" title="Permanent link">&para;</a></h2>
+<p>Two equations impose two conditions. Points satisfying both equations are their intersection points. Replacing equations by inequalities selects whole regions of the plane.</p>
+<figure class="figure-panel jsx-panel regions-panel" data-fullscreen-panel tabindex="0">
+  <div class="figure-toolbar">
+    <div>
+      <span class="figure-title">Several conditions at once</span>
+      <span class="equation-general" data-region-conditions>$y\ge x^2-2$ and $y\le x+2$</span>
+      <span class="figure-step-title" data-region-description>The shaded points lie above the parabola and below the line.</span>
+    </div>
+    <button class="icon-button" type="button" data-fullscreen aria-label="Open intersections and regions in full screen">⛶</button>
+  </div>
+  <div class="curve-switcher" role="group" aria-label="Choose an intersection or region example">
+    <button class="curve-mode is-active" type="button" data-region-mode="parabola-line">Parabola and line</button>
+    <button class="curve-mode" type="button" data-region-mode="absolute-lines">Three linear boundaries</button>
+    <button class="curve-mode" type="button" data-region-mode="semidisk">Disk and half-plane</button>
+  </div>
+  <div class="figure-stage jsx-stage">
+    <div id="regions-board" class="jxgbox" data-intersections-regions aria-label="Intersections of curves and regions satisfying inequalities"></div>
+  </div>
+  <figcaption class="figure-caption">Highlighted boundary points satisfy two equations simultaneously. Every shaded point satisfies all displayed inequalities.</figcaption>
+</figure>
+
+<h2 id="exercises">Exercises<a class="headerlink" href="#exercises" title="Permanent link">&para;</a></h2>
+<p>The first ten exercises reinforce the basic computational procedures of the lecture. The next ten require explanation, modelling and argument rather than only substitution into a formula.</p>
+<p><a class="exercise-download" download="download" href="lecture-01-exercises/">Download exercises as Markdown</a></p>
+<h3 id="technical-exercises">Technical and computational practice<a class="headerlink" href="#technical-exercises" title="Permanent link">&para;</a></h3>
+<p><em>Exercises 1–10: plot, substitute, calculate and verify.</em></p>
+<ol>
+<li>Plot the points <span class="arithmatex">\(A=(-3,2)\)</span>, <span class="arithmatex">\(B=(4,-1)\)</span>, <span class="arithmatex">\(C=(0,5)\)</span> and <span class="arithmatex">\(D=(-2,-4)\)</span>. State the quadrant of each point that does not lie on an axis.</li>
+<li>For <span class="arithmatex">\(P=(-2,3)\)</span> and <span class="arithmatex">\(Q=(4,-5)\)</span>, compute the horizontal difference, the vertical difference and the Euclidean distance <span class="arithmatex">\(d_E(P,Q)\)</span>.</li>
+<li>For <span class="arithmatex">\(y=2x+1\)</span>, calculate <span class="arithmatex">\(y\)</span> for <span class="arithmatex">\(x=-3,-1,0,2,4\)</span>, and write the five corresponding points of the graph.</li>
+<li>For <span class="arithmatex">\(y=\frac{6}{x}\)</span>, calculate the points corresponding to <span class="arithmatex">\(x=-6,-3,-1,1,2,6\)</span>. Indicate which inputs are not allowed.</li>
+<li>The circle <span class="arithmatex">\(x^2+y^2=25\)</span> is intersected by the vertical lines <span class="arithmatex">\(x=0\)</span>, <span class="arithmatex">\(x=3\)</span>, <span class="arithmatex">\(x=5\)</span> and <span class="arithmatex">\(x=6\)</span>. For each line, find all real values of <span class="arithmatex">\(y\)</span> and state how many intersection points occur.</li>
+<li>Decide whether <span class="arithmatex">\((0,0)\)</span>, <span class="arithmatex">\((4,0)\)</span>, <span class="arithmatex">\((2,3)\)</span>, <span class="arithmatex">\((-1,4)\)</span> and <span class="arithmatex">\((5,-2)\)</span> lie inside, on, or outside the disk <span class="arithmatex">\(x^2+y^2\le16\)</span>.</li>
+<li>For <span class="arithmatex">\(x(t)=3\cos t\)</span>, <span class="arithmatex">\(y(t)=3\sin t\)</span>, compute the point for <span class="arithmatex">\(t=0,\frac{\pi}{2},\pi,\frac{3\pi}{2},2\pi\)</span>.</li>
+<li>For <span class="arithmatex">\(x(t)=t\)</span>, <span class="arithmatex">\(y(t)=t^2-2\)</span>, compute the points corresponding to <span class="arithmatex">\(t=-2,-1,0,1,2\)</span>. Verify that every computed point satisfies <span class="arithmatex">\(y=x^2-2\)</span>.</li>
+<li>Find all intersection points of <span class="arithmatex">\(y=x^2-2\)</span> and <span class="arithmatex">\(y=x+2\)</span>. Give exact coordinates and decimal approximations.</li>
+<li>For each of <span class="arithmatex">\((0,0)\)</span>, <span class="arithmatex">\((0,3)\)</span>, <span class="arithmatex">\((2,3)\)</span>, <span class="arithmatex">\((-2,0)\)</span> and <span class="arithmatex">\((1,2)\)</span>, decide whether it belongs to the region <span class="arithmatex">\(y\ge x^2-2\)</span>, <span class="arithmatex">\(y\le x+2\)</span>.</li>
+</ol>
+<h3 id="problem-exercises">Problems requiring explanation and argument<a class="headerlink" href="#problem-exercises" title="Permanent link">&para;</a></h3>
+<p><em>Exercises 11–20: explain why, derive a rule, or justify a geometric conclusion.</em></p>
+<ol>
+<li>A Cartesian coordinate system requires an origin, two perpendicular axes, positive directions and a unit length. Explain what information is lost if any one of these choices is omitted. Give a concrete example in each case.</li>
+<li>Prove from the coordinate formula that <span class="arithmatex">\(d_E(P,Q)=d_E(Q,P)\)</span>. Then show that translating both points by the same vector does not change their distance.</li>
+<li>The equation <span class="arithmatex">\(x^2+y^2=9\)</span> does not define <span class="arithmatex">\(y\)</span> as a function of <span class="arithmatex">\(x\)</span> on the whole circle. Explain why. Find two natural restrictions that do define functions and write their formulas.</li>
+<li>For <span class="arithmatex">\(y=\frac{4}{x}\)</span>, explain why the graph has two branches, never meets either coordinate axis, and is symmetric with respect to the origin.</li>
+<li>The parametrization <span class="arithmatex">\(x(t)=3\cos t\)</span>, <span class="arithmatex">\(y(t)=3\sin t\)</span> uses one parameter to describe a circle. Explain why this makes the circle one-dimensional although it lies in a plane. Is the parameter value associated with a point unique?</li>
+<li>For <span class="arithmatex">\(P=(p_1,p_2)\)</span> and <span class="arithmatex">\(Q=(q_1,q_2)\)</span>, construct a parametrization of the segment from <span class="arithmatex">\(P\)</span> to <span class="arithmatex">\(Q\)</span> using <span class="arithmatex">\(t\in[0,1]\)</span>. Explain the roles of <span class="arithmatex">\(t=0\)</span>, <span class="arithmatex">\(t=1\)</span> and the intermediate values.</li>
+<li>Determine exactly for which values of <span class="arithmatex">\(x\)</span> there exist points satisfying both <span class="arithmatex">\(y\ge x^2-2\)</span> and <span class="arithmatex">\(y\le x+2\)</span>. Use the boundary intersections and explain why the region is bounded.</li>
+<li>For which values of <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(b\)</span> does <span class="arithmatex">\(y=mx+b\)</span> meet <span class="arithmatex">\(y=x^2\)</span> in exactly one point? Derive a condition and interpret it geometrically.</li>
+<li>Starting from the distance formula, derive the equation <span class="arithmatex">\((x-h)^2+(y-k)^2=r^2\)</span> of a circle with centre <span class="arithmatex">\((h,k)\)</span> and radius <span class="arithmatex">\(r&gt;0\)</span>. Explain why replacing equality by <span class="arithmatex">\(\le\)</span> gives the disk.</li>
+<li>For the upper half-disk <span class="arithmatex">\(x^2+y^2\le9\)</span>, <span class="arithmatex">\(y\ge0\)</span> and the region <span class="arithmatex">\(y\ge x^2-2\)</span>, <span class="arithmatex">\(y\le x+2\)</span>, identify the boundary curves and the points satisfying two boundary equations. Decide whether each region is convex and justify your answer.</li>
+</ol>
+      </main>
+    </div>
+  
+</body>
+</html>

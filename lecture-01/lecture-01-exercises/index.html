@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="A course in analytical geometry, linear algebra and calculus.">
+  <title>Lecture 1 — Cartesian Geometry and Coordinates · Mathematical Stories</title>
+  <link rel="stylesheet" href="../../assets/css/base.css">
+  <link rel="stylesheet" href="../../assets/css/home.css">
+  <link rel="stylesheet" href="../../assets/css/lecture.css">
+  <link rel="stylesheet" href="../../assets/css/figures.css">
+  <link rel="stylesheet" href="../../assets/css/exercises.css">
+  <link rel="stylesheet" href="../../assets/css/mkdocs-adapter.css">
+  
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams'
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+  
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="../..">Mathematical Stories</a>
+    <nav class="header-links" aria-label="Primary navigation">
+      <a href="../..#course-map">Course map</a>
+      <a href="https://github.com/dchorazkiewicz/basic_mathematics">GitHub</a>
+    </nav>
+  </header>
+
+  
+    <main class="standalone-page"><h1 id="lecture-1-cartesian-geometry-and-coordinates">Lecture 1 — Cartesian Geometry and Coordinates<a class="headerlink" href="#lecture-1-cartesian-geometry-and-coordinates" title="Permanent link">&para;</a></h1>
+<h2 id="a-technical-and-computational-practice">A. Technical and computational practice<a class="headerlink" href="#a-technical-and-computational-practice" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p>Plot the points
+   [
+   A=(-3,2),\quad B=(4,-1),\quad C=(0,5),\quad D=(-2,-4).
+   ]
+   State the quadrant of each point that does not lie on an axis.</p>
+</li>
+<li>
+<p>For
+   [
+   P=(-2,3),\qquad Q=(4,-5),
+   ]
+   compute the horizontal difference, the vertical difference and the Euclidean distance <span class="arithmatex">\(d_E(P,Q)\)</span>.</p>
+</li>
+<li>
+<p>For the function
+   [
+   y=2x+1,
+   ]
+   calculate <span class="arithmatex">\(y\)</span> for <span class="arithmatex">\(x=-3,-1,0,2,4\)</span>, and write the five corresponding points of its graph.</p>
+</li>
+<li>
+<p>For the inverse proportionality
+   [
+   y=\frac{6}{x},
+   ]
+   calculate the points corresponding to <span class="arithmatex">\(x=-6,-3,-1,1,2,6\)</span>. Indicate which inputs are not allowed.</p>
+</li>
+<li>
+<p>The circle
+   [
+   x^2+y^2=25
+   ]
+   is intersected by the vertical lines <span class="arithmatex">\(x=0\)</span>, <span class="arithmatex">\(x=3\)</span>, <span class="arithmatex">\(x=5\)</span> and <span class="arithmatex">\(x=6\)</span>. For each line, find all real values of <span class="arithmatex">\(y\)</span> and state how many intersection points occur.</p>
+</li>
+<li>
+<p>Decide whether each point lies inside, on, or outside the disk
+   [
+   x^2+y^2\le 16:
+   ]
+   [
+   (0,0),\quad (4,0),\quad (2,3),\quad (-1,4),\quad (5,-2).
+   ]</p>
+</li>
+<li>
+<p>A circle is parametrized by
+   [
+   x(t)=3\cos t,\qquad y(t)=3\sin t.
+   ]
+   Compute the point for
+   [
+   t=0,\quad \frac{\pi}{2},\quad \pi,\quad \frac{3\pi}{2},\quad 2\pi.
+   ]</p>
+</li>
+<li>
+<p>For the parametric parabola
+   [
+   x(t)=t,\qquad y(t)=t^2-2,
+   ]
+   compute the points corresponding to <span class="arithmatex">\(t=-2,-1,0,1,2\)</span>. Verify directly that every computed point satisfies <span class="arithmatex">\(y=x^2-2\)</span>.</p>
+</li>
+<li>
+<p>Find all intersection points of
+   [
+   y=x^2-2
+   ]
+   and
+   [
+   y=x+2.
+   ]
+   Give exact coordinates and decimal approximations.</p>
+</li>
+<li>
+<p>For each point below, decide whether it belongs to the region
+    [
+    y\ge x^2-2,
+    \qquad
+    y\le x+2:
+    ]
+    [
+    (0,0),\quad (0,3),\quad (2,3),\quad (-2,0),\quad (1,2).
+    ]</p>
+</li>
+</ol>
+<h2 id="b-problems-requiring-explanation-and-argument">B. Problems requiring explanation and argument<a class="headerlink" href="#b-problems-requiring-explanation-and-argument" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p>A Cartesian coordinate system requires an origin, two perpendicular axes, positive directions and a unit length. Explain what information is lost if any one of these choices is omitted. Give a concrete example in each case.</p>
+</li>
+<li>
+<p>Prove directly from the coordinate formula that
+    [
+    d_E(P,Q)=d_E(Q,P).
+    ]
+    Then show that translating both points by the same vector does not change their distance.</p>
+</li>
+<li>
+<p>The equation
+    [
+    x^2+y^2=9
+    ]
+    does not define <span class="arithmatex">\(y\)</span> as a function of <span class="arithmatex">\(x\)</span> on the whole circle. Explain why. Find two natural restrictions of the circle that do define functions and write their formulas.</p>
+</li>
+<li>
+<p>Consider
+    [
+    y=\frac{4}{x}.
+    ]
+    Explain, without drawing a complete table of values, why its graph has two branches, why it never meets either coordinate axis, and why it is symmetric with respect to the origin.</p>
+</li>
+<li>
+<p>The parametrization
+    [
+    x(t)=3\cos t,\qquad y(t)=3\sin t
+    ]
+    uses one real parameter to describe a circle. Explain why this shows that the circle is a one-dimensional object even though it lies in a two-dimensional plane. Is the parameter value associated with a point unique? Justify your answer.</p>
+</li>
+<li>
+<p>Let
+    [
+    P=(p_1,p_2),\qquad Q=(q_1,q_2).
+    ]
+    Construct a parametrization of the line segment from <span class="arithmatex">\(P\)</span> to <span class="arithmatex">\(Q\)</span> using a parameter <span class="arithmatex">\(t\in[0,1]\)</span>. Explain why the endpoints occur at <span class="arithmatex">\(t=0\)</span> and <span class="arithmatex">\(t=1\)</span>, and why every intermediate value gives a point on the segment.</p>
+</li>
+<li>
+<p>Determine exactly for which values of <span class="arithmatex">\(x\)</span> there exist points satisfying both
+    [
+    y\ge x^2-2
+    ]
+    and
+    [
+    y\le x+2.
+    ]
+    Use the boundary intersections to justify your answer, and explain why the resulting region is bounded.</p>
+</li>
+<li>
+<p>For which values of <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(b\)</span> does the line
+    [
+    y=mx+b
+    ]
+    meet the parabola
+    [
+    y=x^2
+    ]
+    in exactly one point? Derive a condition on <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(b\)</span>, and interpret the result geometrically.</p>
+</li>
+<li>
+<p>A circle has centre <span class="arithmatex">\((h,k)\)</span> and radius <span class="arithmatex">\(r&gt;0\)</span>. Starting from the distance formula, derive its equation
+    [
+    (x-h)^2+(y-k)^2=r^2.
+    ]
+    Explain why replacing equality by <span class="arithmatex">\(\le\)</span> produces the entire disk.</p>
+</li>
+<li>
+<p>Consider the two regions
+    [
+    A={(x,y):x^2+y^2\le 9,\ y\ge0}
+    ]
+    and
+    [
+    B={(x,y):y\ge x^2-2,\ y\le x+2}.
+    ]
+    For each region, explain which curves form its boundary and which boundary points satisfy two equations simultaneously. Then decide whether the region appears convex and justify your conclusion geometrically or algebraically.</p>
+</li>
+</ol></main>
+  
+</body>
+</html>

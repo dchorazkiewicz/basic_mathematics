@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="A course in analytical geometry, linear algebra and calculus.">
+  <title>Lecture 02 — Vectors, Bases, and Coordinate Systems · Mathematical Stories</title>
+  <link rel="stylesheet" href="../../assets/css/base.css">
+  <link rel="stylesheet" href="../../assets/css/home.css">
+  <link rel="stylesheet" href="../../assets/css/lecture.css">
+  <link rel="stylesheet" href="../../assets/css/figures.css">
+  <link rel="stylesheet" href="../../assets/css/exercises.css">
+  <link rel="stylesheet" href="../../assets/css/mkdocs-adapter.css">
+  
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams'
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+  
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="../..">Mathematical Stories</a>
+    <nav class="header-links" aria-label="Primary navigation">
+      <a href="../..#course-map">Course map</a>
+      <a href="https://github.com/dchorazkiewicz/basic_mathematics">GitHub</a>
+    </nav>
+  </header>
+
+  
+    <main class="standalone-page"><h1 id="lecture-02-vectors-bases-and-coordinate-systems">Lecture 02 — Vectors, Bases, and Coordinate Systems<a class="headerlink" href="#lecture-02-vectors-bases-and-coordinate-systems" title="Permanent link">&para;</a></h1>
+<h2 id="a-elementary-computational-and-graphical-exercises">A. Elementary computational and graphical exercises<a class="headerlink" href="#a-elementary-computational-and-graphical-exercises" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p>Let <span class="arithmatex">\(A=(1,2)\)</span> and <span class="arithmatex">\(B=(5,-1)\)</span>. Compute the free vector <span class="arithmatex">\([\overrightarrow{AB}]\)</span>. Draw equal anchored representatives beginning at <span class="arithmatex">\(O=(0,0)\)</span> and at <span class="arithmatex">\(P=(-2,3)\)</span>, and write the endpoint of each representative.</p>
+</li>
+<li>
+<p>For <span class="arithmatex">\(\mathbf u=[3,-2]\)</span> and <span class="arithmatex">\(\mathbf v=[-1,4]\)</span>, compute <span class="arithmatex">\(\mathbf u+\mathbf v\)</span>, <span class="arithmatex">\(\mathbf u-\mathbf v\)</span>, <span class="arithmatex">\(2\mathbf u\)</span>, and <span class="arithmatex">\(-3\mathbf v\)</span>. Draw <span class="arithmatex">\(\mathbf u\)</span>, <span class="arithmatex">\(\mathbf v\)</span>, and <span class="arithmatex">\(\mathbf u+\mathbf v\)</span> using the parallelogram rule.</p>
+</li>
+<li>
+<p>For <span class="arithmatex">\(\mathbf u=[1,2]\)</span> and <span class="arithmatex">\(\mathbf v=[2,-1]\)</span>, compute <span class="arithmatex">\(2\mathbf u-3\mathbf v\)</span>. Reproduce the same displacement by placing anchored representatives head to tail.</p>
+</li>
+<li>
+<p>Compute the lengths and corresponding unit vectors for <span class="arithmatex">\(\mathbf u=[3,4]\)</span>, <span class="arithmatex">\(\mathbf v=[-5,12]\)</span>, and <span class="arithmatex">\(\mathbf w=[2,-2]\)</span>.</p>
+</li>
+<li>
+<p>Determine which pairs are parallel, perpendicular, or neither: <span class="arithmatex">\([2,1]\)</span> and <span class="arithmatex">\([6,3]\)</span>; <span class="arithmatex">\([2,1]\)</span> and <span class="arithmatex">\([1,-2]\)</span>; <span class="arithmatex">\([3,-1]\)</span> and <span class="arithmatex">\([2,5]\)</span>. Use scalar multiples for parallelism and dot products for perpendicularity.</p>
+</li>
+<li>
+<p>Find the angles between <span class="arithmatex">\(\mathbf u=[1,0]\)</span> and <span class="arithmatex">\(\mathbf v=[1,1]\)</span>, and between <span class="arithmatex">\(\mathbf v=[1,1]\)</span> and <span class="arithmatex">\(\mathbf w=[-1,1]\)</span>. Draw each pair and compare the computed angle with the picture.</p>
+</li>
+<li>
+<p>The sides from one vertex of a triangle are <span class="arithmatex">\(\mathbf u=[3,1]\)</span> and <span class="arithmatex">\(\mathbf v=[-1,2]\)</span>. Compute <span class="arithmatex">\(\|\mathbf u-\mathbf v\|\)</span> directly and again from the cosine theorem using the angle between <span class="arithmatex">\(\mathbf u\)</span> and <span class="arithmatex">\(\mathbf v\)</span>.</p>
+</li>
+<li>
+<p>Compute the projection of <span class="arithmatex">\(\mathbf u=[4,3]\)</span> onto <span class="arithmatex">\(\mathbf v=[1,0]\)</span> and onto <span class="arithmatex">\(\mathbf w=[1,1]\)</span>. In each case write <span class="arithmatex">\(\mathbf u\)</span> as a parallel component plus a perpendicular remainder and verify perpendicularity by a dot product.</p>
+</li>
+<li>
+<p>Let <span class="arithmatex">\(\mathbf b_1=[1,1]\)</span>, <span class="arithmatex">\(\mathbf b_2=[1,-1]\)</span>, and <span class="arithmatex">\(\mathbf u=[4,2]\)</span>. Find <span class="arithmatex">\(\alpha,\beta\)</span> such that <span class="arithmatex">\(\mathbf u=\alpha\mathbf b_1+\beta\mathbf b_2\)</span>. State <span class="arithmatex">\([\mathbf u]_B\)</span> and reconstruct <span class="arithmatex">\(\mathbf u\)</span>.</p>
+</li>
+<li>
+<p>A point starts at <span class="arithmatex">\(P=(2,-1)\)</span> and undergoes the successive displacements <span class="arithmatex">\(\mathbf u=[3,2]\)</span>, <span class="arithmatex">\(\mathbf v=[-1,4]\)</span>, and <span class="arithmatex">\(-2\mathbf u\)</span>. Find the final point. Then combine the three displacements first and verify that the same endpoint is obtained.</p>
+</li>
+</ol>
+<h2 id="b-development-and-reasoning-exercises">B. Development and reasoning exercises<a class="headerlink" href="#b-development-and-reasoning-exercises" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p>Two anchored vectors are declared equal when they represent the same translation. Explain, using a parallelogram construction, why moving an arrow without changing its length and direction does not change the free vector. Give one numerical example with two different initial points.</p>
+</li>
+<li>
+<p>Use three concrete vectors to draw both <span class="arithmatex">\((\mathbf u+\mathbf v)+\mathbf w\)</span> and <span class="arithmatex">\(\mathbf u+(\mathbf v+\mathbf w)\)</span>. Explain geometrically, without relying only on coordinate arithmetic, why the endpoints coincide.</p>
+</li>
+<li>
+<p>Show that two nonzero vectors in the plane are parallel exactly when one is a scalar multiple of the other. Explain separately what positive and negative scalar multiples do to orientation.</p>
+</li>
+<li>
+<p>Choose two nonzero vectors of equal length such that <span class="arithmatex">\(\|\mathbf u+\mathbf v\|&lt;\|\mathbf u\|\)</span>. Compute the lengths and explain how the angle between the vectors produces partial cancellation.</p>
+</li>
+<li>
+<p>Starting from the cosine theorem for the triangle formed by <span class="arithmatex">\(\mathbf u\)</span>, <span class="arithmatex">\(\mathbf v\)</span>, and <span class="arithmatex">\(\mathbf u-\mathbf v\)</span>, derive <span class="arithmatex">\(\mathbf u\cdot\mathbf v=\|\mathbf u\|\,\|\mathbf v\|\cos\theta\)</span>. Explain why the sign of the dot product distinguishes acute, right, and obtuse angles.</p>
+</li>
+<li>
+<p>Let <span class="arithmatex">\(\mathbf r=\mathbf u-\operatorname{proj}_{\mathbf v}\mathbf u\)</span>. Prove directly from the projection formula that <span class="arithmatex">\(\mathbf r\cdot\mathbf v=0\)</span>. Then interpret the result geometrically.</p>
+</li>
+<li>
+<p>Suppose <span class="arithmatex">\(\mathbf b_1\)</span> and <span class="arithmatex">\(\mathbf b_2\)</span> are nonparallel. Explain why a vector cannot have two different representations <span class="arithmatex">\(\mathbf u=\alpha\mathbf b_1+\beta\mathbf b_2=\alpha'\mathbf b_1+\beta'\mathbf b_2\)</span>. Reduce the question to a linear combination equal to the zero vector.</p>
+</li>
+<li>
+<p>Explain the difference between the point <span class="arithmatex">\(P=(3,2)\)</span> and the vector <span class="arithmatex">\(\mathbf v=[3,2]\)</span>. Construct one situation in which the same ordered pair refers to a location and another in which it refers to a displacement.</p>
+</li>
+<li>
+<p>The vector <span class="arithmatex">\(\mathbf u=[6,2]\)</span> is awkward in the standard basis but simple in the basis <span class="arithmatex">\(\mathbf b_1=[1,1]\)</span>, <span class="arithmatex">\(\mathbf b_2=[1,-1]\)</span>. Find its coordinates in both bases and explain what it means for one basis to be better adapted to a problem.</p>
+</li>
+<li>
+<p>A student claims that every pair of nonzero vectors forms a basis of the plane. Give one counterexample and one valid example. For each pair, explain geometrically whether its linear combinations fill a line or the whole plane.</p>
+</li>
+</ol></main>
+  
+</body>
+</html>
