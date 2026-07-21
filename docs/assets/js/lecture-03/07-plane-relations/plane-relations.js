@@ -20,23 +20,37 @@
     zoom: { enabled: false }
   });
 
-  const view = board.create('view3d', [
-    [-6.4, -5.2],
-    [12.8, 10.4],
-    [[-4.5, 4.5], [-4.5, 4.5], [-4.5, 4.5]]
+  let view = null;
+  const layoutBoundingBox = () => {
+    const width = Math.max(1, host.clientWidth);
+    const height = Math.max(1, host.clientHeight);
+    const halfHeight = 6;
+    const halfWidth = halfHeight * width / height;
+
+    if (view) {
+      const frameSize = 2 * halfHeight - 0.7;
+      view.llftCorner[0] = -0.5 * frameSize;
+      view.llftCorner[1] = -halfHeight + 0.35;
+      view.size[0] = frameSize;
+      view.size[1] = frameSize;
+      view.needsUpdate = true;
+    }
+
+    return [-halfWidth, halfHeight, halfWidth, -halfHeight];
+  };
+
+  view = board.create('view3d', [
+    [-5.65, -5.65],
+    [11.3, 11.3],
+    [[-3.6, 3.6], [-3.6, 3.6], [-3.6, 3.6]]
   ], {
-    projection: 'central',
+    projection: 'parallel',
+    depthOrder: true,
     trackball: { enabled: true },
-    axesPosition: 'center',
-    xAxis: { strokeColor: '#a9b2ba', strokeWidth: 1, withLabel: false },
-    yAxis: { strokeColor: '#a9b2ba', strokeWidth: 1, withLabel: false },
-    zAxis: { strokeColor: '#a9b2ba', strokeWidth: 1, withLabel: false },
-    xPlaneRear: { visible: false },
-    yPlaneRear: { visible: false },
-    zPlaneRear: { visible: false },
-    xPlaneFront: { visible: false },
-    yPlaneFront: { visible: false },
-    zPlaneFront: { visible: false }
+    axesPosition: 'none',
+    az: { slider: { visible: false, start: 5.55 } },
+    el: { slider: { visible: false, start: 0.62 } },
+    bank: { slider: { visible: false, start: 0 } }
   });
 
   const groups = { base: [], intersect: [], parallel: [], perpendicular: [] };
@@ -64,7 +78,7 @@
     ...fixed
   }), group);
   const line = (point, direction, color, group) => register(view.create('line3d', [
-    point, direction, [-5, 5]
+    point, direction, [-3.8, 3.8]
   ], {
     strokeColor: color,
     strokeWidth: 5,
@@ -77,28 +91,24 @@
   plane(basePoint, [1, 0, 0], [0, 1, 0], '#2f6f9f', 'base');
   arrow(basePoint, [0, 0, 2.6], '#2f6f9f', 'base');
   label([0.25, 0.15, 1.0], '$\\mathbf n_1$', '#2f6f9f', 'base');
-  label([2.5, -2.0, -0.45], '$\\Pi_1$', '#2f6f9f', 'base');
 
   const intersectNormal = [1.8, -1.0, 1.5];
   plane(basePoint, [1, 0, -1.2], [0, 1, 2 / 3], '#b1782b', 'intersect');
   arrow(basePoint, intersectNormal, '#b1782b', 'intersect');
   line(basePoint, [1.0, 1.8, 0], '#7a3f73', 'intersect');
   label([1.05, -0.55, 0.35], '$\\mathbf n_2$', '#b1782b', 'intersect');
-  label([-2.5, 1.7, 1.1], '$\\Pi_2$', '#b1782b', 'intersect');
-  label([2.2, 3.3, -0.35], '$L$', '#7a3f73', 'intersect');
+  label([2.0, 3.0, -0.35], '$L$', '#7a3f73', 'intersect');
 
   const parallelPoint = [0, 0, 1.8];
   plane(parallelPoint, [1, 0, 0], [0, 1, 0], '#b1782b', 'parallel');
   arrow(parallelPoint, [0, 0, 2.0], '#b1782b', 'parallel');
   label([0.25, 0.15, 3.0], '$\\mathbf n_2$', '#b1782b', 'parallel');
-  label([2.5, -2.0, 2.05], '$\\Pi_2$', '#b1782b', 'parallel');
 
   plane(basePoint, [0, 1, 0], [0, 0, 1], '#b1782b', 'perpendicular');
   arrow(basePoint, [2.6, 0, 0], '#b1782b', 'perpendicular');
   line(basePoint, [0, 1, 0], '#7a3f73', 'perpendicular');
   label([1.1, 0.15, -0.45], '$\\mathbf n_2$', '#b1782b', 'perpendicular');
-  label([0.15, 2.3, 1.8], '$\\Pi_2$', '#b1782b', 'perpendicular');
-  label([0.2, 3.3, -0.45], '$L$', '#7a3f73', 'perpendicular');
+  label([0.2, 3.0, -0.45], '$L$', '#7a3f73', 'perpendicular');
 
   function setMode(mode) {
     Object.entries(groups).forEach(([group, objects]) => {
@@ -116,6 +126,6 @@
   window.LectureJSX?.keepBoardFitted?.({
     board,
     host,
-    boundingBox: [-8, 8, 8, -8]
+    boundingBox: layoutBoundingBox
   });
 })();
