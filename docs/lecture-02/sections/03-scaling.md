@@ -1,8 +1,8 @@
 ## Scaling vectors and forming linear combinations {#scaling}
 
-A free vector is an instruction for changing position. Multiplying it by a real number changes the size of that displacement and, when the number is negative, reverses its orientation.
-
 ### Multiplication by a real number
+
+A free vector is an instruction for changing position. Multiplying it by a real number changes the size of that displacement and, when the number is negative, reverses its orientation.
 
 !!! definition "Scalar multiplication"
     For $\mathbf a=[a_1,a_2]$ and $t\in\mathbb R$,
@@ -27,15 +27,14 @@ For $t=0$, every vector is sent to the zero vector $\mathbf0=[0,0]$.
 
 <figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
   <div class="figure-toolbar">
-    <div><span class="figure-title">Scaling and combining vectors</span><span class="figure-step-title" data-scaling-readout>$2\mathbf u-\mathbf v$</span></div>
+    <div><span class="figure-title">Scaling one vector</span><span class="figure-step-title" data-scaling-readout>$2\mathbf u$</span></div>
     <button class="icon-button" type="button" data-fullscreen aria-label="Open scaling figure in full screen">⛶</button>
   </div>
   <div class="figure-stage jsx-stage"><div id="vector-scaling-board" class="jxgbox" data-vector-scaling></div></div>
-  <div class="parameter-controls" style="--parameter-count:2">
-    <label class="parameter-control"><span>$a$ = <output data-scale-a>2</output></span><input type="range" min="-3" max="3" step="0.25" value="2" data-scale-a-slider></label>
-    <label class="parameter-control"><span>$b$ = <output data-scale-b>-1</output></span><input type="range" min="-3" max="3" step="0.25" value="-1" data-scale-b-slider></label>
+  <div class="parameter-controls" style="--parameter-count:1">
+    <label class="parameter-control"><span>$t$ = <output data-scale-t>2</output></span><input type="range" min="-3" max="3" step="0.25" value="2" data-scale-t-slider></label>
   </div>
-  <figcaption class="figure-caption">The two scaled displacements are added head to tail to form $a\mathbf u+b\mathbf v$.</figcaption>
+  <figcaption class="figure-caption">The dashed arrow is $\mathbf u$; the solid arrow is $t\mathbf u$.</figcaption>
 </figure>
 
 Scalar multiplication is compatible with addition:
@@ -46,9 +45,11 @@ $$
 \boxed{(s+t)\mathbf a=s\mathbf a+t\mathbf a}.
 $$
 
-These identities follow directly from coordinatewise arithmetic. Geometrically, scaling can be performed before or after composing displacements.
+These identities follow directly from coordinatewise arithmetic.
 
-### Linear combinations: what addition and scaling can build
+### Linear combinations of two vectors
+
+Now choose two vectors $\mathbf u$ and $\mathbf v$. We want to describe the displacements obtained by assigning an independent coefficient to each direction and then adding the two resulting motions.
 
 !!! definition "Linear combination"
     Given vectors $\mathbf u,\mathbf v$ and real numbers $a,b$, the vector
@@ -59,7 +60,20 @@ These identities follow directly from coordinatewise arithmetic. Geometrically, 
 
     is called a linear combination of $\mathbf u$ and $\mathbf v$.
 
-First scale $\mathbf u$ by $a$ and $\mathbf v$ by $b$, then add the resulting displacements. A linear combination is therefore built from the two operations already introduced.
+This is a separate two-vector construction: the coefficient $a$ controls the contribution of $\mathbf u$, while $b$ controls the contribution of $\mathbf v$.
+
+<figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
+  <div class="figure-toolbar">
+    <div><span class="figure-title">A linear combination of two vectors</span><span class="figure-step-title" data-linear-combination-readout>$2\mathbf u-\mathbf v$</span></div>
+    <button class="icon-button" type="button" data-fullscreen aria-label="Open linear combination figure in full screen">⛶</button>
+  </div>
+  <div class="figure-stage jsx-stage"><div id="linear-combination-board" class="jxgbox" data-linear-combination></div></div>
+  <div class="parameter-controls" style="--parameter-count:2">
+    <label class="parameter-control"><span>$a$ = <output data-linear-a>2</output></span><input type="range" min="-3" max="3" step="0.25" value="2" data-linear-a-slider></label>
+    <label class="parameter-control"><span>$b$ = <output data-linear-b>-1</output></span><input type="range" min="-3" max="3" step="0.25" value="-1" data-linear-b-slider></label>
+  </div>
+  <figcaption class="figure-caption">The two contributions $a\mathbf u$ and $b\mathbf v$ are placed head to tail; the dark arrow is their sum.</figcaption>
+</figure>
 
 !!! note "One direction versus two directions"
     A single nonzero vector generates only the line
