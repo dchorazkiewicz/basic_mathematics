@@ -27,7 +27,7 @@
     <script defer src="https://cdn.jsdelivr.net/npm/jsxgraph@1.10.1/distrib/jsxgraphcore.js"></script>
     {% set scripts = ['assets/js/fullscreen.js', 'assets/js/jsx-board-layout.js'] %}
     {% if page.meta.lecture == '01' %}
-      {% set scripts = scripts + ['assets/cartesian-construction.js', 'assets/distance-geometry.js', 'assets/function-machine.js', 'assets/circle-relation.js', 'assets/parametric-curves.js', 'assets/intersections-regions.js'] %}
+      {% set scripts = scripts + ['assets/euclidean-constructions.js', 'assets/cartesian-construction.js', 'assets/distance-geometry.js', 'assets/function-machine.js', 'assets/circle-relation.js', 'assets/parametric-curves.js', 'assets/intersections-regions.js'] %}
     {% elif page.meta.lecture == '02' %}
       {% set scripts = scripts + ['assets/point-arithmetic.js', 'assets/vector-equivalence.js', 'assets/vector-addition.js', 'assets/vector-scaling.js', 'assets/vector-direction.js', 'assets/vector-tests.js', 'assets/vector-projection.js', 'assets/vector-basis.js'] %}
     {% elif page.meta.lecture == '03' %}
