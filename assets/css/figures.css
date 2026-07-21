@@ -33,6 +33,7 @@
   white-space: nowrap;
   pointer-events: none;
 }
+.vector-label-chip:empty { display: none !important; }
 .figure-panel:fullscreen .vector-label-chip {
   background: rgba(255,253,250,.9);
   box-shadow: 0 2px 10px rgba(24,33,43,.18);
