@@ -35,19 +35,19 @@
   </header>
 
   
-    <main class="standalone-page"><h1 id="authoring-and-deployment">Authoring and deployment<a class="headerlink" href="#authoring-and-deployment" title="Permanent link">&para;</a></h1>
-<h2 id="local-preview">Local preview<a class="headerlink" href="#local-preview" title="Permanent link">&para;</a></h2>
+    <main class="standalone-page"><h1 id="authoring-and-deployment">Authoring and deployment</h1>
+<h2 id="local-preview">Local preview</h2>
 <div class="highlight"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv
 <span class="nb">source</span><span class="w"> </span>.venv/bin/activate<span class="w">        </span><span class="c1"># Windows: .venv\Scripts\activate</span>
 python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
 mkdocs<span class="w"> </span>serve
 </code></pre></div>
-<h2 id="deploy-to-github-pages">Deploy to GitHub Pages<a class="headerlink" href="#deploy-to-github-pages" title="Permanent link">&para;</a></h2>
+<h2 id="deploy-to-github-pages">Deploy to GitHub Pages</h2>
 <div class="highlight"><pre><span></span><code>mkdocs<span class="w"> </span>build<span class="w"> </span>--strict
 mkdocs<span class="w"> </span>gh-deploy<span class="w"> </span>--force<span class="w"> </span>--clean
 </code></pre></div>
 <p>Configure GitHub Pages to publish from the root of the <code>gh-pages</code> branch.</p>
-<h2 id="modular-lecture-structure">Modular lecture structure<a class="headerlink" href="#modular-lecture-structure" title="Permanent link">&para;</a></h2>
+<h2 id="modular-lecture-structure">Modular lecture structure</h2>
 <p>Each lecture remains one long reading page, matching the reference site, while its source is split into semantic section modules:</p>
 <div class="highlight"><pre><span></span><code>docs/lecture-02/
 ├── index.md
@@ -57,9 +57,9 @@ mkdocs<span class="w"> </span>gh-deploy<span class="w"> </span>--force<span clas
     └── ...
 </code></pre></div>
 <p><code>index.md</code> assembles the modules with <code>pymdownx.snippets</code>. All headings, paragraphs, lists, tables, exercises, proofs and formulas are authored in Markdown. HTML is reserved for the internal controls and host elements of interactive figures.</p>
-<h2 id="semantic-mathematical-environments">Semantic mathematical environments<a class="headerlink" href="#semantic-mathematical-environments" title="Permanent link">&para;</a></h2>
+<h2 id="semantic-mathematical-environments">Semantic mathematical environments</h2>
 <p>Use Markdown admonitions instead of hand-written HTML wrappers.</p>
-<h3 id="definition">Definition<a class="headerlink" href="#definition" title="Permanent link">&para;</a></h3>
+<h3 id="definition">Definition</h3>
 <div class="highlight"><pre><span></span><code>!!! definition &quot;Vector norm&quot;
     For $\mathbf v=[v_1,v_2]$ define
 
@@ -67,11 +67,11 @@ mkdocs<span class="w"> </span>gh-deploy<span class="w"> </span>--force<span clas
     \|\mathbf v\|=\sqrt{v_1^2+v_2^2}.
     $$
 </code></pre></div>
-<h3 id="theorem">Theorem<a class="headerlink" href="#theorem" title="Permanent link">&para;</a></h3>
+<h3 id="theorem">Theorem</h3>
 <div class="highlight"><pre><span></span><code>!!! theorem &quot;Projection theorem&quot;
     Every vector admits an orthogonal decomposition.
 </code></pre></div>
-<h3 id="long-derivation">Long derivation<a class="headerlink" href="#long-derivation" title="Permanent link">&para;</a></h3>
+<h3 id="long-derivation">Long derivation</h3>
 <div class="highlight"><pre><span></span><code>!!! derivation &quot;Eliminating the parameter&quot;
     First substitute the preceding identity:
 
@@ -85,7 +85,7 @@ mkdocs<span class="w"> </span>gh-deploy<span class="w"> </span>--force<span clas
 
     Continue the argument in ordinary Markdown paragraphs.
 </code></pre></div>
-<h3 id="collapsible-long-proof">Collapsible long proof<a class="headerlink" href="#collapsible-long-proof" title="Permanent link">&para;</a></h3>
+<h3 id="collapsible-long-proof">Collapsible long proof</h3>
 <div class="highlight"><pre><span></span><code>??? proof &quot;Proof&quot;
     The proof may contain any number of paragraphs, lists and equations.
 
@@ -103,9 +103,9 @@ mkdocs<span class="w"> </span>gh-deploy<span class="w"> </span>--force<span clas
 <div class="highlight"><pre><span></span><code>definition, theorem, proof, derivation, principle, interpretation,
 example, problem, question, consequence, summary, warning, note
 </code></pre></div>
-<h2 id="long-proofs-and-multiline-mathematics">Long proofs and multiline mathematics<a class="headerlink" href="#long-proofs-and-multiline-mathematics" title="Permanent link">&para;</a></h2>
+<h2 id="long-proofs-and-multiline-mathematics">Long proofs and multiline mathematics</h2>
 <p>MathJax supports <code>aligned</code>, <code>alignedat</code>, <code>gathered</code>, <code>cases</code>, <code>matrix</code>, <code>pmatrix</code>, and <code>bmatrix</code>. A proof should normally be split into several meaningful display equations rather than one extremely wide formula. On narrow screens, display mathematics receives horizontal scrolling as a fallback.</p>
-<h2 id="interactive-figures-and-fullscreen">Interactive figures and fullscreen<a class="headerlink" href="#interactive-figures-and-fullscreen" title="Permanent link">&para;</a></h2>
+<h2 id="interactive-figures-and-fullscreen">Interactive figures and fullscreen</h2>
 <p>Interactive figures are the one intentional HTML exception because their buttons, sliders and <code>data-*</code> hooks are consumed directly by JavaScript. Keep the host markup local to the section where the figure appears:</p>
 <div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">figure</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;figure-panel jsx-panel&quot;</span> <span class="na">data-fullscreen-panel</span> <span class="na">tabindex</span><span class="o">=</span><span class="s">&quot;0&quot;</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;figure-toolbar&quot;</span><span class="p">&gt;</span>
