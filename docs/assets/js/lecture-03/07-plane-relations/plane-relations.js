@@ -111,6 +111,9 @@
       zoom: { enabled: false }
     });
 
+    const cameraAzimuth = activeMode === 'perpendicular' ? 0 : 5.55;
+    const cameraElevation = activeMode === 'perpendicular' ? 0.68 : 0.62;
+
     const view = board.create('view3d', [
       [-halfWidth + margin, -halfHeight + margin],
       [2 * (halfWidth - margin), 2 * (halfHeight - margin)],
@@ -119,8 +122,8 @@
       projection: 'parallel',
       depthOrder: true,
       trackball: { enabled: true },
-      az: { slider: { visible: false, start: 5.55 } },
-      el: { slider: { visible: false, start: 0.62 } },
+      az: { slider: { visible: false, start: cameraAzimuth } },
+      el: { slider: { visible: false, start: cameraElevation } },
       bank: { slider: { visible: false, start: 0 } },
       ...cartesianView
     });
@@ -177,11 +180,13 @@
       arrow(secondPoint, [0, 0, 1.6], '#b1782b');
       label([0.22, 0.12, 2.75], '$\\mathbf n_2$', '#b1782b');
     } else {
-      plane(basePoint, [0, 1, 0], [0, 0, 1], '#b1782b');
-      arrow(basePoint, [2.35, 0, 0], '#b1782b');
-      line(basePoint, [0, 1, 0], '#7a3f73');
-      label([1.0, 0.12, -0.35], '$\\mathbf n_2$', '#b1782b');
-      label([0.18, 2.55, -0.35], '$L$', '#7a3f73');
+      // Pi_1 is horizontal, so n_1 points along z. Pi_2 is the xz-plane,
+      // hence n_2 points along y and n_1 dot n_2 = 0 exactly.
+      plane(basePoint, [1, 0, 0], [0, 0, 1], '#b1782b');
+      arrow(basePoint, [0, 2.35, 0], '#b1782b');
+      line(basePoint, [1, 0, 0], '#7a3f73');
+      label([0.12, 1.05, -0.35], '$\\mathbf n_2$', '#b1782b');
+      label([2.55, 0.18, -0.35], '$L$', '#7a3f73');
     }
 
     board.fullUpdate();
