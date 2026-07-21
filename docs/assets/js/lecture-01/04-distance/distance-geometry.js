@@ -27,6 +27,9 @@
   });
 
   const fixed = { fixed: true, highlight: false };
+  const boxed = options => window.LectureJSX?.diagramLabelStyle?.(options) || {
+    display: 'html', cssClass: 'vector-label-chip', ...fixed, ...options
+  };
   const P = board.create('point', [1.2, 1.1], {
     name: 'P', size: 5, fillColor: '#3f735f', strokeColor: '#3f735f',
     label: { offset: [-22, -24], fontSize: 20 }, snapToGrid: true, snapSizeX: 0.5, snapSizeY: 0.5
@@ -60,13 +63,13 @@
     () => (P.X() + R.X()) / 2 - 0.65,
     () => P.Y() - 0.42,
     () => `x₂ − x₁ = ${(Q.X() - P.X()).toFixed(1)}`
-  ], { color: '#2f6f9f', fontSize: 17, ...fixed });
+  ], boxed({ color: '#2f6f9f', fontSize: 17 }));
 
   board.create('text', [
     () => R.X() + 0.22,
     () => (R.Y() + Q.Y()) / 2,
     () => `y₂ − y₁ = ${(Q.Y() - P.Y()).toFixed(1)}`
-  ], { color: '#b1782b', fontSize: 17, ...fixed });
+  ], boxed({ color: '#b1782b', fontSize: 17 }));
 
   board.create('text', [
     () => {
@@ -82,12 +85,7 @@
       return (P.Y() + Q.Y()) / 2 + 0.62 * dx / length;
     },
     () => `dₑ(P,Q) = ${Math.hypot(Q.X() - P.X(), Q.Y() - P.Y()).toFixed(2)}`
-  ], {
-    color: '#7a3f73',
-    fontSize: 18,
-    cssClass: 'distance-hypotenuse-label',
-    ...fixed
-  });
+  ], boxed({ color: '#7a3f73', fontSize: 18 }));
 
   board.create('text', [0.2, 5.05, 'Move P or Q: the right triangle and all three lengths update automatically.'], {
     color: '#66717d', fontSize: 16, ...fixed
