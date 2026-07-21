@@ -37,7 +37,7 @@ markdown_extensions:
       base_path: docs
       check_paths: true
   - toc:
-      permalink: true
+      permalink: false
 
 plugins:
   - search
