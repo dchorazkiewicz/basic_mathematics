@@ -1,12 +1,10 @@
 ---
-title: Authoring and deployment guide
+title: Authoring and deployment
 ---
 
-# Authoring and deployment guide
+# Authoring and deployment
 
 ## Local preview
-
-Create a virtual environment, install the pinned dependency, and start the development server:
 
 ```bash
 python -m venv .venv
@@ -15,109 +13,66 @@ python -m pip install -r requirements.txt
 mkdocs serve
 ```
 
-MkDocs watches Markdown, CSS, JavaScript, and theme overrides. The local preview is normally available at `http://127.0.0.1:8000/`.
-
-## Deploying to the `gh-pages` branch
-
-The repository does not need GitHub Actions. From a clean local checkout on the branch containing the desired source:
+## Deploy to GitHub Pages
 
 ```bash
 mkdocs build --strict
 mkdocs gh-deploy --force --clean
 ```
 
-`mkdocs gh-deploy` builds the site and pushes the generated output to the `gh-pages` branch. GitHub Pages should be configured to publish from the root of that branch.
+Configure GitHub Pages to publish from the root of the `gh-pages` branch.
 
 ## Modular lecture structure
 
-Each major conceptual section should be a separate Markdown file:
+Each lecture remains one long reading page, matching the reference site, while its source is split into semantic section modules:
 
 ```text
-lecture-02/
+docs/lecture-02/
 ├── index.md
-├── 01-from-points.md
-├── 02-addition.md
-├── 03-scaling.md
-└── ...
+└── sections/
+    ├── 01-from-points.md
+    ├── 02-addition.md
+    └── ...
 ```
 
-Reusable visual behaviour belongs in `docs/javascripts/`, while presentation belongs in `docs/stylesheets/`. Markdown pages contain only a small semantic host element for an interactive figure.
+`index.md` assembles the modules with `pymdownx.snippets`. New prose may be written directly in Markdown. Preserve the semantic `data-*` host elements inside interactive figures because the JavaScript modules use them to find and initialise each board.
 
-## Long multiline derivations
+## Long proofs and multiline derivations
 
-Long derivations are supported by MathJax. Prefer several readable display blocks rather than one enormous formula.
+Long proofs may contain any number of Markdown paragraphs and display equations. MathJax supports environments such as `aligned`, `alignedat`, `gathered`, `cases`, `matrix`, `pmatrix`, and `bmatrix`.
 
 ```markdown
-<div class="derivation-block" markdown>
-<span class="block-label">Derivation</span>
+<div class="statement proof" markdown>
+  <div class="statement-label">Proof</div>
 
-First substitute the preceding identity:
-
-$$
-\begin{aligned}
-F(x)
-  &= A(x)+B(x)\\
-  &= C(x)+D(x).
-\end{aligned}
-$$
-
-Now apply the next theorem:
+A long argument can continue across many paragraphs.
 
 $$
 \begin{aligned}
-F(x)
-  &= E(x)\\
-  &= G(x).
+A_1 &= A_2 \\
+    &= A_3 \\
+    &= A_4.
 \end{aligned}
 $$
+
+The proof may then continue with further text and figures.
 </div>
 ```
 
-Supported MathJax environments include `aligned`, `alignedat`, `gathered`, `cases`, `matrix`, `pmatrix`, `bmatrix`, and AMS equation tags.
+## Interactive figures and fullscreen
 
-For a particularly wide calculation, break the argument at a mathematically meaningful equality. The site stylesheet provides horizontal scrolling as a fallback, but logical line breaking is preferable.
-
-## Long proofs
-
-A proof may contain any amount of Markdown, multiple formulas, figures, lists, and subordinate headings:
-
-```markdown
-<div class="proof-block" markdown>
-<span class="block-label">Proof</span>
-
-Start with the hypotheses...
-
-$$
-\begin{aligned}
-...
-\end{aligned}
-$$
-
-Continue with the geometric argument...
-
-Therefore the claim follows. $\square$
-</div>
-```
-
-For optional or reference-level proofs, use a collapsible block:
-
-```markdown
-??? proof "Detailed proof"
-    The complete proof can span many paragraphs.
-
-    $$
-    \begin{aligned}
-    ...
-    \end{aligned}
-    $$
-```
-
-## Interactive figures
-
-A Markdown page declares a host:
+The original JSXGraph modules and fullscreen controller are loaded globally by the custom MkDocs theme. A figure keeps the same host markup as the reference site, for example:
 
 ```html
-<div id="example-board" class="jxgbox" data-example-board></div>
+<figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
+  <div class="figure-toolbar">
+    <span class="figure-title">Figure title</span>
+    <button class="icon-button" type="button" data-fullscreen aria-label="Open figure in full screen">⛶</button>
+  </div>
+  <div class="figure-stage jsx-stage">
+    <div id="example-board" class="jxgbox" data-example-board></div>
+  </div>
+</figure>
 ```
 
-The corresponding module registers an idempotent initializer with `window.MathematicalStories`. This is important because Material for MkDocs may replace page content without a full browser reload.
+The `data-fullscreen-panel` and `data-fullscreen` attributes activate the same enlargement behaviour as the original custom site.

@@ -1,0 +1,15 @@
+.exercises-heading { display: flex; justify-content: space-between; gap: 24px; align-items: flex-start; }
+.exercises-heading h2 { margin-bottom: 10px; }
+.exercise-download { flex: 0 0 auto; display: inline-flex; align-items: center; min-height: 42px; padding: 9px 15px; border: 1px solid var(--blue); border-radius: 999px; color: var(--navy); font-family: var(--sans); font-size: .8rem; font-weight: 650; text-decoration: none; }
+.exercise-download:hover { background: var(--blue-soft); }
+.exercise-group { margin-top: 28px; padding: 22px 24px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); box-shadow: var(--shadow); }
+.exercise-group > header { display: flex; gap: 16px; align-items: flex-start; padding-bottom: 16px; border-bottom: 1px solid var(--line); }
+.exercise-group h3 { margin: 0 0 4px; font-family: var(--serif); font-size: 1.35rem; }
+.exercise-group header p { margin: 0; color: var(--muted); font-family: var(--sans); font-size: .82rem; }
+.exercise-range { display: inline-flex; justify-content: center; min-width: 58px; padding: 6px 9px; border-radius: 999px; background: var(--blue-soft); color: var(--navy); font-family: var(--sans); font-size: .72rem; font-weight: 750; }
+.exercise-group--problems .exercise-range { background: #f4eadb; color: #7a4a11; }
+.exercise-group ol { margin: 18px 0 0; padding-left: 1.5rem; }
+.exercise-group li { padding-left: .45rem; margin: 0 0 15px; }
+.exercise-group li::marker { color: var(--blue); font-family: var(--sans); font-weight: 750; }
+.exercise-group--problems li::marker { color: #a66d20; }
+@media (max-width: 700px) { .exercises-heading { display: block; } .exercise-download { margin-top: 12px; } .exercise-group { padding: 17px 16px; } }

@@ -1,0 +1,135 @@
+<section id="from-points" class="section">
+  <h2>From Cartesian points to free vectors</h2>
+
+  <p>A point of the Cartesian plane is an ordered pair of real numbers. Let</p>
+  <div class="display-math">$$P=(p_1,p_2),\qquad Q=(q_1,q_2).$$</div>
+
+  <p>Before vectors are introduced, we first define several arithmetic operations on such points. These definitions are possible because a point of the Cartesian plane is represented by an ordered pair of numbers.</p>
+
+  <h3>Arithmetic operations on Cartesian points</h3>
+
+  <p>The point</p>
+  <div class="display-math">$$O=(0,0)$$</div>
+  <p>plays the role of zero.</p>
+
+  <p>Addition of points is defined coordinatewise:</p>
+  <div class="display-math">$$\boxed{P+Q=(p_1+q_1,\,p_2+q_2)}.$$</div>
+
+  <p>The point opposite to $P$ is</p>
+  <div class="display-math">$$\boxed{-P=(-p_1,-p_2)},$$</div>
+  <p>so that</p>
+  <div class="display-math">$$P+(-P)=O.$$</div>
+
+  <p>Subtraction of points is defined by adding the opposite point:</p>
+  <div class="display-math">$$\boxed{Q-P=Q+(-P)=(q_1-p_1,\,q_2-p_2)}.$$</div>
+
+  <p>For a real number $\lambda$, multiplication of a point by a number is also defined coordinatewise:</p>
+  <div class="display-math">$$\boxed{\lambda P=(\lambda p_1,\,\lambda p_2)}.$$</div>
+
+  <p>At this stage these are arithmetic operations on ordered pairs. They are useful computational rules, but their geometric meaning has not yet been established. The first expression to acquire such a meaning will be the difference $Q-P$.</p>
+
+  <figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
+    <div class="figure-toolbar">
+      <div>
+        <span class="figure-title">Arithmetic on Cartesian points</span>
+        <span class="figure-step-title">Move $P$ and $Q$, then compare the four coordinatewise operations.</span>
+      </div>
+      <button class="icon-button" type="button" data-fullscreen aria-label="Open point arithmetic figure in full screen">⛶</button>
+    </div>
+    <div class="curve-switcher" role="group" aria-label="Choose a point operation">
+      <button class="curve-mode is-active" type="button" data-point-operation="sum">Addition</button>
+      <button class="curve-mode" type="button" data-point-operation="opposite">Opposite point</button>
+      <button class="curve-mode" type="button" data-point-operation="difference">Subtraction</button>
+      <button class="curve-mode" type="button" data-point-operation="scalar">Scalar multiplication</button>
+    </div>
+    <div class="figure-stage jsx-stage"><div id="point-arithmetic-board" class="jxgbox" data-point-arithmetic></div></div>
+    <div class="parameter-controls" data-point-lambda-control hidden>
+      <label class="parameter-control">
+        <span>$\lambda$ = <output data-point-lambda-output>1.5</output></span>
+        <input type="range" min="-3" max="3" step="0.25" value="1.5" data-point-lambda-slider>
+      </label>
+    </div>
+    <div class="relation-readout"><span data-point-operation-readout></span></div>
+    <figcaption class="figure-caption">The figure visualises arithmetic on ordered pairs. The interpretation of $Q-P$ as a directed displacement is introduced immediately afterwards.</figcaption>
+  </figure>
+
+  <h3>An ordered pair of points determines an anchored vector</h3>
+
+  <p>The ordered pair $(P,Q)$ determines an arrow beginning at $P$ and ending at $Q$. We denote it by</p>
+  <div class="display-math">$$\overrightarrow{PQ}$$</div>
+  <p>and call it an <em>anchored vector</em>. The order matters: $P$ is its initial point and $Q$ is its endpoint.</p>
+
+  <figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
+    <div class="figure-toolbar">
+      <div>
+        <span class="figure-title">An anchored vector and its coordinate changes</span>
+        <span class="figure-step-title">The horizontal and vertical changes are $q_1-p_1$ and $q_2-p_2$.</span>
+      </div>
+      <button class="icon-button" type="button" data-fullscreen aria-label="Open vector equivalence figure in full screen">⛶</button>
+    </div>
+    <div class="figure-stage jsx-stage"><div id="vector-equivalence-board" class="jxgbox" data-vector-equivalence></div></div>
+    <figcaption class="figure-caption">The arrow begins at $P$ and ends at $Q$; its coordinates record the two coordinate changes.</figcaption>
+  </figure>
+
+  <p>The point difference is</p>
+  <div class="display-math">$$Q-P=(q_1-p_1,\,q_2-p_2).$$</div>
+  <p>The two numbers $q_1-p_1$ and $q_2-p_2$ are, by definition, the coordinates of the anchored vector $\overrightarrow{PQ}$. Round brackets remain reserved for Cartesian points.</p>
+
+  <p>Its length is the distance between the two points:</p>
+  <div class="display-math">$$\boxed{|\overrightarrow{PQ}|=d_E(P,Q)}.$$</div>
+
+  <p>Reversing the order reverses the arrow and changes the signs of both coordinates. The vector $\overrightarrow{QP}$ therefore has coordinates</p>
+  <div class="display-math">$$p_1-q_1,\qquad p_2-q_2.$$</div>
+
+  <h3>When do arrows drawn in different places represent the same vector?</h3>
+
+  <p>We first define equality geometrically. Consider two anchored vectors</p>
+  <div class="display-math">$$\overrightarrow{PQ}\qquad\text{and}\qquad\overrightarrow{P'Q'}.$$</div>
+
+  <p>They are called equal when the midpoint of the pair $P,Q'$ is also the midpoint of the pair $Q,P'$. Equivalently, the four points form a parallelogram in which the two arrows are opposite directed sides.</p>
+
+  <p>The midpoint condition is</p>
+  <div class="display-math">$$\frac12(P+Q')=\frac12(Q+P').$$</div>
+
+  <p>Rearranging this equality gives</p>
+  <div class="display-math">$$Q-P=Q'-P'.$$</div>
+
+  <p>We have therefore obtained the coordinate criterion for the geometric relation:</p>
+  <div class="display-math">$$\boxed{\overrightarrow{PQ}=\overrightarrow{P'Q'}\quad\Longleftrightarrow\quad Q-P=Q'-P'}.$$</div>
+
+  <p>Thus two anchored vectors are equal precisely when their corresponding coordinates are equal. Their initial points may be different.</p>
+
+  <h3>Free vectors</h3>
+
+  <p>Equality divides all anchored vectors into disjoint classes. Each class contains all arrows representing one and the same directed change. Such a class is called a <em>free vector</em>.</p>
+
+  <p>If $\overrightarrow{PQ}$ is one representative of a free vector $\mathbf v$, we write</p>
+  <div class="display-math">$$\boxed{\mathbf v=[\overrightarrow{PQ}]}.$$</div>
+
+  <p>Here the square brackets denote the equivalence class of all anchored vectors equal to $\overrightarrow{PQ}$.</p>
+
+  <p>If the common coordinates of these representatives are $v_1,v_2$, then the same free vector is written</p>
+  <div class="display-math">$$\boxed{\mathbf v=[v_1,v_2]}.$$</div>
+
+  <p>Thus round brackets distinguish points from vectors:</p>
+  <div class="display-math">$$V=(v_1,v_2)\qquad\text{is a point, whereas}\qquad \mathbf v=[v_1,v_2]\qquad\text{is a free vector}.$$</div>
+
+  <p>Since</p>
+  <div class="display-math">$$Q-P=(q_1-p_1,\,q_2-p_2)$$</div>
+  <p>is a Cartesian point, placing square brackets around this point means the free vector with the same coordinate entries:</p>
+  <div class="display-math">$$\boxed{[\overrightarrow{PQ}]=[Q-P]=[q_1-p_1,\,q_2-p_2]}.$$</div>
+
+  <p>The outer square brackets change the type of object: $(q_1-p_1,q_2-p_2)$ is a point, while $[q_1-p_1,q_2-p_2]$ is a free vector.</p>
+
+  <p>A particularly convenient representative begins at the origin. If</p>
+  <div class="display-math">$$O=(0,0),\qquad V=(v_1,v_2),$$</div>
+  <p>then</p>
+  <div class="display-math">$$\mathbf v=[\overrightarrow{OV}]=[V]=[v_1,v_2].$$</div>
+
+  <p>This does not identify the point $V$ with the vector $\mathbf v$; it gives a canonical representative of the free vector.</p>
+
+  <div class="statement">
+    <div class="statement-label">Order of construction</div>
+    <p>Only now, after free vectors have been constructed, do we define operations on them. Each operation will first be described using representatives and then written in coordinates.</p>
+  </div>
+</section>
