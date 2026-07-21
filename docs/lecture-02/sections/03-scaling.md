@@ -96,7 +96,7 @@ First scale $\mathbf u$ by $a$ and $\mathbf v$ by $b$, then add the resulting di
 
     Two parallel vectors still generate one line. Two nonparallel vectors provide two independent directions and can generate the whole plane.
 
-??? derivation "Why nonparallel directions reach the plane"
+!!! derivation "Why nonparallel directions reach the plane"
     If $\mathbf u$ and $\mathbf v$ are parallel, every multiple of either vector lies on the same line, so every sum $a\mathbf u+b\mathbf v$ remains on that line. If they are not parallel, the parallelogram construction decomposes any target displacement into one component along each direction. The two coefficients record those two signed motions.
 
 !!! theorem "Basis theorem in the plane"
