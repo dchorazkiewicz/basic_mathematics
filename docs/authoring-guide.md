@@ -35,39 +35,84 @@ docs/lecture-02/
     └── ...
 ```
 
-`index.md` assembles the modules with `pymdownx.snippets`. New prose may be written directly in Markdown. Preserve the semantic `data-*` host elements inside interactive figures because the JavaScript modules use them to find and initialise each board.
+`index.md` assembles the modules with `pymdownx.snippets`. All headings, paragraphs, lists, tables, exercises, proofs and formulas are authored in Markdown. HTML is reserved for the internal controls and host elements of interactive figures.
 
-## Long proofs and multiline derivations
+## Semantic mathematical environments
 
-Long proofs may contain any number of Markdown paragraphs and display equations. MathJax supports environments such as `aligned`, `alignedat`, `gathered`, `cases`, `matrix`, `pmatrix`, and `bmatrix`.
+Use Markdown admonitions instead of hand-written HTML wrappers.
+
+### Definition
 
 ```markdown
-<div class="statement proof" markdown>
-  <div class="statement-label">Proof</div>
+!!! definition "Vector norm"
+    For $\mathbf v=[v_1,v_2]$ define
 
-A long argument can continue across many paragraphs.
-
-$$
-\begin{aligned}
-A_1 &= A_2 \\
-    &= A_3 \\
-    &= A_4.
-\end{aligned}
-$$
-
-The proof may then continue with further text and figures.
-</div>
+    $$
+    \|\mathbf v\|=\sqrt{v_1^2+v_2^2}.
+    $$
 ```
+
+### Theorem
+
+```markdown
+!!! theorem "Projection theorem"
+    Every vector admits an orthogonal decomposition.
+```
+
+### Long derivation
+
+```markdown
+!!! derivation "Eliminating the parameter"
+    First substitute the preceding identity:
+
+    $$
+    \begin{aligned}
+    F(x)
+      &=A(x)+B(x)\\
+      &=C(x)+D(x).
+    \end{aligned}
+    $$
+
+    Continue the argument in ordinary Markdown paragraphs.
+```
+
+### Collapsible long proof
+
+```markdown
+??? proof "Proof"
+    The proof may contain any number of paragraphs, lists and equations.
+
+    $$
+    \begin{aligned}
+    A_1 &= A_2 \\
+        &= A_3 \\
+        &= A_4.
+    \end{aligned}
+    $$
+
+    Continue until the argument is complete. $\square$
+```
+
+Available styled types include:
+
+```text
+definition, theorem, proof, derivation, principle, interpretation,
+example, problem, question, consequence, summary, warning, note
+```
+
+## Long proofs and multiline mathematics
+
+MathJax supports `aligned`, `alignedat`, `gathered`, `cases`, `matrix`, `pmatrix`, and `bmatrix`. A proof should normally be split into several meaningful display equations rather than one extremely wide formula. On narrow screens, display mathematics receives horizontal scrolling as a fallback.
 
 ## Interactive figures and fullscreen
 
-The original JSXGraph modules and fullscreen controller are loaded globally by the custom MkDocs theme. A figure keeps the same host markup as the reference site, for example:
+Interactive figures are the one intentional HTML exception because their buttons, sliders and `data-*` hooks are consumed directly by JavaScript. Keep the host markup local to the section where the figure appears:
 
 ```html
 <figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
   <div class="figure-toolbar">
     <span class="figure-title">Figure title</span>
-    <button class="icon-button" type="button" data-fullscreen aria-label="Open figure in full screen">⛶</button>
+    <button class="icon-button" type="button" data-fullscreen>⛶</button>
   </div>
   <div class="figure-stage jsx-stage">
     <div id="example-board" class="jxgbox" data-example-board></div>
@@ -75,4 +120,4 @@ The original JSXGraph modules and fullscreen controller are loaded globally by t
 </figure>
 ```
 
-The `data-fullscreen-panel` and `data-fullscreen` attributes activate the same enlargement behaviour as the original custom site.
+The `data-fullscreen-panel` and `data-fullscreen` attributes activate the same enlargement behaviour as the original custom site. Do not place ordinary prose, definitions, proofs or formulas inside figure markup.
