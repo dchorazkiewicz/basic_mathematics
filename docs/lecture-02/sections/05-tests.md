@@ -126,57 +126,21 @@ Because the quotient was obtained as a cosine, it already lies in $[-1,1]$. The 
 
     so the vectors are perpendicular.
 
-### Algebraic properties used later
+### The cosine theorem
 
-!!! derivation "Coordinate verification"
-    Let $\mathbf w=[w_1,w_2]$. Then
+The displacement between the endpoints of $\mathbf u$ and $\mathbf v$ is $\mathbf u-\mathbf v$. Expanding its coordinate length gives
 
-    $$
-    \begin{aligned}
-    (\mathbf u+\mathbf w)\cdot\mathbf v
-      &=(u_1+w_1)v_1+(u_2+w_2)v_2\\
-      &=\mathbf u\cdot\mathbf v+\mathbf w\cdot\mathbf v.
-    \end{aligned}
-    $$
+$$
+\begin{aligned}
+\|\mathbf u-\mathbf v\|^2
+  &=(u_1-v_1)^2+(u_2-v_2)^2\\
+  &=\|\mathbf u\|^2+\|\mathbf v\|^2-2(\mathbf u\cdot\mathbf v)\\
+  &=\|\mathbf u\|^2+\|\mathbf v\|^2-2\|\mathbf u\|\,\|\mathbf v\|\cos\theta.
+\end{aligned}
+$$
 
-    Coordinate arithmetic similarly gives
+Therefore, for a triangle with side lengths $a$, $b$, and $c$ opposite the included angle $\theta$,
 
-    $$
-    (\lambda\mathbf u)\cdot\mathbf v=\lambda(\mathbf u\cdot\mathbf v),
-    \qquad
-    \mathbf u\cdot\mathbf v=\mathbf v\cdot\mathbf u,
-    $$
-
-    and
-
-    $$
-    \mathbf u\cdot\mathbf u=u_1^2+u_2^2=\|\mathbf u\|^2.
-    $$
-
-!!! theorem "Dot-product properties"
-    $$
-    \begin{aligned}
-    (\mathbf u+\mathbf w)\cdot\mathbf v&=\mathbf u\cdot\mathbf v+\mathbf w\cdot\mathbf v,\\
-    (\lambda\mathbf u)\cdot\mathbf v&=\lambda(\mathbf u\cdot\mathbf v),\\
-    \mathbf u\cdot\mathbf v&=\mathbf v\cdot\mathbf u,\\
-    \mathbf u\cdot\mathbf u&=\|\mathbf u\|^2.
-    \end{aligned}
-    $$
-
-!!! consequence "Cosine theorem"
-    The displacement between the endpoints of $\mathbf u$ and $\mathbf v$ is $\mathbf u-\mathbf v$. Therefore
-
-    $$
-    \begin{aligned}
-    \|\mathbf u-\mathbf v\|^2
-      &=(\mathbf u-\mathbf v)\cdot(\mathbf u-\mathbf v)\\
-      &=\|\mathbf u\|^2+\|\mathbf v\|^2-2\mathbf u\cdot\mathbf v\\
-      &=\|\mathbf u\|^2+\|\mathbf v\|^2-2\|\mathbf u\|\,\|\mathbf v\|\cos\theta.
-    \end{aligned}
-    $$
-
-    Thus, for a triangle with side lengths $a$, $b$, and $c$ opposite the included angle $\theta$,
-
-    $$
-    \boxed{c^2=a^2+b^2-2ab\cos\theta}.
-    $$
+$$
+\boxed{c^2=a^2+b^2-2ab\cos\theta}.
+$$
