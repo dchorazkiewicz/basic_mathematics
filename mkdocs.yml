@@ -85,6 +85,7 @@ extra_javascript:
   - https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js
   - https://cdn.jsdelivr.net/npm/jsxgraph@1.10.1/distrib/jsxgraphcore.js
   - javascripts/course.js
+  - javascripts/point-vectors.js
   - javascripts/vector-addition.js
 
 extra_css:
