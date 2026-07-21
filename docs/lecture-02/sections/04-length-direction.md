@@ -17,19 +17,16 @@ Let $\mathbf v=[v_1,v_2]$ be drawn from the origin. Its endpoint, together with 
   <figcaption class="figure-caption">The vector, its two coordinate changes, and its inclination are displayed simultaneously.</figcaption>
 </figure>
 
-!!! derivation "Length from the Pythagorean theorem"
-    $$
-    \|\mathbf v\|^2=v_1^2+v_2^2.
-    $$
+By the Pythagorean theorem,
 
-    The length is nonnegative, so
+$$
+\|\mathbf v\|^2=v_1^2+v_2^2.
+$$
 
-    $$
-    \boxed{\|\mathbf v\|=\sqrt{v_1^2+v_2^2}}.
-    $$
+Since length is nonnegative, this gives the Euclidean norm.
 
 !!! definition "Euclidean norm"
-    The Euclidean length, or norm, of $\mathbf v=[v_1,v_2]$ is
+    For $\mathbf v=[v_1,v_2]$,
 
     $$
     \boxed{\|\mathbf v\|=\sqrt{v_1^2+v_2^2}}.
@@ -37,18 +34,19 @@ Let $\mathbf v=[v_1,v_2]$ be drawn from the origin. Its endpoint, together with 
 
     The double bars distinguish the vector from the number measuring its length.
 
-!!! consequence "Basic consequences"
-    $$
-    \boxed{\|\mathbf0\|=0},
-    \qquad
-    \boxed{\mathbf v\neq\mathbf0\implies\|\mathbf v\|>0}.
-    $$
+In particular,
 
-    For points $A$ and $B$,
+$$
+\|\mathbf0\|=0,
+\qquad
+\mathbf v\neq\mathbf0\implies\|\mathbf v\|>0.
+$$
 
-    $$
-    \boxed{d_E(A,B)=\|B-A\|}.
-    $$
+For points $A$ and $B$,
+
+$$
+\boxed{d_E(A,B)=\|B-A\|}.
+$$
 
 The vector $B-A$ records how to move from $A$ to $B$, while its norm records the Euclidean distance travelled. The same object therefore carries both directional and metric information.
 
