@@ -1,54 +1,44 @@
 ## From Cartesian points to free vectors {#from-points}
 
-A point of the Cartesian plane is an ordered pair of real numbers. Let
+A Cartesian point is an ordered pair of real numbers. Let
 
 $$
 P=(p_1,p_2),\qquad Q=(q_1,q_2).
 $$
 
-Before vectors are introduced, we first define several arithmetic operations on such points. These definitions are possible because a point of the Cartesian plane is represented by an ordered pair of numbers.
+The notation is deceptively similar throughout this lecture, so we will keep the types of objects explicit:
 
-### Arithmetic operations on Cartesian points
+- $(p_1,p_2)$ denotes a **point**;
+- $(P,Q)$ denotes an **ordered pair of points**;
+- $\overrightarrow{PQ}$ denotes the **anchored vector** determined by that ordered pair;
+- $[v_1,v_2]$ denotes a **free vector**, an abstract displacement independent of its starting point.
 
-The point
+### Arithmetic on Cartesian point coordinates
 
-$$
-O=(0,0)
-$$
-
-plays the role of zero.
-
-Addition of points is defined coordinatewise:
+Because points are represented by ordered pairs of numbers, we may perform coordinatewise calculations on their descriptions. Write
 
 $$
-\boxed{P+Q=(p_1+q_1,\,p_2+q_2)}.
+O=(0,0).
 $$
 
-The point opposite to $P$ is
+Then
 
 $$
-\boxed{-P=(-p_1,-p_2)},
+\begin{aligned}
+P+Q&=(p_1+q_1,\,p_2+q_2),\\
+-P&=(-p_1,-p_2),\\
+Q-P&=(q_1-p_1,\,q_2-p_2),\\
+\lambda P&=(\lambda p_1,\lambda p_2).
+\end{aligned}
 $$
 
-so that
+At this stage these are operations on coordinate descriptions of points. They do not yet define free vectors. The expression that will matter geometrically is the difference
 
 $$
-P+(-P)=O.
+Q-P=(q_1-p_1,\,q_2-p_2),
 $$
 
-Subtraction of points is defined by adding the opposite point:
-
-$$
-\boxed{Q-P=Q+(-P)=(q_1-p_1,\,q_2-p_2)}.
-$$
-
-For a real number $\lambda$, multiplication of a point by a number is also defined coordinatewise:
-
-$$
-\boxed{\lambda P=(\lambda p_1,\,\lambda p_2)}.
-$$
-
-At this stage these are arithmetic operations on ordered pairs. They are useful computational rules, but their geometric meaning has not yet been established. The first expression to acquire such a meaning will be the difference $Q-P$.
+because it records how the coordinates must change in order to move from $P$ to $Q$.
 
 <figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
   <div class="figure-toolbar">
@@ -72,18 +62,24 @@ At this stage these are arithmetic operations on ordered pairs. They are useful 
     </label>
   </div>
   <div class="relation-readout"><span data-point-operation-readout></span></div>
-  <figcaption class="figure-caption">The figure visualises arithmetic on ordered pairs. The interpretation of $Q-P$ as a directed displacement is introduced immediately afterwards.</figcaption>
+  <figcaption class="figure-caption">These are calculations on ordered pairs representing points. The difference $Q-P$ will shortly be interpreted as a change of position.</figcaption>
 </figure>
 
 ### An ordered pair of points determines an anchored vector
 
-The ordered pair $(P,Q)$ determines an arrow beginning at $P$ and ending at $Q$. We denote it by
+The ordered pair of points
+
+$$
+(P,Q)
+$$
+
+determines a directed motion beginning at $P$ and ending at $Q$. We represent this ordered pair geometrically by the arrow
 
 $$
 \overrightarrow{PQ}
 $$
 
-and call it an *anchored vector*. The order matters: $P$ is its initial point and $Q$ is its endpoint.
+and call it an **anchored vector**. Its initial point is part of the object: changing $P$ or $Q$ produces a different anchored vector.
 
 <figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
   <div class="figure-toolbar">
@@ -95,123 +91,143 @@ and call it an *anchored vector*. The order matters: $P$ is its initial point an
   </div>
   <div class="figure-stage jsx-stage"><div id="anchored-vector-board" class="jxgbox" data-anchored-vector></div></div>
   <div class="relation-readout"><span data-anchored-vector-readout></span></div>
-  <figcaption class="figure-caption">The first point is the initial point and the second point is the endpoint. Reversing their order reverses the arrow.</figcaption>
+  <figcaption class="figure-caption">The anchored vector remembers both its initial point and its endpoint. Reversing the ordered pair reverses the motion.</figcaption>
 </figure>
 
-The point difference is
+The coordinate change encoded by $\overrightarrow{PQ}$ is
 
 $$
-Q-P=(q_1-p_1,\,q_2-p_2).
+\Delta(P,Q):=Q-P=(q_1-p_1,\,q_2-p_2).
 $$
 
-The two numbers $q_1-p_1$ and $q_2-p_2$ are, by definition, the coordinates of the anchored vector $\overrightarrow{PQ}$. Round brackets remain reserved for Cartesian points.
+Its two entries answer a concrete question:
 
-Its length is the distance between the two points:
+- how much must the horizontal coordinate change?
+- how much must the vertical coordinate change?
+
+Thus the anchored vector contains more information than the pair of numbers $Q-P$: it records **where the motion begins and ends**, while $Q-P$ records only **how the position changes**.
+
+Its length is the distance between its endpoints:
 
 $$
 \boxed{|\overrightarrow{PQ}|=d_E(P,Q)}.
 $$
 
-Reversing the order reverses the arrow and changes the signs of both coordinates. The vector $\overrightarrow{QP}$ therefore has coordinates
+Reversing the order produces a different anchored vector and negates the coordinate change:
 
 $$
-p_1-q_1,\qquad p_2-q_2.
+\Delta(Q,P)=P-Q=-(Q-P).
 $$
 
-### When do arrows drawn in different places represent the same vector?
+### Different anchored vectors can encode the same displacement
 
-We first define equality geometrically. Consider two anchored vectors
+Now consider two anchored vectors
 
 $$
 \overrightarrow{PQ}\qquad\text{and}\qquad\overrightarrow{P'Q'}.
 $$
 
-They are called equal when the midpoint of the pair $P,Q'$ is also the midpoint of the pair $Q,P'$. Equivalently, the four points form a parallelogram in which the two arrows are opposite directed sides.
-
-The midpoint condition is
-
-$$
-\frac12(P+Q')=\frac12(Q+P').
-$$
-
-Rearranging this equality gives
+If $(P,Q)\neq(P',Q')$, then they are different anchored vectors. Nevertheless, they may carry the same information about how a position changes. This happens precisely when
 
 $$
 Q-P=Q'-P'.
 $$
 
-We have therefore obtained the coordinate criterion for the geometric relation:
+We therefore introduce the relation
 
 $$
-\boxed{\overrightarrow{PQ}=\overrightarrow{P'Q'}\quad\Longleftrightarrow\quad Q-P=Q'-P'}.
+\boxed{
+\overrightarrow{PQ}\sim\overrightarrow{P'Q'}
+\quad\Longleftrightarrow\quad
+Q-P=Q'-P'.
+}
 $$
 
-Thus two anchored vectors are equal precisely when their corresponding coordinates are equal. Their initial points may be different.
+The symbol $\sim$ does **not** say that the anchored vectors are literally the same ordered pair of points. It says that they encode the same displacement.
+
+Geometrically, the condition is equivalent to
+
+$$
+\frac12(P+Q')=\frac12(Q+P'),
+$$
+
+so the diagonals $PQ'$ and $QP'$ have the same midpoint. The four points form a parallelogram, and the two anchored vectors occur as opposite directed sides.
 
 <figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
   <div class="figure-toolbar">
     <div>
-      <span class="figure-title">Equal anchored vectors in different positions</span>
-      <span class="figure-step-title">Both arrows have the same coordinate change, although their initial points differ.</span>
+      <span class="figure-title">Different anchored vectors with the same displacement</span>
+      <span class="figure-step-title">The ordered pairs of endpoints differ, but both arrows encode the same coordinate change.</span>
     </div>
     <button class="icon-button" type="button" data-fullscreen aria-label="Open vector equivalence figure in full screen">⛶</button>
   </div>
   <div class="figure-stage jsx-stage"><div id="vector-equivalence-board" class="jxgbox" data-vector-equivalence></div></div>
-  <figcaption class="figure-caption">The dashed segments display the parallelogram relation behind the equality $Q-P=Q'-P'$.</figcaption>
+  <figcaption class="figure-caption">The midpoint $M$ of both diagonals verifies the parallelogram relation. The anchored vectors remain different, but they satisfy $\overrightarrow{PQ}\sim\overrightarrow{P'Q'}$.</figcaption>
 </figure>
 
-### Free vectors
+### Free vectors: extracting only the change of position
 
-Equality divides all anchored vectors into disjoint classes. Each class contains all arrows representing one and the same directed change. Such a class is called a *free vector*.
+Often we do not care where a motion begins. We want an instruction that can be applied at any point:
 
-If $\overrightarrow{PQ}$ is one representative of a free vector $\mathbf v$, we write
+> change the horizontal coordinate by $v_1$ and the vertical coordinate by $v_2$.
+
+To isolate exactly this information, we form a new abstract object.
+
+!!! definition "Free vector"
+    A **free vector** is the collection of all anchored vectors that encode one fixed coordinate change. If $\overrightarrow{PQ}$ is one representative, then
+
+    $$
+    [\overrightarrow{PQ}]
+      :=\{\overrightarrow{AB}:B-A=Q-P\}.
+    $$
+
+    Every member of this collection is called a **representative** of the free vector.
+
+The square brackets mean that we have deliberately forgotten the initial and terminal points and retained only the common displacement. If
 
 $$
-\boxed{\mathbf v=[\overrightarrow{PQ}]}.
+Q-P=(v_1,v_2),
 $$
 
-Here the square brackets denote the equivalence class of all anchored vectors equal to $\overrightarrow{PQ}$.
-
-If the common coordinates of these representatives are $v_1,v_2$, then the same free vector is written
+then we write the resulting free vector as
 
 $$
-\boxed{\mathbf v=[v_1,v_2]}.
+\boxed{\mathbf v=[\overrightarrow{PQ}]=[v_1,v_2].}
 $$
+
+This is the central abstraction:
+
+- $\overrightarrow{PQ}$ says: “start at this particular point $P$ and finish at this particular point $Q$”;
+- $\mathbf v=[v_1,v_2]$ says: “wherever you start, change your position by $v_1$ horizontally and $v_2$ vertically”.
 
 <figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
   <div class="figure-toolbar">
     <div>
-      <span class="figure-title">A free vector and many anchored representatives</span>
+      <span class="figure-title">One free vector, many anchored representatives</span>
       <span class="figure-step-title">Move the endpoint $V$ of the representative beginning at $O=(0,0)$.</span>
     </div>
     <button class="icon-button" type="button" data-fullscreen aria-label="Open free vector representative figure in full screen">⛶</button>
   </div>
   <div class="figure-stage jsx-stage"><div id="free-vector-representatives-board" class="jxgbox" data-free-vector-representatives></div></div>
   <div class="relation-readout"><span data-free-vector-readout></span></div>
-  <figcaption class="figure-caption">Every arrow has the same direction, length, and coordinate change. Their initial points differ, but all arrows represent the same free vector $\mathbf v$.</figcaption>
+  <figcaption class="figure-caption">Every displayed arrow is a different anchored vector, but all are representatives of the same free vector because every arrow encodes the same coordinate change.</figcaption>
 </figure>
 
-Thus round brackets distinguish points from vectors:
+### Similar notation, different objects
+
+This distinction must remain explicit:
 
 $$
-V=(v_1,v_2)\qquad\text{is a point, whereas}\qquad \mathbf v=[v_1,v_2]\qquad\text{is a free vector}.
+\begin{aligned}
+V&=(v_1,v_2) &&\text{is a point},\\
+\overrightarrow{OV}& &&\text{is an anchored vector},\\
+[\overrightarrow{OV}]&=\mathbf v=[v_1,v_2] &&\text{is a free vector}.
+\end{aligned}
 $$
 
-Since
+The expressions use the same numbers, but they do not denote the same kind of object.
 
-$$
-Q-P=(q_1-p_1,\,q_2-p_2)
-$$
-
-is a Cartesian point, placing square brackets around this point means the free vector with the same coordinate entries:
-
-$$
-\boxed{[\overrightarrow{PQ}]=[Q-P]=[q_1-p_1,\,q_2-p_2]}.
-$$
-
-The outer square brackets change the type of object: $(q_1-p_1,q_2-p_2)$ is a point, while $[q_1-p_1,q_2-p_2]$ is a free vector.
-
-A particularly convenient representative begins at the origin. If
+A representative beginning at the origin is especially convenient. If
 
 $$
 O=(0,0),\qquad V=(v_1,v_2),
@@ -220,10 +236,10 @@ $$
 then
 
 $$
-\mathbf v=[\overrightarrow{OV}]=[V]=[v_1,v_2].
+\boxed{\mathbf v=[\overrightarrow{OV}]=[v_1,v_2].}
 $$
 
-This does not identify the point $V$ with the vector $\mathbf v$; it gives a canonical representative of the free vector.
+The point $V$ is not identified with the free vector. It merely determines a canonical anchored representative from the origin.
 
-!!! principle "Order of construction"
-    Only now, after free vectors have been constructed, do we define operations on them. Each operation will first be described using representatives and then written in coordinates.
+!!! principle "What the abstraction buys us"
+    A free vector is a reusable instruction for changing position. Because it no longer depends on a particular starting point, we can apply the same displacement anywhere and, in the next section, compose several displacements into one.

@@ -1,128 +1,153 @@
 ## Addition, opposite vectors, and subtraction {#addition}
 
-### Why an operation of addition is needed
+### Why free vectors should be addable
 
-Suppose that we begin at a point $P$, move to a point $Q$, and then move from $Q$ to a point $R$. These are two consecutive geometric changes:
+A free vector is an instruction for changing position, independent of the point at which the motion begins. Once such instructions exist, the next natural problem is to compose them.
+
+Suppose that a first displacement changes a position by
+
+$$
+\mathbf a=[a_1,a_2],
+$$
+
+and a second displacement changes the new position by
+
+$$
+\mathbf b=[b_1,b_2].
+$$
+
+Starting at an arbitrary point $P$, choose an anchored representative $\overrightarrow{PQ}$ of $\mathbf a$, and then an anchored representative $\overrightarrow{QR}$ of $\mathbf b$:
 
 $$
 P\longrightarrow Q\longrightarrow R.
 $$
 
-The first change is represented by the anchored vector $\overrightarrow{PQ}$ and the second by $\overrightarrow{QR}$. But the same journey also produces one direct change from the initial point $P$ to the final point $R$, represented by $\overrightarrow{PR}$.
+The two-stage journey has one initial point and one final point, so it also determines the direct anchored vector $\overrightarrow{PR}$.
 
-!!! problem "The problem"
-    Given the two free vectors represented by $\overrightarrow{PQ}$ and $\overrightarrow{QR}$, construct one free vector that represents their combined effect. This geometric problem leads to the definition of vector addition.
+!!! problem "The composition problem"
+    Can the total change from $P$ to $R$ be described by one free vector that depends only on $\mathbf a$ and $\mathbf b$, and not on the chosen starting point $P$?
 
 <figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
   <div class="figure-toolbar">
     <div>
-      <span class="figure-title">Two consecutive changes and one direct change</span>
+      <span class="figure-title">Two successive changes and one total change</span>
       <span class="figure-step-title">Move $P$, $Q$, or $R$ and compare the route $P\to Q\to R$ with the direct change $P\to R$.</span>
     </div>
     <button class="icon-button" type="button" data-fullscreen aria-label="Open point-chain addition figure in full screen">⛶</button>
   </div>
   <div class="figure-stage jsx-stage"><div id="vector-chain-board" class="jxgbox" data-vector-chain></div></div>
   <div class="relation-readout" data-vector-chain-readout></div>
-  <figcaption class="figure-caption">The two-step motion and the direct motion have the same initial and final points. The direct anchored vector is therefore the natural candidate for the combined free vector.</figcaption>
+  <figcaption class="figure-caption">The two anchored vectors describe the two stages of the journey. The direct anchored vector records their total effect.</figcaption>
 </figure>
 
-### From two successive displacements to vector addition
+### The total displacement is independent of the starting point
 
-Let the free vector represented by $\overrightarrow{PQ}$ have coordinates
-
-$$
-\mathbf a=[a_1,a_2],
-$$
-
-and let the free vector represented by $\overrightarrow{QR}$ have coordinates
-
-$$
-\mathbf b=[b_1,b_2].
-$$
-
-Because $\overrightarrow{PQ}$ has coordinate change $(a_1,a_2)$,
+Because $\overrightarrow{PQ}$ represents $\mathbf a=[a_1,a_2]$, the point $Q$ is obtained from $P$ by the coordinate change $(a_1,a_2)$:
 
 $$
 Q=P+(a_1,a_2).
 $$
 
-Because $\overrightarrow{QR}$ has coordinate change $(b_1,b_2)$,
+Because $\overrightarrow{QR}$ represents $\mathbf b=[b_1,b_2]$,
 
 $$
 R=Q+(b_1,b_2).
 $$
 
-Now substitute the expression for the point $Q$ into the formula for the point $R$:
+Substituting the first equation into the second gives
 
 $$
 \begin{aligned}
 R
   &=Q+(b_1,b_2)\\
-  &=\bigl(P+(a_1,a_2)\bigr)+(b_1,b_2).
+  &=\bigl(P+(a_1,a_2)\bigr)+(b_1,b_2)\\
+  &=P+(a_1+b_1,\,a_2+b_2).
 \end{aligned}
 $$
 
-At this point we are still using the coordinatewise addition of Cartesian points introduced earlier. By associativity,
+Therefore
 
 $$
-R=P+\bigl((a_1,a_2)+(b_1,b_2)\bigr).
+R-P=(a_1+b_1,\,a_2+b_2).
 $$
 
-Adding the two ordered pairs coordinatewise gives
+The starting point $P$ has disappeared from the final coordinate change. No matter where the journey begins, performing the displacement $\mathbf a$ and then the displacement $\mathbf b$ produces the same total displacement.
+
+This proves that the direct anchored vector $\overrightarrow{PR}$ is a representative of a free vector determined only by $\mathbf a$ and $\mathbf b$.
+
+!!! definition "Addition of free vectors"
+    The sum $\mathbf a+\mathbf b$ is the free vector that represents the total effect of first applying $\mathbf a$ and then applying $\mathbf b$:
+
+    $$
+    \boxed{
+    \mathbf a+\mathbf b
+      :=[\overrightarrow{PR}]
+      =[a_1+b_1,\,a_2+b_2].
+    }
+    $$
+
+The definition does not identify the anchored vectors $\overrightarrow{PQ}$, $\overrightarrow{QR}$, and $\overrightarrow{PR}$. They are three different ordered pairs of points. The free vector $\mathbf a+\mathbf b$ abstracts only the total change encoded by $\overrightarrow{PR}$.
+
+### The order of two displacements
+
+The coordinate calculation gives
 
 $$
-(a_1,a_2)+(b_1,b_2)=(a_1+b_1,\,a_2+b_2),
+[a_1+b_1,\,a_2+b_2]
+  =[b_1+a_1,\,b_2+a_2].
 $$
 
-and therefore
-
-$$
-\boxed{R=P+(a_1+b_1,\,a_2+b_2).}
-$$
-
-Hence the direct anchored vector $\overrightarrow{PR}$ has coordinates
-
-$$
-[\overrightarrow{PR}]=[a_1+b_1,\,a_2+b_2].
-$$
-
-These coordinates depend only on the two free vectors $\mathbf a$ and $\mathbf b$, not on the particular starting point $P$. We therefore define
-
-$$
-\boxed{\mathbf a+\mathbf b=[\overrightarrow{PR}]=[a_1+b_1,\,a_2+b_2].}
-$$
-
-### The parallelogram rule and commutativity
-
-The same sum can be constructed in the opposite order. Placing a representative of $\mathbf b$ first and then one of $\mathbf a$ gives the same endpoint. Hence
+Hence the total displacement is the same whether we apply $\mathbf a$ and then $\mathbf b$, or $\mathbf b$ and then $\mathbf a$:
 
 $$
 \boxed{\mathbf a+\mathbf b=\mathbf b+\mathbf a.}
 $$
 
-### Opposite vectors
+Geometrically, the two possible orders trace adjacent sides of a parallelogram and lead to the same final point.
 
-For every vector $\mathbf a=[a_1,a_2]$ there is an opposite vector
+### Opposite displacement
 
-$$
-\boxed{-\mathbf a=[-a_1,-a_2]},
-$$
-
-characterised by
+For a free vector
 
 $$
-\mathbf a+(-\mathbf a)=\mathbf0.
+\mathbf a=[a_1,a_2],
 $$
 
-Geometrically it has the same length and lies on the same direction line as $\mathbf a$, but its orientation is reversed.
+the opposite free vector is the instruction that undoes its change of position:
 
-### Subtraction as addition of the opposite vector
+$$
+\boxed{-\mathbf a=[-a_1,-a_2].}
+$$
+
+Applying $\mathbf a$ and then $-\mathbf a$ returns to the initial position, so
+
+$$
+\mathbf a+(-\mathbf a)=\mathbf0,
+\qquad
+\mathbf0=[0,0].
+$$
+
+The opposite free vector has representatives with the same length as representatives of $\mathbf a$, but with reversed orientation.
+
+### Subtraction asks for the missing displacement
+
+Suppose the total displacement $\mathbf a$ is known and one stage $\mathbf b$ is known. The displacement that must occur before $\mathbf b$ is the free vector $\mathbf x$ satisfying
+
+$$
+\mathbf x+\mathbf b=\mathbf a.
+$$
+
+We define this missing displacement by
+
+$$
+\mathbf x=\mathbf a+(-\mathbf b).
+$$
 
 <figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
   <div class="figure-toolbar">
     <div>
-      <span class="figure-title">Opposite vector and subtraction</span>
-      <span class="figure-step-title">First reverse $\mathbf b$, then add $-\mathbf b$ to $\mathbf a$.</span>
+      <span class="figure-title">Opposite displacement and subtraction</span>
+      <span class="figure-step-title">Reverse $\mathbf b$, add the reversed displacement to $\mathbf a$, and verify the missing stage.</span>
     </div>
     <button class="icon-button" type="button" data-fullscreen aria-label="Open opposite vector and subtraction figure in full screen">⛶</button>
   </div>
@@ -133,26 +158,31 @@ Geometrically it has the same length and lies on the same direction line as $\ma
   </div>
   <div class="figure-stage jsx-stage"><div id="vector-subtraction-board" class="jxgbox" data-vector-subtraction></div></div>
   <div class="relation-readout" data-vector-subtraction-readout></div>
-  <figcaption class="figure-caption">The opposite vector reverses orientation without changing length. Subtraction is then ordinary vector addition with this reversed vector.</figcaption>
+  <figcaption class="figure-caption">Subtraction constructs the displacement that is missing from a composition of motions.</figcaption>
 </figure>
 
-Subtraction is defined by adding the opposite vector:
-
-$$
-\boxed{\mathbf a-\mathbf b=\mathbf a+(-\mathbf b)=[a_1-b_1,\,a_2-b_2].}
-$$
-
-It is the missing vector in the equation
-
-$$
-(\mathbf a-\mathbf b)+\mathbf b=\mathbf a.
-$$
-
-!!! note "Points and vectors"
-    For any two points $P$ and $Q$,
+!!! definition "Subtraction of free vectors"
+    Subtraction is addition of the opposite displacement:
 
     $$
-    [\overrightarrow{PQ}]=[Q-P].
+    \boxed{
+    \mathbf a-\mathbf b
+      :=\mathbf a+(-\mathbf b)
+      =[a_1-b_1,\,a_2-b_2].
+    }
     $$
 
-    The subtraction is performed on their coordinate descriptions and the result is interpreted as the free vector represented by the arrow from $P$ to $Q$.
+    It is characterised by
+
+    $$
+    (\mathbf a-\mathbf b)+\mathbf b=\mathbf a.
+    $$
+
+!!! note "From two points to a displacement"
+    For points $P$ and $Q$, the anchored vector $\overrightarrow{PQ}$ is the ordered pair of endpoints. Its associated free vector is
+
+    $$
+    [\overrightarrow{PQ}]=[q_1-p_1,\,q_2-p_2].
+    $$
+
+    The subtraction $Q-P$ is performed on point coordinates; square brackets then indicate that we retain only the resulting change of position.
