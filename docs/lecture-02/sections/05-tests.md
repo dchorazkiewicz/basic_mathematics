@@ -29,7 +29,7 @@ $$
 
 ### Parallel directions arise from the sine of the angle difference
 
-??? derivation "Parallelism from $\sin(\beta-\alpha)$"
+!!! derivation "Parallelism from $\sin(\beta-\alpha)$"
     Two nonzero vectors determine the same unoriented direction precisely when
 
     $$
@@ -61,14 +61,14 @@ $$
     \boxed{\mathbf u\parallel\mathbf v\iff \mathbf u=\lambda\mathbf v\text{ for some }\lambda\neq0}.
     $$
 
-??? proof "Why the determinant condition gives a scalar multiple"
+!!! proof "Why the determinant condition gives a scalar multiple"
     If $v_1\neq0$, set $\lambda=u_1/v_1$. The equality $u_1v_2-u_2v_1=0$ then gives $u_2=\lambda v_2$, hence $\mathbf u=\lambda\mathbf v$. If $v_1=0$, then $v_2\neq0$ and the same argument uses $\lambda=u_2/v_2$.
 
 The quantity $u_1v_2-u_2v_1$ measures whether the two coordinate directions span genuine area. It is zero exactly when both vectors lie on one line.
 
 ### The cosine of the same difference reveals perpendicularity
 
-??? derivation "Perpendicularity from $\cos(\beta-\alpha)$"
+!!! derivation "Perpendicularity from $\cos(\beta-\alpha)$"
     The vectors are perpendicular precisely when
 
     $$
