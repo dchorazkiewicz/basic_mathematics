@@ -45,10 +45,12 @@
   board.create('text', [
     () => (P.X() + Q.X()) / 2,
     () => (P.Y() + Q.Y()) / 2 + 0.45,
-    '→PQ'
+    '$\\overrightarrow{PQ}$'
   ], {
     color: '#17324d',
     fontSize: 20,
+    display: 'html',
+    useMathJax: true,
     ...fixed
   });
 
