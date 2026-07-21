@@ -1,72 +1,89 @@
-<section id="length-direction" class="section">
-  <h2>How much motion and in which direction?</h2>
+## How much motion and in which direction? {#length-direction}
 
-  <p>The coordinate pair of a vector records two changes, but it does not immediately answer two geometric questions:</p>
-  <div class="statement">
-    <div class="statement-label">Two questions carried by every nonzero vector</div>
-    <ol>
-      <li>How long is the displacement?</li>
-      <li>In which direction does it point?</li>
-    </ol>
+The coordinate pair of a vector records two changes, but it does not immediately answer two geometric questions:
+
+!!! question "Two questions carried by every nonzero vector"
+    1. How long is the displacement?
+    2. In which direction does it point?
+
+Let $\mathbf v=[v_1,v_2]$ be drawn from the origin. Its endpoint, together with its horizontal and vertical coordinate changes, forms a right triangle. The legs have lengths $|v_1|$ and $|v_2|$, while the vector itself is the hypotenuse.
+
+<figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
+  <div class="figure-toolbar">
+    <div><span class="figure-title">A vector as a right triangle</span><span class="figure-step-title" data-direction-readout>$\mathbf v=[4,3]$</span></div>
+    <button class="icon-button" type="button" data-fullscreen aria-label="Open vector direction figure in full screen">⛶</button>
   </div>
+  <div class="figure-stage jsx-stage"><div id="vector-direction-board" class="jxgbox" data-vector-direction></div></div>
+  <figcaption class="figure-caption">The vector, its two coordinate changes, and its inclination are displayed simultaneously.</figcaption>
+</figure>
 
-  <p>Let $\mathbf v=[v_1,v_2]$ be drawn from the origin. Its endpoint, together with its horizontal and vertical coordinate changes, forms a right triangle. The legs have lengths $|v_1|$ and $|v_2|$, while the vector itself is the hypotenuse.</p>
+!!! derivation "Length from the Pythagorean theorem"
+    $$
+    \|\mathbf v\|^2=v_1^2+v_2^2.
+    $$
 
-  <figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
-    <div class="figure-toolbar">
-      <div><span class="figure-title">A vector as a right triangle</span><span class="figure-step-title" data-direction-readout>$\mathbf v=[4,3]$</span></div>
-      <button class="icon-button" type="button" data-fullscreen aria-label="Open vector direction figure in full screen">⛶</button>
-    </div>
-    <div class="figure-stage jsx-stage"><div id="vector-direction-board" class="jxgbox" data-vector-direction></div></div>
-    <figcaption class="figure-caption">The vector, its two coordinate changes, and its inclination are displayed simultaneously.</figcaption>
-  </figure>
+    The length is nonnegative, so
 
-  <div class="derivation">
-    <h3>Length from the Pythagorean theorem</h3>
-    <div class="display-math">$$\|\mathbf v\|^2=v_1^2+v_2^2.$$</div>
-    <p>The length is nonnegative, so</p>
-    <div class="display-math">$$\boxed{\|\mathbf v\|=\sqrt{v_1^2+v_2^2}}.$$</div>
-  </div>
+    $$
+    \boxed{\|\mathbf v\|=\sqrt{v_1^2+v_2^2}}.
+    $$
 
-  <div class="statement">
-    <div class="statement-label">Definition</div>
-    <p>The Euclidean length, or norm, of $\mathbf v=[v_1,v_2]$ is</p>
-    <div class="display-math">$$\boxed{\|\mathbf v\|=\sqrt{v_1^2+v_2^2}}.$$</div>
-    <p>The double bars distinguish the vector from the number measuring its length.</p>
-  </div>
+!!! definition "Euclidean norm"
+    The Euclidean length, or norm, of $\mathbf v=[v_1,v_2]$ is
 
-  <div class="statement">
-    <div class="statement-label">Basic consequences</div>
-    <div class="display-math">$$\boxed{\|\mathbf0\|=0},\qquad \boxed{\mathbf v\neq\mathbf0\implies\|\mathbf v\|&gt;0}.$$</div>
-    <p>For points $A$ and $B$,</p>
-    <div class="display-math">$$\boxed{d_E(A,B)=\|B-A\|}. $$</div>
-  </div>
+    $$
+    \boxed{\|\mathbf v\|=\sqrt{v_1^2+v_2^2}}.
+    $$
 
-  <p>The vector $B-A$ records how to move from $A$ to $B$, while its norm records the Euclidean distance travelled. The same object therefore carries both directional and metric information.</p>
+    The double bars distinguish the vector from the number measuring its length.
 
-  <h3>Separating magnitude from direction</h3>
-  <p>Assume $\mathbf v\neq\mathbf0$ and let $\alpha$ be its angle of inclination measured from the positive $x$-axis.</p>
+!!! consequence "Basic consequences"
+    $$
+    \boxed{\|\mathbf0\|=0},
+    \qquad
+    \boxed{\mathbf v\neq\mathbf0\implies\|\mathbf v\|>0}.
+    $$
 
-  <div class="derivation">
-    <p>The right triangle gives</p>
-    <div class="display-math">$$\cos\alpha=\frac{v_1}{\|\mathbf v\|},\qquad \sin\alpha=\frac{v_2}{\|\mathbf v\|}.$$</div>
-    <p>Therefore</p>
-    <div class="display-math">$$v_1=\|\mathbf v\|\cos\alpha,\qquad v_2=\|\mathbf v\|\sin\alpha.$$</div>
-  </div>
+    For points $A$ and $B$,
 
-  <div class="statement">
-    <div class="statement-label">Theorem</div>
-    <p>Every nonzero vector admits the decomposition</p>
-    <div class="display-math">$$\boxed{\mathbf v=\|\mathbf v\|[\cos\alpha,\sin\alpha]}. $$</div>
-    <p>The vector $[\cos\alpha,\sin\alpha]$ has length one.</p>
-  </div>
+    $$
+    \boxed{d_E(A,B)=\|B-A\|}.
+    $$
 
-  <div class="statement">
-    <div class="statement-label">The two pieces of a vector</div>
-    <ul>
-      <li>$\|\mathbf v\|$ says how much displacement occurs;</li>
-      <li>$[\cos\alpha,\sin\alpha]$ says in which direction it occurs.</li>
-    </ul>
-    <p>Thus every nonzero vector is a positive magnitude multiplied by a unit direction.</p>
-  </div>
-</section>
+The vector $B-A$ records how to move from $A$ to $B$, while its norm records the Euclidean distance travelled. The same object therefore carries both directional and metric information.
+
+### Separating magnitude from direction
+
+Assume $\mathbf v\neq\mathbf0$ and let $\alpha$ be its angle of inclination measured from the positive $x$-axis.
+
+!!! derivation "Recovering the coordinates"
+    The right triangle gives
+
+    $$
+    \cos\alpha=\frac{v_1}{\|\mathbf v\|},
+    \qquad
+    \sin\alpha=\frac{v_2}{\|\mathbf v\|}.
+    $$
+
+    Therefore
+
+    $$
+    v_1=\|\mathbf v\|\cos\alpha,
+    \qquad
+    v_2=\|\mathbf v\|\sin\alpha.
+    $$
+
+!!! theorem "Magnitude-direction decomposition"
+    Every nonzero vector admits the decomposition
+
+    $$
+    \boxed{\mathbf v=\|\mathbf v\|[\cos\alpha,\sin\alpha]}.
+    $$
+
+    The vector $[\cos\alpha,\sin\alpha]$ has length one.
+
+!!! interpretation "The two pieces of a vector"
+    - $\|\mathbf v\|$ says how much displacement occurs;
+    - $[\cos\alpha,\sin\alpha]$ says in which direction it occurs.
+
+    Thus every nonzero vector is a positive magnitude multiplied by a unit direction.
