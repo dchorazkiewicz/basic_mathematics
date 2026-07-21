@@ -84,10 +84,22 @@
 <p>Choose two nonzero vectors of equal length such that <span class="arithmatex">\(\|\mathbf u+\mathbf v\|&lt;\|\mathbf u\|\)</span>. Compute the lengths and explain how the angle between the vectors produces partial cancellation.</p>
 </li>
 <li>
-<p>Starting from the cosine theorem for the triangle formed by <span class="arithmatex">\(\mathbf u\)</span>, <span class="arithmatex">\(\mathbf v\)</span>, and <span class="arithmatex">\(\mathbf u-\mathbf v\)</span>, derive <span class="arithmatex">\(\mathbf u\cdot\mathbf v=\|\mathbf u\|\,\|\mathbf v\|\cos\theta\)</span>. Explain why the sign of the dot product distinguishes acute, right, and obtuse angles.</p>
+<p>Starting from the coordinate definition of the dot product, prove</p>
+<div class="arithmatex">\[
+(\mathbf u+\mathbf w)\cdot\mathbf v
+  =\mathbf u\cdot\mathbf v+\mathbf w\cdot\mathbf v,
+\qquad
+(\lambda\mathbf u)\cdot\mathbf v
+  =\lambda(\mathbf u\cdot\mathbf v),
+\]</div>
+<p>together with symmetry and <span class="arithmatex">\(\mathbf u\cdot\mathbf u=\|\mathbf u\|^2\)</span>. Use these properties to expand <span class="arithmatex">\(\|\mathbf u-\mathbf v\|^2\)</span> and recover the cosine theorem.</p>
 </li>
 <li>
-<p>Let <span class="arithmatex">\(\mathbf r=\mathbf u-\operatorname{proj}_{\mathbf v}\mathbf u\)</span>. Prove directly from the projection formula that <span class="arithmatex">\(\mathbf r\cdot\mathbf v=0\)</span>. Then interpret the result geometrically.</p>
+<p>Let <span class="arithmatex">\(\mathbf r=\mathbf u-\operatorname{proj}_{\mathbf v}\mathbf u\)</span> for <span class="arithmatex">\(\mathbf v\neq\mathbf0\)</span>. Prove directly that <span class="arithmatex">\(\mathbf r\cdot\mathbf v=0\)</span>. Then use <span class="arithmatex">\(\|\mathbf r\|^2\geq0\)</span> to derive the Cauchy--Schwarz inequality</p>
+<div class="arithmatex">\[
+|\mathbf u\cdot\mathbf v|\leq\|\mathbf u\|\,\|\mathbf v\|,
+\]</div>
+<p>and determine exactly when equality holds.</p>
 </li>
 <li>
 <p>Suppose <span class="arithmatex">\(\mathbf b_1\)</span> and <span class="arithmatex">\(\mathbf b_2\)</span> are nonparallel. Explain why a vector cannot have two different representations <span class="arithmatex">\(\mathbf u=\alpha\mathbf b_1+\beta\mathbf b_2=\alpha'\mathbf b_1+\beta'\mathbf b_2\)</span>. Reduce the question to a linear combination equal to the zero vector.</p>

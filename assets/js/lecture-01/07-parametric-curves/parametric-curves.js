@@ -45,7 +45,17 @@
   board.create('point', [
     () => modes[state.mode].x(state.t),
     () => modes[state.mode].y(state.t)
-  ], { name: 'P(t)', size: 6, fillColor: '#b1782b', strokeColor: '#b1782b', fixed: true, highlight: false });
+  ], {
+    name: 'P(t)',
+    size: 6,
+    fillColor: '#b1782b',
+    strokeColor: '#b1782b',
+    fixed: true,
+    highlight: false,
+    label: window.LectureJSX?.pointLabelStyle?.({ offset: [12, 10], fontSize: 18 }) || {
+      display: 'html', cssClass: 'vector-label-chip', offset: [12, 10], fontSize: 18
+    }
+  });
 
   board.create('segment', [
     () => [modes[state.mode].x(state.t), modes[state.mode].y(state.t)],

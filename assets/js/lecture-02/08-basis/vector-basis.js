@@ -11,6 +11,9 @@
   const VIEW = [-7, 6, 8, -6];
   const board = JXG.JSXGraph.initBoard(host.id, { boundingbox: VIEW, axis: true, grid: true, keepAspectRatio: true, showNavigation: false, showCopyright: false, pan: { enabled: false }, zoom: { enabled: false } });
   const fixed = { fixed: true, highlight: false };
+  const vectorLabel = options => window.LectureJSX?.vectorLabelStyle?.(options) ?? {
+    display: 'html', cssClass: 'vector-label-chip', fixed: true, highlight: false, ...options
+  };
   const O = board.create('point', [0, 0], { name: 'O', size: 3, ...fixed });
   const b1 = [1, 1], b2 = [1, -1];
   const A = board.create('point', [() => state.a, () => state.a], { visible: false, ...fixed });
@@ -20,8 +23,8 @@
   board.create('arrow', [O, A], { strokeColor: '#2f6f9f', strokeWidth: 3, dash: 2, ...fixed });
   board.create('arrow', [A, V], { strokeColor: '#b1782b', strokeWidth: 3, dash: 2, ...fixed });
   board.create('arrow', [O, V], { strokeColor: '#17324d', strokeWidth: 5, ...fixed });
-  board.create('text', [1.15, 1.15, 'b₁'], { color: '#2f6f9f', fontSize: 18, ...fixed });
-  board.create('text', [1.15, -1.15, 'b₂'], { color: '#b1782b', fontSize: 18, ...fixed });
+  board.create('text', [1.15, 1.15, 'b₁'], vectorLabel({ color: '#2f6f9f', fontSize: 18 }));
+  board.create('text', [1.15, -1.15, 'b₂'], vectorLabel({ color: '#b1782b', fontSize: 18 }));
   const fmt = n => Number(n).toFixed(2).replace(/\.00$/, '').replace(/\.50$/, '.5');
   function render() {
     aOut.textContent = fmt(state.a); bOut.textContent = fmt(state.b);
