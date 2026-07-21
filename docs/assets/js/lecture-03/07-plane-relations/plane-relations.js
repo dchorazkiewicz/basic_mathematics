@@ -10,35 +10,70 @@
     display: 'html', cssClass: 'vector-label-chip', ...fixed, ...options
   };
 
+  const nextFrame = () => new Promise(resolve => requestAnimationFrame(resolve));
+
   let board = null;
   let activeMode = 'intersect';
-  let lastWidth = 0;
-  let lastHeight = 0;
-  let rebuildTimer = null;
+  let rebuildToken = 0;
 
-  const hiddenViewParts = {
+  const emptyView = {
     axesPosition: 'none',
     xAxis: { visible: false },
     yAxis: { visible: false },
     zAxis: { visible: false },
-    xPlaneRear: { visible: false },
-    yPlaneRear: { visible: false },
-    zPlaneRear: { visible: false },
-    xPlaneFront: { visible: false },
-    yPlaneFront: { visible: false },
-    zPlaneFront: { visible: false }
+    xAxisBorder: { visible: false },
+    yAxisBorder: { visible: false },
+    zAxisBorder: { visible: false },
+
+    xPlaneRear: { visible: false, mesh3d: { visible: false } },
+    yPlaneRear: { visible: false, mesh3d: { visible: false } },
+    zPlaneRear: { visible: false, mesh3d: { visible: false } },
+    xPlaneFront: { visible: false, mesh3d: { visible: false } },
+    yPlaneFront: { visible: false, mesh3d: { visible: false } },
+    zPlaneFront: { visible: false, mesh3d: { visible: false } },
+
+    xPlaneRearYAxis: { visible: false },
+    xPlaneRearZAxis: { visible: false },
+    yPlaneRearXAxis: { visible: false },
+    yPlaneRearZAxis: { visible: false },
+    zPlaneRearXAxis: { visible: false },
+    zPlaneRearYAxis: { visible: false },
+    xPlaneFrontYAxis: { visible: false },
+    xPlaneFrontZAxis: { visible: false },
+    yPlaneFrontXAxis: { visible: false },
+    yPlaneFrontZAxis: { visible: false },
+    zPlaneFrontXAxis: { visible: false },
+    zPlaneFrontYAxis: { visible: false }
   };
 
+  function measureStage() {
+    host.style.removeProperty('width');
+    host.style.removeProperty('height');
+
+    const rect = stage.getBoundingClientRect();
+    const styles = getComputedStyle(stage);
+    const width = Math.max(
+      320,
+      rect.width - parseFloat(styles.paddingLeft || 0) - parseFloat(styles.paddingRight || 0)
+    );
+    const height = Math.max(
+      280,
+      rect.height - parseFloat(styles.paddingTop || 0) - parseFloat(styles.paddingBottom || 0)
+    );
+    return { width, height };
+  }
+
   function createBoard() {
-    const width = Math.max(320, host.clientWidth || stage.clientWidth || 800);
-    const height = Math.max(280, host.clientHeight || stage.clientHeight || 500);
-    const halfHeight = 5.4;
+    const { width, height } = measureStage();
+    const halfHeight = 5;
     const halfWidth = halfHeight * width / height;
-    const margin = 0.28;
+    const margin = 0.16;
 
     if (board) {
       JXG.JSXGraph.freeBoard(board);
       board = null;
+      host.style.removeProperty('width');
+      host.style.removeProperty('height');
     }
 
     board = JXG.JSXGraph.initBoard(host.id, {
@@ -55,7 +90,7 @@
     const view = board.create('view3d', [
       [-halfWidth + margin, -halfHeight + margin],
       [2 * (halfWidth - margin), 2 * (halfHeight - margin)],
-      [[-3.6, 3.6], [-3.6, 3.6], [-3.6, 3.6]]
+      [[-3.25, 3.25], [-3.25, 3.25], [-3.25, 3.25]]
     ], {
       projection: 'parallel',
       depthOrder: true,
@@ -63,18 +98,18 @@
       az: { slider: { visible: false, start: 5.55 } },
       el: { slider: { visible: false, start: 0.62 } },
       bank: { slider: { visible: false, start: 0 } },
-      ...hiddenViewParts
+      ...emptyView
     });
 
     const plane = (point, d1, d2, color) => view.create('plane3d', [
-      point, d1, d2, [-2.65, 2.65], [-2.65, 2.65]
+      point, d1, d2, [-2.35, 2.35], [-2.35, 2.35]
     ], {
       fillColor: color,
-      fillOpacity: 0.34,
+      fillOpacity: 0.36,
       strokeColor: color,
-      strokeOpacity: 0.96,
+      strokeOpacity: 0.98,
       strokeWidth: 2,
-      mesh3d: { visible: true, strokeColor: color, strokeOpacity: 0.3, strokeWidth: 1.1 },
+      mesh3d: { visible: true, strokeColor: color, strokeOpacity: 0.32, strokeWidth: 1.1 },
       ...fixed
     });
 
@@ -88,7 +123,7 @@
     });
 
     const line = (point, direction, color) => view.create('line3d', [
-      point, direction, [-3.35, 3.35]
+      point, direction, [-3.1, 3.1]
     ], {
       strokeColor: color,
       strokeWidth: 5,
@@ -98,55 +133,58 @@
     const label = (coords, text, color) => view.create('text3d', [coords, text],
       boxed({ color, fontSize: 18, useMathJax: true }));
 
-    const basePoint = [0, 0, -0.65];
-    plane(basePoint, [1, 0, 0], [0, 1, 0], '#2f6f9f');
-    arrow(basePoint, [0, 0, 2.5], '#2f6f9f');
-    label([0.25, 0.15, 1.0], '$\\mathbf n_1$', '#2f6f9f');
+    const basePoint = [0, 0, -0.55];
 
+    plane(basePoint, [1, 0, 0], [0, 1, 0], '#2f6f9f');
+    arrow(basePoint, [0, 0, 2.35], '#2f6f9f');
+    label([0.22, 0.12, 0.95], '$\\mathbf n_1$', '#2f6f9f');
+
+    // The scene is recreated on every mode change. Exactly one second plane
+    // exists at a time, so geometry from another mode cannot remain visible.
     if (activeMode === 'intersect') {
       plane(basePoint, [1, 0, -1.2], [0, 1, 2 / 3], '#b1782b');
       arrow(basePoint, [1.8, -1.0, 1.5], '#b1782b');
       line(basePoint, [1.0, 1.8, 0], '#7a3f73');
-      label([1.05, -0.55, 0.35], '$\\mathbf n_2$', '#b1782b');
-      label([1.8, 2.8, -0.35], '$L$', '#7a3f73');
+      label([1.0, -0.5, 0.35], '$\\mathbf n_2$', '#b1782b');
+      label([1.65, 2.55, -0.25], '$L$', '#7a3f73');
     } else if (activeMode === 'parallel') {
-      const secondPoint = [0, 0, 1.7];
+      const secondPoint = [0, 0, 1.55];
       plane(secondPoint, [1, 0, 0], [0, 1, 0], '#b1782b');
-      arrow(secondPoint, [0, 0, 2.0], '#b1782b');
-      label([0.25, 0.15, 2.9], '$\\mathbf n_2$', '#b1782b');
+      arrow(secondPoint, [0, 0, 1.6], '#b1782b');
+      label([0.22, 0.12, 2.75], '$\\mathbf n_2$', '#b1782b');
     } else {
       plane(basePoint, [0, 1, 0], [0, 0, 1], '#b1782b');
-      arrow(basePoint, [2.5, 0, 0], '#b1782b');
+      arrow(basePoint, [2.35, 0, 0], '#b1782b');
       line(basePoint, [0, 1, 0], '#7a3f73');
-      label([1.05, 0.15, -0.45], '$\\mathbf n_2$', '#b1782b');
-      label([0.2, 2.75, -0.45], '$L$', '#7a3f73');
+      label([1.0, 0.12, -0.35], '$\\mathbf n_2$', '#b1782b');
+      label([0.18, 2.55, -0.35], '$L$', '#7a3f73');
     }
 
     board.fullUpdate();
     window.MathJax?.typesetPromise?.([panel]);
-    lastWidth = width;
-    lastHeight = height;
   }
 
-  function scheduleRebuild(force = false) {
-    const width = Math.max(1, host.clientWidth || stage.clientWidth);
-    const height = Math.max(1, host.clientHeight || stage.clientHeight);
-    if (!force && Math.abs(width - lastWidth) < 3 && Math.abs(height - lastHeight) < 3) return;
-
-    clearTimeout(rebuildTimer);
-    rebuildTimer = setTimeout(createBoard, 90);
+  async function rebuildAfterLayout() {
+    const token = ++rebuildToken;
+    await nextFrame();
+    await nextFrame();
+    if (token !== rebuildToken) return;
+    createBoard();
   }
 
   buttons.forEach(button => button.addEventListener('click', () => {
     activeMode = button.dataset.planeMode;
     buttons.forEach(item => item.classList.toggle('is-active', item === button));
-    createBoard();
+    rebuildAfterLayout();
   }));
 
-  const observer = new ResizeObserver(() => scheduleRebuild());
+  const observer = new ResizeObserver(() => rebuildAfterLayout());
   observer.observe(stage);
-  window.addEventListener('resize', () => scheduleRebuild());
-  document.addEventListener('fullscreenchange', () => scheduleRebuild(true));
+  window.addEventListener('resize', rebuildAfterLayout);
+  document.addEventListener('fullscreenchange', () => {
+    rebuildAfterLayout();
+    setTimeout(rebuildAfterLayout, 160);
+  });
 
-  createBoard();
+  rebuildAfterLayout();
 })();
