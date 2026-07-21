@@ -1,6 +1,8 @@
 ## Before coordinates {#before-coordinates}
 
-A Euclidean plane already contains points, straight lines, right angles and lengths. Coordinates do not create these objects. They provide a systematic numerical description after we make several explicit choices.
+A Euclidean space is a line, a plane, or a higher-dimensional space equipped with rules for constructing points, straight lines, circles, perpendiculars, intersections, and lengths.
 
-!!! note "Available geometry"
-    Before coordinates we may construct lines through points, perpendicular lines, circles, intersections and lengths. What is missing is an origin, orientation and numerical scale.
+![Points, lines, perpendiculars, and circles constructed in a Euclidean plane](../../assets/img/euclidean-constructions.svg)
+
+!!! note "Before coordinates"
+    We can already construct geometric objects. Coordinates add an origin, orientation, and numerical scale so that these constructions can be described by numbers.
