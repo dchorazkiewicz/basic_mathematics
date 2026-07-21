@@ -40,28 +40,13 @@
   board.create('segment', [P, P2], { strokeColor: '#a9b2ba', dash: 2, ...fixed });
   board.create('segment', [Q, Q2], { strokeColor: '#a9b2ba', dash: 2, ...fixed });
 
-  // The diagonals P--Q' and Q--P' meet at their common midpoint.
-  board.create('segment', [P, Q2], {
-    strokeColor: '#8f9aa5', strokeWidth: 2, dash: 2, ...fixed
-  });
-  board.create('segment', [Q, P2], {
-    strokeColor: '#8f9aa5', strokeWidth: 2, dash: 2, ...fixed
-  });
-
-  board.create('point', [
-    () => (P.X() + Q2.X()) / 2,
-    () => (P.Y() + Q2.Y()) / 2
-  ], {
-    name: 'M',
-    size: 4,
-    fillColor: '#7a3f73',
-    strokeColor: '#7a3f73',
-    label: { offset: [10, 10], fontSize: 18 },
+  board.create('text', [-5, 5, '$Q-P=Q\' - P\'=[3,2]$'], {
+    color: '#66717d',
+    fontSize: 17,
+    display: 'html',
+    useMathJax: true,
+    cssClass: 'vector-label-chip',
     ...fixed
-  });
-
-  board.create('text', [-5, 5, 'Both arrows have coordinate change [3,2].'], {
-    color: '#66717d', fontSize: 17, ...fixed
   });
 
   window.LectureJSX?.keepBoardFitted?.({ board, host, boundingBox: VIEW });
