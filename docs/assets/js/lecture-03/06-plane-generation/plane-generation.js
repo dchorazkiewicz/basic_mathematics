@@ -47,11 +47,35 @@
     () => (first()[2] + second()[2]) / 2 + lift
   ];
 
-  const emptyView = {
-    axesPosition: 'none',
-    xAxis: { visible: false },
-    yAxis: { visible: false },
-    zAxis: { visible: false },
+  const cartesianView = {
+    axesPosition: 'center',
+    xAxis: {
+      visible: true,
+      name: 'x',
+      withLabel: true,
+      lastArrow: true,
+      strokeColor: '#7f8b96',
+      strokeOpacity: 0.82,
+      strokeWidth: 1.4
+    },
+    yAxis: {
+      visible: true,
+      name: 'y',
+      withLabel: true,
+      lastArrow: true,
+      strokeColor: '#7f8b96',
+      strokeOpacity: 0.82,
+      strokeWidth: 1.4
+    },
+    zAxis: {
+      visible: true,
+      name: 'z',
+      withLabel: true,
+      lastArrow: true,
+      strokeColor: '#7f8b96',
+      strokeOpacity: 0.82,
+      strokeWidth: 1.4
+    },
     xAxisBorder: { visible: false },
     yAxisBorder: { visible: false },
     zAxisBorder: { visible: false },
@@ -129,7 +153,7 @@
       az: { slider: { visible: false, start: 5.55 } },
       el: { slider: { visible: false, start: 0.76 } },
       bank: { slider: { visible: false, start: 0 } },
-      ...emptyView
+      ...cartesianView
     });
 
     // The surface covers the complete slider range s,t in [-2,2].
