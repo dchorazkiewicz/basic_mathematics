@@ -16,11 +16,35 @@
   let activeMode = 'intersect';
   let rebuildToken = 0;
 
-  const emptyView = {
-    axesPosition: 'none',
-    xAxis: { visible: false },
-    yAxis: { visible: false },
-    zAxis: { visible: false },
+  const cartesianView = {
+    axesPosition: 'center',
+    xAxis: {
+      visible: true,
+      name: 'x',
+      withLabel: true,
+      lastArrow: true,
+      strokeColor: '#7f8b96',
+      strokeOpacity: 0.82,
+      strokeWidth: 1.4
+    },
+    yAxis: {
+      visible: true,
+      name: 'y',
+      withLabel: true,
+      lastArrow: true,
+      strokeColor: '#7f8b96',
+      strokeOpacity: 0.82,
+      strokeWidth: 1.4
+    },
+    zAxis: {
+      visible: true,
+      name: 'z',
+      withLabel: true,
+      lastArrow: true,
+      strokeColor: '#7f8b96',
+      strokeOpacity: 0.82,
+      strokeWidth: 1.4
+    },
     xAxisBorder: { visible: false },
     yAxisBorder: { visible: false },
     zAxisBorder: { visible: false },
@@ -98,7 +122,7 @@
       az: { slider: { visible: false, start: 5.55 } },
       el: { slider: { visible: false, start: 0.62 } },
       bank: { slider: { visible: false, start: 0 } },
-      ...emptyView
+      ...cartesianView
     });
 
     const plane = (point, d1, d2, color) => view.create('plane3d', [
