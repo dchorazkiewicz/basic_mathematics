@@ -25,10 +25,10 @@ $$
 The cross product gives the direction because the intersection line must be perpendicular to both normals. A point on the line is then found by solving the two plane equations simultaneously.
 
 <figure class="figure-panel jsx-panel" data-fullscreen-panel>
-  <div class="figure-toolbar"><div><span class="figure-title">Normals determine how planes meet</span><span class="figure-step-title">Compare parallel, intersecting, and perpendicular normals.</span></div><button class="icon-button" type="button" data-fullscreen>⛶</button></div>
+  <div class="figure-toolbar"><div><span class="figure-title">Normals determine how planes meet</span><span class="figure-step-title">Compare the three spatial configurations and drag the scene to rotate it.</span></div><button class="icon-button" type="button" data-fullscreen>⛶</button></div>
   <div class="curve-switcher"><button class="curve-mode is-active" type="button" data-plane-mode="intersect">Intersecting</button><button class="curve-mode" type="button" data-plane-mode="parallel">Parallel</button><button class="curve-mode" type="button" data-plane-mode="perpendicular">Perpendicular</button></div>
   <div class="figure-stage jsx-stage"><div id="plane-relations-board" class="jxgbox" data-plane-relations></div></div>
-  <figcaption class="figure-caption">An oblique projection emphasises the normals and, when present, the direction of the intersection line.</figcaption>
+  <figcaption class="figure-caption">The planes, their normal vectors, and the intersection line are displayed in a rotatable three-dimensional scene.</figcaption>
 </figure>
 
 ## Distance from a point to a plane
