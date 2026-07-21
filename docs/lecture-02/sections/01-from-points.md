@@ -178,6 +178,19 @@ $$
 \boxed{\mathbf v=[v_1,v_2]}.
 $$
 
+<figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
+  <div class="figure-toolbar">
+    <div>
+      <span class="figure-title">A free vector and many anchored representatives</span>
+      <span class="figure-step-title">Move the endpoint $V$ of the representative beginning at $O=(0,0)$.</span>
+    </div>
+    <button class="icon-button" type="button" data-fullscreen aria-label="Open free vector representative figure in full screen">⛶</button>
+  </div>
+  <div class="figure-stage jsx-stage"><div id="free-vector-representatives-board" class="jxgbox" data-free-vector-representatives></div></div>
+  <div class="relation-readout"><span data-free-vector-readout></span></div>
+  <figcaption class="figure-caption">Every arrow has the same direction, length, and coordinate change. Their initial points differ, but all arrows represent the same free vector $\mathbf v$.</figcaption>
+</figure>
+
 Thus round brackets distinguish points from vectors:
 
 $$
