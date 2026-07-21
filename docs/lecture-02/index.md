@@ -10,8 +10,7 @@ section_links:
   - { id: addition, title: Addition and subtraction }
   - { id: scaling, title: Scaling and combinations }
   - { id: length-direction, title: Length and direction }
-  - { id: tests, title: Parallel and perpendicular }
-  - { id: angle, title: Angle and dot product }
+  - { id: tests, title: Parallelism and dot product }
   - { id: projection, title: Projection }
   - { id: basis, title: Change of basis }
   - { id: exercises, title: Exercises }
@@ -22,7 +21,6 @@ section_links:
 --8<-- "lecture-02/sections/03-scaling.md"
 --8<-- "lecture-02/sections/04-length-direction.md"
 --8<-- "lecture-02/sections/05-tests.md"
---8<-- "lecture-02/sections/06-angle.md"
 --8<-- "lecture-02/sections/07-projection.md"
 --8<-- "lecture-02/sections/08-basis.md"
 --8<-- "lecture-02/sections/09-exercises.md"
