@@ -12,10 +12,10 @@ home: true
 
 | Lecture | Topic | Scope | Status |
 |---:|---|---|---|
-| **01** | [Cartesian Geometry and Coordinates](lecture-01/) | Constructing axes, scale, coordinates, graphs and Euclidean distance. | Open → |
-| **02** | [Vectors, Bases, and Coordinate Systems](lecture-02/) | Directed changes, vector operations, dot products, projection and one concrete change of basis. | Open → |
-| **03** | [Lines and Planes in the Plane and in Space](lecture-03/) | Parametric and normal descriptions, intersections, nearest points, planes, normals and distance. | Open → |
-| **04** | [Conic Sections Through Cartesian and Polar Eyes](lecture-04/) | Classical conics, polar coordinates, eccentricity and one focus--directrix formula. | Open → |
+| **01** | [Cartesian Geometry and Coordinates](lecture-01/index.md) | Constructing axes, scale, coordinates, graphs and Euclidean distance. | Open → |
+| **02** | [Vectors, Bases, and Coordinate Systems](lecture-02/index.md) | Directed changes, vector operations, dot products, projection and one concrete change of basis. | Open → |
+| **03** | [Lines and Planes in the Plane and in Space](lecture-03/index.md) | Parametric and normal descriptions, intersections, nearest points, planes, normals and distance. | Open → |
+| **04** | [Conic Sections Through Cartesian and Polar Eyes](lecture-04/index.md) | Classical conics, polar coordinates, eccentricity and one focus--directrix formula. | Open → |
 
 ## Part II · Linear Algebra
 
