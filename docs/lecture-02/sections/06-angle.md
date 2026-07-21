@@ -33,7 +33,7 @@ so the angle is well defined. Its proof will emerge from orthogonal projection l
 
 Before using the dot product in longer calculations, we verify its behaviour under addition and scalar multiplication.
 
-!!! derivation "Algebraic properties of the dot product"
+??? derivation "Algebraic properties of the dot product"
     Let $\mathbf u=[u_1,u_2]$, $\mathbf v=[v_1,v_2]$, and $\mathbf w=[w_1,w_2]$. Then
 
     $$
@@ -82,7 +82,7 @@ Before using the dot product in longer calculations, we verify its behaviour und
 
 Draw $\mathbf u$ and $\mathbf v$ from a common point. The displacement from the endpoint of $\mathbf v$ to the endpoint of $\mathbf u$ is $\mathbf u-\mathbf v$. Thus the three vectors determine a triangle with side lengths $\|\mathbf u\|$, $\|\mathbf v\|$, and $\|\mathbf u-\mathbf v\|$.
 
-!!! derivation "Expanding the third side"
+??? derivation "Expanding the third side"
     $$
     \begin{aligned}
     \|\mathbf u-\mathbf v\|^2
