@@ -1,6 +1,6 @@
 ## Before coordinates {#before-coordinates}
 
-A Euclidean space is a line, a plane, or a higher-dimensional space equipped with rules for constructing points, straight lines, circles, perpendiculars, intersections, and lengths.
+Classical Euclidean geometry works on a line, in a plane, and in three-dimensional space. It provides rules for constructing points, straight lines, circles or spheres, perpendiculars, intersections, and lengths without using coordinates.
 
 <figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
   <div class="figure-toolbar">
