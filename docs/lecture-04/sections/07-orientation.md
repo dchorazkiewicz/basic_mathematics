@@ -1,8 +1,31 @@
-<section id="orientation" class="section">
-  <h2>Orientation, one formula, and the bridge to mechanics</h2>
-  <p>The equation</p><div class="display-math">$$r=\frac{p}{1+e\cos\theta}$$</div><p>places the nearest point on the positive polar axis. Rotating the entire conic by an angle $\theta_0$ gives</p><div class="display-math">$$\boxed{r=\frac{p}{1+e\cos(\theta-\theta_0)}}.$$</div>
-  <div class="display-math">$$\begin{array}{c|c}p&\text{overall focal scale},\\e&\text{shape and conic type},\\\theta_0&\text{orientation in the plane}.\end{array}$$</div>
-  <div class="display-math">$$\begin{array}{c|c|c}e&\text{conic}&\text{focal motion suggested by the geometry}\\\hline0\le e<1&\text{circle or ellipse}&\text{bounded},\\e=1&\text{parabola}&\text{threshold between bounded and unbounded},\\e>1&\text{hyperbola}&\text{unbounded passage}.\end{array}$$</div>
-  <div class="statement"><div class="statement-label">What has been achieved</div><p>The chapter did not merely list four equations. It changed the viewpoint until three apparently different curves became outcomes of one radial law. This is the analytic-geometric preparation needed before a later mechanics course derives the same law from a central force.</p></div>
-  <div class="statement"><div class="statement-label">Choose coordinates adapted to the question</div><p>Cartesian coordinates are best for centres, axes, vertices, and complete symmetric pictures. Polar coordinates centred at a focus are best for radial distance, orientation, eccentricity, and orbital interpretation. Analytic geometry works by choosing the representation in which the geometry speaks most clearly.</p></div>
-</section>
+## Orientation, one formula, and the bridge to mechanics {#orientation}
+
+The equation
+
+$$
+r=\frac{p}{1+e\cos\theta}
+$$
+
+places the nearest point on the positive polar axis. Rotating the entire conic by an angle $\theta_0$ gives
+
+$$
+\boxed{r=\frac{p}{1+e\cos(\theta-\theta_0)}}.
+$$
+
+| Parameter | Geometric role |
+|---|---|
+| $p$ | overall focal scale |
+| $e$ | shape and conic type |
+| $\theta_0$ | orientation in the plane |
+
+| $e$ | Conic | Focal motion suggested by the geometry |
+|---|---|---|
+| $0\le e<1$ | circle or ellipse | bounded |
+| $e=1$ | parabola | threshold between bounded and unbounded |
+| $e>1$ | hyperbola | unbounded passage |
+
+!!! summary "What has been achieved"
+    The chapter did not merely list four equations. It changed the viewpoint until three apparently different curves became outcomes of one radial law. This is the analytic-geometric preparation needed before a later mechanics course derives the same law from a central force.
+
+!!! principle "Choose coordinates adapted to the question"
+    Cartesian coordinates are best for centres, axes, vertices, and complete symmetric pictures. Polar coordinates centred at a focus are best for radial distance, orientation, eccentricity, and orbital interpretation. Analytic geometry works by choosing the representation in which the geometry speaks most clearly.
