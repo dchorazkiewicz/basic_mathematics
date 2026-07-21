@@ -145,14 +145,6 @@ $$
 
 The symbol $\sim$ does **not** say that the anchored vectors are literally the same ordered pair of points. It says that they encode the same displacement.
 
-Geometrically, the condition is equivalent to
-
-$$
-\frac12(P+Q')=\frac12(Q+P'),
-$$
-
-so the diagonals $PQ'$ and $QP'$ have the same midpoint. The four points form a parallelogram, and the two anchored vectors occur as opposite directed sides.
-
 <figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
   <div class="figure-toolbar">
     <div>
@@ -162,7 +154,7 @@ so the diagonals $PQ'$ and $QP'$ have the same midpoint. The four points form a 
     <button class="icon-button" type="button" data-fullscreen aria-label="Open vector equivalence figure in full screen">⛶</button>
   </div>
   <div class="figure-stage jsx-stage"><div id="vector-equivalence-board" class="jxgbox" data-vector-equivalence></div></div>
-  <figcaption class="figure-caption">The midpoint $M$ of both diagonals verifies the parallelogram relation. The anchored vectors remain different, but they satisfy $\overrightarrow{PQ}\sim\overrightarrow{P'Q'}$.</figcaption>
+  <figcaption class="figure-caption">The arrows begin at different points, but both change the horizontal coordinate by $3$ and the vertical coordinate by $2$.</figcaption>
 </figure>
 
 ### Free vectors: extracting only the change of position
