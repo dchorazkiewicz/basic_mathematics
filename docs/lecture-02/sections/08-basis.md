@@ -33,7 +33,7 @@ $$
   <figcaption class="figure-caption">The sliders show how the same vector is reconstructed from the two chosen basis directions.</figcaption>
 </figure>
 
-!!! derivation "Solving for the basis coordinates"
+??? derivation "Solving for the basis coordinates"
     Using the Cartesian coordinates of the basis vectors gives
 
     $$
