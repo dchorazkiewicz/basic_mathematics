@@ -13,10 +13,10 @@
     display: 'html', cssClass: 'vector-label-chip', ...fixed, ...options
   };
 
+  const nextFrame = () => new Promise(resolve => requestAnimationFrame(resolve));
+
   let board = null;
-  let lastWidth = 0;
-  let lastHeight = 0;
-  let rebuildTimer = null;
+  let rebuildToken = 0;
 
   const P0 = [-0.55, -0.45, -0.35];
   const u = [1.75, 0.35, 0.55];
@@ -47,29 +47,64 @@
     () => (first()[2] + second()[2]) / 2 + lift
   ];
 
-  const hiddenViewParts = {
+  const emptyView = {
     axesPosition: 'none',
     xAxis: { visible: false },
     yAxis: { visible: false },
     zAxis: { visible: false },
-    xPlaneRear: { visible: false },
-    yPlaneRear: { visible: false },
-    zPlaneRear: { visible: false },
-    xPlaneFront: { visible: false },
-    yPlaneFront: { visible: false },
-    zPlaneFront: { visible: false }
+    xAxisBorder: { visible: false },
+    yAxisBorder: { visible: false },
+    zAxisBorder: { visible: false },
+
+    xPlaneRear: { visible: false, mesh3d: { visible: false } },
+    yPlaneRear: { visible: false, mesh3d: { visible: false } },
+    zPlaneRear: { visible: false, mesh3d: { visible: false } },
+    xPlaneFront: { visible: false, mesh3d: { visible: false } },
+    yPlaneFront: { visible: false, mesh3d: { visible: false } },
+    zPlaneFront: { visible: false, mesh3d: { visible: false } },
+
+    xPlaneRearYAxis: { visible: false },
+    xPlaneRearZAxis: { visible: false },
+    yPlaneRearXAxis: { visible: false },
+    yPlaneRearZAxis: { visible: false },
+    zPlaneRearXAxis: { visible: false },
+    zPlaneRearYAxis: { visible: false },
+    xPlaneFrontYAxis: { visible: false },
+    xPlaneFrontZAxis: { visible: false },
+    yPlaneFrontXAxis: { visible: false },
+    yPlaneFrontZAxis: { visible: false },
+    zPlaneFrontXAxis: { visible: false },
+    zPlaneFrontYAxis: { visible: false }
   };
 
+  function measureStage() {
+    host.style.removeProperty('width');
+    host.style.removeProperty('height');
+
+    const rect = stage.getBoundingClientRect();
+    const styles = getComputedStyle(stage);
+    const width = Math.max(
+      320,
+      rect.width - parseFloat(styles.paddingLeft || 0) - parseFloat(styles.paddingRight || 0)
+    );
+    const height = Math.max(
+      280,
+      rect.height - parseFloat(styles.paddingTop || 0) - parseFloat(styles.paddingBottom || 0)
+    );
+    return { width, height };
+  }
+
   function createBoard() {
-    const width = Math.max(320, host.clientWidth || stage.clientWidth || 800);
-    const height = Math.max(280, host.clientHeight || stage.clientHeight || 500);
-    const halfHeight = 5.35;
+    const { width, height } = measureStage();
+    const halfHeight = 5;
     const halfWidth = halfHeight * width / height;
-    const margin = 0.28;
+    const margin = 0.16;
 
     if (board) {
       JXG.JSXGraph.freeBoard(board);
       board = null;
+      host.style.removeProperty('width');
+      host.style.removeProperty('height');
     }
 
     board = JXG.JSXGraph.initBoard(host.id, {
@@ -86,24 +121,25 @@
     const view = board.create('view3d', [
       [-halfWidth + margin, -halfHeight + margin],
       [2 * (halfWidth - margin), 2 * (halfHeight - margin)],
-      [[-4.1, 4.1], [-4.1, 4.1], [-4.1, 4.1]]
+      [[-5.05, 4.0], [-4.35, 3.45], [-2.2, 1.55]]
     ], {
       projection: 'parallel',
       depthOrder: true,
       trackball: { enabled: true },
       az: { slider: { visible: false, start: 5.55 } },
-      el: { slider: { visible: false, start: 0.72 } },
+      el: { slider: { visible: false, start: 0.76 } },
       bank: { slider: { visible: false, start: 0 } },
-      ...hiddenViewParts
+      ...emptyView
     });
 
-    view.create('plane3d', [P0, u, v, [-2.35, 2.35], [-2.35, 2.35]], {
+    // The surface covers the complete slider range s,t in [-2,2].
+    view.create('plane3d', [P0, u, v, [-2.05, 2.05], [-2.05, 2.05]], {
       fillColor: '#2f6f9f',
-      fillOpacity: 0.34,
+      fillOpacity: 0.4,
       strokeColor: '#2f6f9f',
-      strokeOpacity: 0.96,
-      strokeWidth: 2,
-      mesh3d: { visible: true, strokeColor: '#2f6f9f', strokeOpacity: 0.34, strokeWidth: 1.15 },
+      strokeOpacity: 0.98,
+      strokeWidth: 2.2,
+      mesh3d: { visible: true, strokeColor: '#2f6f9f', strokeOpacity: 0.42, strokeWidth: 1.2 },
       ...fixed
     });
 
@@ -117,34 +153,33 @@
       name: '', size: 6, fillColor: '#3f735f', strokeColor: '#3f735f', ...fixed
     });
 
+    // First move by s*u, then by t*v. Both stages remain on the plane.
     view.create('line3d', [origin, afterU], {
-      strokeColor: '#2f6f9f', strokeWidth: 4, lastArrow: true, ...fixed
+      strokeColor: '#2f6f9f', strokeWidth: 5, lastArrow: true, ...fixed
     });
     view.create('line3d', [afterU, generated], {
-      strokeColor: '#b1782b', strokeWidth: 4, lastArrow: true, ...fixed
+      strokeColor: '#b1782b', strokeWidth: 5, lastArrow: true, ...fixed
     });
     view.create('line3d', [origin, generated], {
       strokeColor: '#3f735f', strokeWidth: 3, dash: 2, ...fixed
     });
 
     const constantPoint = point => () => point;
-    view.create('text3d', [[P0[0] - 0.12, P0[1] - 0.2, P0[2] + 0.28], '$P_0$'],
+    view.create('text3d', [[P0[0] - 0.12, P0[1] - 0.2, P0[2] + 0.26], '$P_0$'],
       boxed({ color: '#17324d', fontSize: 17, useMathJax: true }));
-    view.create('text3d', [midpoint(constantPoint(P0), scaledUPoint, 0.24), '$s\\mathbf u$'],
+    view.create('text3d', [midpoint(constantPoint(P0), scaledUPoint, 0.22), '$s\\mathbf u$'],
       boxed({ color: '#2f6f9f', fontSize: 18, useMathJax: true }));
-    view.create('text3d', [midpoint(scaledUPoint, generatedPoint, 0.24), '$t\\mathbf v$'],
+    view.create('text3d', [midpoint(scaledUPoint, generatedPoint, 0.22), '$t\\mathbf v$'],
       boxed({ color: '#b1782b', fontSize: 18, useMathJax: true }));
     view.create('text3d', [[
-      () => generatedPoint()[0] + 0.18,
-      () => generatedPoint()[1] + 0.18,
-      () => generatedPoint()[2] + 0.3
+      () => generatedPoint()[0] + 0.14,
+      () => generatedPoint()[1] + 0.14,
+      () => generatedPoint()[2] + 0.24
     ], '$P_0+s\\mathbf u+t\\mathbf v$'],
       boxed({ color: '#3f735f', fontSize: 17, useMathJax: true }));
 
     board.fullUpdate();
     window.MathJax?.typesetPromise?.([panel]);
-    lastWidth = width;
-    lastHeight = height;
   }
 
   function update() {
@@ -154,23 +189,25 @@
     window.MathJax?.typesetPromise?.([panel]);
   }
 
-  function scheduleRebuild(force = false) {
-    const width = Math.max(1, host.clientWidth || stage.clientWidth);
-    const height = Math.max(1, host.clientHeight || stage.clientHeight);
-    if (!force && Math.abs(width - lastWidth) < 3 && Math.abs(height - lastHeight) < 3) return;
-
-    clearTimeout(rebuildTimer);
-    rebuildTimer = setTimeout(createBoard, 90);
+  async function rebuildAfterLayout() {
+    const token = ++rebuildToken;
+    await nextFrame();
+    await nextFrame();
+    if (token !== rebuildToken) return;
+    createBoard();
+    update();
   }
 
   sSlider.addEventListener('input', update);
   tSlider.addEventListener('input', update);
 
-  const observer = new ResizeObserver(() => scheduleRebuild());
+  const observer = new ResizeObserver(() => rebuildAfterLayout());
   observer.observe(stage);
-  window.addEventListener('resize', () => scheduleRebuild());
-  document.addEventListener('fullscreenchange', () => scheduleRebuild(true));
+  window.addEventListener('resize', rebuildAfterLayout);
+  document.addEventListener('fullscreenchange', () => {
+    rebuildAfterLayout();
+    setTimeout(rebuildAfterLayout, 160);
+  });
 
-  createBoard();
-  update();
+  rebuildAfterLayout();
 })();
