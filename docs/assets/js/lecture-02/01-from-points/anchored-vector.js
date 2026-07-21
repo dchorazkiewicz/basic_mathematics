@@ -21,6 +21,9 @@
     snapSizeX: 0.5,
     snapSizeY: 0.5
   };
+  const vectorLabel = options => window.LectureJSX?.vectorLabelStyle?.(options) ?? {
+    display: 'html', cssClass: 'vector-label-chip', fixed: true, highlight: false, ...options
+  };
 
   const P = board.create('point', [-2.5, -1.5], {
     name: 'P',
@@ -46,13 +49,11 @@
     () => (P.X() + Q.X()) / 2,
     () => (P.Y() + Q.Y()) / 2 + 0.45,
     '$\\overrightarrow{PQ}$'
-  ], {
+  ], vectorLabel({
     color: '#17324d',
     fontSize: 20,
-    display: 'html',
-    useMathJax: true,
-    ...fixed
-  });
+    useMathJax: true
+  }));
 
   const readout = host.closest('[data-fullscreen-panel]')?.querySelector('[data-anchored-vector-readout]');
   const fmt = value => Number(value.toFixed(1)).toString();
