@@ -25,15 +25,42 @@
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
   {% if page.meta.lecture %}
     <script defer src="https://cdn.jsdelivr.net/npm/jsxgraph@1.10.1/distrib/jsxgraphcore.js"></script>
-    {% set scripts = ['assets/js/fullscreen.js', 'assets/js/jsx-board-layout.js'] %}
+    {% set scripts = ['assets/js/shared/fullscreen.js', 'assets/js/shared/jsx-board-layout.js'] %}
     {% if page.meta.lecture == '01' %}
-      {% set scripts = scripts + ['assets/euclidean-constructions.js', 'assets/cartesian-construction.js', 'assets/distance-geometry.js', 'assets/function-machine.js', 'assets/circle-relation.js', 'assets/parametric-curves.js', 'assets/intersections-regions.js'] %}
+      {% set scripts = scripts + [
+        'assets/js/lecture-01/01-before-coordinates/euclidean-constructions.js',
+        'assets/js/lecture-01/02-cartesian-construction/cartesian-construction.js',
+        'assets/js/lecture-01/04-distance/distance-geometry.js',
+        'assets/js/lecture-01/05-graphs/function-machine.js',
+        'assets/js/lecture-01/06-relations/circle-relation.js',
+        'assets/js/lecture-01/07-parametric-curves/parametric-curves.js',
+        'assets/js/lecture-01/08-intersections-regions/intersections-regions.js'
+      ] %}
     {% elif page.meta.lecture == '02' %}
-      {% set scripts = scripts + ['assets/point-arithmetic.js', 'assets/vector-equivalence.js', 'assets/vector-addition.js', 'assets/vector-scaling.js', 'assets/vector-direction.js', 'assets/vector-tests.js', 'assets/vector-projection.js', 'assets/vector-basis.js'] %}
+      {% set scripts = scripts + [
+        'assets/js/lecture-02/01-from-points/point-arithmetic.js',
+        'assets/js/lecture-02/01-from-points/vector-equivalence.js',
+        'assets/js/lecture-02/02-addition/vector-addition.js',
+        'assets/js/lecture-02/03-scaling/vector-scaling.js',
+        'assets/js/lecture-02/04-length-direction/vector-direction.js',
+        'assets/js/lecture-02/05-tests/vector-tests.js',
+        'assets/js/lecture-02/07-projection/vector-projection.js',
+        'assets/js/lecture-02/08-basis/vector-basis.js'
+      ] %}
     {% elif page.meta.lecture == '03' %}
-      {% set scripts = scripts + ['assets/line-descriptions.js', 'assets/line-distance.js', 'assets/plane-generation.js', 'assets/plane-relations.js'] %}
+      {% set scripts = scripts + [
+        'assets/js/lecture-03/01-line-descriptions/line-descriptions.js',
+        'assets/js/lecture-03/05-line-distance/line-distance.js',
+        'assets/js/lecture-03/06-plane-generation/plane-generation.js',
+        'assets/js/lecture-03/07-plane-relations/plane-relations.js'
+      ] %}
     {% elif page.meta.lecture == '04' %}
-      {% set scripts = scripts + ['assets/classical-conics.js', 'assets/polar-coordinate.js', 'assets/polar-graph.js', 'assets/polar-conic-family.js'] %}
+      {% set scripts = scripts + [
+        'assets/js/lecture-04/01-classical-conics/classical-conics.js',
+        'assets/js/lecture-04/04-polar-coordinates/polar-coordinate.js',
+        'assets/js/lecture-04/05-polar-graphs/polar-graph.js',
+        'assets/js/lecture-04/06-polar-conic-family/polar-conic-family.js'
+      ] %}
     {% endif %}
     {% for script in scripts %}<script defer src="{{ script | url }}"></script>{% endfor %}
   {% endif %}
