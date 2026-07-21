@@ -1,55 +1,29 @@
-## Parallel vectors, multiplication by a number, and linear combinations {#scaling}
+## Scaling vectors and forming linear combinations {#scaling}
 
-Before multiplying a vector by a number, we first identify the geometric relation that this operation is meant to preserve.
-
-!!! definition "Parallel vectors from length equalities"
-    Two nonzero free vectors $\mathbf a$ and $\mathbf b$ have the same direction and the same orientation when placing them successively produces no shortening:
-
-    $$
-    |\mathbf a+\mathbf b|=|\mathbf a|+|\mathbf b|.
-    $$
-
-    They have the same direction and opposite orientations when
-
-    $$
-    |\mathbf a-\mathbf b|=|\mathbf a|+|\mathbf b|.
-    $$
-
-    In both cases the vectors are called parallel.
-
-For $\mathbf a=[a_1,a_2]$ and $\mathbf b=[b_1,b_2]$, equality in the triangle inequality gives the coordinate criterion
-
-$$
-\boxed{\mathbf a\parallel\mathbf b\iff \lambda\mathbf a=\mu\mathbf b}
-$$
-
-for some real numbers $\lambda$ and $\mu$ that are not both zero. In the plane this may also be written as
-
-$$
-\boxed{a_1b_2-a_2b_1=0.}
-$$
-
-If $\lambda$ and $\mu$ have the same sign, the orientations agree; if their signs are opposite, the orientations are opposite.
+A free vector is an instruction for changing position. Multiplying it by a real number changes the size of that displacement and, when the number is negative, reverses its orientation.
 
 ### Multiplication by a real number
 
-If $t>0$, then $t\mathbf a$ is parallel to $\mathbf a$, has the same orientation, and
+!!! definition "Scalar multiplication"
+    For $\mathbf a=[a_1,a_2]$ and $t\in\mathbb R$,
+
+    $$
+    \boxed{t\mathbf a=[ta_1,ta_2]}.
+    $$
+
+If $t>0$, the displacement keeps its orientation and its length is multiplied by $t$:
 
 $$
-|t\mathbf a|=t|\mathbf a|.
+\|t\mathbf a\|=t\|\mathbf a\|.
 $$
 
-If $t<0$, the orientation is reversed and
+If $t<0$, the displacement points in the opposite orientation and
 
 $$
-|t\mathbf a|=|t|\,|\mathbf a|.
+\|t\mathbf a\|=|t|\,\|\mathbf a\|.
 $$
 
-For $t=0$, the result is the zero vector. In coordinates,
-
-$$
-\boxed{t[a_1,a_2]=[ta_1,ta_2].}
-$$
+For $t=0$, every vector is sent to the zero vector $\mathbf0=[0,0]$.
 
 <figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
   <div class="figure-toolbar">
@@ -72,7 +46,7 @@ $$
 \boxed{(s+t)\mathbf a=s\mathbf a+t\mathbf a}.
 $$
 
-These identities follow from coordinatewise arithmetic, while geometrically they say that scaling commutes with combining directed changes.
+These identities follow directly from coordinatewise arithmetic. Geometrically, scaling can be performed before or after composing displacements.
 
 ### Linear combinations: what addition and scaling can build
 
@@ -85,7 +59,7 @@ These identities follow from coordinatewise arithmetic, while geometrically they
 
     is called a linear combination of $\mathbf u$ and $\mathbf v$.
 
-First scale $\mathbf u$ by $a$ and $\mathbf v$ by $b$, then add the resulting displacements. A linear combination is therefore not a new operation.
+First scale $\mathbf u$ by $a$ and $\mathbf v$ by $b$, then add the resulting displacements. A linear combination is therefore built from the two operations already introduced.
 
 !!! note "One direction versus two directions"
     A single nonzero vector generates only the line
@@ -94,13 +68,13 @@ First scale $\mathbf u$ by $a$ and $\mathbf v$ by $b$, then add the resulting di
     \{\lambda\mathbf v:\lambda\in\mathbb R\}.
     $$
 
-    Two parallel vectors still generate one line. Two nonparallel vectors provide two independent directions and can generate the whole plane.
+    Two vectors lying on the same line still generate only that line. Two vectors with different directions provide two independent motions and can generate the whole plane.
 
-!!! derivation "Why nonparallel directions reach the plane"
-    If $\mathbf u$ and $\mathbf v$ are parallel, every multiple of either vector lies on the same line, so every sum $a\mathbf u+b\mathbf v$ remains on that line. If they are not parallel, the parallelogram construction decomposes any target displacement into one component along each direction. The two coefficients record those two signed motions.
+!!! derivation "Why two independent directions reach the plane"
+    If $\mathbf u$ and $\mathbf v$ lie on one line, every sum $a\mathbf u+b\mathbf v$ remains on that line. If their directions differ, the parallelogram construction decomposes any target displacement into one component along each direction. The coefficients record those two signed motions.
 
 !!! theorem "Basis theorem in the plane"
-    Two nonparallel vectors $\mathbf u$ and $\mathbf v$ determine every vector in the plane uniquely in the form
+    Two vectors with different directions determine every vector in the plane uniquely in the form
 
     $$
     \boxed{\mathbf w=a\mathbf u+b\mathbf v}.
