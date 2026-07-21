@@ -17,7 +17,7 @@ Let $\mathbf v=[v_1,v_2]$ be drawn from the origin. Its endpoint, together with 
   <figcaption class="figure-caption">The vector, its two coordinate changes, and its inclination are displayed simultaneously.</figcaption>
 </figure>
 
-??? derivation "Length from the Pythagorean theorem"
+!!! derivation "Length from the Pythagorean theorem"
     $$
     \|\mathbf v\|^2=v_1^2+v_2^2.
     $$
@@ -56,7 +56,7 @@ The vector $B-A$ records how to move from $A$ to $B$, while its norm records the
 
 Assume $\mathbf v\neq\mathbf0$ and let $\alpha$ be its angle of inclination measured from the positive $x$-axis.
 
-??? derivation "Recovering the coordinates"
+!!! derivation "Recovering the coordinates"
     The right triangle gives
 
     $$
