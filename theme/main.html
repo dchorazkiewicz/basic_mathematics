@@ -25,7 +25,7 @@
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
   {% if page.meta.lecture %}
     <script defer src="https://cdn.jsdelivr.net/npm/jsxgraph@1.10.1/distrib/jsxgraphcore.js"></script>
-    {% set scripts = ['assets/js/shared/fullscreen.js', 'assets/js/shared/jsx-board-layout.js'] %}
+    {% set scripts = ['assets/js/shared/fullscreen.js', 'assets/js/shared/jsx-board-layout.js', 'assets/js/shared/vector-label-style.js'] %}
     {% if page.meta.lecture == '01' %}
       {% set scripts = scripts + [
         'assets/js/lecture-01/01-before-coordinates/euclidean-constructions.js',
