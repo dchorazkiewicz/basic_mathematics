@@ -1,23 +1,28 @@
 ---
 title: Vectors, Bases, and Coordinate Systems
+description: Lecture 2 — Vectors, Bases, and Coordinate Systems
+lecture: "02"
+eyebrow: Lecture 02 · Analytical Geometry
+lecture_title: Vectors, Bases, and Coordinate Systems
+intro: Coordinates first described locations. We now use coordinate differences to construct directed changes, identify when arrows represent the same vector, and derive the operations and tests used throughout analytical geometry.
+section_links:
+  - { id: from-points, title: From points to vectors }
+  - { id: addition, title: Addition and subtraction }
+  - { id: scaling, title: Scaling and combinations }
+  - { id: length-direction, title: Length and direction }
+  - { id: tests, title: Parallel and perpendicular }
+  - { id: angle, title: Angle and dot product }
+  - { id: projection, title: Projection }
+  - { id: basis, title: Change of basis }
+  - { id: exercises, title: Exercises }
 ---
 
-<div class="lecture-hero">
-  <p class="eyebrow">Lecture 02 · Analytical Geometry</p>
-  <h1>Vectors, Bases, and Coordinate Systems</h1>
-  <p>Coordinates first described locations. We now use coordinate differences to construct directed changes, identify when arrows represent the same vector, and derive the operations and tests used throughout analytical geometry.</p>
-</div>
-
-## Lecture map
-
-1. [From Cartesian points to free vectors](01-from-points.md)
-2. [Addition, opposite vectors, and subtraction](02-addition.md)
-3. Scaling and linear combinations
-4. Length and direction
-5. Parallel and perpendicular tests
-6. Angle and dot product
-7. Projection
-8. Change of basis
-9. Exercises
-
-The lecture is kept modular: each major conceptual section lives in a separate Markdown file, while interactive figures are reusable JavaScript components mounted in small semantic containers.
+--8<-- "lecture-02/sections/01-from-points.md"
+--8<-- "lecture-02/sections/02-addition.md"
+--8<-- "lecture-02/sections/03-scaling.md"
+--8<-- "lecture-02/sections/04-length-direction.md"
+--8<-- "lecture-02/sections/05-tests.md"
+--8<-- "lecture-02/sections/06-angle.md"
+--8<-- "lecture-02/sections/07-projection.md"
+--8<-- "lecture-02/sections/08-basis.md"
+--8<-- "lecture-02/sections/09-exercises.md"

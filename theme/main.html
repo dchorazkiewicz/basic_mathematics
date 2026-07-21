@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="{{ page.meta.description or config.site_description }}">
+  <title>{% if page.title %}{{ page.title }} · {% endif %}{{ config.site_name }}</title>
+  <link rel="stylesheet" href="{{ 'assets/css/base.css' | url }}">
+  <link rel="stylesheet" href="{{ 'assets/css/home.css' | url }}">
+  <link rel="stylesheet" href="{{ 'assets/css/lecture.css' | url }}">
+  <link rel="stylesheet" href="{{ 'assets/css/figures.css' | url }}">
+  <link rel="stylesheet" href="{{ 'assets/css/exercises.css' | url }}">
+  <link rel="stylesheet" href="{{ 'assets/css/mkdocs-adapter.css' | url }}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsxgraph@1.10.1/distrib/jsxgraph.css">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams'
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/jsxgraph@1.10.1/distrib/jsxgraphcore.js"></script>
+  {% for script in [
+    'assets/js/fullscreen.js',
+    'assets/js/jsx-board-layout.js',
+    'assets/cartesian-construction.js',
+    'assets/distance-geometry.js',
+    'assets/function-machine.js',
+    'assets/circle-relation.js',
+    'assets/parametric-curves.js',
+    'assets/intersections-regions.js',
+    'assets/point-arithmetic.js',
+    'assets/vector-equivalence.js',
+    'assets/vector-addition.js',
+    'assets/vector-scaling.js',
+    'assets/vector-direction.js',
+    'assets/vector-tests.js',
+    'assets/vector-projection.js',
+    'assets/vector-basis.js',
+    'assets/line-descriptions.js',
+    'assets/line-distance.js',
+    'assets/plane-generation.js',
+    'assets/plane-relations.js',
+    'assets/classical-conics.js',
+    'assets/polar-coordinate.js',
+    'assets/polar-graph.js',
+    'assets/polar-conic-family.js'
+  ] %}<script defer src="{{ script | url }}"></script>{% endfor %}
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="{{ nav.homepage.url | url }}">Mathematical Stories</a>
+    <nav class="header-links" aria-label="Primary navigation">
+      <a href="{{ nav.homepage.url | url }}#course-map">Course map</a>
+      <a href="{{ config.repo_url }}">GitHub</a>
+    </nav>
+  </header>
+
+  {% if page.meta.home %}
+    <main class="home">{{ page.content }}</main>
+  {% elif page.meta.lecture %}
+    <div class="lecture-shell">
+      <aside class="lecture-nav" aria-label="Lecture contents">
+        <div class="nav-label">Lecture {{ page.meta.lecture }}</div>
+        {% for section in page.meta.section_links %}
+          <a href="#{{ section.id }}">{{ section.title }}</a>
+        {% endfor %}
+      </aside>
+      <main class="lecture-main">
+        <header class="lecture-header">
+          <p class="eyebrow">{{ page.meta.eyebrow }}</p>
+          <h1>{{ page.meta.lecture_title }}</h1>
+          <p>{{ page.meta.intro }}</p>
+        </header>
+        {{ page.content }}
+      </main>
+    </div>
+  {% else %}
+    <main class="standalone-page">{{ page.content }}</main>
+  {% endif %}
+</body>
+</html>
