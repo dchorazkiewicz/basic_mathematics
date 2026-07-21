@@ -58,11 +58,11 @@
 
   view.create('plane3d', [P0, u, v, [-1.45, 1.45], [-1.45, 1.45]], {
     fillColor: '#2f6f9f',
-    fillOpacity: 0.18,
+    fillOpacity: 0.32,
     strokeColor: '#2f6f9f',
-    strokeOpacity: 0.75,
-    strokeWidth: 1,
-    mesh3d: { visible: true, strokeColor: '#2f6f9f', strokeOpacity: 0.22, strokeWidth: 1 },
+    strokeOpacity: 0.95,
+    strokeWidth: 2,
+    mesh3d: { visible: true, strokeColor: '#2f6f9f', strokeOpacity: 0.42, strokeWidth: 1.4 },
     ...fixed
   });
 

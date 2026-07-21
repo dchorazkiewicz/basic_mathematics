@@ -48,11 +48,11 @@
     point, d1, d2, [-3.1, 3.1], [-3.1, 3.1]
   ], {
     fillColor: color,
-    fillOpacity: 0.18,
+    fillOpacity: 0.32,
     strokeColor: color,
-    strokeOpacity: 0.8,
-    strokeWidth: 1,
-    mesh3d: { visible: true, strokeColor: color, strokeOpacity: 0.18, strokeWidth: 1 },
+    strokeOpacity: 0.95,
+    strokeWidth: 2,
+    mesh3d: { visible: true, strokeColor: color, strokeOpacity: 0.38, strokeWidth: 1.35 },
     ...fixed
   }), group);
   const arrow = (point, direction, color, group) => register(view.create('line3d', [
