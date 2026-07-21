@@ -129,40 +129,12 @@ $$
 
 The opposite free vector has representatives with the same length as representatives of $\mathbf a$, but with reversed orientation.
 
-### Subtraction asks for the missing displacement
+### Subtraction
 
-Suppose the total displacement $\mathbf a$ is known and one stage $\mathbf b$ is known. The displacement that must occur before $\mathbf b$ is the free vector $\mathbf x$ satisfying
-
-$$
-\mathbf x+\mathbf b=\mathbf a.
-$$
-
-We define this missing displacement by
-
-$$
-\mathbf x=\mathbf a+(-\mathbf b).
-$$
-
-<figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
-  <div class="figure-toolbar">
-    <div>
-      <span class="figure-title">Opposite displacement and subtraction</span>
-      <span class="figure-step-title">Reverse $\mathbf b$, add the reversed displacement to $\mathbf a$, and verify the missing stage.</span>
-    </div>
-    <button class="icon-button" type="button" data-fullscreen aria-label="Open opposite vector and subtraction figure in full screen">⛶</button>
-  </div>
-  <div class="curve-switcher" role="group" aria-label="Choose a subtraction construction step">
-    <button class="curve-mode is-active" type="button" data-subtraction-step="opposite">Construct $-\mathbf b$</button>
-    <button class="curve-mode" type="button" data-subtraction-step="add">Add $\mathbf a+(-\mathbf b)$</button>
-    <button class="curve-mode" type="button" data-subtraction-step="check">Check the missing vector</button>
-  </div>
-  <div class="figure-stage jsx-stage"><div id="vector-subtraction-board" class="jxgbox" data-vector-subtraction></div></div>
-  <div class="relation-readout" data-vector-subtraction-readout></div>
-  <figcaption class="figure-caption">Subtraction constructs the displacement that is missing from a composition of motions.</figcaption>
-</figure>
+Once the opposite vector has been defined, subtraction is simply addition of that opposite vector.
 
 !!! definition "Subtraction of free vectors"
-    Subtraction is addition of the opposite displacement:
+    For $\mathbf a=[a_1,a_2]$ and $\mathbf b=[b_1,b_2]$,
 
     $$
     \boxed{
@@ -172,7 +144,7 @@ $$
     }
     $$
 
-    It is characterised by
+    Consequently,
 
     $$
     (\mathbf a-\mathbf b)+\mathbf b=\mathbf a.

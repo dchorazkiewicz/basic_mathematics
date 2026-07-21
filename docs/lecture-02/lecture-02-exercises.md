@@ -32,7 +32,17 @@
 
 14. Choose two nonzero vectors of equal length such that $\|\mathbf u+\mathbf v\|<\|\mathbf u\|$. Compute the lengths and explain how the angle between the vectors produces partial cancellation.
 
-15. Starting from the cosine theorem for the triangle formed by $\mathbf u$, $\mathbf v$, and $\mathbf u-\mathbf v$, derive $\mathbf u\cdot\mathbf v=\|\mathbf u\|\,\|\mathbf v\|\cos\theta$. Explain why the sign of the dot product distinguishes acute, right, and obtuse angles.
+15. Starting from the coordinate definition of the dot product, prove
+
+    $$
+    (\mathbf u+\mathbf w)\cdot\mathbf v
+      =\mathbf u\cdot\mathbf v+\mathbf w\cdot\mathbf v,
+    \qquad
+    (\lambda\mathbf u)\cdot\mathbf v
+      =\lambda(\mathbf u\cdot\mathbf v),
+    $$
+
+    together with symmetry and $\mathbf u\cdot\mathbf u=\|\mathbf u\|^2$. Use these properties to expand $\|\mathbf u-\mathbf v\|^2$ and recover the cosine theorem.
 
 16. Let $\mathbf r=\mathbf u-\operatorname{proj}_{\mathbf v}\mathbf u$ for $\mathbf v\neq\mathbf0$. Prove directly that $\mathbf r\cdot\mathbf v=0$. Then use $\|\mathbf r\|^2\geq0$ to derive the Cauchy--Schwarz inequality
 
