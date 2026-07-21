@@ -11,6 +11,9 @@
   };
   const fixed = { fixed: true, highlight: false };
   const draggable = { size: 5, snapToGrid: true, snapSizeX: 0.5, snapSizeY: 0.5 };
+  const vectorLabel = options => window.LectureJSX?.vectorLabelStyle?.(options) ?? {
+    display: 'html', cssClass: 'vector-label-chip', fixed: true, highlight: false, ...options
+  };
   const f = value => {
     const rounded = Math.round(value * 10) / 10;
     return Number.isInteger(rounded) ? String(rounded) : rounded.toFixed(1);
@@ -37,9 +40,9 @@
     board.create('arrow', [Q, R], { strokeColor: colors.b, strokeWidth: 5, ...fixed });
     board.create('arrow', [P, R], { strokeColor: colors.sum, strokeWidth: 4, dash: 2, ...fixed });
 
-    board.create('text', [() => (P.X() + Q.X()) / 2, () => (P.Y() + Q.Y()) / 2 + 0.35, 'a = [PQ]'], { color: colors.a, fontSize: 18, ...fixed });
-    board.create('text', [() => (Q.X() + R.X()) / 2, () => (Q.Y() + R.Y()) / 2 + 0.35, 'b = [QR]'], { color: colors.b, fontSize: 18, ...fixed });
-    board.create('text', [() => (P.X() + R.X()) / 2, () => (P.Y() + R.Y()) / 2 - 0.45, 'a + b = [PR]'], { color: colors.sum, fontSize: 18, ...fixed });
+    board.create('text', [() => (P.X() + Q.X()) / 2, () => (P.Y() + Q.Y()) / 2 + 0.35, 'a = [PQ]'], vectorLabel({ color: colors.a, fontSize: 18 }));
+    board.create('text', [() => (Q.X() + R.X()) / 2, () => (Q.Y() + R.Y()) / 2 + 0.35, 'b = [QR]'], vectorLabel({ color: colors.b, fontSize: 18 }));
+    board.create('text', [() => (P.X() + R.X()) / 2, () => (P.Y() + R.Y()) / 2 - 0.45, 'a + b = [PR]'], vectorLabel({ color: colors.sum, fontSize: 18 }));
 
     function updateReadout() {
       const ax = Q.X() - P.X();
@@ -82,12 +85,12 @@
     const difference = board.create('arrow', [O, D], { strokeColor: colors.sum, strokeWidth: 5, ...fixed });
     const checkB = board.create('arrow', [D, A], { strokeColor: colors.b, strokeWidth: 4, dash: 2, ...fixed });
 
-    const labelA = board.create('text', [() => A.X() / 2, () => A.Y() / 2 - 0.35, 'a'], { color: colors.a, fontSize: 19, ...fixed });
-    const labelB = board.create('text', [() => B.X() / 2 - 0.3, () => B.Y() / 2, 'b'], { color: colors.b, fontSize: 19, ...fixed });
-    const labelNegB = board.create('text', [() => -B.X() / 2 - 0.3, () => -B.Y() / 2, '−b'], { color: colors.opposite, fontSize: 19, ...fixed });
-    const labelNegBAtA = board.create('text', [() => (A.X() + D.X()) / 2, () => (A.Y() + D.Y()) / 2 - 0.35, '−b'], { color: colors.opposite, fontSize: 19, ...fixed });
-    const labelDifference = board.create('text', [() => D.X() / 2 + 0.2, () => D.Y() / 2 - 0.35, 'a − b'], { color: colors.sum, fontSize: 19, ...fixed });
-    const labelCheck = board.create('text', [() => (D.X() + A.X()) / 2 + 0.2, () => (D.Y() + A.Y()) / 2 + 0.25, 'b'], { color: colors.b, fontSize: 19, ...fixed });
+    const labelA = board.create('text', [() => A.X() / 2, () => A.Y() / 2 - 0.35, 'a'], vectorLabel({ color: colors.a, fontSize: 19 }));
+    const labelB = board.create('text', [() => B.X() / 2 - 0.3, () => B.Y() / 2, 'b'], vectorLabel({ color: colors.b, fontSize: 19 }));
+    const labelNegB = board.create('text', [() => -B.X() / 2 - 0.3, () => -B.Y() / 2, '−b'], vectorLabel({ color: colors.opposite, fontSize: 19 }));
+    const labelNegBAtA = board.create('text', [() => (A.X() + D.X()) / 2, () => (A.Y() + D.Y()) / 2 - 0.35, '−b'], vectorLabel({ color: colors.opposite, fontSize: 19 }));
+    const labelDifference = board.create('text', [() => D.X() / 2 + 0.2, () => D.Y() / 2 - 0.35, 'a − b'], vectorLabel({ color: colors.sum, fontSize: 19 }));
+    const labelCheck = board.create('text', [() => (D.X() + A.X()) / 2 + 0.2, () => (D.Y() + A.Y()) / 2 + 0.25, 'b'], vectorLabel({ color: colors.b, fontSize: 19 }));
 
     const controlled = [negB, negBAtA, difference, checkB, NegB, D, labelNegB, labelNegBAtA, labelDifference, labelCheck];
 
