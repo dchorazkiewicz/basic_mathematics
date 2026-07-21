@@ -88,13 +88,14 @@ and call it an *anchored vector*. The order matters: $P$ is its initial point an
 <figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
   <div class="figure-toolbar">
     <div>
-      <span class="figure-title">An anchored vector and its coordinate changes</span>
-      <span class="figure-step-title">The horizontal and vertical changes are $q_1-p_1$ and $q_2-p_2$.</span>
+      <span class="figure-title">An anchored vector</span>
+      <span class="figure-step-title">Move $P$ and $Q$ to see the directed arrow determined by the ordered pair $(P,Q)$.</span>
     </div>
-    <button class="icon-button" type="button" data-fullscreen aria-label="Open vector equivalence figure in full screen">⛶</button>
+    <button class="icon-button" type="button" data-fullscreen aria-label="Open anchored vector figure in full screen">⛶</button>
   </div>
-  <div class="figure-stage jsx-stage"><div id="vector-equivalence-board" class="jxgbox" data-vector-equivalence></div></div>
-  <figcaption class="figure-caption">The arrow begins at $P$ and ends at $Q$; its coordinates record the two coordinate changes.</figcaption>
+  <div class="figure-stage jsx-stage"><div id="anchored-vector-board" class="jxgbox" data-anchored-vector></div></div>
+  <div class="relation-readout"><span data-anchored-vector-readout></span></div>
+  <figcaption class="figure-caption">The first point is the initial point and the second point is the endpoint. Reversing their order reverses the arrow.</figcaption>
 </figure>
 
 The point difference is
@@ -146,6 +147,18 @@ $$
 $$
 
 Thus two anchored vectors are equal precisely when their corresponding coordinates are equal. Their initial points may be different.
+
+<figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
+  <div class="figure-toolbar">
+    <div>
+      <span class="figure-title">Equal anchored vectors in different positions</span>
+      <span class="figure-step-title">Both arrows have the same coordinate change, although their initial points differ.</span>
+    </div>
+    <button class="icon-button" type="button" data-fullscreen aria-label="Open vector equivalence figure in full screen">⛶</button>
+  </div>
+  <div class="figure-stage jsx-stage"><div id="vector-equivalence-board" class="jxgbox" data-vector-equivalence></div></div>
+  <figcaption class="figure-caption">The dashed segments display the parallelogram relation behind the equality $Q-P=Q'-P'$.</figcaption>
+</figure>
 
 ### Free vectors
 
