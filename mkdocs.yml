@@ -7,7 +7,7 @@ repo_name: dchorazkiewicz/basic_mathematics
 docs_dir: docs
 site_dir: site_build
 strict: true
-not_in_nav: |
+exclude_docs: |
   lecture-*/sections/*.md
 
 theme:
