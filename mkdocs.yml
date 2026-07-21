@@ -63,6 +63,7 @@ nav:
           - lecture-02/index.md
           - From points to vectors: lecture-02/01-from-points.md
           - Addition and subtraction: lecture-02/02-addition.md
+  - Authoring and deployment: authoring-guide.md
 
 markdown_extensions:
   - attr_list
