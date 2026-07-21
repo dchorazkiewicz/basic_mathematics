@@ -1,68 +1,25 @@
 site_name: Mathematical Stories
-site_description: A constructive course in analytical geometry, linear algebra and calculus
+site_description: A course in analytical geometry, linear algebra and calculus.
 site_url: https://dchorazkiewicz.github.io/basic_mathematics/
 repo_url: https://github.com/dchorazkiewicz/basic_mathematics
 repo_name: dchorazkiewicz/basic_mathematics
 
-strict: true
+docs_dir: docs
 site_dir: site_build
-
-validation:
-  omitted_files: warn
-  absolute_links: warn
-  unrecognized_links: warn
-
-watch:
-  - docs
-  - overrides
+strict: true
+not_in_nav: |
+  lecture-*/sections/*.md
 
 theme:
-  name: material
-  custom_dir: overrides
-  language: en
-  font:
-    text: Source Sans 3
-    code: JetBrains Mono
-  palette:
-    - media: "(prefers-color-scheme: light)"
-      scheme: default
-      primary: indigo
-      accent: deep orange
-      toggle:
-        icon: material/weather-night
-        name: Switch to dark mode
-    - media: "(prefers-color-scheme: dark)"
-      scheme: slate
-      primary: indigo
-      accent: amber
-      toggle:
-        icon: material/weather-sunny
-        name: Switch to light mode
-  features:
-    - navigation.sections
-    - navigation.indexes
-    - navigation.top
-    - navigation.footer
-    - navigation.tracking
-    - toc.follow
-    - search.suggest
-    - search.highlight
-    - content.code.copy
-    - content.tabs.link
+  name: null
+  custom_dir: theme
 
 nav:
   - Home: index.md
-  - Part I · Analytical Geometry:
-      - Lecture 1 · Cartesian Geometry and Coordinates:
-          - chapter-01/index.md
-          - Constructing Cartesian coordinates: chapter-01/constructing-coordinates.md
-          - Graphs and intersections: chapter-01/graphs-and-intersections.md
-          - Euclidean reference: chapter-01/euclidean-reference.md
-          - Review exercises: chapter-01/review-exercises.md
-      - Lecture 2 · Vectors, Bases, and Coordinate Systems:
-          - lecture-02/index.md
-          - From points to vectors: lecture-02/01-from-points.md
-          - Addition and subtraction: lecture-02/02-addition.md
+  - Lecture 01 · Cartesian Geometry and Coordinates: lecture-01/index.md
+  - Lecture 02 · Vectors, Bases, and Coordinate Systems: lecture-02/index.md
+  - Lecture 03 · Lines and Planes: lecture-03/index.md
+  - Lecture 04 · Conic Sections: lecture-04/index.md
   - Authoring and deployment: authoring-guide.md
 
 markdown_extensions:
@@ -76,22 +33,13 @@ markdown_extensions:
       generic: true
   - pymdownx.details
   - pymdownx.superfences
-  - pymdownx.tabbed:
-      alternate_style: true
+  - pymdownx.snippets:
+      base_path: docs
+      check_paths: true
   - toc:
       permalink: true
 
-extra_javascript:
-  - javascripts/mathjax.js
-  - https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js
-  - https://cdn.jsdelivr.net/npm/jsxgraph@1.10.1/distrib/jsxgraphcore.js
-  - javascripts/course.js
-  - javascripts/point-vectors.js
-  - javascripts/vector-addition.js
-
-extra_css:
-  - https://cdn.jsdelivr.net/npm/jsxgraph@1.10.1/distrib/jsxgraph.css
-  - stylesheets/extra.css
-  - stylesheets/course.css
+plugins:
+  - search
 
 copyright: Copyright &copy; Damian Chorążkiewicz

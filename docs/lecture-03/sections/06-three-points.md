@@ -1,0 +1,7 @@
+<section id="three-points" class="section">
+  <h2>A plane through three points</h2>
+  <div class="derivation"><h3>Extracting two independent directions</h3><p>Let $P,Q,R$ be three noncollinear points. Then</p><div class="display-math">$$\mathbf u=Q-P,\qquad \mathbf v=R-P$$</div><p>are nonparallel and provide the two directions required to generate a plane. Their cross product</p><div class="display-math">$$\mathbf n=(Q-P)\times(R-P)$$</div><p>is nonzero and perpendicular to the plane.</p></div>
+  <div class="statement"><div class="statement-label">Unique plane through three noncollinear points</div><div class="display-math">$$\boxed{\Pi=\{P+s(Q-P)+t(R-P):s,t\in\mathbb R\}},$$</div><div class="display-math">$$\boxed{\mathbf n=(Q-P)\times(R-P)}.$$</div></div>
+  <div class="statement"><div class="statement-label">Example</div><p>For $P=(1,0,0)$, $Q=(0,1,0)$, and $R=(0,0,1)$,</p><div class="display-math">$$Q-P=[-1,1,0],\qquad R-P=[-1,0,1],$$</div><div class="display-math">$$(Q-P)\times(R-P)=[1,1,1].$$</div><p>Using $P$ in the normal equation gives</p><div class="display-math">$$(1,1,1)\cdot((x,y,z)-(1,0,0))=0,$$</div><div class="display-math">$$\boxed{x+y+z=1}. $$</div></div>
+  <p>Noncollinearity is essential. If $P,Q,R$ are collinear, then $Q-P$ and $R-P$ are parallel and their cross product is zero, so they do not supply two independent directions.</p>
+</section>
