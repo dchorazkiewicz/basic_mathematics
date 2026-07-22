@@ -1,31 +1,32 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-labelledby="title desc">
-  <title id="title">Two points on the unit circle</title>
-  <desc id="desc">Points A and B lie on the unit circle at angles alpha and beta. The chord AB subtends the central angle delta equal to alpha minus beta.</desc>
-  <defs>
-    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
-      <path d="M0,0 L0,6 L9,3 z" fill="#66717d"/>
-    </marker>
-  </defs>
-  <rect width="800" height="520" fill="#f5f8fa"/>
-  <line x1="90" y1="400" x2="730" y2="400" stroke="#66717d" stroke-width="2" marker-end="url(#arrow)"/>
-  <line x1="250" y1="475" x2="250" y2="55" stroke="#66717d" stroke-width="2" marker-end="url(#arrow)"/>
-  <circle cx="250" cy="400" r="210" fill="none" stroke="#a9b2ba" stroke-width="2"/>
-  <line x1="250" y1="400" x2="438" y2="306" stroke="#3f735f" stroke-width="5"/>
-  <line x1="250" y1="400" x2="385" y2="239" stroke="#2f6f9f" stroke-width="5"/>
-  <line x1="438" y1="306" x2="385" y2="239" stroke="#b1782b" stroke-width="4"/>
-  <circle cx="438" cy="306" r="7" fill="#3f735f"/>
-  <circle cx="385" cy="239" r="7" fill="#2f6f9f"/>
-  <circle cx="250" cy="400" r="6" fill="#18212b"/>
-  <path d="M318 400 A68 68 0 0 0 311 370" fill="none" stroke="#3f735f" stroke-width="3"/>
-  <path d="M330 360 A100 100 0 0 0 314 333" fill="none" stroke="#2f6f9f" stroke-width="3"/>
-  <path d="M309 366 A66 66 0 0 0 294 347" fill="none" stroke="#b1782b" stroke-width="4"/>
-  <text x="454" y="302" font-family="serif" font-size="27" fill="#3f735f">B=(cos β, sin β)</text>
-  <text x="397" y="228" font-family="serif" font-size="27" fill="#2f6f9f">A=(cos α, sin α)</text>
-  <text x="520" y="274" font-family="serif" font-size="26" fill="#b1782b">chord AB</text>
-  <text x="322" y="388" font-family="serif" font-size="24" fill="#3f735f">β</text>
-  <text x="333" y="341" font-family="serif" font-size="24" fill="#2f6f9f">α</text>
-  <text x="295" y="333" font-family="serif" font-size="23" fill="#b1782b">δ=α−β</text>
-  <text x="228" y="431" font-family="serif" font-size="24" fill="#18212b">O</text>
-  <text x="690" y="431" font-family="sans-serif" font-size="20" fill="#66717d">x</text>
-  <text x="268" y="76" font-family="sans-serif" font-size="20" fill="#66717d">y</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 500" role="img" aria-labelledby="title desc">
+  <title id="title">Elementary construction for the cosine difference identity</title>
+  <desc id="desc">A triangle OAB with OA and OB of unit length. The perpendicular from A meets OB at H, giving OH equal to cosine delta, AH equal to sine delta, and HB equal to one minus cosine delta.</desc>
+  <rect width="820" height="500" fill="#f5f8fa"/>
+
+  <line x1="120" y1="390" x2="700" y2="390" stroke="#66717d" stroke-width="2"/>
+
+  <line x1="170" y1="390" x2="610" y2="390" stroke="#3f735f" stroke-width="6"/>
+  <line x1="170" y1="390" x2="500" y2="120" stroke="#2f6f9f" stroke-width="6"/>
+  <line x1="500" y1="120" x2="610" y2="390" stroke="#18212b" stroke-width="5"/>
+  <line x1="500" y1="120" x2="500" y2="390" stroke="#b1782b" stroke-width="5"/>
+
+  <polyline points="500,390 500,360 530,360" fill="none" stroke="#66717d" stroke-width="3"/>
+  <path d="M245 390 A75 75 0 0 0 228 343" fill="none" stroke="#b1782b" stroke-width="4"/>
+
+  <circle cx="170" cy="390" r="7" fill="#18212b"/>
+  <circle cx="500" cy="120" r="8" fill="#2f6f9f"/>
+  <circle cx="500" cy="390" r="7" fill="#b1782b"/>
+  <circle cx="610" cy="390" r="8" fill="#3f735f"/>
+
+  <text x="145" y="430" font-family="serif" font-size="30" fill="#18212b">O</text>
+  <text x="510" y="105" font-family="serif" font-size="30" fill="#2f6f9f">A</text>
+  <text x="480" y="430" font-family="serif" font-size="30" fill="#b1782b">H</text>
+  <text x="620" y="430" font-family="serif" font-size="30" fill="#3f735f">B</text>
+
+  <text x="225" y="345" font-family="serif" font-size="28" fill="#b1782b">δ</text>
+  <text x="285" y="225" font-family="serif" font-size="27" fill="#2f6f9f">OA = 1</text>
+  <text x="335" y="425" font-family="serif" font-size="27" fill="#3f735f">OH = cos δ</text>
+  <text x="515" y="265" font-family="serif" font-size="27" fill="#b1782b">AH = sin δ</text>
+  <text x="505" y="355" font-family="serif" font-size="25" fill="#18212b">HB = 1 − cos δ</text>
+  <text x="520" y="465" font-family="serif" font-size="25" fill="#66717d">OB = 1</text>
 </svg>
