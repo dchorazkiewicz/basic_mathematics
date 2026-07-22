@@ -381,7 +381,7 @@ R-P=(a_1+b_1,\,a_2+b_2).
 \]</div>
 <p>The subtraction <span class="arithmatex">\(Q-P\)</span> is performed on point coordinates; square brackets then indicate that we retain only the resulting change of position.</p>
 </div>
-<h2 id="scaling">Scaling vectors and forming linear combinations</h2>
+<h2 id="scaling">Scaling vectors</h2>
 <h3 id="multiplication-by-a-real-number">Multiplication by a real number</h3>
 <p>A free vector is an instruction for changing position. Multiplying it by a real number changes the size of that displacement and, when the number is negative, reverses its orientation.</p>
 <div class="admonition definition">
@@ -419,50 +419,6 @@ R-P=(a_1+b_1,\,a_2+b_2).
 \boxed{(s+t)\mathbf a=s\mathbf a+t\mathbf a}.
 \]</div>
 <p>These identities follow directly from coordinatewise arithmetic.</p>
-<h3 id="linear-combinations-of-two-vectors">Linear combinations of two vectors</h3>
-<p>Now choose two vectors <span class="arithmatex">\(\mathbf u\)</span> and <span class="arithmatex">\(\mathbf v\)</span>. We want to describe the displacements obtained by assigning an independent coefficient to each direction and then adding the two resulting motions.</p>
-<div class="admonition definition">
-<p class="admonition-title">Linear combination</p>
-<p>Given vectors <span class="arithmatex">\(\mathbf u,\mathbf v\)</span> and real numbers <span class="arithmatex">\(a,b\)</span>, the vector</p>
-<div class="arithmatex">\[
-\boxed{a\mathbf u+b\mathbf v}
-\]</div>
-<p>is called a linear combination of <span class="arithmatex">\(\mathbf u\)</span> and <span class="arithmatex">\(\mathbf v\)</span>.</p>
-</div>
-<p>This is a separate two-vector construction: the coefficient <span class="arithmatex">\(a\)</span> controls the contribution of <span class="arithmatex">\(\mathbf u\)</span>, while <span class="arithmatex">\(b\)</span> controls the contribution of <span class="arithmatex">\(\mathbf v\)</span>.</p>
-<figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
-  <div class="figure-toolbar">
-    <div><span class="figure-title">A linear combination of two vectors</span><span class="figure-step-title" data-linear-combination-readout>$2\mathbf u-\mathbf v$</span></div>
-    <button class="icon-button" type="button" data-fullscreen aria-label="Open linear combination figure in full screen">⛶</button>
-  </div>
-  <div class="figure-stage jsx-stage"><div id="linear-combination-board" class="jxgbox" data-linear-combination></div></div>
-  <div class="parameter-controls" style="--parameter-count:2">
-    <label class="parameter-control"><span>$a$ = <output data-linear-a>2</output></span><input type="range" min="-3" max="3" step="0.25" value="2" data-linear-a-slider></label>
-    <label class="parameter-control"><span>$b$ = <output data-linear-b>-1</output></span><input type="range" min="-3" max="3" step="0.25" value="-1" data-linear-b-slider></label>
-  </div>
-  <figcaption class="figure-caption">The two contributions $a\mathbf u$ and $b\mathbf v$ are placed head to tail; the dark arrow is their sum.</figcaption>
-</figure>
-
-<div class="admonition note">
-<p class="admonition-title">One direction versus two directions</p>
-<p>A single nonzero vector generates only the line</p>
-<div class="arithmatex">\[
-\{\lambda\mathbf v:\lambda\in\mathbb R\}.
-\]</div>
-<p>Two vectors lying on the same line still generate only that line. Two vectors with different directions provide two independent motions and can generate the whole plane.</p>
-</div>
-<div class="admonition derivation">
-<p class="admonition-title">Why two independent directions reach the plane</p>
-<p>If <span class="arithmatex">\(\mathbf u\)</span> and <span class="arithmatex">\(\mathbf v\)</span> lie on one line, every sum <span class="arithmatex">\(a\mathbf u+b\mathbf v\)</span> remains on that line. If their directions differ, the parallelogram construction decomposes any target displacement into one component along each direction. The coefficients record those two signed motions.</p>
-</div>
-<div class="admonition theorem">
-<p class="admonition-title">Basis theorem in the plane</p>
-<p>Two vectors with different directions determine every vector in the plane uniquely in the form</p>
-<div class="arithmatex">\[
-\boxed{\mathbf w=a\mathbf u+b\mathbf v}.
-\]</div>
-<p>A basis is precisely such a pair of independent directions, and basis coordinates are the coefficients in this reconstruction.</p>
-</div>
 <h2 id="length-direction">How much motion and in which direction?</h2>
 <p>The coordinate pair of a vector records two changes, but it does not immediately answer two geometric questions:</p>
 <div class="admonition question">
