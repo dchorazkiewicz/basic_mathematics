@@ -120,39 +120,132 @@
 </div>
 <details class="note">
 <summary>Construction steps</summary>
-<ul>
-<li>Begin with the Euclidean plane.</li>
-<li>Choose two points.</li>
-<li>Construct the first straight line through them.</li>
-<li>Choose the origin <span class="arithmatex">\(O\)</span> on the line.</li>
-<li>Construct the perpendicular axis through <span class="arithmatex">\(O\)</span>.</li>
-<li>Choose the positive directions.</li>
-<li>Choose the unit segment <span class="arithmatex">\(OU\)</span>.</li>
-<li>Set the compass to <span class="arithmatex">\(OU\)</span> and draw the circle centred at <span class="arithmatex">\(O\)</span>.</li>
-<li>Keep only the four marks <span class="arithmatex">\(\pm 1\)</span>.</li>
-<li>Use the mark <span class="arithmatex">\(+1\)</span> as the next compass centre.</li>
-<li>Keep the newly constructed mark <span class="arithmatex">\(+2\)</span>.</li>
-<li>Repeat from <span class="arithmatex">\(+2\)</span>.</li>
-<li>Keep the newly constructed mark <span class="arithmatex">\(+3\)</span>.</li>
-<li>Repeat from <span class="arithmatex">\(-1\)</span> in the negative direction.</li>
-<li>Keep the newly constructed mark <span class="arithmatex">\(-2\)</span>.</li>
-<li>Repeat from <span class="arithmatex">\(+1\)</span> on the vertical axis.</li>
-<li>Keep the newly constructed vertical mark <span class="arithmatex">\(+2\)</span>.</li>
-<li>Repeat from <span class="arithmatex">\(-1\)</span> on the vertical axis.</li>
-<li>Keep the newly constructed vertical mark <span class="arithmatex">\(-2\)</span>.</li>
-<li>Focus on the unit interval <span class="arithmatex">\([0,1]\)</span>.</li>
-<li>Construct the midpoint.</li>
-<li>Remove the helpers and keep <span class="arithmatex">\(1/2\)</span>.</li>
-<li>Bisect both half-intervals.</li>
-<li>Remove the helpers and keep the quarter marks.</li>
-<li>Repeat once more to obtain eighth marks.</li>
-<li>Continue the same process to obtain arbitrarily fine dyadic marks.</li>
-<li>Return to the completed coordinate axes.</li>
-<li>Choose an arbitrary point <span class="arithmatex">\(P\)</span>.</li>
-<li>Project <span class="arithmatex">\(P\)</span> orthogonally onto both axes.</li>
-<li>Reveal a light auxiliary grid.</li>
-<li>Read the ordered pair <span class="arithmatex">\((x,y)\)</span>.</li>
-</ul>
+<ol>
+<li>
+<p><strong>Begin with the Euclidean plane.</strong><br />
+   At this stage there are no coordinates, axes or numbers. We have only the geometric plane and the constructions available in Euclidean geometry.</p>
+</li>
+<li>
+<p><strong>Choose two distinct points.</strong><br />
+   Two distinct points determine a unique straight line. They provide the initial data from which the first axis will be constructed.</p>
+</li>
+<li>
+<p><strong>Construct the first straight line through them.</strong><br />
+   This line will become the horizontal axis. For the moment it has no origin, orientation or numerical scale.</p>
+</li>
+<li>
+<p><strong>Choose the origin <span class="arithmatex">\(O\)</span> on the line.</strong><br />
+   The origin separates the line into two half-lines and gives the reference point to which the coordinate <span class="arithmatex">\(0\)</span> will be assigned.</p>
+</li>
+<li>
+<p><strong>Construct the perpendicular axis through <span class="arithmatex">\(O\)</span>.</strong><br />
+   The perpendicular line supplies a second independent direction. The two axes now meet at a right angle and determine the basic Cartesian frame.</p>
+</li>
+<li>
+<p><strong>Choose the positive directions.</strong><br />
+   Each axis has two possible orientations. Selecting one positive direction on each axis makes signed coordinates possible and distinguishes positive numbers from negative ones.</p>
+</li>
+<li>
+<p><strong>Choose the unit segment <span class="arithmatex">\(OU\)</span>.</strong><br />
+   The length of <span class="arithmatex">\(OU\)</span> is declared to be one unit. This is the common scale used on both axes, so the same geometric length represents the number <span class="arithmatex">\(1\)</span> horizontally and vertically.</p>
+</li>
+<li>
+<p><strong>Set the compass to <span class="arithmatex">\(OU\)</span> and draw the circle centred at <span class="arithmatex">\(O\)</span>.</strong><br />
+   The circle transfers the chosen unit length in every direction from the origin. Its intersections with the axes locate the four points at distance one from <span class="arithmatex">\(O\)</span>.</p>
+</li>
+<li>
+<p><strong>Keep only the four marks <span class="arithmatex">\(\pm1\)</span>.</strong><br />
+   The circle is only a construction aid and may now be removed. The remaining marks establish the first positive and negative unit positions on both axes.</p>
+</li>
+<li>
+<p><strong>Use the mark <span class="arithmatex">\(+1\)</span> as the next compass centre.</strong><br />
+    Keeping the same compass opening transfers one further unit along the positive horizontal direction. No new length is chosen: the original unit is being repeated.</p>
+</li>
+<li>
+<p><strong>Keep the newly constructed mark <span class="arithmatex">\(+2\)</span>.</strong><br />
+    The new intersection lies two unit lengths from the origin. After the auxiliary circle is removed, the mark records the number <span class="arithmatex">\(2\)</span> on the horizontal axis.</p>
+</li>
+<li>
+<p><strong>Repeat from <span class="arithmatex">\(+2\)</span>.</strong><br />
+    The same fixed compass opening is transferred once more. This shows that the integer scale is constructed by repeated addition of the unit length.</p>
+</li>
+<li>
+<p><strong>Keep the newly constructed mark <span class="arithmatex">\(+3\)</span>.</strong><br />
+    The new point is three unit lengths from <span class="arithmatex">\(O\)</span>. The positive integer marks are therefore generated successively rather than placed arbitrarily.</p>
+</li>
+<li>
+<p><strong>Repeat from <span class="arithmatex">\(-1\)</span> in the negative direction.</strong><br />
+    The unit length is now transferred to the opposite side of the origin. Orientation determines that these positions receive negative rather than positive labels.</p>
+</li>
+<li>
+<p><strong>Keep the newly constructed mark <span class="arithmatex">\(-2\)</span>.</strong><br />
+    This point lies two unit lengths from <span class="arithmatex">\(O\)</span> in the negative horizontal direction. The scale is symmetric in distance, but its signs depend on the chosen orientation.</p>
+</li>
+<li>
+<p><strong>Repeat from <span class="arithmatex">\(+1\)</span> on the vertical axis.</strong><br />
+    The same unit is transferred along the positive vertical direction. Using one common unit makes horizontal and vertical measurements directly comparable.</p>
+</li>
+<li>
+<p><strong>Keep the newly constructed vertical mark <span class="arithmatex">\(+2\)</span>.</strong><br />
+    The point is two units above the origin according to the selected orientation. The vertical axis now carries the same numerical scale as the horizontal axis.</p>
+</li>
+<li>
+<p><strong>Repeat from <span class="arithmatex">\(-1\)</span> on the vertical axis.</strong><br />
+    The construction is mirrored below the origin. Again, the distance is positive as a length, while the coordinate is negative because of orientation.</p>
+</li>
+<li>
+<p><strong>Keep the newly constructed vertical mark <span class="arithmatex">\(-2\)</span>.</strong><br />
+    We now have integer marks in both directions on both axes. Further integers can be obtained by continuing exactly the same transfer process.</p>
+</li>
+<li>
+<p><strong>Focus on the unit interval <span class="arithmatex">\([0,1]\)</span>.</strong><br />
+    Integer marks alone do not yet provide a sufficiently fine scale. We isolate one unit interval because subdivisions constructed there can be reproduced throughout the axes.</p>
+</li>
+<li>
+<p><strong>Construct the midpoint.</strong><br />
+    The perpendicular bisector of the unit segment identifies the point equidistant from <span class="arithmatex">\(0\)</span> and <span class="arithmatex">\(1\)</span>. This point divides the unit interval into two equal parts.</p>
+</li>
+<li>
+<p><strong>Remove the helpers and keep <span class="arithmatex">\(1/2\)</span>.</strong><br />
+    The circles and bisector used in the construction are temporary. The surviving mark represents the number <span class="arithmatex">\(\tfrac12\)</span> because it lies halfway between <span class="arithmatex">\(0\)</span> and <span class="arithmatex">\(1\)</span>.</p>
+</li>
+<li>
+<p><strong>Bisect both half-intervals.</strong><br />
+    Applying the same midpoint construction to <span class="arithmatex">\([0,\tfrac12]\)</span> and <span class="arithmatex">\([\tfrac12,1]\)</span> divides the unit into four equal parts.</p>
+</li>
+<li>
+<p><strong>Remove the helpers and keep the quarter marks.</strong><br />
+    The permanent marks are <span class="arithmatex">\(\tfrac14\)</span>, <span class="arithmatex">\(\tfrac12\)</span> and <span class="arithmatex">\(\tfrac34\)</span>. They show how rational positions arise from repeated geometric subdivision.</p>
+</li>
+<li>
+<p><strong>Repeat once more to obtain eighth marks.</strong><br />
+    Bisecting each quarter produces intervals of length <span class="arithmatex">\(\tfrac18\)</span>. The scale becomes finer without changing either the origin or the original unit.</p>
+</li>
+<li>
+<p><strong>Continue the same process to obtain arbitrarily fine dyadic marks.</strong><br />
+    Repeated bisection produces numbers of the form <span class="arithmatex">\(k/2^n\)</span>. These marks illustrate how the numerical scale can be refined as closely as needed.</p>
+</li>
+<li>
+<p><strong>Return to the completed coordinate axes.</strong><br />
+    The axes now have an origin, positive directions and a common subdivided scale. These choices turn each axis into a copy of the real number line.</p>
+</li>
+<li>
+<p><strong>Choose an arbitrary point <span class="arithmatex">\(P\)</span> in the plane.</strong><br />
+    The point need not lie on either axis. Our next task is to describe its position using the numerical structures already constructed on the axes.</p>
+</li>
+<li>
+<p><strong>Project <span class="arithmatex">\(P\)</span> orthogonally onto both axes.</strong><br />
+    The perpendicular projections identify one number on the horizontal axis and one number on the vertical axis. These numbers measure the signed horizontal and vertical positions of <span class="arithmatex">\(P\)</span>.</p>
+</li>
+<li>
+<p><strong>Reveal a light auxiliary grid.</strong><br />
+    The grid extends the scale marks through the plane and makes the two projections easier to read. It is a visual aid, not an additional part of the definition of coordinates.</p>
+</li>
+<li>
+<p><strong>Read the ordered pair <span class="arithmatex">\((x,y)\)</span>.</strong><br />
+    The horizontal projection gives the first coordinate <span class="arithmatex">\(x\)</span>, and the vertical projection gives the second coordinate <span class="arithmatex">\(y\)</span>. Thus the completed construction assigns to <span class="arithmatex">\(P\)</span> the ordered pair <span class="arithmatex">\((x,y)\)</span>.</p>
+</li>
+</ol>
 </details>
 <h2 id="coordinates">Assigning coordinates</h2>
 <p>Let <span class="arithmatex">\(P\)</span> be any point of the plane. Through <span class="arithmatex">\(P\)</span>, construct perpendiculars to both axes. Their intersection points with the axes determine two signed real numbers <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span>.</p>
