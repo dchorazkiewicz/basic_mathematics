@@ -11,7 +11,7 @@ home: true
 !!! note "Before the lectures"
     The introduction explains the purpose of the course, the weekly learning cycle, and the standard expected of mathematical notes.
 
-    **[Read the course introduction →](manifest.md)**
+    **[Read the course introduction →](introduction/purpose-and-philosophy.md)**
 
 ## Part I · Analytical Geometry {#course-map}
 
