@@ -177,7 +177,7 @@
       name: '', size: 6, fillColor: '#3f735f', strokeColor: '#3f735f', ...fixed
     });
 
-    // First move by s*u, then by t*v. Both stages remain on the plane.
+    // First form s*u, then t*v; their sum is applied at P0.
     view.create('line3d', [origin, afterU], {
       strokeColor: '#2f6f9f', strokeWidth: 5, lastArrow: true, ...fixed
     });
@@ -199,7 +199,7 @@
       () => generatedPoint()[0] + 0.14,
       () => generatedPoint()[1] + 0.14,
       () => generatedPoint()[2] + 0.24
-    ], '$P_0+s\\mathbf u+t\\mathbf v$'],
+    ], '$P_0\\oplus(s\\mathbf u+t\\mathbf v)$'],
       boxed({ color: '#3f735f', fontSize: 17, useMathJax: true }));
 
     board.fullUpdate();
