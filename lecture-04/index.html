@@ -488,11 +488,11 @@ r=\frac{p}{1+e\cos\theta}
 <p>Cartesian coordinates are best for centres, axes, vertices, and complete symmetric pictures. Polar coordinates centred at a focus are best for radial distance, orientation, eccentricity, and orbital interpretation. Analytic geometry works by choosing the representation in which the geometry speaks most clearly.</p>
 </div>
 <h2 id="computational-model">Computational interlude: Cartesian and polar conics</h2>
-<p>The plane classes <code>Point</code> and <code>FreeVector</code> are those defined in Lecture 2. Each conic below implements the equations, parametrisations and geometric data used in this chapter.</p>
+<p>The planar classes <code>Point</code>, <code>AnchoredVector</code>, and <code>FreeVector</code> are those defined in Lecture 2. Polar directions are therefore constructed from points on the unit circle and only then converted into free vectors.</p>
 <details class="example">
 <summary>Python class: <code>PolarCoordinates</code></summary>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">atan2</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">hypot</span><span class="p">,</span> <span class="n">sin</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">atan2</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">sin</span>
 
 
 <span class="nd">@dataclass</span>
@@ -506,18 +506,44 @@ r=\frac{p}{1+e\cos\theta}
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">unit_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FreeVector</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">FreeVector</span><span class="p">(</span><span class="n">cos</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">angle</span><span class="p">),</span> <span class="n">sin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">angle</span><span class="p">))</span>
+        <span class="n">origin</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">endpoint</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">cos</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">angle</span><span class="p">),</span> <span class="n">sin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">angle</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">origin</span><span class="o">.</span><span class="n">anchored_vector_to</span><span class="p">(</span><span class="n">endpoint</span><span class="p">)</span><span class="o">.</span><span class="n">as_free_vector</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">to_cartesian</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pole</span><span class="p">:</span> <span class="n">Point</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Point</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">pole</span><span class="o">.</span><span class="n">translated_by</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">unit_direction</span><span class="p">)</span>
+        <span class="n">radial_vector</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">unit_direction</span>
+        <span class="k">return</span> <span class="n">pole</span><span class="o">.</span><span class="n">translated_by</span><span class="p">(</span><span class="n">radial_vector</span><span class="p">)</span>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">from_cartesian</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">point</span><span class="p">:</span> <span class="n">Point</span><span class="p">,</span> <span class="n">pole</span><span class="p">:</span> <span class="n">Point</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;PolarCoordinates&quot;</span><span class="p">:</span>
-        <span class="n">displacement</span> <span class="o">=</span> <span class="n">pole</span><span class="o">.</span><span class="n">vector_to</span><span class="p">(</span><span class="n">point</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_cartesian</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span>
+        <span class="n">point</span><span class="p">:</span> <span class="n">Point</span><span class="p">,</span>
+        <span class="n">pole</span><span class="p">:</span> <span class="n">Point</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;PolarCoordinates&quot;</span><span class="p">:</span>
+        <span class="n">displacement</span> <span class="o">=</span> <span class="n">pole</span><span class="o">.</span><span class="n">anchored_vector_to</span><span class="p">(</span><span class="n">point</span><span class="p">)</span><span class="o">.</span><span class="n">as_free_vector</span><span class="p">()</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
-            <span class="n">hypot</span><span class="p">(</span><span class="n">displacement</span><span class="o">.</span><span class="n">dx</span><span class="p">,</span> <span class="n">displacement</span><span class="o">.</span><span class="n">dy</span><span class="p">),</span>
+            <span class="n">displacement</span><span class="o">.</span><span class="n">norm</span><span class="p">,</span>
             <span class="n">atan2</span><span class="p">(</span><span class="n">displacement</span><span class="o">.</span><span class="n">dy</span><span class="p">,</span> <span class="n">displacement</span><span class="o">.</span><span class="n">dx</span><span class="p">),</span>
         <span class="p">)</span>
+</code></pre></div>
+</details>
+<details class="example">
+<summary>Using <code>PolarCoordinates</code></summary>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">pi</span>
+
+<span class="n">pole</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">polar</span> <span class="o">=</span> <span class="n">PolarCoordinates</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">pi</span> <span class="o">/</span> <span class="mi">3</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">polar</span><span class="o">.</span><span class="n">unit_direction</span><span class="o">.</span><span class="n">coordinates</span><span class="p">)</span>
+<span class="c1"># (0.5000000000000001, 0.8660254037844386)</span>
+
+<span class="n">point</span> <span class="o">=</span> <span class="n">polar</span><span class="o">.</span><span class="n">to_cartesian</span><span class="p">(</span><span class="n">pole</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">point</span><span class="p">)</span>
+<span class="c1"># Point(x=3.0000000000000004, y=4.464101615137754)</span>
+
+<span class="n">recovered</span> <span class="o">=</span> <span class="n">PolarCoordinates</span><span class="o">.</span><span class="n">from_cartesian</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="n">pole</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">recovered</span><span class="o">.</span><span class="n">radius</span><span class="p">)</span>
+<span class="c1"># 4.0</span>
 </code></pre></div>
 </details>
 <details class="example">
@@ -536,19 +562,32 @@ r=\frac{p}{1+e\cos\theta}
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;radius must be positive&quot;</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">at</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">angle</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Point</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">Point</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">centre</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">),</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">centre</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">),</span>
-        <span class="p">)</span>
+        <span class="n">radial_endpoint</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">),</span> <span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">))</span>
+        <span class="n">radial</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">anchored_vector_to</span><span class="p">(</span><span class="n">radial_endpoint</span><span class="p">)</span>
+        <span class="n">unit_vector</span> <span class="o">=</span> <span class="n">radial</span><span class="o">.</span><span class="n">as_free_vector</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">centre</span><span class="o">.</span><span class="n">translated_by</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">*</span> <span class="n">unit_vector</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">contains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">point</span><span class="p">:</span> <span class="n">Point</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-9</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">centre</span><span class="o">.</span><span class="n">distance_to</span><span class="p">(</span><span class="n">point</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">tolerance</span>
 </code></pre></div>
 </details>
 <details class="example">
+<summary>Using <code>Circle</code></summary>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">pi</span>
+
+<span class="n">circle</span> <span class="o">=</span> <span class="n">Circle</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">circle</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">))</span>
+<span class="c1"># Point(x=1.2246467991473532e-16, y=2.0)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">circle</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
+<span class="c1"># True</span>
+</code></pre></div>
+</details>
+<details class="example">
 <summary>Python class: <code>Ellipse</code></summary>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">cos</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">,</span> <span class="n">sin</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">cos</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">sqrt</span>
 
 
 <span class="nd">@dataclass</span>
@@ -582,13 +621,35 @@ r=\frac{p}{1+e\cos\theta}
         <span class="p">)</span>
         <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="n">value</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">tolerance</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">contains_by_foci</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">point</span><span class="p">:</span> <span class="n">Point</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-9</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">contains_by_foci</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">point</span><span class="p">:</span> <span class="n">Point</span><span class="p">,</span>
+        <span class="n">tolerance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-9</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="n">first</span><span class="p">,</span> <span class="n">second</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">foci</span>
-        <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span>
+        <span class="n">distance_sum</span> <span class="o">=</span> <span class="p">(</span>
             <span class="n">point</span><span class="o">.</span><span class="n">distance_to</span><span class="p">(</span><span class="n">first</span><span class="p">)</span>
             <span class="o">+</span> <span class="n">point</span><span class="o">.</span><span class="n">distance_to</span><span class="p">(</span><span class="n">second</span><span class="p">)</span>
-            <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">semi_major</span>
-        <span class="p">)</span> <span class="o">&lt;=</span> <span class="n">tolerance</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="n">distance_sum</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">semi_major</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">tolerance</span>
+</code></pre></div>
+</details>
+<details class="example">
+<summary>Using <code>Ellipse</code></summary>
+<div class="highlight"><pre><span></span><code><span class="n">ellipse</span> <span class="o">=</span> <span class="n">Ellipse</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">point</span> <span class="o">=</span> <span class="n">ellipse</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">point</span><span class="p">)</span>
+<span class="c1"># Point(x=5.0, y=0.0)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">ellipse</span><span class="o">.</span><span class="n">foci</span><span class="p">)</span>
+<span class="c1"># (Point(x=-4.0, y=0), Point(x=4.0, y=0))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">ellipse</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">point</span><span class="p">))</span>
+<span class="c1"># True</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">ellipse</span><span class="o">.</span><span class="n">contains_by_foci</span><span class="p">(</span><span class="n">point</span><span class="p">))</span>
+<span class="c1"># True</span>
 </code></pre></div>
 </details>
 <details class="example">
@@ -629,6 +690,21 @@ r=\frac{p}{1+e\cos\theta}
         <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span>
             <span class="n">point</span><span class="o">.</span><span class="n">distance_to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">focus</span><span class="p">)</span> <span class="o">-</span> <span class="n">distance_to_directrix</span>
         <span class="p">)</span> <span class="o">&lt;=</span> <span class="n">tolerance</span>
+</code></pre></div>
+</details>
+<details class="example">
+<summary>Using <code>Parabola</code></summary>
+<div class="highlight"><pre><span></span><code><span class="n">parabola</span> <span class="o">=</span> <span class="n">Parabola</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">point</span> <span class="o">=</span> <span class="n">parabola</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="mf">1.5</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">point</span><span class="p">)</span>
+<span class="c1"># Point(x=4.5, y=6.0)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">parabola</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">point</span><span class="p">))</span>
+<span class="c1"># True</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">parabola</span><span class="o">.</span><span class="n">contains_by_focus_directrix</span><span class="p">(</span><span class="n">point</span><span class="p">))</span>
+<span class="c1"># True</span>
 </code></pre></div>
 </details>
 <details class="example">
@@ -675,12 +751,36 @@ r=\frac{p}{1+e\cos\theta}
         <span class="p">)</span>
         <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="n">value</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">tolerance</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">contains_by_foci</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">point</span><span class="p">:</span> <span class="n">Point</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-9</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">contains_by_foci</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">point</span><span class="p">:</span> <span class="n">Point</span><span class="p">,</span>
+        <span class="n">tolerance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-9</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="n">first</span><span class="p">,</span> <span class="n">second</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">foci</span>
+        <span class="n">distance_difference</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span>
+            <span class="n">point</span><span class="o">.</span><span class="n">distance_to</span><span class="p">(</span><span class="n">first</span><span class="p">)</span> <span class="o">-</span> <span class="n">point</span><span class="o">.</span><span class="n">distance_to</span><span class="p">(</span><span class="n">second</span><span class="p">)</span>
+        <span class="p">)</span>
         <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span>
-            <span class="nb">abs</span><span class="p">(</span><span class="n">point</span><span class="o">.</span><span class="n">distance_to</span><span class="p">(</span><span class="n">first</span><span class="p">)</span> <span class="o">-</span> <span class="n">point</span><span class="o">.</span><span class="n">distance_to</span><span class="p">(</span><span class="n">second</span><span class="p">))</span>
-            <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">semi_transverse</span>
+            <span class="n">distance_difference</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">semi_transverse</span>
         <span class="p">)</span> <span class="o">&lt;=</span> <span class="n">tolerance</span>
+</code></pre></div>
+</details>
+<details class="example">
+<summary>Using <code>Hyperbola</code></summary>
+<div class="highlight"><pre><span></span><code><span class="n">hyperbola</span> <span class="o">=</span> <span class="n">Hyperbola</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">point</span> <span class="o">=</span> <span class="n">hyperbola</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">point</span><span class="p">)</span>
+<span class="c1"># Point(x=3.0, y=0.0)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">hyperbola</span><span class="o">.</span><span class="n">foci</span><span class="p">)</span>
+<span class="c1"># (Point(x=-5.0, y=0), Point(x=5.0, y=0))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">hyperbola</span><span class="o">.</span><span class="n">asymptote_slopes</span><span class="p">)</span>
+<span class="c1"># (-1.3333333333333333, 1.3333333333333333)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">hyperbola</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">point</span><span class="p">))</span>
+<span class="c1"># True</span>
 </code></pre></div>
 </details>
 <details class="example">
@@ -726,7 +826,27 @@ r=\frac{p}{1+e\cos\theta}
         <span class="k">return</span> <span class="n">PolarCoordinates</span><span class="p">(</span><span class="n">radius</span><span class="p">,</span> <span class="n">angle</span><span class="p">)</span><span class="o">.</span><span class="n">to_cartesian</span><span class="p">(</span><span class="n">focus</span><span class="p">)</span>
 </code></pre></div>
 </details>
-<p>The classes expose both descriptions used in the chapter: <code>contains</code> checks Cartesian equations, the focal methods check geometric distance conditions, and <code>PolarConic.point_at</code> constructs a point from direction and focal distance.</p>
+<details class="example">
+<summary>Using <code>PolarConic</code></summary>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">pi</span>
+
+<span class="n">conic</span> <span class="o">=</span> <span class="n">PolarConic</span><span class="p">(</span>
+    <span class="n">focal_parameter</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">eccentricity</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">orientation</span><span class="o">=</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">6</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">conic</span><span class="o">.</span><span class="n">conic_type</span><span class="p">)</span>
+<span class="c1"># ellipse</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">conic</span><span class="o">.</span><span class="n">radius_at</span><span class="p">(</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">6</span><span class="p">))</span>
+<span class="c1"># 2.0</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">conic</span><span class="o">.</span><span class="n">point_at</span><span class="p">(</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">6</span><span class="p">,</span> <span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))</span>
+<span class="c1"># Point(x=1.7320508075688774, y=0.9999999999999999)</span>
+</code></pre></div>
+</details>
+<p>The polar construction now follows the same chain as the vector lecture: two points determine a representative, the representative determines a free direction vector, scalar multiplication sets its length, and translating the pole produces the final point.</p>
 <h2 id="exercises">Exercises</h2>
 <p>The first ten consolidate computation and graphical reading. The final ten require explanation, derivation, and comparison of representations.</p>
 <p><a class="download-button" download="download" href="lecture-04-exercises/">Download exercises as Markdown</a></p>
