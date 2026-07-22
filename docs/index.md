@@ -8,6 +8,8 @@ home: true
 
 *A course in analytical geometry, linear algebra and calculus.*
 
+[Read the didactic manifest](manifest.md)
+
 ## Part I · Analytical Geometry {#course-map}
 
 | Lecture | Topic | Scope | Status |
