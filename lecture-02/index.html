@@ -931,8 +931,28 @@ v_2=\|\mathbf v\|\sin\alpha.
 <p class="admonition-title">What changes and what does not</p>
 <p>The Cartesian coordinates <span class="arithmatex">\([4,2]\)</span> and the basis coordinates <span class="arithmatex">\([3,1]_B\)</span> are two numerical descriptions of the same geometric vector. Changing the basis means solving for the coefficients in one concrete linear combination; no additional general machinery is introduced here.</p>
 </div>
-<h2 id="computational-model">Computational interlude: constructing vectors from points</h2>
-<p>The implementation follows the order used in the mathematics. Points come first. An ordered pair of points determines an anchored vector. A free vector is then obtained by forgetting the location of that representative and retaining its coordinate change.</p>
+<h2 id="computational-model">Computational interlude: points and vectors as distinct types</h2>
+<p>This implementation follows the construction used in the lecture:</p>
+<div class="arithmatex">\[
+(P,Q)
+\longmapsto
+\overrightarrow{PQ}
+\longmapsto
+[\overrightarrow{PQ}]
+\longmapsto
+[v_1,v_2].
+\]</div>
+<p>A free vector is represented in the program by one anchored representative. Two such objects are equal when their representatives have the same coordinate change. The code also implements the bridge operations and all operations introduced in this chapter:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+(P,Q)&amp;\longmapsto \overrightarrow{PQ},\\
+\overrightarrow{PQ}&amp;\longmapsto[\overrightarrow{PQ}],\\
+(P,\mathbf v)&amp;\longmapsto P\oplus\mathbf v,\\
+(\mathbf u,\mathbf v)&amp;\longmapsto\mathbf u+\mathbf v,\\
+(t,\mathbf v)&amp;\longmapsto t\mathbf v,\\
+(\mathbf u,\mathbf v)&amp;\longmapsto\mathbf u\cdot\mathbf v.
+\end{aligned}
+\]</div>
 <details class="example">
 <summary>Python class: <code>Point</code></summary>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
@@ -951,7 +971,7 @@ v_2=\|\mathbf v\|\sin\alpha.
         <span class="k">return</span> <span class="n">Point</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="s2">&quot;Point&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Point&quot;</span><span class="p">:</span>
-        <span class="c1"># Ordinary coordinate subtraction: point - point -&gt; point.</span>
+        <span class="c1"># Ordinary round-bracket coordinate difference.</span>
         <span class="k">return</span> <span class="n">Point</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scalar</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Point&quot;</span><span class="p">:</span>
@@ -963,12 +983,10 @@ v_2=\|\mathbf v\|\sin\alpha.
         <span class="k">return</span> <span class="n">hypot</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">anchored_vector_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="s2">&quot;Point&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;AnchoredVector&quot;</span><span class="p">:</span>
-        <span class="c1"># The ordered pair (self, other) determines an anchored vector.</span>
         <span class="k">return</span> <span class="n">AnchoredVector</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">translated_by</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vector</span><span class="p">:</span> <span class="s2">&quot;FreeVector&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Point&quot;</span><span class="p">:</span>
-        <span class="c1"># Point plus a free displacement gives a point.</span>
-        <span class="k">return</span> <span class="n">Point</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">vector</span><span class="o">.</span><span class="n">dx</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">vector</span><span class="o">.</span><span class="n">dy</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">vector</span><span class="o">.</span><span class="n">apply_to</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 </code></pre></div>
 </details>
 <details class="example">
@@ -983,7 +1001,6 @@ v_2=\|\mathbf v\|\sin\alpha.
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">coordinate_difference</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Point</span><span class="p">:</span>
-        <span class="c1"># This is the ordinary round-bracket difference end - start.</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span>
 
     <span class="nd">@property</span>
@@ -998,8 +1015,10 @@ v_2=\|\mathbf v\|\sin\alpha.
     <span class="k">def</span><span class="w"> </span><span class="nf">reversed</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;AnchoredVector&quot;</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">AnchoredVector</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">end</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">)</span>
 
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_equivalent_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="s2">&quot;AnchoredVector&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">coordinates</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">coordinates</span>
+
     <span class="k">def</span><span class="w"> </span><span class="nf">as_free_vector</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;FreeVector&quot;</span><span class="p">:</span>
-        <span class="c1"># Forget the endpoints and retain their common displacement.</span>
         <span class="k">return</span> <span class="n">FreeVector</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 </code></pre></div>
 </details>
@@ -1014,11 +1033,11 @@ v_2=\|\mathbf v\|\sin\alpha.
     <span class="n">representative</span><span class="p">:</span> <span class="n">AnchoredVector</span>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">from_coordinates</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">dx</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">dy</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;FreeVector&quot;</span><span class="p">:</span>
-        <span class="c1"># Coordinates determine the canonical representative from O=(0,0).</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_from_components</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">dx</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">dy</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;FreeVector&quot;</span><span class="p">:</span>
+        <span class="c1"># Every result is again represented by two points.</span>
         <span class="n">origin</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="n">endpoint</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">AnchoredVector</span><span class="p">(</span><span class="n">origin</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">origin</span><span class="o">.</span><span class="n">anchored_vector_to</span><span class="p">(</span><span class="n">endpoint</span><span class="p">)</span><span class="o">.</span><span class="n">as_free_vector</span><span class="p">()</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">coordinates</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
@@ -1038,20 +1057,27 @@ v_2=\|\mathbf v\|\sin\alpha.
             <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">coordinates</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">coordinates</span>
         <span class="p">)</span>
 
+    <span class="k">def</span><span class="w"> </span><span class="nf">representative_at</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="n">Point</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AnchoredVector</span><span class="p">:</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">start</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">dx</span><span class="p">,</span> <span class="n">start</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">dy</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">AnchoredVector</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">point</span><span class="p">:</span> <span class="n">Point</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Point</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">representative_at</span><span class="p">(</span><span class="n">point</span><span class="p">)</span><span class="o">.</span><span class="n">end</span>
+
     <span class="k">def</span><span class="w"> </span><span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="s2">&quot;FreeVector&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;FreeVector&quot;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">FreeVector</span><span class="o">.</span><span class="n">from_coordinates</span><span class="p">(</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_from_components</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">dx</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">dx</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">dy</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">dy</span><span class="p">,</span>
         <span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__neg__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;FreeVector&quot;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">FreeVector</span><span class="o">.</span><span class="n">from_coordinates</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">dx</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">dy</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_from_components</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">dx</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">dy</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="s2">&quot;FreeVector&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;FreeVector&quot;</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="n">other</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scalar</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;FreeVector&quot;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">FreeVector</span><span class="o">.</span><span class="n">from_coordinates</span><span class="p">(</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_from_components</span><span class="p">(</span>
             <span class="n">scalar</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dx</span><span class="p">,</span>
             <span class="n">scalar</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dy</span><span class="p">,</span>
         <span class="p">)</span>
@@ -1078,6 +1104,8 @@ v_2=\|\mathbf v\|\sin\alpha.
         <span class="n">other</span><span class="p">:</span> <span class="s2">&quot;FreeVector&quot;</span><span class="p">,</span>
         <span class="n">tolerance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-9</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">norm</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">other</span><span class="o">.</span><span class="n">norm</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;parallel directions must be nonzero&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">determinant</span><span class="p">(</span><span class="n">other</span><span class="p">))</span> <span class="o">&lt;=</span> <span class="n">tolerance</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">is_perpendicular_to</span><span class="p">(</span>
@@ -1085,6 +1113,8 @@ v_2=\|\mathbf v\|\sin\alpha.
         <span class="n">other</span><span class="p">:</span> <span class="s2">&quot;FreeVector&quot;</span><span class="p">,</span>
         <span class="n">tolerance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-9</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">norm</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">other</span><span class="o">.</span><span class="n">norm</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;perpendicular directions must be nonzero&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">other</span><span class="p">))</span> <span class="o">&lt;=</span> <span class="n">tolerance</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">angle_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="s2">&quot;FreeVector&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
@@ -1111,7 +1141,7 @@ v_2=\|\mathbf v\|\sin\alpha.
     <span class="n">second</span><span class="p">:</span> <span class="n">FreeVector</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">first</span><span class="o">.</span><span class="n">is_parallel_to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">second</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">first</span><span class="o">.</span><span class="n">determinant</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">second</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;basis vectors must be nonparallel&quot;</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">combine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FreeVector</span><span class="p">:</span>
@@ -1124,59 +1154,87 @@ v_2=\|\mathbf v\|\sin\alpha.
         <span class="k">return</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span>
 </code></pre></div>
 </details>
+<p>To run the examples, place the four class definitions above in one file, append either block below, and execute:</p>
+<div class="highlight"><pre><span></span><code>python vectors.py
+</code></pre></div>
 <details class="example">
-<summary>Using points, anchored vectors, and free vectors</summary>
-<div class="highlight"><pre><span></span><code><span class="n">P</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">Q</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<summary>Run: points, representatives, and equivalence</summary>
+<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">Q</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
 
-<span class="n">ordinary_difference</span> <span class="o">=</span> <span class="n">Q</span> <span class="o">-</span> <span class="n">P</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">ordinary_difference</span><span class="p">)</span>
-<span class="c1"># Point(x=3, y=4)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">P</span> <span class="o">+</span> <span class="n">Q</span><span class="p">)</span>          <span class="c1"># Point(x=5, y=8)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="o">-</span><span class="n">P</span><span class="p">)</span>             <span class="c1"># Point(x=-1, y=-2)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">Q</span> <span class="o">-</span> <span class="n">P</span><span class="p">)</span>          <span class="c1"># Point(x=3, y=4)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">P</span><span class="p">)</span>          <span class="c1"># Point(x=2, y=4)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">P</span><span class="o">.</span><span class="n">distance_to</span><span class="p">(</span><span class="n">Q</span><span class="p">))</span>  <span class="c1"># 5.0</span>
 
-<span class="n">PQ</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">anchored_vector_to</span><span class="p">(</span><span class="n">Q</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">PQ</span><span class="p">)</span>
-<span class="c1"># AnchoredVector(start=Point(x=1, y=2), end=Point(x=4, y=6))</span>
+    <span class="n">PQ</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">anchored_vector_to</span><span class="p">(</span><span class="n">Q</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">PQ</span><span class="o">.</span><span class="n">coordinates</span><span class="p">)</span>  <span class="c1"># (3, 4)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">PQ</span><span class="o">.</span><span class="n">length</span><span class="p">)</span>       <span class="c1"># 5.0</span>
 
-<span class="n">v</span> <span class="o">=</span> <span class="n">PQ</span><span class="o">.</span><span class="n">as_free_vector</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">coordinates</span><span class="p">)</span>
-<span class="c1"># (3, 4)</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+    <span class="n">AB</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">anchored_vector_to</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">norm</span><span class="p">)</span>
-<span class="c1"># 5.0</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">PQ</span> <span class="o">==</span> <span class="n">AB</span><span class="p">)</span>                    <span class="c1"># False</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">PQ</span><span class="o">.</span><span class="n">is_equivalent_to</span><span class="p">(</span><span class="n">AB</span><span class="p">))</span>     <span class="c1"># True</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">P</span><span class="o">.</span><span class="n">translated_by</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
-<span class="c1"># Point(x=4, y=6)</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">PQ</span><span class="o">.</span><span class="n">as_free_vector</span><span class="p">()</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">AB</span><span class="o">.</span><span class="n">as_free_vector</span><span class="p">()</span>
 
-<span class="n">R</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-<span class="n">w</span> <span class="o">=</span> <span class="n">Q</span><span class="o">.</span><span class="n">anchored_vector_to</span><span class="p">(</span><span class="n">R</span><span class="p">)</span><span class="o">.</span><span class="n">as_free_vector</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">v</span> <span class="o">==</span> <span class="n">w</span><span class="p">)</span>                      <span class="c1"># True</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">coordinates</span><span class="p">)</span>               <span class="c1"># (3, 4)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">representative_at</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)))</span>
+    <span class="c1"># AnchoredVector(start=Point(x=10, y=-1), end=Point(x=13, y=3))</span>
 
-<span class="nb">print</span><span class="p">((</span><span class="n">v</span> <span class="o">+</span> <span class="n">w</span><span class="p">)</span><span class="o">.</span><span class="n">coordinates</span><span class="p">)</span>
-<span class="c1"># (-3, 3)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">w</span><span class="p">))</span>
-<span class="c1"># -22</span>
-
-<span class="n">basis</span> <span class="o">=</span> <span class="n">Basis</span><span class="p">(</span>
-    <span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">anchored_vector_to</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">as_free_vector</span><span class="p">(),</span>
-    <span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">anchored_vector_to</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">as_free_vector</span><span class="p">(),</span>
-<span class="p">)</span>
-<span class="n">vector</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">anchored_vector_to</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">as_free_vector</span><span class="p">()</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">basis</span><span class="o">.</span><span class="n">coordinates_of</span><span class="p">(</span><span class="n">vector</span><span class="p">))</span>
-<span class="c1"># (3.0, 1.0)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">P</span><span class="o">.</span><span class="n">translated_by</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>           <span class="c1"># Point(x=4, y=6)</span>
 </code></pre></div>
 </details>
-<p>The construction is now the same as in the text:</p>
+<p>The last line implements</p>
 <div class="arithmatex">\[
-(P,Q)
-\longmapsto
-\overrightarrow{PQ}
-\longmapsto
-[\overrightarrow{PQ}]
-\longmapsto
-[v_1,v_2].
+P\oplus[Q-P]=Q.
 \]</div>
-<p>The coordinates are properties of the displacement represented by the points; they are not the starting definition of the vector object.</p>
+<details class="example">
+<summary>Run: vector operations and a basis</summary>
+<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">O</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">v</span> <span class="o">=</span> <span class="n">O</span><span class="o">.</span><span class="n">anchored_vector_to</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span><span class="o">.</span><span class="n">as_free_vector</span><span class="p">()</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">O</span><span class="o">.</span><span class="n">anchored_vector_to</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">as_free_vector</span><span class="p">()</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">O</span><span class="o">.</span><span class="n">anchored_vector_to</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span><span class="o">.</span><span class="n">as_free_vector</span><span class="p">()</span>
+
+    <span class="nb">print</span><span class="p">((</span><span class="n">v</span> <span class="o">+</span> <span class="n">u</span><span class="p">)</span><span class="o">.</span><span class="n">coordinates</span><span class="p">)</span>          <span class="c1"># (4, 2)</span>
+    <span class="nb">print</span><span class="p">((</span><span class="n">v</span> <span class="o">-</span> <span class="n">u</span><span class="p">)</span><span class="o">.</span><span class="n">coordinates</span><span class="p">)</span>          <span class="c1"># (2, 6)</span>
+    <span class="nb">print</span><span class="p">((</span><span class="o">-</span><span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">coordinates</span><span class="p">)</span>             <span class="c1"># (-3, -4)</span>
+    <span class="nb">print</span><span class="p">((</span><span class="mi">2</span> <span class="o">*</span> <span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">coordinates</span><span class="p">)</span>          <span class="c1"># (6, 8)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">norm</span><span class="p">)</span>                       <span class="c1"># 5.0</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">normalized</span><span class="p">()</span><span class="o">.</span><span class="n">coordinates</span><span class="p">)</span>   <span class="c1"># (0.6, 0.8)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">u</span><span class="p">))</span>                     <span class="c1"># -5</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">determinant</span><span class="p">(</span><span class="n">u</span><span class="p">))</span>             <span class="c1"># -10</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">is_parallel_to</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">v</span><span class="p">))</span>      <span class="c1"># True</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">is_perpendicular_to</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>     <span class="c1"># True</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">angle_to</span><span class="p">(</span><span class="n">u</span><span class="p">),</span> <span class="mi">3</span><span class="p">))</span>      <span class="c1"># 2.034</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">projection_onto</span><span class="p">(</span><span class="n">u</span><span class="p">)</span><span class="o">.</span><span class="n">coordinates</span><span class="p">)</span>  <span class="c1"># (-1.0, 2.0)</span>
+
+    <span class="n">b1</span> <span class="o">=</span> <span class="n">O</span><span class="o">.</span><span class="n">anchored_vector_to</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">as_free_vector</span><span class="p">()</span>
+    <span class="n">b2</span> <span class="o">=</span> <span class="n">O</span><span class="o">.</span><span class="n">anchored_vector_to</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">as_free_vector</span><span class="p">()</span>
+    <span class="n">basis</span> <span class="o">=</span> <span class="n">Basis</span><span class="p">(</span><span class="n">b1</span><span class="p">,</span> <span class="n">b2</span><span class="p">)</span>
+
+    <span class="n">vector</span> <span class="o">=</span> <span class="n">O</span><span class="o">.</span><span class="n">anchored_vector_to</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">as_free_vector</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">basis</span><span class="o">.</span><span class="n">coordinates_of</span><span class="p">(</span><span class="n">vector</span><span class="p">))</span>       <span class="c1"># (3.0, 1.0)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">basis</span><span class="o">.</span><span class="n">combine</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">coordinates</span><span class="p">)</span>    <span class="c1"># (4, 2)</span>
+</code></pre></div>
+</details>
+<p>The implementation therefore preserves the distinctions made in the chapter:</p>
+<ul>
+<li><code>Q - P</code> is the ordinary point-coordinate difference and returns a <code>Point</code>;</li>
+<li><code>P.anchored_vector_to(Q)</code> constructs the anchored vector <span class="arithmatex">\(\overrightarrow{PQ}\)</span>;</li>
+<li><code>PQ.as_free_vector()</code> passes to the free vector <span class="arithmatex">\([\overrightarrow{PQ}]\)</span>;</li>
+<li>two anchored vectors may be different but equivalent;</li>
+<li>equal free vectors may be represented at different starting points;</li>
+<li>only free vectors carry vector addition, scaling, norm, angle, dot product and projection.</li>
+</ul>
 <h2 id="exercises">Exercises</h2>
 <p>The first ten consolidate calculation and construction. The next ten require explanation, proof, comparison, or modelling.</p>
 <p><a class="download-button" download="download" href="lecture-02-exercises/">Download exercises as Markdown</a></p>
