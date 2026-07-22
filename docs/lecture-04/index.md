@@ -13,6 +13,7 @@ section_links:
   - { id: focus-directrix, title: Focus and directrix }
   - { id: polar-family, title: One polar family }
   - { id: orientation, title: Orientation and mechanics }
+  - { id: computational-model, title: Computational model }
   - { id: exercises, title: Exercises }
 ---
 
@@ -23,4 +24,5 @@ section_links:
 --8<-- "lecture-04/sections/05-focus-directrix.md"
 --8<-- "lecture-04/sections/06-polar-family.md"
 --8<-- "lecture-04/sections/07-orientation.md"
+--8<-- "lecture-04/sections/computational-model.md"
 --8<-- "lecture-04/sections/08-exercises.md"
