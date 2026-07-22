@@ -115,7 +115,7 @@ The sequence below distinguishes permanent objects from temporary construction a
         The perpendicular projections identify one number on the horizontal axis and one number on the vertical axis. These numbers measure the signed horizontal and vertical positions of $P$.
 
     30. **Reveal a light auxiliary grid.**  
-        The grid extends the scale marks through the plane and makes the two projections easier to read. It is a visual aid, not an additional part of the definition of coordinates.
+        The grid is not needed to define the coordinates and is not part of the construction itself. It is added only as a visual guide: it helps the eye follow the horizontal and vertical projections back to the axes and makes a quick estimate of the point's position easier before the exact coordinate values are read.
 
     31. **Read the ordered pair $(x,y)$.**  
         The horizontal projection gives the first coordinate $x$, and the vertical projection gives the second coordinate $y$. Thus the completed construction assigns to $P$ the ordered pair $(x,y)$.
