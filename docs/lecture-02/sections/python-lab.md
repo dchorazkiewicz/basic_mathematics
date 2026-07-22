@@ -1,6 +1,6 @@
 ## Live Python experiment {#python-lab}
 
-The editor below runs Python directly in the browser. Change the coordinates of the points, run the code, and inspect which operations return points, anchored vectors, free vectors, or numbers. The first execution downloads the Python runtime, so it may take a moment.
+The editor below runs Python directly in the browser. Change the coordinates of the points, run the code, and inspect which operations return points, anchored vectors, free vectors, or numbers. The first execution downloads the browser Python runtime, so it may take a moment.
 
 <script type="py-editor" env="lecture-02-vectors" setup config='{"files":{"../assets/python/lecture-02/vector_model.py":"./vector_model.py"}}'>
 from vector_model import Point, AnchoredVector, FreeVector, Basis
