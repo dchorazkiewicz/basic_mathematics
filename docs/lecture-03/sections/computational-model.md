@@ -1,6 +1,6 @@
 ## Computational interlude: lines and planes as constructed objects {#computational-model}
 
-The plane classes `Point` and `FreeVector` are those defined in Lecture 2. The new classes implement the constructions and tests introduced in this chapter.
+The planar classes `Point`, `AnchoredVector`, and `FreeVector` are those defined in Lecture 2. A line direction is therefore obtained from an ordered pair of points or from another already constructed free vector. The three-dimensional model repeats the same construction in space.
 
 ??? example "Python class: `Line`"
 
@@ -19,14 +19,17 @@ The plane classes `Point` and `FreeVector` are those defined in Lecture 2. The n
 
         @classmethod
         def through(cls, first: Point, second: Point) -> "Line":
-            return cls(first, first.vector_to(second))
+            anchored = first.anchored_vector_to(second)
+            return cls(first, anchored.as_free_vector())
 
         def at(self, t: float) -> Point:
             return self.base.translated_by(t * self.direction)
 
         @property
         def normal(self) -> FreeVector:
-            return FreeVector(-self.direction.dy, self.direction.dx)
+            origin = Point(0, 0)
+            endpoint = Point(-self.direction.dy, self.direction.dx)
+            return origin.anchored_vector_to(endpoint).as_free_vector()
 
         @property
         def slope(self) -> float | None:
@@ -35,12 +38,13 @@ The plane classes `Point` and `FreeVector` are those defined in Lecture 2. The n
             return self.direction.dy / self.direction.dx
 
         def normal_equation(self) -> tuple[float, float, float]:
-            a, b = self.normal.dx, self.normal.dy
+            a, b = self.normal.coordinates
             c = a * self.base.x + b * self.base.y
             return a, b, c
 
         def contains(self, point: Point, tolerance: float = 1e-9) -> bool:
-            offset = self.base.vector_to(point)
+            anchored = self.base.anchored_vector_to(point)
+            offset = anchored.as_free_vector()
             return abs(self.normal.dot(offset)) <= tolerance
 
         def is_parallel_to(self, other: "Line") -> bool:
@@ -50,12 +54,42 @@ The plane classes `Point` and `FreeVector` are those defined in Lecture 2. The n
             return self.direction.is_perpendicular_to(other.direction)
 
         def nearest_point(self, point: Point) -> Point:
-            offset = self.base.vector_to(point)
+            offset = self.base.anchored_vector_to(point).as_free_vector()
             shift = offset.projection_onto(self.direction)
             return self.base.translated_by(shift)
 
         def distance_to(self, point: Point) -> float:
             return point.distance_to(self.nearest_point(point))
+    ```
+
+??? example "Using `Line`"
+
+    ```python
+    A = Point(1, 1)
+    B = Point(4, 3)
+
+    line = Line.through(A, B)
+
+    print(line.direction.coordinates)
+    # (3, 2)
+
+    print(line.at(0))
+    # Point(x=1, y=1)
+
+    print(line.at(1))
+    # Point(x=4, y=3)
+
+    print(line.at(2))
+    # Point(x=7, y=5)
+
+    print(line.normal.coordinates)
+    # (-2, 3)
+
+    print(line.normal_equation())
+    # (-2, 3, 1)
+
+    print(line.contains(Point(7, 5)))
+    # True
     ```
 
 ??? example "Python class: `Point3D`"
@@ -72,16 +106,28 @@ The plane classes `Point` and `FreeVector` are those defined in Lecture 2. The n
         z: float
 
         def __add__(self, other: "Point3D") -> "Point3D":
-            return Point3D(self.x + other.x, self.y + other.y, self.z + other.z)
+            return Point3D(
+                self.x + other.x,
+                self.y + other.y,
+                self.z + other.z,
+            )
 
         def __neg__(self) -> "Point3D":
             return Point3D(-self.x, -self.y, -self.z)
 
         def __sub__(self, other: "Point3D") -> "Point3D":
-            return Point3D(self.x - other.x, self.y - other.y, self.z - other.z)
+            return Point3D(
+                self.x - other.x,
+                self.y - other.y,
+                self.z - other.z,
+            )
 
         def __mul__(self, scalar: float) -> "Point3D":
-            return Point3D(scalar * self.x, scalar * self.y, scalar * self.z)
+            return Point3D(
+                scalar * self.x,
+                scalar * self.y,
+                scalar * self.z,
+            )
 
         __rmul__ = __mul__
 
@@ -92,12 +138,8 @@ The plane classes `Point` and `FreeVector` are those defined in Lecture 2. The n
                 + (other.z - self.z) ** 2
             )
 
-        def vector_to(self, other: "Point3D") -> "FreeVector3D":
-            return FreeVector3D(
-                other.x - self.x,
-                other.y - self.y,
-                other.z - self.z,
-            )
+        def anchored_vector_to(self, other: "Point3D") -> "AnchoredVector3D":
+            return AnchoredVector3D(self, other)
 
         def translated_by(self, vector: "FreeVector3D") -> "Point3D":
             return Point3D(
@@ -107,6 +149,37 @@ The plane classes `Point` and `FreeVector` are those defined in Lecture 2. The n
             )
     ```
 
+??? example "Python class: `AnchoredVector3D`"
+
+    ```python
+    from dataclasses import dataclass
+
+
+    @dataclass
+    class AnchoredVector3D:
+        start: Point3D
+        end: Point3D
+
+        @property
+        def coordinate_difference(self) -> Point3D:
+            return self.end - self.start
+
+        @property
+        def coordinates(self) -> tuple[float, float, float]:
+            difference = self.coordinate_difference
+            return difference.x, difference.y, difference.z
+
+        @property
+        def length(self) -> float:
+            return self.start.distance_to(self.end)
+
+        def reversed(self) -> "AnchoredVector3D":
+            return AnchoredVector3D(self.end, self.start)
+
+        def as_free_vector(self) -> "FreeVector3D":
+            return FreeVector3D(self)
+    ```
+
 ??? example "Python class: `FreeVector3D`"
 
     ```python
@@ -114,27 +187,58 @@ The plane classes `Point` and `FreeVector` are those defined in Lecture 2. The n
     from math import acos, sqrt
 
 
-    @dataclass
+    @dataclass(eq=False)
     class FreeVector3D:
-        dx: float
-        dy: float
-        dz: float
+        representative: AnchoredVector3D
+
+        @classmethod
+        def from_coordinates(
+            cls,
+            dx: float,
+            dy: float,
+            dz: float,
+        ) -> "FreeVector3D":
+            origin = Point3D(0, 0, 0)
+            endpoint = Point3D(dx, dy, dz)
+            return cls(AnchoredVector3D(origin, endpoint))
+
+        @property
+        def coordinates(self) -> tuple[float, float, float]:
+            return self.representative.coordinates
+
+        @property
+        def dx(self) -> float:
+            return self.coordinates[0]
+
+        @property
+        def dy(self) -> float:
+            return self.coordinates[1]
+
+        @property
+        def dz(self) -> float:
+            return self.coordinates[2]
+
+        def __eq__(self, other: object) -> bool:
+            return (
+                isinstance(other, FreeVector3D)
+                and self.coordinates == other.coordinates
+            )
 
         def __add__(self, other: "FreeVector3D") -> "FreeVector3D":
-            return FreeVector3D(
+            return FreeVector3D.from_coordinates(
                 self.dx + other.dx,
                 self.dy + other.dy,
                 self.dz + other.dz,
             )
 
         def __neg__(self) -> "FreeVector3D":
-            return FreeVector3D(-self.dx, -self.dy, -self.dz)
+            return FreeVector3D.from_coordinates(-self.dx, -self.dy, -self.dz)
 
         def __sub__(self, other: "FreeVector3D") -> "FreeVector3D":
             return self + (-other)
 
         def __mul__(self, scalar: float) -> "FreeVector3D":
-            return FreeVector3D(
+            return FreeVector3D.from_coordinates(
                 scalar * self.dx,
                 scalar * self.dy,
                 scalar * self.dz,
@@ -159,7 +263,7 @@ The plane classes `Point` and `FreeVector` are those defined in Lecture 2. The n
             )
 
         def cross(self, other: "FreeVector3D") -> "FreeVector3D":
-            return FreeVector3D(
+            return FreeVector3D.from_coordinates(
                 self.dy * other.dz - self.dz * other.dy,
                 self.dz * other.dx - self.dx * other.dz,
                 self.dx * other.dy - self.dy * other.dx,
@@ -209,11 +313,9 @@ The plane classes `Point` and `FreeVector` are those defined in Lecture 2. The n
             second: Point3D,
             third: Point3D,
         ) -> "Plane":
-            return cls(
-                first,
-                first.vector_to(second),
-                first.vector_to(third),
-            )
+            first_direction = first.anchored_vector_to(second).as_free_vector()
+            second_direction = first.anchored_vector_to(third).as_free_vector()
+            return cls(first, first_direction, second_direction)
 
         @property
         def normal(self) -> FreeVector3D:
@@ -224,16 +326,16 @@ The plane classes `Point` and `FreeVector` are those defined in Lecture 2. The n
             return self.base.translated_by(shift)
 
         def normal_equation(self) -> tuple[float, float, float, float]:
-            a, b, c = self.normal.dx, self.normal.dy, self.normal.dz
+            a, b, c = self.normal.coordinates
             d = a * self.base.x + b * self.base.y + c * self.base.z
             return a, b, c, d
 
         def contains(self, point: Point3D, tolerance: float = 1e-9) -> bool:
-            offset = self.base.vector_to(point)
+            offset = self.base.anchored_vector_to(point).as_free_vector()
             return abs(self.normal.dot(offset)) <= tolerance
 
         def distance_to(self, point: Point3D) -> float:
-            offset = self.base.vector_to(point)
+            offset = self.base.anchored_vector_to(point).as_free_vector()
             return abs(self.normal.dot(offset)) / self.normal.norm
 
         def is_parallel_to(self, other: "Plane") -> bool:
@@ -249,4 +351,41 @@ The plane classes `Point` and `FreeVector` are those defined in Lecture 2. The n
             return direction
     ```
 
-The names now expose the dimension only where it matters: `Point` and `FreeVector` describe the Cartesian plane, while `Point3D` and `FreeVector3D` describe space. `Line.at(t)` and `Plane.at(s, t)` return points; normal equations and distance tests return scalars.
+??? example "Using points, vectors, and a plane in space"
+
+    ```python
+    P = Point3D(1, 0, 0)
+    Q = Point3D(0, 1, 0)
+    R = Point3D(0, 0, 1)
+
+    PQ = P.anchored_vector_to(Q)
+    PR = P.anchored_vector_to(R)
+
+    print(PQ.coordinates)
+    # (-1, 1, 0)
+
+    print(PR.coordinates)
+    # (-1, 0, 1)
+
+    plane = Plane.through(P, Q, R)
+
+    print(plane.normal.coordinates)
+    # (1, 1, 1)
+
+    print(plane.normal_equation())
+    # (1, 1, 1, 1)
+
+    print(plane.at(0, 0))
+    # Point3D(x=1, y=0, z=0)
+
+    print(plane.at(1, 0))
+    # Point3D(x=0, y=1, z=0)
+
+    print(plane.at(0, 1))
+    # Point3D(x=0, y=0, z=1)
+
+    print(plane.contains(Point3D(0.2, 0.3, 0.5)))
+    # True
+    ```
+
+Every direction used by `Line` or `Plane` is now obtained from a representative determined by points. Its coordinates are then read from that representative and used by the algebraic operations.
