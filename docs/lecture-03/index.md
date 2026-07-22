@@ -13,6 +13,7 @@ section_links:
   - { id: plane-normal, title: Normal and cross product }
   - { id: three-points, title: Three points }
   - { id: plane-relations, title: Plane relations }
+  - { id: computational-model, title: Computational model }
   - { id: exercises, title: Exercises }
 ---
 
@@ -23,4 +24,5 @@ section_links:
 --8<-- "lecture-03/sections/05-plane-normal.md"
 --8<-- "lecture-03/sections/06-three-points.md"
 --8<-- "lecture-03/sections/07-plane-relations.md"
+--8<-- "lecture-03/sections/computational-model.md"
 --8<-- "lecture-03/sections/08-exercises.md"
