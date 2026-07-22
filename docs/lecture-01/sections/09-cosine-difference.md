@@ -1,8 +1,42 @@
 ## The cosine of a difference of angles {#cosine-difference}
 
-We derive the formula by computing one and the same length in two different ways. No vectors and no dot product are used.
+We derive the formula by calculating the same length $AB$ in two different ways. The whole argument is organised around the following diagram.
 
-Choose two points $A$ and $B$ on the unit circle centred at $O$. Let
+<figure class="figure-panel">
+  <div class="figure-toolbar">
+    <div>
+      <span class="figure-title">The complete geometric setup</span>
+      <span class="figure-step-title">All points, angles and lengths used in the proof are defined here.</span>
+    </div>
+  </div>
+  <div class="figure-stage">
+    <img src="../assets/images/lecture-01/cosine-difference-unit-circle.svg" alt="Points A and B on the unit circle, with angles alpha and beta, the chord AB, and the perpendicular from A to OB meeting it at H." loading="lazy">
+  </div>
+  <figcaption class="figure-caption">The points $A$ and $B$ lie on the unit circle centred at $O$. The perpendicular from $A$ to $OB$ meets $OB$ at $H$.</figcaption>
+</figure>
+
+Read the notation directly from the figure:
+
+- $OA=OB=1$ because $A$ and $B$ lie on the unit circle;
+- the angles of $OA$ and $OB$ from the positive horizontal axis are $\alpha$ and $eta$;
+- therefore the angle between $OA$ and $OB$ is
+  $$
+  \delta=\alpha-\beta;
+  $$
+- the point $H$ is the foot of the perpendicular from $A$ to the line $OB$;
+- hence the triangles $OAH$ and $AHB$ are right-angled at $H$.
+
+For the displayed configuration assume
+
+$$
+0\leq\beta\leq\alpha\leq\frac{\pi}{2}.
+$$
+
+The identity obtained below extends to arbitrary angles by the usual symmetry and periodicity properties of sine and cosine.
+
+### First calculation: use the coordinates of $A$ and $B$
+
+From the unit-circle definition of sine and cosine,
 
 $$
 A=(\cos\alpha,\sin\alpha),
@@ -10,17 +44,7 @@ A=(\cos\alpha,\sin\alpha),
 B=(\cos\beta,\sin\beta).
 $$
 
-The angle between the radii $OA$ and $OB$ is
-
-$$
-\delta=\alpha-\beta.
-$$
-
-For the diagram we assume $0\leq\delta\leq\frac{\pi}{2}$. The general identity follows from the usual symmetry and periodicity properties of sine and cosine.
-
-### First calculation: use the coordinates of $A$ and $B$
-
-By the distance formula,
+The coordinate formula for distance gives
 
 $$
 AB^2
@@ -28,7 +52,7 @@ AB^2
  +(\sin\alpha-\sin\beta)^2.
 $$
 
-Expanding and using $\cos^2\theta+\sin^2\theta=1$ twice gives
+Expanding the squares,
 
 $$
 \begin{aligned}
@@ -36,18 +60,22 @@ AB^2
 &=\cos^2\alpha+\sin^2\alpha
   +\cos^2\beta+\sin^2\beta \\
 &\quad-2\cos\alpha\cos\beta
-      -2\sin\alpha\sin\beta \\
-&=2-2\bigl(\cos\alpha\cos\beta
-             +\sin\alpha\sin\beta\bigr).
+      -2\sin\alpha\sin\beta.
 \end{aligned}
+$$
+
+Using $\cos^2\theta+\sin^2\theta=1$ for both angles,
+
+$$
+AB^2
+=2-2\bigl(\cos\alpha\cos\beta
+           +\sin\alpha\sin\beta\bigr).
 \tag{1}
 $$
 
-### Second calculation: use only the angle $\delta$
+### Second calculation: read the lengths from the right triangles
 
-Drop the perpendicular from $A$ to the line $OB$, and call its foot $H$.
-
-Because $OA=1$ and the angle $AOH$ equals $\delta$, the right triangle $OAH$ gives
+In the right triangle $OAH$, the hypotenuse is $OA=1$ and the angle at $O$ is $\delta$. Therefore
 
 $$
 OH=\cos\delta,
@@ -55,26 +83,13 @@ OH=\cos\delta,
 AH=\sin\delta.
 $$
 
-Since $OB=1$,
+Since $OB=1$ and $H$ lies between $O$ and $B$ in the displayed configuration,
 
 $$
 HB=OB-OH=1-\cos\delta.
 $$
 
-<figure class="figure-panel">
-  <div class="figure-toolbar">
-    <div>
-      <span class="figure-title">One chord, one perpendicular</span>
-      <span class="figure-step-title">The perpendicular from $A$ to $OB$ converts the angle $\delta$ into ordinary lengths.</span>
-    </div>
-  </div>
-  <div class="figure-stage">
-    <img src="../assets/images/lecture-01/cosine-difference-unit-circle.svg" alt="Triangle OAB with OA and OB of unit length and a perpendicular AH to OB." loading="lazy">
-  </div>
-  <figcaption class="figure-caption">The construction gives $OH=\cos\delta$, $AH=\sin\delta$ and $HB=1-\cos\delta$.</figcaption>
-</figure>
-
-Now apply the Pythagorean theorem in the right triangle $AHB$:
+Now use the right triangle $AHB$. By the Pythagorean theorem,
 
 $$
 \begin{aligned}
@@ -87,15 +102,15 @@ AB^2
 \tag{2}
 $$
 
-Since $\delta=\alpha-\beta$,
+Because $\delta=\alpha-\beta$,
 
 $$
 AB^2=2-2\cos(\alpha-\beta).
 $$
 
-### Compare the two results
+### Compare the two calculations
 
-Equations (1) and (2) are two expressions for the same number $AB^2$. Therefore
+Equations (1) and (2) describe the same squared length $AB^2$. Hence
 
 $$
 2-2\bigl(\cos\alpha\cos\beta+\sin\alpha\sin\beta\bigr)
@@ -103,7 +118,7 @@ $$
 2-2\cos(\alpha-\beta).
 $$
 
-After cancelling the common terms,
+Cancelling the common terms gives
 
 !!! theorem "Cosine of a difference"
     $$
@@ -111,5 +126,5 @@ After cancelling the common terms,
     =\cos\alpha\cos\beta+\sin\alpha\sin\beta.}
     $$
 
-!!! interpretation "What was actually proved"
-    The proof uses one geometric object: the chord $AB$ of the unit circle. Its length is calculated once from the Cartesian coordinates of its endpoints and once from a perpendicular projection. Equating the two calculations produces the identity.
+!!! interpretation "Structure of the proof"
+    The diagram supplies one chord $AB$. Its squared length is calculated first from the coordinates of its endpoints and then from the two right triangles created by the perpendicular $AH$. Equating the two calculations produces the identity.
