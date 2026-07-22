@@ -25,3 +25,36 @@ The sequence below distinguishes permanent objects from temporary construction a
 
 !!! principle "Construction principle"
     The scale is not drawn at once. A fixed compass opening is transferred successively along each axis. The interval is then refined by geometric bisection before coordinates are assigned by orthogonal projection.
+
+??? note "Construction steps"
+    - Begin with the Euclidean plane.
+    - Choose two points.
+    - Construct the first straight line through them.
+    - Choose the origin $O$ on the line.
+    - Construct the perpendicular axis through $O$.
+    - Choose the positive directions.
+    - Choose the unit segment $OU$.
+    - Set the compass to $OU$ and draw the circle centred at $O$.
+    - Keep only the four marks $\pm 1$.
+    - Use the mark $+1$ as the next compass centre.
+    - Keep the newly constructed mark $+2$.
+    - Repeat from $+2$.
+    - Keep the newly constructed mark $+3$.
+    - Repeat from $-1$ in the negative direction.
+    - Keep the newly constructed mark $-2$.
+    - Repeat from $+1$ on the vertical axis.
+    - Keep the newly constructed vertical mark $+2$.
+    - Repeat from $-1$ on the vertical axis.
+    - Keep the newly constructed vertical mark $-2$.
+    - Focus on the unit interval $[0,1]$.
+    - Construct the midpoint.
+    - Remove the helpers and keep $1/2$.
+    - Bisect both half-intervals.
+    - Remove the helpers and keep the quarter marks.
+    - Repeat once more to obtain eighth marks.
+    - Continue the same process to obtain arbitrarily fine dyadic marks.
+    - Return to the completed coordinate axes.
+    - Choose an arbitrary point $P$.
+    - Project $P$ orthogonally onto both axes.
+    - Reveal a light auxiliary grid.
+    - Read the ordered pair $(x,y)$.
