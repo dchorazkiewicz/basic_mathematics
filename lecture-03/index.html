@@ -652,9 +652,9 @@ P=P_0\oplus(s\mathbf u+t\mathbf v).
 \]</div>
 </div>
 <h2 id="computational-model">Computational interlude: lines and planes as constructed objects</h2>
-<p>The equations in this lecture combine objects of different types. A parameter multiplied by a direction is a vector; translating a base point by that vector produces a point. Membership in a line or plane is then a scalar condition. The first block uses <code>Point2</code>, <code>FreeVector2</code>, <code>displacement</code>, and <code>translate</code> from the preceding computational model.</p>
+<p>The equations in this lecture combine objects of different types. A parameter multiplied by a direction is a vector; translating a base point by that vector produces a point. Membership in a line or plane is a scalar condition. The two-dimensional blocks use <code>Point2</code>, <code>FreeVector2</code>, <code>displacement</code>, and <code>translate</code> from Lecture 2.</p>
 <details class="example">
-<summary>Python implementation: a line in the plane</summary>
+<summary>Python class: <code>Line2</code></summary>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
@@ -662,51 +662,70 @@ P=P_0\oplus(s\mathbf u+t\mathbf v).
 
 <span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">Line2</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A line determined by one point and one nonzero direction.&quot;&quot;&quot;</span>
+
     <span class="n">base</span><span class="p">:</span> <span class="n">Point2</span>
     <span class="n">direction</span><span class="p">:</span> <span class="n">FreeVector2</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># A zero direction would generate only one point.</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">direction</span><span class="o">.</span><span class="n">norm</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;A line requires a nonzero direction vector.&quot;</span><span class="p">)</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">through</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">first</span><span class="p">:</span> <span class="n">Point2</span><span class="p">,</span> <span class="n">second</span><span class="p">:</span> <span class="n">Point2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Line2</span><span class="p">:</span>
+        <span class="c1"># Two points determine the direction represented by first -&gt; second.</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">displacement</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">second</span><span class="p">))</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">at</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Point2</span><span class="p">:</span>
+        <span class="c1"># Scalar * vector -&gt; vector, then point translated by vector -&gt; point.</span>
         <span class="k">return</span> <span class="n">translate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">base</span><span class="p">,</span> <span class="n">t</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">direction</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">normal</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FreeVector2</span><span class="p">:</span>
+        <span class="c1"># Rotating [u, v] to [-v, u] produces a perpendicular direction.</span>
         <span class="k">return</span> <span class="n">FreeVector2</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">direction</span><span class="o">.</span><span class="n">dy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">direction</span><span class="o">.</span><span class="n">dx</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">contains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">point</span><span class="p">:</span> <span class="n">Point2</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-9</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="c1"># The offset is a vector; its dot product with the normal is a scalar.</span>
         <span class="n">offset</span> <span class="o">=</span> <span class="n">displacement</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">base</span><span class="p">,</span> <span class="n">point</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">normal</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">offset</span><span class="p">))</span> <span class="o">&lt;=</span> <span class="n">tolerance</span>
 </code></pre></div>
 </details>
-<p>The method <code>at(t)</code> implements the parametric construction. The method <code>contains(P)</code> first constructs the displacement from the base point to <code>P</code>, then takes its dot product with a normal vector, and finally tests whether the resulting number is zero.</p>
+<p>The method <code>at(t)</code> implements the parametric construction. The method <code>contains(P)</code> first constructs a displacement vector and then tests a scalar equation.</p>
 <details class="example">
-<summary>Python implementation: a plane in three-dimensional space</summary>
+<summary>Python class: <code>Point3</code></summary>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Point3</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A location in three-dimensional Cartesian space.&quot;&quot;&quot;</span>
+
+    <span class="n">x</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">y</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">z</span><span class="p">:</span> <span class="nb">float</span>
+</code></pre></div>
+</details>
+<details class="example">
+<summary>Python class: <code>FreeVector3</code></summary>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
 
 
 <span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">Point3</span><span class="p">:</span>
-    <span class="n">x</span><span class="p">:</span> <span class="nb">float</span>
-    <span class="n">y</span><span class="p">:</span> <span class="nb">float</span>
-    <span class="n">z</span><span class="p">:</span> <span class="nb">float</span>
-
-
-<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">FreeVector3</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A free displacement in three-dimensional space.&quot;&quot;&quot;</span>
+
     <span class="n">dx</span><span class="p">:</span> <span class="nb">float</span>
     <span class="n">dy</span><span class="p">:</span> <span class="nb">float</span>
     <span class="n">dz</span><span class="p">:</span> <span class="nb">float</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">FreeVector3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FreeVector3</span><span class="p">:</span>
+        <span class="c1"># Vector + vector -&gt; vector.</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">FreeVector3</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">NotImplemented</span>
         <span class="k">return</span> <span class="n">FreeVector3</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">dx</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">dx</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">dy</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">dy</span><span class="p">,</span>
@@ -714,6 +733,9 @@ P=P_0\oplus(s\mathbf u+t\mathbf v).
         <span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scalar</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FreeVector3</span><span class="p">:</span>
+        <span class="c1"># Scalar * vector -&gt; vector.</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">scalar</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+            <span class="k">return</span> <span class="bp">NotImplemented</span>
         <span class="k">return</span> <span class="n">FreeVector3</span><span class="p">(</span>
             <span class="n">scalar</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dx</span><span class="p">,</span>
             <span class="n">scalar</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dy</span><span class="p">,</span>
@@ -723,6 +745,9 @@ P=P_0\oplus(s\mathbf u+t\mathbf v).
     <span class="fm">__rmul__</span> <span class="o">=</span> <span class="fm">__mul__</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">dot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">FreeVector3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="c1"># Vector dot vector -&gt; scalar.</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">FreeVector3</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;The dot product requires two free vectors.&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">dx</span> <span class="o">*</span> <span class="n">other</span><span class="o">.</span><span class="n">dx</span>
             <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">dy</span> <span class="o">*</span> <span class="n">other</span><span class="o">.</span><span class="n">dy</span>
@@ -730,6 +755,9 @@ P=P_0\oplus(s\mathbf u+t\mathbf v).
         <span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">cross</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">FreeVector3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FreeVector3</span><span class="p">:</span>
+        <span class="c1"># In three dimensions, vector cross vector -&gt; vector.</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">FreeVector3</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;The cross product requires two free vectors.&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">FreeVector3</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">dy</span> <span class="o">*</span> <span class="n">other</span><span class="o">.</span><span class="n">dz</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">dz</span> <span class="o">*</span> <span class="n">other</span><span class="o">.</span><span class="n">dy</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">dz</span> <span class="o">*</span> <span class="n">other</span><span class="o">.</span><span class="n">dx</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">dx</span> <span class="o">*</span> <span class="n">other</span><span class="o">.</span><span class="n">dz</span><span class="p">,</span>
@@ -738,10 +766,17 @@ P=P_0\oplus(s\mathbf u+t\mathbf v).
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">norm_squared</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="c1"># Squared length is enough for testing whether the vector is zero.</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</code></pre></div>
+</details>
+<details class="example">
+<summary>Python operations: points and vectors in three dimensions</summary>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">displacement3</span><span class="p">(</span><span class="n">start</span><span class="p">:</span> <span class="n">Point3</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="n">Point3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FreeVector3</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Construct the free vector represented by start -&gt; end.&quot;&quot;&quot;</span>
 
-
-<span class="k">def</span><span class="w"> </span><span class="nf">displacement3</span><span class="p">(</span><span class="n">start</span><span class="p">:</span> <span class="n">Point3</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="n">Point3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FreeVector3</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">Point3</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">end</span><span class="p">,</span> <span class="n">Point3</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;A displacement requires two points.&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">FreeVector3</span><span class="p">(</span>
         <span class="n">end</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">start</span><span class="o">.</span><span class="n">x</span><span class="p">,</span>
         <span class="n">end</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">start</span><span class="o">.</span><span class="n">y</span><span class="p">,</span>
@@ -750,37 +785,54 @@ P=P_0\oplus(s\mathbf u+t\mathbf v).
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">translate3</span><span class="p">(</span><span class="n">point</span><span class="p">:</span> <span class="n">Point3</span><span class="p">,</span> <span class="n">vector</span><span class="p">:</span> <span class="n">FreeVector3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Point3</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Apply a free vector to a point.&quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="n">Point3</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;The first argument must be a point.&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">vector</span><span class="p">,</span> <span class="n">FreeVector3</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;The second argument must be a free vector.&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">Point3</span><span class="p">(</span>
         <span class="n">point</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">vector</span><span class="o">.</span><span class="n">dx</span><span class="p">,</span>
         <span class="n">point</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">vector</span><span class="o">.</span><span class="n">dy</span><span class="p">,</span>
         <span class="n">point</span><span class="o">.</span><span class="n">z</span> <span class="o">+</span> <span class="n">vector</span><span class="o">.</span><span class="n">dz</span><span class="p">,</span>
     <span class="p">)</span>
+</code></pre></div>
+</details>
+<details class="example">
+<summary>Python class: <code>Plane3</code></summary>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
 
 
 <span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">Plane3</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A plane generated from one point and two independent directions.&quot;&quot;&quot;</span>
+
     <span class="n">base</span><span class="p">:</span> <span class="n">Point3</span>
     <span class="n">first_direction</span><span class="p">:</span> <span class="n">FreeVector3</span>
     <span class="n">second_direction</span><span class="p">:</span> <span class="n">FreeVector3</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># Parallel directions have zero cross product and generate only a line.</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">normal</span><span class="o">.</span><span class="n">norm_squared</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The two directions must be nonparallel.&quot;</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">normal</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FreeVector3</span><span class="p">:</span>
+        <span class="c1"># The cross product constructs a vector perpendicular to both directions.</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">first_direction</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">second_direction</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">at</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Point3</span><span class="p">:</span>
+        <span class="c1"># Two scaled directions form one displacement from the base point.</span>
         <span class="n">shift</span> <span class="o">=</span> <span class="n">s</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">first_direction</span> <span class="o">+</span> <span class="n">t</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">second_direction</span>
         <span class="k">return</span> <span class="n">translate3</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">base</span><span class="p">,</span> <span class="n">shift</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">contains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">point</span><span class="p">:</span> <span class="n">Point3</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-9</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="c1"># The normal equation is a scalar relation.</span>
         <span class="n">offset</span> <span class="o">=</span> <span class="n">displacement3</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">base</span><span class="p">,</span> <span class="n">point</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">normal</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">offset</span><span class="p">))</span> <span class="o">&lt;=</span> <span class="n">tolerance</span>
 </code></pre></div>
 </details>
-<p>The cross product is used only where it is needed: it constructs a normal to the two permitted directions. The normal equation is implemented as a relation returning <code>bool</code>, not as another point or vector.</p>
+<p>The cross product appears only where it is required: it constructs a normal to the two permitted directions. The normal equation is implemented as a relation returning <code>bool</code>, not as another point or vector.</p>
 <h2 id="exercises">Practice and development</h2>
 <p>The first ten exercises are computational and graphical. The next ten require explanation, derivation, or comparison of representations.</p>
 <p><a class="download-button" download="download" href="lecture-03-exercises/">Download exercises as Markdown</a></p>
