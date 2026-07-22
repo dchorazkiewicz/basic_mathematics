@@ -16,6 +16,8 @@ These criteria include vertical directions without a special convention. For non
     \mathbf v_1\cdot\mathbf v_2=1+m_1m_2,
     $$
 
+    so
+
     $$
     \boxed{L_1\perp L_2\iff m_1m_2=-1}.
     $$
@@ -24,45 +26,82 @@ These criteria include vertical directions without a special convention. For non
 
 ## The nearest point on a line
 
-Let $L=\{P_0+t\mathbf v:t\in\mathbb R\}$ with $\mathbf v\neq\mathbf0$, and let $P$ be any point.
+Let
+
+$$
+L=\{P_0\oplus t\mathbf v:t\in\mathbb R\},
+\qquad \mathbf v\neq\mathbf0,
+$$
+
+and let $P$ be any point. The square-bracketed difference
+
+$$
+[P-P_0]
+$$
+
+is the free displacement from $P_0$ to $P$.
 
 !!! derivation "Projecting onto the allowed direction"
-    Decompose $P-P_0$ into a component parallel to $\mathbf v$ and a perpendicular component:
+    Decompose $[P-P_0]$ into a component parallel to $\mathbf v$ and a perpendicular component:
 
     $$
-    \operatorname{proj}_{\mathbf v}(P-P_0)=\frac{(P-P_0)\cdot\mathbf v}{\mathbf v\cdot\mathbf v}\,\mathbf v.
+    \operatorname{proj}_{\mathbf v}[P-P_0]
+      =\frac{[P-P_0]\cdot\mathbf v}{\mathbf v\cdot\mathbf v}\,\mathbf v.
     $$
 
-    Starting at $P_0$ and moving by this component reaches
+    The projection is a free vector. Applying it at $P_0$ reaches the foot $Q$:
 
     $$
-    \boxed{Q=P_0+\operatorname{proj}_{\mathbf v}(P-P_0)}.
+    \boxed{
+    Q=P_0\oplus\operatorname{proj}_{\mathbf v}[P-P_0].
+    }
     $$
 
 <figure class="figure-panel jsx-panel" data-fullscreen-panel>
   <div class="figure-toolbar"><div><span class="figure-title">Nearest point and distance to a line</span><span class="figure-step-title">Move $P$, $P_0$, and the line direction.</span></div><button class="icon-button" type="button" data-fullscreen>⛶</button></div>
   <div class="figure-stage jsx-stage"><div id="line-distance-board" class="jxgbox" data-line-distance></div></div>
   <div class="relation-readout"><span data-foot-readout></span><span data-distance-readout></span></div>
-  <figcaption class="figure-caption">The remainder $P-Q$ is perpendicular to the permitted direction of the line.</figcaption>
+  <figcaption class="figure-caption">The free remainder $[P-Q]$ is perpendicular to the permitted direction of the line.</figcaption>
 </figure>
+
+The perpendicular remainder is
+
+$$
+[P-P_0]-\operatorname{proj}_{\mathbf v}[P-P_0].
+$$
 
 !!! theorem "Distance in parametric form"
     $$
-    \boxed{d(P,L)=\left\|(P-P_0)-\operatorname{proj}_{\mathbf v}(P-P_0)\right\|}.
+    \boxed{
+    d(P,L)
+      =\left\|[P-P_0]-\operatorname{proj}_{\mathbf v}[P-P_0]\right\|.
+    }
     $$
 
-Every other route from $P$ to the line contains the same perpendicular component plus an additional component along the line. The perpendicular alone is shortest.
+Every other route from $P$ to the line contains the same perpendicular component plus an additional component along the line. The perpendicular component alone is shortest.
 
 ### Distance from the normal equation
 
-Suppose $L:ax+by=c$ with normal $\mathbf n=[a,b]$. For $P=(x_P,y_P)$ and any $P_0$ on the line:
+Suppose $L:ax+by=c$ with normal $\mathbf n=[a,b]$. Let $P=(x_P,y_P)$ and let $P_0=(x_0,y_0)$ be any point on the line.
 
 !!! derivation "Reading the normal component"
+    The displacement from $P_0$ to $P$ is
+
     $$
-    \mathbf n\cdot(P-P_0)=ax_P+by_P-c.
+    [P-P_0]=[x_P-x_0,\,y_P-y_0].
     $$
 
-    The signed scalar component along the normal is
+    Therefore
+
+    $$
+    \begin{aligned}
+    \mathbf n\cdot[P-P_0]
+      &=a(x_P-x_0)+b(y_P-y_0)\\
+      &=ax_P+by_P-c.
+    \end{aligned}
+    $$
+
+    The signed scalar component along the unit normal is
 
     $$
     \frac{ax_P+by_P-c}{\sqrt{a^2+b^2}}.
