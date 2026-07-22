@@ -69,27 +69,27 @@
     name: 'λP', size: 5, fillColor: '#b1782b', strokeColor: '#b1782b', ...fixed
   });
 
-  const V = board.create('point', [2, -2], {
-    name: 'V', fillColor: '#7a3f73', strokeColor: '#7a3f73', ...draggable
+  const X = board.create('point', [2, -2], {
+    name: 'X', fillColor: '#7a3f73', strokeColor: '#7a3f73', ...draggable
   });
 
   const Translated = board.create('point', [
-    () => P.X() + V.X(),
-    () => P.Y() + V.Y()
+    () => P.X() + X.X(),
+    () => P.Y() + X.Y()
   ], {
     name: 'P⊕v', size: 5, fillColor: '#3f7f68', strokeColor: '#3f7f68', ...fixed
   });
 
-  const vectorArrow = board.create('arrow', [O, V], {
+  const vectorArrow = board.create('arrow', [O, X], {
     strokeColor: '#7a3f73', strokeWidth: 4, ...fixed
   });
   const translatedArrow = board.create('arrow', [P, Translated], {
     strokeColor: '#3f7f68', strokeWidth: 5, ...fixed
   });
   const vectorText = board.create('text', [
-    () => V.X() / 2,
-    () => V.Y() / 2 + 0.35,
-    () => `$\\mathbf v=[${f(V.X())},${f(V.Y())}]$`
+    () => X.X() / 2,
+    () => X.Y() / 2 + 0.35,
+    () => `$\\mathbf v=[X-O]=[${f(X.X())},${f(X.Y())}]$`
   ], {
     display: 'html', useMathJax: true, cssClass: 'vector-label-chip',
     color: '#7a3f73', fontSize: 17, ...fixed
@@ -97,7 +97,7 @@
 
   let mode = 'sum';
   const results = [Sum, Opp, Diff, Scaled, Translated];
-  const translationObjects = [V, vectorArrow, translatedArrow, vectorText];
+  const translationObjects = [X, vectorArrow, translatedArrow, vectorText];
 
   function f(value) {
     const rounded = Math.round(value * 10) / 10;
@@ -116,8 +116,8 @@
     const py = P.Y();
     const qx = Q.X();
     const qy = Q.Y();
-    const vx = V.X();
-    const vy = V.Y();
+    const vx = X.X();
+    const vy = X.Y();
     const lambda = Number(lambdaSlider.value);
     lambdaOutput.textContent = f(lambda);
 
@@ -172,7 +172,7 @@
 
   P.on('drag', updateReadout);
   Q.on('drag', updateReadout);
-  V.on('drag', updateReadout);
+  X.on('drag', updateReadout);
 
   setMode('sum');
   window.LectureJSX?.keepBoardFitted?.({ board, host, boundingBox: VIEW });
