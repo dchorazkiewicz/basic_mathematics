@@ -23,7 +23,7 @@
     snapToGrid: true, snapSizeX: .5, snapSizeY: .5
   });
   const D = board.create('point', [3, 2], {
-    name: 'P₀+v', size: 5, fillColor: '#2f6f9f', strokeColor: '#2f6f9f',
+    name: 'P₀⊕v', size: 5, fillColor: '#2f6f9f', strokeColor: '#2f6f9f',
     snapToGrid: true, snapSizeX: .5, snapSizeY: .5,
     label: window.LectureJSX?.pointLabelStyle?.({ offset: [12, 10], fontSize: 17 }) || {
       display: 'html', cssClass: 'vector-label-chip', offset: [12, 10], fontSize: 17
@@ -56,7 +56,7 @@
   board.create('text', [
     () => (Q.X() + P.X()) / 2 + .35,
     () => (Q.Y() + P.Y()) / 2,
-    '$d(P,L)$'
+    '$d(P,L)=\\|[P-Q]\\|$'
   ], boxed({ color: '#b1782b', fontSize: 17, useMathJax: true }));
 
   const foot = document.querySelector('[data-foot-readout]');
@@ -64,7 +64,7 @@
   function fmt(x) { return Number(x.toFixed(2)).toString(); }
   function update() {
     foot.textContent = `Q = (${fmt(Q.X())}, ${fmt(Q.Y())})`;
-    dist.textContent = `d(P,L) = ${fmt(Math.hypot(P.X() - Q.X(), P.Y() - Q.Y()))}`;
+    dist.textContent = `d(P,L) = ||[P−Q]|| = ${fmt(Math.hypot(P.X() - Q.X(), P.Y() - Q.Y()))}`;
   }
   board.on('update', update);
   update();
