@@ -60,6 +60,8 @@
         
           <a href="#orientation">Orientation and mechanics</a>
         
+          <a href="#computational-model">Computational model</a>
+        
           <a href="#exercises">Exercises</a>
         
       </aside>
@@ -485,6 +487,61 @@ r=\frac{p}{1+e\cos\theta}
 <p class="admonition-title">Choose coordinates adapted to the question</p>
 <p>Cartesian coordinates are best for centres, axes, vertices, and complete symmetric pictures. Polar coordinates centred at a focus are best for radial distance, orientation, eccentricity, and orbital interpretation. Analytic geometry works by choosing the representation in which the geometry speaks most clearly.</p>
 </div>
+<h2 id="computational-model">Computational interlude: polar data and a conic family</h2>
+<p>A polar pair is not merely an arbitrary pair of numbers: the radial coordinate must satisfy the convention <span class="arithmatex">\(r\geq0\)</span>, and a polar conic may fail to produce an admissible point for some angles. The implementation below uses <code>Point2</code>, <code>FreeVector2</code>, and <code>translate</code> from the computational model of Lecture 2.</p>
+<details class="example">
+<summary>Python implementation: polar coordinates and the focus--directrix family</summary>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">cos</span><span class="p">,</span> <span class="n">sin</span>
+
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">PolarCoordinates</span><span class="p">:</span>
+    <span class="n">radius</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">angle</span><span class="p">:</span> <span class="nb">float</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;This course uses the convention r &gt;= 0.&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_cartesian</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pole</span><span class="p">:</span> <span class="n">Point2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Point2</span><span class="p">:</span>
+        <span class="n">radial_vector</span> <span class="o">=</span> <span class="n">FreeVector2</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">angle</span><span class="p">),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">angle</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">translate</span><span class="p">(</span><span class="n">pole</span><span class="p">,</span> <span class="n">radial_vector</span><span class="p">)</span>
+
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">PolarConic</span><span class="p">:</span>
+    <span class="n">focal_parameter</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">eccentricity</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">orientation</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">focal_parameter</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The focal parameter must be positive.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">eccentricity</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The eccentricity cannot be negative.&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">radius_at</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">angle</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">denominator</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">eccentricity</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span>
+            <span class="n">angle</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">orientation</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">denominator</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">focal_parameter</span> <span class="o">/</span> <span class="n">denominator</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">point_at</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">angle</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">focus</span><span class="p">:</span> <span class="n">Point2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Point2</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">radius</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius_at</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">radius</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="n">PolarCoordinates</span><span class="p">(</span><span class="n">radius</span><span class="p">,</span> <span class="n">angle</span><span class="p">)</span><span class="o">.</span><span class="n">to_cartesian</span><span class="p">(</span><span class="n">focus</span><span class="p">)</span>
+</code></pre></div>
+</details>
+<p>The return type <code>float | None</code> records a genuine domain issue. Under the convention <span class="arithmatex">\(r\geq0\)</span>, an angle for which <span class="arithmatex">\(1+e\cos(\theta-\theta_0)\leq0\)</span> does not produce a point through this radial description. The program must control the same restrictions that are present in the mathematics.</p>
 <h2 id="exercises">Exercises</h2>
 <p>The first ten consolidate computation and graphical reading. The final ten require explanation, derivation, and comparison of representations.</p>
 <p><a class="download-button" download="download" href="lecture-04-exercises/">Download exercises as Markdown</a></p>
