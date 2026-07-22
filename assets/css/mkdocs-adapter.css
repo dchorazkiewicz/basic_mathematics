@@ -51,6 +51,79 @@ details > :last-child { margin-bottom: 0; }
 .admonition .arithmatex,
 details .arithmatex { max-width: 100%; }
 
+/* Pygments syntax highlighting for fenced source-code blocks. */
+.highlight {
+  margin: 16px 0;
+  overflow-x: auto;
+  border: 1px solid #273449;
+  border-radius: 12px;
+  background: #111827;
+}
+.highlight pre {
+  margin: 0;
+  padding: 18px 20px;
+  overflow: visible;
+  background: transparent;
+  color: #e5e7eb;
+  font: 0.92rem/1.58 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  tab-size: 4;
+}
+.highlight code {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+}
+.highlight .c,
+.highlight .c1,
+.highlight .cm,
+.highlight .cp,
+.highlight .cs { color: #7f8ea3; font-style: italic; }
+.highlight .k,
+.highlight .kc,
+.highlight .kd,
+.highlight .kn,
+.highlight .kp,
+.highlight .kr,
+.highlight .kt { color: #c084fc; font-weight: 700; }
+.highlight .nc,
+.highlight .nn { color: #67e8f9; font-weight: 700; }
+.highlight .nf,
+.highlight .fm { color: #60a5fa; }
+.highlight .nd,
+.highlight .na { color: #fbbf24; }
+.highlight .nb,
+.highlight .bp { color: #38bdf8; }
+.highlight .s,
+.highlight .s1,
+.highlight .s2,
+.highlight .sa,
+.highlight .sb,
+.highlight .sc,
+.highlight .sd,
+.highlight .se,
+.highlight .sh,
+.highlight .si,
+.highlight .sr,
+.highlight .ss,
+.highlight .sx { color: #86efac; }
+.highlight .m,
+.highlight .mi,
+.highlight .mf,
+.highlight .mh,
+.highlight .mo { color: #fca5a5; }
+.highlight .o,
+.highlight .ow { color: #f9a8d4; }
+.highlight .p { color: #cbd5e1; }
+.highlight .n,
+.highlight .nv,
+.highlight .vc,
+.highlight .vg,
+.highlight .vi { color: #e5e7eb; }
+.highlight .err { color: #fecaca; background: #7f1d1d; }
+details .highlight { margin-bottom: 0; }
+
 /* Markdown tables used by the course map and conceptual summaries. */
 .home table,
 .lecture-main table,
