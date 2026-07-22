@@ -1,4 +1,4 @@
-// Interactive construction of L = {P0 + t v : t in R}.
+// Interactive construction of L = {P0 ⊕ t v : t in R}.
 (() => {
   const host = document.querySelector('[data-line-generation]');
   if (!host || !window.JXG) return;
@@ -33,7 +33,7 @@
     snapToGrid: true, snapSizeX: 0.5, snapSizeY: 0.5
   });
   const V = board.create('point', [3.5, 2.5], {
-    name: 'P₀+v', size: 5, fillColor: '#2f6f9f', strokeColor: '#2f6f9f',
+    name: 'P₀⊕v', size: 5, fillColor: '#2f6f9f', strokeColor: '#2f6f9f',
     snapToGrid: true, snapSizeX: 0.5, snapSizeY: 0.5,
     label: window.LectureJSX?.pointLabelStyle?.({ offset: [12, 10], fontSize: 17 })
   });
@@ -75,7 +75,7 @@
     const y = P0.Y() + t() * vy();
     if (output) output.textContent = fmt(t());
     if (readout) {
-      readout.textContent = `P(t) = (${fmt(P0.X())}, ${fmt(P0.Y())}) + ${fmt(t())}[${fmt(vx())}, ${fmt(vy())}] = (${fmt(x)}, ${fmt(y)})`;
+      readout.textContent = `P(t) = (${fmt(P0.X())}, ${fmt(P0.Y())}) ⊕ ${fmt(t())}[${fmt(vx())}, ${fmt(vy())}] = (${fmt(x)}, ${fmt(y)})`;
     }
     board.update();
   }
