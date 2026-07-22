@@ -292,7 +292,8 @@ P\oplus[Q-P]=Q.
         print((-v).coordinates)             # (-3, -4)
         print((2 * v).coordinates)          # (6, 8)
         print(v.norm)                       # 5.0
-        print(v.normalized().coordinates)   # (0.6, 0.8)
+        print(tuple(round(c, 3) for c in v.normalized().coordinates))
+        # (0.6, 0.8)
         print(v.dot(u))                     # -5
         print(v.determinant(u))             # -10
         print(v.is_parallel_to(2 * v))      # True
