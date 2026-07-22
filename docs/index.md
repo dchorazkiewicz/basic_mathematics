@@ -8,7 +8,10 @@ home: true
 
 *A course in analytical geometry, linear algebra and calculus.*
 
-[Read the didactic manifest](manifest.md)
+!!! note "Before the lectures"
+    The introduction explains the purpose of the course, the weekly learning cycle, and the standard expected of mathematical notes.
+
+    **[Read the course introduction →](manifest.md)**
 
 ## Part I · Analytical Geometry {#course-map}
 
