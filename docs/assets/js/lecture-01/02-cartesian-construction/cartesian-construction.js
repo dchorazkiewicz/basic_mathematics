@@ -162,15 +162,15 @@
     }), 'grid');
   }
 
-  point([2.5, 1.5], 'P', 'point-p', {
+  point([3, 2], 'P', 'point-p', {
     size: 5, fillColor: colors.green, strokeColor: colors.green,
     label: { offset: [14, 8], fontSize: 22 }
   });
-  point([2.5, 0], '', 'projection', { size: 4, fillColor: colors.green, strokeColor: colors.green });
-  point([0, 1.5], '', 'projection', { size: 4, fillColor: colors.green, strokeColor: colors.green });
-  segment([2.5, 1.5], [2.5, 0], 'projection', { strokeColor: colors.green, dash: 2 });
-  segment([2.5, 1.5], [0, 1.5], 'projection', { strokeColor: colors.green, dash: 2 });
-  text([2.85, 1.1], 'P = (x, y)', 'coordinates', { color: colors.green, fontSize: 18 });
+  point([3, 0], '', 'projection', { size: 4, fillColor: colors.green, strokeColor: colors.green });
+  point([0, 2], '', 'projection', { size: 4, fillColor: colors.green, strokeColor: colors.green });
+  segment([3, 2], [3, 0], 'projection', { strokeColor: colors.green, dash: 2 });
+  segment([3, 2], [0, 2], 'projection', { strokeColor: colors.green, dash: 2 });
+  text([3.3, 1.55], 'P = (3, 2)', 'coordinates', { color: colors.green, fontSize: 18 });
 
   const baseAxes = ['xaxis', 'origin', 'yaxis', 'rightangle', 'directions'];
   const firstMarks = [...baseAxes, 'marks-one'];
@@ -208,10 +208,10 @@
     { title: 'Repeat once more to obtain eighth marks', keys: ['focus', 'half', 'quarters', 'eighths'], bbox: FOCUS_VIEW },
     { title: 'The same process gives arbitrarily fine dyadic marks', keys: ['focus', 'half', 'quarters', 'eighths'], bbox: FOCUS_VIEW },
     { title: 'Return to the completed coordinate axes', keys: allIntegerMarks },
-    { title: 'Choose an arbitrary point P', keys: [...allIntegerMarks, 'point-p'] },
+    { title: 'Choose the point P = (3, 2)', keys: [...allIntegerMarks, 'point-p'] },
     { title: 'Project P orthogonally onto both axes', keys: [...allIntegerMarks, 'point-p', 'projection'] },
     { title: 'Reveal a light auxiliary grid', keys: ['grid', ...allIntegerMarks, 'point-p', 'projection'] },
-    { title: 'Read the ordered pair (x,y)', keys: ['grid', ...allIntegerMarks, 'point-p', 'projection', 'coordinates'] }
+    { title: 'Read the ordered pair (3,2)', keys: ['grid', ...allIntegerMarks, 'point-p', 'projection', 'coordinates'] }
   ];
 
   const panel = host.closest('[data-fullscreen-panel]');
