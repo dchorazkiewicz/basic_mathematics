@@ -15,6 +15,7 @@ section_links:
   - { id: parametric-curves, title: Parametric curves }
   - { id: intersections-regions, title: Intersections and regions }
   - { id: cosine-difference, title: Cosine of an angle difference }
+  - { id: computational-model, title: Computational model }
   - { id: exercises, title: Exercises }
 ---
 
@@ -27,4 +28,5 @@ section_links:
 --8<-- "lecture-01/sections/07-parametric-curves.md"
 --8<-- "lecture-01/sections/08-intersections-regions.md"
 --8<-- "lecture-01/sections/09-cosine-difference.md"
+--8<-- "lecture-01/sections/computational-model.md"
 --8<-- "lecture-01/sections/09-exercises.md"
