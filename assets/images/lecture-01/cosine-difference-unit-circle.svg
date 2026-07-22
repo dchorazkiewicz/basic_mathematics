@@ -18,11 +18,11 @@
   <path d="M330 390 A70 70 0 0 0 323 360" fill="none" stroke="#3f735f" stroke-width="3"/>
   <path d="M345 349 A105 105 0 0 0 325 308" fill="none" stroke="#2f6f9f" stroke-width="3"/>
   <path d="M318 353 A70 70 0 0 0 302 334" fill="none" stroke="#b1782b" stroke-width="4"/>
-  <text x="458" y="294" font-family="serif" font-size="28" fill="#3f735f">A=(cos α, sin α)</text>
-  <text x="400" y="215" font-family="serif" font-size="28" fill="#2f6f9f">B=(cos β, sin β)</text>
-  <text x="332" y="378" font-family="serif" font-size="25" fill="#3f735f">α</text>
-  <text x="344" y="326" font-family="serif" font-size="25" fill="#2f6f9f">β</text>
-  <text x="305" y="318" font-family="serif" font-size="24" fill="#b1782b">β−α</text>
+  <text x="458" y="294" font-family="serif" font-size="28" fill="#3f735f">B=(cos β, sin β)</text>
+  <text x="400" y="215" font-family="serif" font-size="28" fill="#2f6f9f">A=(cos α, sin α)</text>
+  <text x="332" y="378" font-family="serif" font-size="25" fill="#3f735f">β</text>
+  <text x="344" y="326" font-family="serif" font-size="25" fill="#2f6f9f">α</text>
+  <text x="305" y="318" font-family="serif" font-size="24" fill="#b1782b">α−β</text>
   <text x="238" y="420" font-family="serif" font-size="24" fill="#18212b">O</text>
   <text x="620" y="423" font-family="sans-serif" font-size="20" fill="#66717d">x</text>
   <text x="278" y="75" font-family="sans-serif" font-size="20" fill="#66717d">y</text>
