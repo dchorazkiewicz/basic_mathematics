@@ -40,13 +40,13 @@
   board.create('segment', [P, P2], { strokeColor: '#a9b2ba', dash: 2, ...fixed });
   board.create('segment', [Q, Q2], { strokeColor: '#a9b2ba', dash: 2, ...fixed });
 
-  board.create('text', [-5, 5, '$Q-P=Q\' - P\'=[3,2]$'], {
-    color: '#66717d',
-    fontSize: 17,
-    display: 'html',
-    useMathJax: true,
-    cssClass: 'vector-label-chip',
-    ...fixed
+  board.create('text', [-5, 5.05, "$Q-P=Q'-P'=(3,2)$"], {
+    color: '#66717d', fontSize: 17, display: 'html', useMathJax: true,
+    cssClass: 'vector-label-chip', ...fixed
+  });
+  board.create('text', [-5, 4.35, "$[Q-P]=[Q'-P']=[3,2]$"], {
+    color: '#17324d', fontSize: 17, display: 'html', useMathJax: true,
+    cssClass: 'vector-label-chip', ...fixed
   });
 
   window.LectureJSX?.keepBoardFitted?.({ board, host, boundingBox: VIEW });
