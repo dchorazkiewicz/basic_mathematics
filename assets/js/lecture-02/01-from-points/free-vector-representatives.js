@@ -23,8 +23,8 @@
     ...fixed
   });
 
-  const V = board.create('point', [2.5, 1.5], {
-    name: 'V',
+  const X = board.create('point', [2.5, 1.5], {
+    name: 'X',
     size: 6,
     fillColor: '#b1782b',
     strokeColor: '#b1782b',
@@ -33,7 +33,7 @@
     snapSizeY: 0.5
   });
 
-  board.create('arrow', [O, V], {
+  board.create('arrow', [O, X], {
     strokeColor: '#17324d',
     strokeWidth: 6,
     ...fixed
@@ -48,7 +48,7 @@
 
   anchors.forEach(([x, y]) => {
     const start = board.create('point', [x, y], { visible: false, ...fixed });
-    const end = board.create('point', [() => x + V.X(), () => y + V.Y()], {
+    const end = board.create('point', [() => x + X.X(), () => y + X.Y()], {
       visible: false,
       ...fixed
     });
@@ -60,7 +60,7 @@
     });
   });
 
-  board.create('text', [-5.4, 5.2, 'Move V: every arrow remains an equal representative of the same free vector.'], {
+  board.create('text', [-5.4, 5.2, 'Move X: every arrow remains a representative of the same free vector.'], {
     color: '#66717d',
     fontSize: 16,
     ...fixed
@@ -71,13 +71,13 @@
 
   function update() {
     if (readout) {
-      readout.textContent = `$\\mathbf v=[${fmt(V.X())},${fmt(V.Y())}]$`;
+      readout.textContent = `$\\mathbf v=[X-O]=[${fmt(X.X())},${fmt(X.Y())}]$`;
       window.MathJax?.typesetPromise?.([readout]);
     }
     board.fullUpdate();
   }
 
-  V.on('drag', update);
+  X.on('drag', update);
   update();
   window.LectureJSX?.keepBoardFitted?.({ board, host, boundingBox: VIEW });
 })();
