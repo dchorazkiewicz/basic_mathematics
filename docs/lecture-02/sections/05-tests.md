@@ -1,5 +1,15 @@
 ## Parallelism, perpendicularity, and the dot product {#tests}
 
+The preceding geometry of the unit circle already tells us how to study the angle between two unit directions. Every nonzero vector can be rescaled to such a unit direction:
+
+$$
+\widehat{\mathbf u}:=\frac{\mathbf u}{\|\mathbf u\|},
+\qquad
+\widehat{\mathbf v}:=\frac{\mathbf v}{\|\mathbf v\|}.
+$$
+
+Both normalized vectors have length $1$, and positive rescaling does not change their directions. Therefore the angle between $\mathbf u$ and $\mathbf v$ is exactly the angle between $\widehat{\mathbf u}$ and $\widehat{\mathbf v}$. The unit-circle formulas from the previous lecture can consequently be transferred directly to arbitrary nonzero vectors; the factors $\|\mathbf u\|$ and $\|\mathbf v\|$ merely restore their original lengths.
+
 Take two arbitrary nonzero vectors
 
 $$
