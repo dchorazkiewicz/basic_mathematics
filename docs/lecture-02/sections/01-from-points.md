@@ -205,6 +205,57 @@ This is the central abstraction:
   <figcaption class="figure-caption">Every displayed arrow is a different anchored vector, but all are representatives of the same free vector because every arrow encodes the same coordinate change.</figcaption>
 </figure>
 
+### The length of a free vector
+
+All representatives of one free vector have the same horizontal and vertical coordinate changes. The distance formula therefore gives them the same length. Length is consequently a property of the free vector itself, not of the particular representative chosen to draw it.
+
+!!! definition "Euclidean norm"
+    Let
+
+    $$
+    \mathbf v=[\overrightarrow{PQ}]=[v_1,v_2],
+    $$
+
+    where $P=(p_1,p_2)$ and $Q=(q_1,q_2)$. The **norm** of $\mathbf v$ is the length of any anchored representative:
+
+    $$
+    \boxed{
+    \|\mathbf v\|
+      :=|\overrightarrow{PQ}|
+      =d_E(P,Q)
+      =\sqrt{(q_1-p_1)^2+(q_2-p_2)^2}
+      =\sqrt{v_1^2+v_2^2}.
+    }
+    $$
+
+The definition is independent of the representative: if
+
+$$
+\overrightarrow{PQ}\sim\overrightarrow{P'Q'},
+$$
+
+then both representatives have the same coordinate change, so the distance formula gives
+
+$$
+|\overrightarrow{PQ}|=|\overrightarrow{P'Q'}|.
+$$
+
+In particular,
+
+$$
+\|\mathbf0\|=0,
+\qquad
+\mathbf v\neq\mathbf0\implies\|\mathbf v\|>0.
+$$
+
+For any two points $A$ and $B$, the free vector associated with the motion from $A$ to $B$ satisfies
+
+$$
+\boxed{d_E(A,B)=\|B-A\|}.
+$$
+
+Thus a free vector carries two kinds of information from the beginning: the coordinate change tells us **how the position changes**, and the norm tells us **how far the motion travels**.
+
 ### Similar notation, different objects
 
 This distinction must remain explicit:
