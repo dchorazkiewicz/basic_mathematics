@@ -11,6 +11,10 @@
   <link rel="stylesheet" href="{{ 'assets/css/figures.css' | url }}">
   <link rel="stylesheet" href="{{ 'assets/css/exercises.css' | url }}">
   <link rel="stylesheet" href="{{ 'assets/css/mkdocs-adapter.css' | url }}">
+  {% if page.meta.python_editor %}
+    <link rel="stylesheet" href="https://pyscript.net/releases/2026.6.2/core.css">
+    <script type="module" src="https://pyscript.net/releases/2026.6.2/core.js"></script>
+  {% endif %}
   {% if page.meta.lecture %}<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsxgraph@1.10.1/distrib/jsxgraph.css">{% endif %}
   <script>
     window.MathJax = {
