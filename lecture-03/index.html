@@ -87,7 +87,13 @@ P\oplus\mathbf v\in\mathcal P
 <p class="admonition-title">Data that determine a line</p>
 <p>A line in the Cartesian plane is determined by one point <span class="arithmatex">\(P_0\)</span> on the line and one nonzero direction vector <span class="arithmatex">\(\mathbf v\)</span>. Every point of the line is reached by applying a scalar multiple of <span class="arithmatex">\(\mathbf v\)</span> at <span class="arithmatex">\(P_0\)</span>.</p>
 </div>
-<p>Let <span class="arithmatex">\(P_0=(x_0,y_0)\)</span> be fixed and let <span class="arithmatex">\(\mathbf v=[u,v]\neq\mathbf0\)</span>. Every permitted displacement is the free vector <span class="arithmatex">\(t\mathbf v\)</span>, so the corresponding point is</p>
+<p>Let</p>
+<div class="arithmatex">\[
+P_0=(x_0,y_0),
+\qquad
+\mathbf v=[v_1,v_2]\neq\mathbf0.
+\]</div>
+<p>Every permitted displacement is the free vector <span class="arithmatex">\(t\mathbf v\)</span>, so the corresponding point is</p>
 <div class="arithmatex">\[
 \boxed{P=P_0\oplus t\mathbf v},
 \qquad t\in\mathbb R.
@@ -105,7 +111,7 @@ P_0\oplus t\mathbf v\in\mathcal P.
 \]</div>
 <p>In coordinates,</p>
 <div class="arithmatex">\[
-\boxed{x=x_0+tu,\qquad y=y_0+tv.}
+\boxed{x=x_0+tv_1,\qquad y=y_0+tv_2.}
 \]</div>
 </div>
 <figure class="figure-panel jsx-panel" data-fullscreen-panel>
@@ -161,15 +167,17 @@ a(x-x_0)+b(y-y_0)=0,
 <h3 id="slope-form-as-a-special-coordinate-description">Slope form as a special coordinate description</h3>
 <div class="admonition derivation">
 <p class="admonition-title">Eliminating the parameter</p>
-<p>If <span class="arithmatex">\(u\neq0\)</span>, then <span class="arithmatex">\(t=(x-x_0)/u\)</span>. Substitution gives</p>
+<p>If <span class="arithmatex">\(v_1\neq0\)</span>, then <span class="arithmatex">\(t=(x-x_0)/v_1\)</span>. Substitution gives</p>
 <div class="arithmatex">\[
-y-y_0=\frac vu(x-x_0),\qquad \boxed{m=\frac vu},
+y-y_0=\frac{v_2}{v_1}(x-x_0),
+\qquad
+\boxed{m=\frac{v_2}{v_1}},
 \]</div>
 <p>and therefore <span class="arithmatex">\(y=mx+b\)</span> after collecting constants.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Vertical case</p>
-<p>If <span class="arithmatex">\(u=0\)</span>, the line is vertical and is described by <span class="arithmatex">\(x=x_0\)</span>. Parametric and normal forms need no exception; only slope notation fails.</p>
+<p>If <span class="arithmatex">\(v_1=0\)</span>, the line is vertical and is described by <span class="arithmatex">\(x=x_0\)</span>. Parametric and normal forms need no exception; only slope notation fails.</p>
 </div>
 <div class="admonition summary">
 <p class="admonition-title">Three forms, three questions</p>
