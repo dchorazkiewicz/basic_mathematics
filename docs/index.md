@@ -1,10 +1,10 @@
 ---
-title: Mathematical Stories
-description: Mathematical Stories — a twelve-lecture course in analytical geometry, linear algebra and calculus.
+title: Basic Mathematics
+description: Basic Mathematics — a twelve-lecture course in analytical geometry, linear algebra and calculus.
 home: true
 ---
 
-# Mathematical Stories
+# Basic Mathematics
 
 *A course in analytical geometry, linear algebra and calculus.*
 
