@@ -299,46 +299,75 @@ P\oplus[Q-P]=Q.
 <div class="arithmatex">\[
 \mathbf v_1\cdot\mathbf v_2=1+m_1m_2,
 \]</div>
+<p>so</p>
 <div class="arithmatex">\[
 \boxed{L_1\perp L_2\iff m_1m_2=-1}.
 \]</div>
 <p>This is the slope form of the dot-product criterion, not an independent rule.</p>
 </div>
 <h2 id="the-nearest-point-on-a-line">The nearest point on a line</h2>
-<p>Let <span class="arithmatex">\(L=\{P_0+t\mathbf v:t\in\mathbb R\}\)</span> with <span class="arithmatex">\(\mathbf v\neq\mathbf0\)</span>, and let <span class="arithmatex">\(P\)</span> be any point.</p>
+<p>Let</p>
+<div class="arithmatex">\[
+L=\{P_0\oplus t\mathbf v:t\in\mathbb R\},
+\qquad \mathbf v\neq\mathbf0,
+\]</div>
+<p>and let <span class="arithmatex">\(P\)</span> be any point. The square-bracketed difference</p>
+<div class="arithmatex">\[
+[P-P_0]
+\]</div>
+<p>is the free displacement from <span class="arithmatex">\(P_0\)</span> to <span class="arithmatex">\(P\)</span>.</p>
 <div class="admonition derivation">
 <p class="admonition-title">Projecting onto the allowed direction</p>
-<p>Decompose <span class="arithmatex">\(P-P_0\)</span> into a component parallel to <span class="arithmatex">\(\mathbf v\)</span> and a perpendicular component:</p>
+<p>Decompose <span class="arithmatex">\([P-P_0]\)</span> into a component parallel to <span class="arithmatex">\(\mathbf v\)</span> and a perpendicular component:</p>
 <div class="arithmatex">\[
-\operatorname{proj}_{\mathbf v}(P-P_0)=\frac{(P-P_0)\cdot\mathbf v}{\mathbf v\cdot\mathbf v}\,\mathbf v.
+\operatorname{proj}_{\mathbf v}[P-P_0]
+  =\frac{[P-P_0]\cdot\mathbf v}{\mathbf v\cdot\mathbf v}\,\mathbf v.
 \]</div>
-<p>Starting at <span class="arithmatex">\(P_0\)</span> and moving by this component reaches</p>
+<p>The projection is a free vector. Applying it at <span class="arithmatex">\(P_0\)</span> reaches the foot <span class="arithmatex">\(Q\)</span>:</p>
 <div class="arithmatex">\[
-\boxed{Q=P_0+\operatorname{proj}_{\mathbf v}(P-P_0)}.
+\boxed{
+Q=P_0\oplus\operatorname{proj}_{\mathbf v}[P-P_0].
+}
 \]</div>
 </div>
 <figure class="figure-panel jsx-panel" data-fullscreen-panel>
   <div class="figure-toolbar"><div><span class="figure-title">Nearest point and distance to a line</span><span class="figure-step-title">Move $P$, $P_0$, and the line direction.</span></div><button class="icon-button" type="button" data-fullscreen>⛶</button></div>
   <div class="figure-stage jsx-stage"><div id="line-distance-board" class="jxgbox" data-line-distance></div></div>
   <div class="relation-readout"><span data-foot-readout></span><span data-distance-readout></span></div>
-  <figcaption class="figure-caption">The remainder $P-Q$ is perpendicular to the permitted direction of the line.</figcaption>
+  <figcaption class="figure-caption">The free remainder $[P-Q]$ is perpendicular to the permitted direction of the line.</figcaption>
 </figure>
 
+<p>The perpendicular remainder is</p>
+<div class="arithmatex">\[
+[P-P_0]-\operatorname{proj}_{\mathbf v}[P-P_0].
+\]</div>
 <div class="admonition theorem">
 <p class="admonition-title">Distance in parametric form</p>
 <div class="arithmatex">\[
-\boxed{d(P,L)=\left\|(P-P_0)-\operatorname{proj}_{\mathbf v}(P-P_0)\right\|}.
+\boxed{
+d(P,L)
+  =\left\|[P-P_0]-\operatorname{proj}_{\mathbf v}[P-P_0]\right\|.
+}
 \]</div>
 </div>
-<p>Every other route from <span class="arithmatex">\(P\)</span> to the line contains the same perpendicular component plus an additional component along the line. The perpendicular alone is shortest.</p>
+<p>Every other route from <span class="arithmatex">\(P\)</span> to the line contains the same perpendicular component plus an additional component along the line. The perpendicular component alone is shortest.</p>
 <h3 id="distance-from-the-normal-equation">Distance from the normal equation</h3>
-<p>Suppose <span class="arithmatex">\(L:ax+by=c\)</span> with normal <span class="arithmatex">\(\mathbf n=[a,b]\)</span>. For <span class="arithmatex">\(P=(x_P,y_P)\)</span> and any <span class="arithmatex">\(P_0\)</span> on the line:</p>
+<p>Suppose <span class="arithmatex">\(L:ax+by=c\)</span> with normal <span class="arithmatex">\(\mathbf n=[a,b]\)</span>. Let <span class="arithmatex">\(P=(x_P,y_P)\)</span> and let <span class="arithmatex">\(P_0=(x_0,y_0)\)</span> be any point on the line.</p>
 <div class="admonition derivation">
 <p class="admonition-title">Reading the normal component</p>
+<p>The displacement from <span class="arithmatex">\(P_0\)</span> to <span class="arithmatex">\(P\)</span> is</p>
 <div class="arithmatex">\[
-\mathbf n\cdot(P-P_0)=ax_P+by_P-c.
+[P-P_0]=[x_P-x_0,\,y_P-y_0].
 \]</div>
-<p>The signed scalar component along the normal is</p>
+<p>Therefore</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\mathbf n\cdot[P-P_0]
+  &amp;=a(x_P-x_0)+b(y_P-y_0)\\
+  &amp;=ax_P+by_P-c.
+\end{aligned}
+\]</div>
+<p>The signed scalar component along the unit normal is</p>
 <div class="arithmatex">\[
 \frac{ax_P+by_P-c}{\sqrt{a^2+b^2}}.
 \]</div>
@@ -354,25 +383,33 @@ P\oplus[Q-P]=Q.
 <h2 id="plane-generation">Planes in three-dimensional space</h2>
 <p>A line was produced by allowing one real parameter,</p>
 <div class="arithmatex">\[
-P=P_0+t\mathbf v.
+P=P_0\oplus t\mathbf v.
 \]</div>
 <p>Only one independent direction of motion was available.</p>
 <blockquote>
 <p><strong>Guiding question.</strong> What set is obtained when motion from one fixed point is allowed in two independent directions?</p>
 </blockquote>
-<p>Let <span class="arithmatex">\(P_0\in\mathbb R^3\)</span> be fixed and let <span class="arithmatex">\(\mathbf u,\mathbf v\)</span> be nonparallel vectors.</p>
+<p>Let <span class="arithmatex">\(P_0\in\mathcal P\)</span> be a point in three-dimensional space and let <span class="arithmatex">\(\mathbf u,\mathbf v\in V\)</span> be nonparallel free vectors.</p>
 <div class="admonition derivation">
 <p class="admonition-title">Generating the plane</p>
-<p>Every permitted displacement is a linear combination <span class="arithmatex">\(s\mathbf u+t\mathbf v\)</span>. Starting at <span class="arithmatex">\(P_0\)</span> gives</p>
+<p>Every permitted displacement is a linear combination</p>
 <div class="arithmatex">\[
-P=P_0+s\mathbf u+t\mathbf v.
+s\mathbf u+t\mathbf v\in V.
 \]</div>
-<p>One parameter produces a line; two independent parameters produce a plane. If the directions were parallel, both parameters would still move only along one line.</p>
+<p>Applying that free vector at <span class="arithmatex">\(P_0\)</span> gives the point</p>
+<div class="arithmatex">\[
+\boxed{
+P=P_0\oplus(s\mathbf u+t\mathbf v).
+}
+\]</div>
+<p>One parameter produces a line; two independent parameters produce a plane. If the directions were parallel, every combination would still lie along one direction.</p>
 </div>
 <div class="admonition definition">
 <p class="admonition-title">Parametric plane</p>
 <div class="arithmatex">\[
-\boxed{\Pi=\{P_0+s\mathbf u+t\mathbf v:s,t\in\mathbb R\}}.
+\boxed{
+\Pi=\{P_0\oplus(s\mathbf u+t\mathbf v):s,t\in\mathbb R\}.
+}
 \]</div>
 <p>If <span class="arithmatex">\(P_0=(x_0,y_0,z_0)\)</span>, <span class="arithmatex">\(\mathbf u=[u_1,u_2,u_3]\)</span>, and <span class="arithmatex">\(\mathbf v=[v_1,v_2,v_3]\)</span>, then</p>
 <div class="arithmatex">\[
@@ -385,17 +422,22 @@ z=z_0+su_3+tv_3.
 \]</div>
 </div>
 <figure class="figure-panel jsx-panel" data-fullscreen-panel>
-  <div class="figure-toolbar"><div><span class="figure-title">Two independent directions generate a plane</span><span class="figure-step-title">Change the two parameters and drag the scene to inspect the construction in space.</span></div><button class="icon-button" type="button" data-fullscreen>⛶</button></div>
+  <div class="figure-toolbar"><div><span class="figure-title">Two independent directions generate a plane</span><span class="figure-step-title">Change the two vector coefficients and rotate the scene.</span></div><button class="icon-button" type="button" data-fullscreen>⛶</button></div>
   <div class="figure-stage jsx-stage"><div id="plane-generation-board" class="jxgbox" data-plane-generation></div></div>
   <div class="parameter-controls" style="--parameter-count:2">
     <label class="parameter-control"><span>$s$ = <output data-plane-s>1</output></span><input type="range" min="-2" max="2" step="0.1" value="1" data-plane-s-slider></label>
     <label class="parameter-control"><span>$t$ = <output data-plane-t>1</output></span><input type="range" min="-2" max="2" step="0.1" value="1" data-plane-t-slider></label>
   </div>
-  <figcaption class="figure-caption">The scene is genuinely three-dimensional: rotate it to see the plane generated by $\mathbf u$ and $\mathbf v$ and the point $P_0+s\mathbf u+t\mathbf v$.</figcaption>
+  <figcaption class="figure-caption">The combination $s\mathbf u+t\mathbf v$ is a free displacement. The point $P_0\oplus(s\mathbf u+t\mathbf v)$ is obtained by applying that displacement at $P_0$.</figcaption>
 </figure>
-
 <h2 id="plane-normal">A normal vector from two directions</h2>
-<p>The plane is generated by two directions. To write one equation for it, we need a vector perpendicular to both.</p>
+<p>The plane is generated by two free directions. To write one scalar equation for it, we need a free vector perpendicular to both.</p>
+<p>In three-dimensional space the cross product is an additional vector operation:</p>
+<div class="arithmatex">\[
+V\times V\longrightarrow V,
+\qquad
+(\mathbf u,\mathbf v)\longmapsto\mathbf u\times\mathbf v.
+\]</div>
 <div class="admonition definition">
 <p class="admonition-title">Cross product</p>
 <p>For <span class="arithmatex">\(\mathbf u=[u_1,u_2,u_3]\)</span> and <span class="arithmatex">\(\mathbf v=[v_1,v_2,v_3]\)</span>,</p>
@@ -416,11 +458,24 @@ z=z_0+su_3+tv_3.
 <p>but both normals describe the same plane.</p>
 <div class="admonition derivation">
 <p class="admonition-title">From the normal direction to an equation</p>
-<p>Let <span class="arithmatex">\(\mathbf n=\mathbf u\times\mathbf v\)</span>. A point <span class="arithmatex">\(P\)</span> belongs to the plane exactly when <span class="arithmatex">\(P-P_0\)</span> is an allowed combination, so</p>
+<p>Let</p>
 <div class="arithmatex">\[
-\mathbf n\cdot(P-P_0)=0.
+\mathbf n=\mathbf u\times\mathbf v.
 \]</div>
-<p>For <span class="arithmatex">\(\mathbf n=[a,b,c]\)</span>,</p>
+<p>A variable point <span class="arithmatex">\(P\)</span> belongs to the plane through <span class="arithmatex">\(P_0\)</span> precisely when the free displacement</p>
+<div class="arithmatex">\[
+[P-P_0]
+\]</div>
+<p>lies in the span of <span class="arithmatex">\(\mathbf u\)</span> and <span class="arithmatex">\(\mathbf v\)</span>. Since <span class="arithmatex">\(\mathbf n\)</span> is perpendicular to both generating directions,</p>
+<div class="arithmatex">\[
+\boxed{\mathbf n\cdot[P-P_0]=0}.
+\]</div>
+<p>Both factors of the dot product are free vectors, so the left-hand side is a real number.</p>
+<p>For <span class="arithmatex">\(P=(x,y,z)\)</span>, <span class="arithmatex">\(P_0=(x_0,y_0,z_0)\)</span>, and <span class="arithmatex">\(\mathbf n=[a,b,c]\)</span>,</p>
+<div class="arithmatex">\[
+[P-P_0]=[x-x_0,\,y-y_0,\,z-z_0],
+\]</div>
+<p>hence</p>
 <div class="arithmatex">\[
 a(x-x_0)+b(y-y_0)+c(z-z_0)=0,
 \]</div>
@@ -432,11 +487,11 @@ a(x-x_0)+b(y-y_0)+c(z-z_0)=0,
 <div class="admonition summary">
 <p class="admonition-title">Two descriptions, one plane</p>
 <div class="arithmatex">\[
-\boxed{P=P_0+s\mathbf u+t\mathbf v},
+\boxed{P=P_0\oplus(s\mathbf u+t\mathbf v)},
 \qquad
-\boxed{\mathbf n\cdot(P-P_0)=0\iff ax+by+cz=d}.
+\boxed{\mathbf n\cdot[P-P_0]=0\iff ax+by+cz=d}.
 \]</div>
-<p>The parametric equation lists permitted motions; the normal equation says that the forbidden normal component must vanish.</p>
+<p>The parametric equation first forms an allowed free displacement and applies it to <span class="arithmatex">\(P_0\)</span>. The normal equation requires the forbidden normal component of <span class="arithmatex">\([P-P_0]\)</span> to vanish.</p>
 </div>
 <h2 id="three-points">A plane through three points</h2>
 <div class="admonition derivation">
