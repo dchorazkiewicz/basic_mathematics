@@ -606,24 +606,20 @@ AB^2=2-2\cos(\alpha-\beta).
 <p>The proof did not begin with the desired formula. It began with one geometric quantity, the chord <span class="arithmatex">\(AB\)</span>. The coordinate description of its endpoints produced one expression for <span class="arithmatex">\(AB^2\)</span>. Rotating the picture, projecting <span class="arithmatex">\(A\)</span> onto the horizontal segment <span class="arithmatex">\(OB\)</span>, and applying the Pythagorean theorem produced another. The identity follows because both calculations describe exactly the same unchanged length.</p>
 </div>
 <h2 id="computational-model">Computational interlude: mathematical objects as types</h2>
-<p>Writing a program forces us to state which objects exist and what each operation returns. The blocks below are cumulative, but every class is shown separately so that its role can be inspected without opening the whole implementation.</p>
+<p>The code keeps only the structure needed to distinguish a point, a parametrised curve, and a relation.</p>
 <details class="example">
 <summary>Python class: <code>Point2</code></summary>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">hypot</span>
 
 
-<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">Point2</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;A location in the Cartesian plane.&quot;&quot;&quot;</span>
-
     <span class="n">x</span><span class="p">:</span> <span class="nb">float</span>
     <span class="n">y</span><span class="p">:</span> <span class="nb">float</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">distance_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Point2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-        <span class="c1"># A distance is a number, not another point.</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">distance_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="s2">&quot;Point2&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="c1"># Two points determine one distance.</span>
         <span class="k">return</span> <span class="n">hypot</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
 </code></pre></div>
 </details>
@@ -633,15 +629,13 @@ AB^2=2-2\cos(\alpha-\beta).
 <span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
 
 
-<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">ParametricCurve2</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;A rule that produces one point for each parameter value.&quot;&quot;&quot;</span>
-
     <span class="n">x_of_t</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">float</span><span class="p">]</span>
     <span class="n">y_of_t</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">float</span><span class="p">]</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">at</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Point2</span><span class="p">:</span>
-        <span class="c1"># The two numerical outputs are assembled into one point.</span>
+        <span class="c1"># A parameter value produces a point.</span>
         <span class="k">return</span> <span class="n">Point2</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_of_t</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_of_t</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
 </code></pre></div>
 </details>
@@ -650,25 +644,21 @@ AB^2=2-2\cos(\alpha-\beta).
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
 
 
-<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">CircleRelation</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;A relation testing membership in a circle.&quot;&quot;&quot;</span>
-
     <span class="n">centre</span><span class="p">:</span> <span class="n">Point2</span>
     <span class="n">radius</span><span class="p">:</span> <span class="nb">float</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="c1"># The constructor rejects data outside the mathematical domain.</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The radius must be positive.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;radius must be positive&quot;</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">contains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">point</span><span class="p">:</span> <span class="n">Point2</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-9</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="c1"># A relation returns a truth value.</span>
-        <span class="n">error</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">centre</span><span class="o">.</span><span class="n">distance_to</span><span class="p">(</span><span class="n">point</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span>
-        <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">tolerance</span>
+        <span class="c1"># A relation produces True or False.</span>
+        <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">centre</span><span class="o">.</span><span class="n">distance_to</span><span class="p">(</span><span class="n">point</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">tolerance</span>
 </code></pre></div>
 </details>
-<p>The return types encode the mathematics: <code>curve.at(t)</code> returns a <code>Point2</code>, whereas <code>circle.contains(P)</code> returns a truth value. A curve, a point, and a relation may all involve the same coordinates, but they are not the same kind of object.</p>
+<p>The return types state the mathematical roles: <code>at(t)</code> returns a point, while <code>contains(P)</code> returns a truth value.</p>
 <h2 id="exercises">Exercises</h2>
 <p>The first ten exercises reinforce the basic computational procedures of the lecture. The next ten require explanation, modelling and argument rather than only substitution into a formula.</p>
 <p><a class="exercise-download" download="download" href="lecture-01-exercises/">Download exercises as Markdown</a></p>
