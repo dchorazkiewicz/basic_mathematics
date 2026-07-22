@@ -3,6 +3,19 @@
 !!! principle "Choose the representation adapted to the question"
     The parametric, normal and slope forms are not competing definitions. They expose different information about the same geometric line.
 
+<figure class="figure-panel jsx-panel" data-fullscreen-panel>
+  <div class="figure-toolbar">
+    <div>
+      <span class="figure-title">One line, three descriptions</span>
+      <span class="figure-step-title">Move the point and direction vector and compare the three coordinate descriptions.</span>
+    </div>
+    <button class="icon-button" type="button" data-fullscreen aria-label="Open line descriptions figure in full screen">⛶</button>
+  </div>
+  <div class="figure-stage jsx-stage"><div id="line-descriptions-board" class="jxgbox" data-line-descriptions></div></div>
+  <div class="relation-readout"><span data-line-parametric></span><span data-line-normal></span><span data-line-slope></span></div>
+  <figcaption class="figure-caption">The geometric line remains unchanged while the parametric, normal and slope descriptions expose different information about it.</figcaption>
+</figure>
+
 ### Intersections with the coordinate axes
 
 !!! derivation "Impose both defining conditions"
