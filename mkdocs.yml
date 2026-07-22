@@ -36,6 +36,8 @@ markdown_extensions:
   - pymdownx.arithmatex:
       generic: true
   - pymdownx.details
+  - pymdownx.highlight:
+      use_pygments: true
   - pymdownx.superfences
   - pymdownx.snippets:
       base_path: docs
