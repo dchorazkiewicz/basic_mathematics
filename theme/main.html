@@ -70,7 +70,7 @@
 </head>
 <body>
   <header class="site-header">
-    <a class="brand" href="{{ nav.homepage.url | url }}">Mathematical Stories</a>
+    <a class="brand" href="{{ nav.homepage.url | url }}">{{ config.site_name }}</a>
     <nav class="header-links" aria-label="Primary navigation">
       <a href="{{ nav.homepage.url | url }}#course-map">Course map</a>
       <a href="{{ config.repo_url }}">GitHub</a>
@@ -93,6 +93,18 @@
           <h1>{{ page.meta.lecture_title }}</h1>
           <p>{{ page.meta.intro }}</p>
         </header>
+        {{ page.content }}
+      </main>
+    </div>
+  {% elif 'introduction/' in page.url %}
+    <div class="lecture-shell">
+      <aside class="lecture-nav" aria-label="Introduction contents">
+        <div class="nav-label">Introduction</div>
+        <a{% if page.title == 'Purpose and Philosophy' %} class="active"{% endif %} href="{{ 'introduction/purpose-and-philosophy/' | url }}">Purpose and Philosophy</a>
+        <a{% if page.title == 'How the Course Works' %} class="active"{% endif %} href="{{ 'introduction/how-the-course-works/' | url }}">How the Course Works</a>
+        <a{% if page.title == 'How to Prepare Mathematical Notes' %} class="active"{% endif %} href="{{ 'introduction/how-to-prepare-mathematical-notes/' | url }}">How to Prepare Mathematical Notes</a>
+      </aside>
+      <main class="lecture-main">
         {{ page.content }}
       </main>
     </div>
