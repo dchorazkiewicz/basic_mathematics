@@ -1,8 +1,8 @@
 ## Computational interlude: mathematical objects as types {#computational-model}
 
-The code keeps only the structure needed to distinguish a point, a parametrised curve, and a relation.
+The classes below implement the objects used in this lecture. Each method corresponds to an operation already present in the mathematics.
 
-??? example "Python class: `Point2`"
+??? example "Python class: `Point`"
 
     ```python
     from dataclasses import dataclass
@@ -10,16 +10,15 @@ The code keeps only the structure needed to distinguish a point, a parametrised 
 
 
     @dataclass
-    class Point2:
+    class Point:
         x: float
         y: float
 
-        def distance_to(self, other: "Point2") -> float:
-            # Two points determine one distance.
+        def distance_to(self, other: "Point") -> float:
             return hypot(other.x - self.x, other.y - self.y)
     ```
 
-??? example "Python class: `ParametricCurve2`"
+??? example "Python class: `Function`"
 
     ```python
     from collections.abc import Callable
@@ -27,33 +26,71 @@ The code keeps only the structure needed to distinguish a point, a parametrised 
 
 
     @dataclass
-    class ParametricCurve2:
-        x_of_t: Callable[[float], float]
-        y_of_t: Callable[[float], float]
+    class Function:
+        rule: Callable[[float], float]
 
-        def at(self, t: float) -> Point2:
-            # A parameter value produces a point.
-            return Point2(self.x_of_t(t), self.y_of_t(t))
+        def __call__(self, x: float) -> float:
+            return self.rule(x)
+
+        def graph_point(self, x: float) -> Point:
+            return Point(x, self(x))
     ```
 
-??? example "Python class: `CircleRelation`"
+??? example "Python class: `ParametricCurve`"
 
     ```python
+    from collections.abc import Callable
     from dataclasses import dataclass
 
 
     @dataclass
-    class CircleRelation:
-        centre: Point2
+    class ParametricCurve:
+        x_of_t: Callable[[float], float]
+        y_of_t: Callable[[float], float]
+
+        def at(self, t: float) -> Point:
+            return Point(self.x_of_t(t), self.y_of_t(t))
+    ```
+
+??? example "Python class: `Relation`"
+
+    ```python
+    from collections.abc import Callable
+    from dataclasses import dataclass
+
+
+    @dataclass
+    class Relation:
+        condition: Callable[[Point], bool]
+
+        def contains(self, point: Point) -> bool:
+            return self.condition(point)
+    ```
+
+??? example "Python class: `Circle`"
+
+    ```python
+    from dataclasses import dataclass
+    from math import cos, sin
+
+
+    @dataclass
+    class Circle:
+        centre: Point
         radius: float
 
         def __post_init__(self) -> None:
             if self.radius <= 0:
                 raise ValueError("radius must be positive")
 
-        def contains(self, point: Point2, tolerance: float = 1e-9) -> bool:
-            # A relation produces True or False.
+        def contains(self, point: Point, tolerance: float = 1e-9) -> bool:
             return abs(self.centre.distance_to(point) - self.radius) <= tolerance
+
+        def at(self, angle: float) -> Point:
+            return Point(
+                self.centre.x + self.radius * cos(angle),
+                self.centre.y + self.radius * sin(angle),
+            )
     ```
 
-The return types state the mathematical roles: `at(t)` returns a point, while `contains(P)` returns a truth value.
+`Function.graph_point(x)` and `ParametricCurve.at(t)` return points. `Relation.contains(P)` and `Circle.contains(P)` return truth values. The return type records the mathematical role of each construction.
