@@ -8,11 +8,11 @@ intro: Coordinates first described locations. We now use coordinate differences 
 section_links:
   - { id: from-points, title: From points to vectors }
   - { id: addition, title: Addition and subtraction }
-  - { id: scaling, title: Scaling and combinations }
+  - { id: scaling, title: Scaling }
   - { id: length-direction, title: Length and direction }
   - { id: tests, title: Parallelism and dot product }
   - { id: projection, title: Projection }
-  - { id: basis, title: Change of basis }
+  - { id: basis, title: Linear combinations and change of basis }
   - { id: exercises, title: Exercises }
 ---
 
