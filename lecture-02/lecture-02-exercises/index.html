@@ -39,7 +39,7 @@
 <h2 id="a-elementary-computational-and-graphical-exercises">A. Elementary computational and graphical exercises</h2>
 <ol>
 <li>
-<p>Let <span class="arithmatex">\(A=(1,2)\)</span> and <span class="arithmatex">\(B=(5,-1)\)</span>. Compute the free vector <span class="arithmatex">\([\overrightarrow{AB}]\)</span>. Draw equal anchored representatives beginning at <span class="arithmatex">\(O=(0,0)\)</span> and at <span class="arithmatex">\(P=(-2,3)\)</span>, and write the endpoint of each representative.</p>
+<p>Let <span class="arithmatex">\(A=(1,2)\)</span> and <span class="arithmatex">\(B=(5,-1)\)</span>. Compute the ordinary point difference <span class="arithmatex">\(B-A\)</span> and the free vector <span class="arithmatex">\([B-A]=[\overrightarrow{AB}]\)</span>. Find the points <span class="arithmatex">\(O\oplus[B-A]\)</span> for <span class="arithmatex">\(O=(0,0)\)</span> and <span class="arithmatex">\(P\oplus[B-A]\)</span> for <span class="arithmatex">\(P=(-2,3)\)</span>, and draw the corresponding anchored representatives.</p>
 </li>
 <li>
 <p>For <span class="arithmatex">\(\mathbf u=[3,-2]\)</span> and <span class="arithmatex">\(\mathbf v=[-1,4]\)</span>, compute <span class="arithmatex">\(\mathbf u+\mathbf v\)</span>, <span class="arithmatex">\(\mathbf u-\mathbf v\)</span>, <span class="arithmatex">\(2\mathbf u\)</span>, and <span class="arithmatex">\(-3\mathbf v\)</span>. Draw <span class="arithmatex">\(\mathbf u\)</span>, <span class="arithmatex">\(\mathbf v\)</span>, and <span class="arithmatex">\(\mathbf u+\mathbf v\)</span> using the parallelogram rule.</p>
@@ -66,16 +66,16 @@
 <p>Let <span class="arithmatex">\(\mathbf b_1=[1,1]\)</span>, <span class="arithmatex">\(\mathbf b_2=[1,-1]\)</span>, and <span class="arithmatex">\(\mathbf u=[4,2]\)</span>. Find <span class="arithmatex">\(\alpha,\beta\)</span> such that <span class="arithmatex">\(\mathbf u=\alpha\mathbf b_1+\beta\mathbf b_2\)</span>. State <span class="arithmatex">\([\mathbf u]_B\)</span> and reconstruct <span class="arithmatex">\(\mathbf u\)</span>.</p>
 </li>
 <li>
-<p>A point starts at <span class="arithmatex">\(P=(2,-1)\)</span> and undergoes the successive displacements <span class="arithmatex">\(\mathbf u=[3,2]\)</span>, <span class="arithmatex">\(\mathbf v=[-1,4]\)</span>, and <span class="arithmatex">\(-2\mathbf u\)</span>. Find the final point. Then combine the three displacements first and verify that the same endpoint is obtained.</p>
+<p>Starting from <span class="arithmatex">\(P=(2,-1)\)</span>, form <span class="arithmatex">\((P\oplus[3,2])\oplus[-1,4]\)</span> and then apply <span class="arithmatex">\(-2[3,2]\)</span>. Find the endpoint. Combine the three free vectors first and verify that one translation <span class="arithmatex">\(P\oplus\bigl([3,2]+[-1,4]-2[3,2]\bigr)\)</span> gives the same point.</p>
 </li>
 </ol>
 <h2 id="b-development-and-reasoning-exercises">B. Development and reasoning exercises</h2>
 <ol>
 <li>
-<p>Two anchored vectors are declared equal when they represent the same translation. Explain, using a parallelogram construction, why moving an arrow without changing its length and direction does not change the free vector. Give one numerical example with two different initial points.</p>
+<p>Two anchored vectors are declared equivalent when they encode the same coordinate change. Explain, using a parallelogram construction, why moving an arrow without changing that directed change does not change the free vector. Give one numerical example with two different initial points.</p>
 </li>
 <li>
-<p>Use three concrete vectors to draw both <span class="arithmatex">\((\mathbf u+\mathbf v)+\mathbf w\)</span> and <span class="arithmatex">\(\mathbf u+(\mathbf v+\mathbf w)\)</span>. Explain geometrically, without relying only on coordinate arithmetic, why the endpoints coincide.</p>
+<p>Use three concrete vectors to draw both <span class="arithmatex">\((\mathbf u+\mathbf v)+\mathbf w\)</span> and <span class="arithmatex">\(\mathbf u+(\mathbf v+\mathbf w)\)</span>. Explain geometrically why the endpoints coincide. Then verify that <span class="arithmatex">\((P\oplus\mathbf u)\oplus\mathbf v=P\oplus(\mathbf u+\mathbf v)\)</span>.</p>
 </li>
 <li>
 <p>Show that two nonzero vectors in the plane are parallel exactly when one is a scalar multiple of the other. Explain separately what positive and negative scalar multiples do to orientation.</p>
@@ -105,7 +105,7 @@
 <p>Suppose <span class="arithmatex">\(\mathbf b_1\)</span> and <span class="arithmatex">\(\mathbf b_2\)</span> are nonparallel. Explain why a vector cannot have two different representations <span class="arithmatex">\(\mathbf u=\alpha\mathbf b_1+\beta\mathbf b_2=\alpha'\mathbf b_1+\beta'\mathbf b_2\)</span>. Reduce the question to a linear combination equal to the zero vector.</p>
 </li>
 <li>
-<p>Explain the difference between the point <span class="arithmatex">\(P=(3,2)\)</span> and the vector <span class="arithmatex">\(\mathbf v=[3,2]\)</span>. Construct one situation in which the same ordered pair refers to a location and another in which it refers to a displacement.</p>
+<p>Explain the type and meaning of each expression: <span class="arithmatex">\(P+Q\)</span>, <span class="arithmatex">\(Q-P\)</span>, <span class="arithmatex">\([Q-P]\)</span>, <span class="arithmatex">\(P\oplus\mathbf v\)</span>, <span class="arithmatex">\(\mathbf u+\mathbf v\)</span>, and <span class="arithmatex">\(\mathbf u\cdot\mathbf v\)</span>. State which expressions produce a point, a free vector, or a real number.</p>
 </li>
 <li>
 <p>The vector <span class="arithmatex">\(\mathbf u=[6,2]\)</span> is awkward in the standard basis but simple in the basis <span class="arithmatex">\(\mathbf b_1=[1,1]\)</span>, <span class="arithmatex">\(\mathbf b_2=[1,-1]\)</span>. Find its coordinates in both bases and explain what it means for one basis to be better adapted to a problem.</p>
