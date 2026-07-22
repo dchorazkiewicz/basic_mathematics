@@ -652,7 +652,7 @@ P=P_0\oplus(s\mathbf u+t\mathbf v).
 \]</div>
 </div>
 <h2 id="computational-model">Computational interlude: lines and planes as constructed objects</h2>
-<p>The plane classes <code>Point</code> and <code>FreeVector</code> are those defined in Lecture 2. The new classes implement the constructions and tests introduced in this chapter.</p>
+<p>The planar classes <code>Point</code>, <code>AnchoredVector</code>, and <code>FreeVector</code> are those defined in Lecture 2. A line direction is therefore obtained from an ordered pair of points or from another already constructed free vector. The three-dimensional model repeats the same construction in space.</p>
 <details class="example">
 <summary>Python class: <code>Line</code></summary>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
@@ -669,14 +669,17 @@ P=P_0\oplus(s\mathbf u+t\mathbf v).
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">through</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">first</span><span class="p">:</span> <span class="n">Point</span><span class="p">,</span> <span class="n">second</span><span class="p">:</span> <span class="n">Point</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Line&quot;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">first</span><span class="o">.</span><span class="n">vector_to</span><span class="p">(</span><span class="n">second</span><span class="p">))</span>
+        <span class="n">anchored</span> <span class="o">=</span> <span class="n">first</span><span class="o">.</span><span class="n">anchored_vector_to</span><span class="p">(</span><span class="n">second</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">anchored</span><span class="o">.</span><span class="n">as_free_vector</span><span class="p">())</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">at</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Point</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">translated_by</span><span class="p">(</span><span class="n">t</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">direction</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">normal</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FreeVector</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">FreeVector</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">direction</span><span class="o">.</span><span class="n">dy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">direction</span><span class="o">.</span><span class="n">dx</span><span class="p">)</span>
+        <span class="n">origin</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">endpoint</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">direction</span><span class="o">.</span><span class="n">dy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">direction</span><span class="o">.</span><span class="n">dx</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">origin</span><span class="o">.</span><span class="n">anchored_vector_to</span><span class="p">(</span><span class="n">endpoint</span><span class="p">)</span><span class="o">.</span><span class="n">as_free_vector</span><span class="p">()</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">slope</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
@@ -685,12 +688,13 @@ P=P_0\oplus(s\mathbf u+t\mathbf v).
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">direction</span><span class="o">.</span><span class="n">dy</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">direction</span><span class="o">.</span><span class="n">dx</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">normal_equation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
-        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">normal</span><span class="o">.</span><span class="n">dx</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">normal</span><span class="o">.</span><span class="n">dy</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">normal</span><span class="o">.</span><span class="n">coordinates</span>
         <span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">y</span>
         <span class="k">return</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">contains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">point</span><span class="p">:</span> <span class="n">Point</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-9</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="n">offset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">vector_to</span><span class="p">(</span><span class="n">point</span><span class="p">)</span>
+        <span class="n">anchored</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">anchored_vector_to</span><span class="p">(</span><span class="n">point</span><span class="p">)</span>
+        <span class="n">offset</span> <span class="o">=</span> <span class="n">anchored</span><span class="o">.</span><span class="n">as_free_vector</span><span class="p">()</span>
         <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">normal</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">offset</span><span class="p">))</span> <span class="o">&lt;=</span> <span class="n">tolerance</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">is_parallel_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="s2">&quot;Line&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
@@ -700,12 +704,41 @@ P=P_0\oplus(s\mathbf u+t\mathbf v).
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">direction</span><span class="o">.</span><span class="n">is_perpendicular_to</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">direction</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">nearest_point</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">point</span><span class="p">:</span> <span class="n">Point</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Point</span><span class="p">:</span>
-        <span class="n">offset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">vector_to</span><span class="p">(</span><span class="n">point</span><span class="p">)</span>
+        <span class="n">offset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">anchored_vector_to</span><span class="p">(</span><span class="n">point</span><span class="p">)</span><span class="o">.</span><span class="n">as_free_vector</span><span class="p">()</span>
         <span class="n">shift</span> <span class="o">=</span> <span class="n">offset</span><span class="o">.</span><span class="n">projection_onto</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">direction</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">translated_by</span><span class="p">(</span><span class="n">shift</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">distance_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">point</span><span class="p">:</span> <span class="n">Point</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">point</span><span class="o">.</span><span class="n">distance_to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nearest_point</span><span class="p">(</span><span class="n">point</span><span class="p">))</span>
+</code></pre></div>
+</details>
+<details class="example">
+<summary>Using <code>Line</code></summary>
+<div class="highlight"><pre><span></span><code><span class="n">A</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+<span class="n">line</span> <span class="o">=</span> <span class="n">Line</span><span class="o">.</span><span class="n">through</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">direction</span><span class="o">.</span><span class="n">coordinates</span><span class="p">)</span>
+<span class="c1"># (3, 2)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="c1"># Point(x=1, y=1)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="c1"># Point(x=4, y=3)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="c1"># Point(x=7, y=5)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">normal</span><span class="o">.</span><span class="n">coordinates</span><span class="p">)</span>
+<span class="c1"># (-2, 3)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">normal_equation</span><span class="p">())</span>
+<span class="c1"># (-2, 3, 1)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">)))</span>
+<span class="c1"># True</span>
 </code></pre></div>
 </details>
 <details class="example">
@@ -721,16 +754,28 @@ P=P_0\oplus(s\mathbf u+t\mathbf v).
     <span class="n">z</span><span class="p">:</span> <span class="nb">float</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="s2">&quot;Point3D&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Point3D&quot;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">Point3D</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">z</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">z</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Point3D</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">z</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">z</span><span class="p">,</span>
+        <span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__neg__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Point3D&quot;</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">Point3D</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="s2">&quot;Point3D&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Point3D&quot;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">Point3D</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">z</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">z</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Point3D</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">z</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">z</span><span class="p">,</span>
+        <span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scalar</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Point3D&quot;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">Point3D</span><span class="p">(</span><span class="n">scalar</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">scalar</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">scalar</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Point3D</span><span class="p">(</span>
+            <span class="n">scalar</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span>
+            <span class="n">scalar</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span>
+            <span class="n">scalar</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="p">,</span>
+        <span class="p">)</span>
 
     <span class="fm">__rmul__</span> <span class="o">=</span> <span class="fm">__mul__</span>
 
@@ -741,12 +786,8 @@ P=P_0\oplus(s\mathbf u+t\mathbf v).
             <span class="o">+</span> <span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">z</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
         <span class="p">)</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">vector_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="s2">&quot;Point3D&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;FreeVector3D&quot;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">FreeVector3D</span><span class="p">(</span>
-            <span class="n">other</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span>
-            <span class="n">other</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span>
-            <span class="n">other</span><span class="o">.</span><span class="n">z</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="p">,</span>
-        <span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">anchored_vector_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="s2">&quot;Point3D&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;AnchoredVector3D&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">AnchoredVector3D</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">translated_by</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vector</span><span class="p">:</span> <span class="s2">&quot;FreeVector3D&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Point3D&quot;</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">Point3D</span><span class="p">(</span>
@@ -757,32 +798,93 @@ P=P_0\oplus(s\mathbf u+t\mathbf v).
 </code></pre></div>
 </details>
 <details class="example">
+<summary>Python class: <code>AnchoredVector3D</code></summary>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">AnchoredVector3D</span><span class="p">:</span>
+    <span class="n">start</span><span class="p">:</span> <span class="n">Point3D</span>
+    <span class="n">end</span><span class="p">:</span> <span class="n">Point3D</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">coordinate_difference</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Point3D</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">coordinates</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+        <span class="n">difference</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">coordinate_difference</span>
+        <span class="k">return</span> <span class="n">difference</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">difference</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">difference</span><span class="o">.</span><span class="n">z</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="o">.</span><span class="n">distance_to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">end</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">reversed</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;AnchoredVector3D&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">AnchoredVector3D</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">end</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">as_free_vector</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;FreeVector3D&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">FreeVector3D</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</code></pre></div>
+</details>
+<details class="example">
 <summary>Python class: <code>FreeVector3D</code></summary>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">acos</span><span class="p">,</span> <span class="n">sqrt</span>
 
 
-<span class="nd">@dataclass</span>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">FreeVector3D</span><span class="p">:</span>
-    <span class="n">dx</span><span class="p">:</span> <span class="nb">float</span>
-    <span class="n">dy</span><span class="p">:</span> <span class="nb">float</span>
-    <span class="n">dz</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">representative</span><span class="p">:</span> <span class="n">AnchoredVector3D</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_coordinates</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span>
+        <span class="n">dx</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">dy</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">dz</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;FreeVector3D&quot;</span><span class="p">:</span>
+        <span class="n">origin</span> <span class="o">=</span> <span class="n">Point3D</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">endpoint</span> <span class="o">=</span> <span class="n">Point3D</span><span class="p">(</span><span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">dz</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">AnchoredVector3D</span><span class="p">(</span><span class="n">origin</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">))</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">coordinates</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">representative</span><span class="o">.</span><span class="n">coordinates</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dx</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">coordinates</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">coordinates</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dz</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">coordinates</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">FreeVector3D</span><span class="p">)</span>
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">coordinates</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">coordinates</span>
+        <span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="s2">&quot;FreeVector3D&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;FreeVector3D&quot;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">FreeVector3D</span><span class="p">(</span>
+        <span class="k">return</span> <span class="n">FreeVector3D</span><span class="o">.</span><span class="n">from_coordinates</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">dx</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">dx</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">dy</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">dy</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">dz</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">dz</span><span class="p">,</span>
         <span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__neg__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;FreeVector3D&quot;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">FreeVector3D</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">dx</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">dy</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">dz</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">FreeVector3D</span><span class="o">.</span><span class="n">from_coordinates</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">dx</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">dy</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">dz</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="s2">&quot;FreeVector3D&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;FreeVector3D&quot;</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="n">other</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scalar</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;FreeVector3D&quot;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">FreeVector3D</span><span class="p">(</span>
+        <span class="k">return</span> <span class="n">FreeVector3D</span><span class="o">.</span><span class="n">from_coordinates</span><span class="p">(</span>
             <span class="n">scalar</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dx</span><span class="p">,</span>
             <span class="n">scalar</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dy</span><span class="p">,</span>
             <span class="n">scalar</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dz</span><span class="p">,</span>
@@ -807,7 +909,7 @@ P=P_0\oplus(s\mathbf u+t\mathbf v).
         <span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">cross</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="s2">&quot;FreeVector3D&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;FreeVector3D&quot;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">FreeVector3D</span><span class="p">(</span>
+        <span class="k">return</span> <span class="n">FreeVector3D</span><span class="o">.</span><span class="n">from_coordinates</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">dy</span> <span class="o">*</span> <span class="n">other</span><span class="o">.</span><span class="n">dz</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">dz</span> <span class="o">*</span> <span class="n">other</span><span class="o">.</span><span class="n">dy</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">dz</span> <span class="o">*</span> <span class="n">other</span><span class="o">.</span><span class="n">dx</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">dx</span> <span class="o">*</span> <span class="n">other</span><span class="o">.</span><span class="n">dz</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">dx</span> <span class="o">*</span> <span class="n">other</span><span class="o">.</span><span class="n">dy</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">dy</span> <span class="o">*</span> <span class="n">other</span><span class="o">.</span><span class="n">dx</span><span class="p">,</span>
@@ -856,11 +958,9 @@ P=P_0\oplus(s\mathbf u+t\mathbf v).
         <span class="n">second</span><span class="p">:</span> <span class="n">Point3D</span><span class="p">,</span>
         <span class="n">third</span><span class="p">:</span> <span class="n">Point3D</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Plane&quot;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
-            <span class="n">first</span><span class="p">,</span>
-            <span class="n">first</span><span class="o">.</span><span class="n">vector_to</span><span class="p">(</span><span class="n">second</span><span class="p">),</span>
-            <span class="n">first</span><span class="o">.</span><span class="n">vector_to</span><span class="p">(</span><span class="n">third</span><span class="p">),</span>
-        <span class="p">)</span>
+        <span class="n">first_direction</span> <span class="o">=</span> <span class="n">first</span><span class="o">.</span><span class="n">anchored_vector_to</span><span class="p">(</span><span class="n">second</span><span class="p">)</span><span class="o">.</span><span class="n">as_free_vector</span><span class="p">()</span>
+        <span class="n">second_direction</span> <span class="o">=</span> <span class="n">first</span><span class="o">.</span><span class="n">anchored_vector_to</span><span class="p">(</span><span class="n">third</span><span class="p">)</span><span class="o">.</span><span class="n">as_free_vector</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">first_direction</span><span class="p">,</span> <span class="n">second_direction</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">normal</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FreeVector3D</span><span class="p">:</span>
@@ -871,16 +971,16 @@ P=P_0\oplus(s\mathbf u+t\mathbf v).
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">translated_by</span><span class="p">(</span><span class="n">shift</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">normal_equation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
-        <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">normal</span><span class="o">.</span><span class="n">dx</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">normal</span><span class="o">.</span><span class="n">dy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">normal</span><span class="o">.</span><span class="n">dz</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">normal</span><span class="o">.</span><span class="n">coordinates</span>
         <span class="n">d</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">c</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">z</span>
         <span class="k">return</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">contains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">point</span><span class="p">:</span> <span class="n">Point3D</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-9</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="n">offset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">vector_to</span><span class="p">(</span><span class="n">point</span><span class="p">)</span>
+        <span class="n">offset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">anchored_vector_to</span><span class="p">(</span><span class="n">point</span><span class="p">)</span><span class="o">.</span><span class="n">as_free_vector</span><span class="p">()</span>
         <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">normal</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">offset</span><span class="p">))</span> <span class="o">&lt;=</span> <span class="n">tolerance</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">distance_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">point</span><span class="p">:</span> <span class="n">Point3D</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-        <span class="n">offset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">vector_to</span><span class="p">(</span><span class="n">point</span><span class="p">)</span>
+        <span class="n">offset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">anchored_vector_to</span><span class="p">(</span><span class="n">point</span><span class="p">)</span><span class="o">.</span><span class="n">as_free_vector</span><span class="p">()</span>
         <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">normal</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">offset</span><span class="p">))</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">normal</span><span class="o">.</span><span class="n">norm</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">is_parallel_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="s2">&quot;Plane&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
@@ -896,7 +996,43 @@ P=P_0\oplus(s\mathbf u+t\mathbf v).
         <span class="k">return</span> <span class="n">direction</span>
 </code></pre></div>
 </details>
-<p>The names now expose the dimension only where it matters: <code>Point</code> and <code>FreeVector</code> describe the Cartesian plane, while <code>Point3D</code> and <code>FreeVector3D</code> describe space. <code>Line.at(t)</code> and <code>Plane.at(s, t)</code> return points; normal equations and distance tests return scalars.</p>
+<details class="example">
+<summary>Using points, vectors, and a plane in space</summary>
+<div class="highlight"><pre><span></span><code><span class="n">P</span> <span class="o">=</span> <span class="n">Point3D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">Q</span> <span class="o">=</span> <span class="n">Point3D</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">R</span> <span class="o">=</span> <span class="n">Point3D</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">PQ</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">anchored_vector_to</span><span class="p">(</span><span class="n">Q</span><span class="p">)</span>
+<span class="n">PR</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">anchored_vector_to</span><span class="p">(</span><span class="n">R</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">PQ</span><span class="o">.</span><span class="n">coordinates</span><span class="p">)</span>
+<span class="c1"># (-1, 1, 0)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">PR</span><span class="o">.</span><span class="n">coordinates</span><span class="p">)</span>
+<span class="c1"># (-1, 0, 1)</span>
+
+<span class="n">plane</span> <span class="o">=</span> <span class="n">Plane</span><span class="o">.</span><span class="n">through</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">R</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">plane</span><span class="o">.</span><span class="n">normal</span><span class="o">.</span><span class="n">coordinates</span><span class="p">)</span>
+<span class="c1"># (1, 1, 1)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">plane</span><span class="o">.</span><span class="n">normal_equation</span><span class="p">())</span>
+<span class="c1"># (1, 1, 1, 1)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">plane</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="c1"># Point3D(x=1, y=0, z=0)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">plane</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="c1"># Point3D(x=0, y=1, z=0)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">plane</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="c1"># Point3D(x=0, y=0, z=1)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">plane</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">Point3D</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)))</span>
+<span class="c1"># True</span>
+</code></pre></div>
+</details>
+<p>Every direction used by <code>Line</code> or <code>Plane</code> is now obtained from a representative determined by points. Its coordinates are then read from that representative and used by the algebraic operations.</p>
 <h2 id="exercises">Practice and development</h2>
 <p>The first ten exercises are computational and graphical. The next ten require explanation, derivation, or comparison of representations.</p>
 <p><a class="download-button" download="download" href="lecture-03-exercises/">Download exercises as Markdown</a></p>
