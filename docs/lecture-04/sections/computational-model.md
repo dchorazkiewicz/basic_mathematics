@@ -222,6 +222,8 @@ The plane classes `Point` and `FreeVector` are those defined in Lecture 2. Each 
 
         @property
         def conic_type(self) -> str:
+            if self.eccentricity == 0:
+                return "circle"
             if self.eccentricity < 1:
                 return "ellipse"
             if self.eccentricity == 1:
