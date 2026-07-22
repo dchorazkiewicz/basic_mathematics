@@ -1,5 +1,19 @@
 ## Planes in three-dimensional space {#plane-generation}
 
+The point--vector operations introduced in the plane extend componentwise to three-dimensional coordinates. For
+
+$$
+P=(p_1,p_2,p_3),\qquad \mathbf w=[w_1,w_2,w_3],
+$$
+
+we use
+
+$$
+P\oplus\mathbf w=(p_1+w_1,\,p_2+w_2,\,p_3+w_3),
+$$
+
+and for two points $P,Q$ the square-bracketed difference $[Q-P]$ is the corresponding free vector in space.
+
 A line was produced by allowing one real parameter,
 
 $$
