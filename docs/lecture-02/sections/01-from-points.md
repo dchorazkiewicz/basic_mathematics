@@ -11,11 +11,11 @@ The notation is deliberately type-sensitive:
 - $(p_1,p_2)$ denotes a **point**;
 - $(P,Q)$ denotes an **ordered pair of points**;
 - $\overrightarrow{PQ}$ denotes the **anchored vector** determined by that ordered pair;
-- $[v_1,v_2]$ denotes a **free vector**, an abstract displacement independent of its starting point;
-- $[Q-P]$ denotes the free vector extracted from the ordinary coordinate difference of the two points;
+- $[v_1,v_2]$ denotes a **free vector**, independent of its starting point;
+- $[Q-P]$ denotes the free vector extracted from the ordinary coordinate difference of two points;
 - $P\oplus\mathbf v$ denotes the point obtained by applying the free vector $\mathbf v$ at $P$.
 
-Round and square brackets therefore carry different information. Round brackets describe points. Square brackets describe free vectors.
+Round and square brackets therefore carry different type information. Round brackets describe points. Square brackets describe free vectors.
 
 ### Arithmetic on Cartesian point coordinates
 
@@ -42,7 +42,7 @@ $$
 Q-P=(q_1-p_1,q_2-p_2)
 $$
 
-is still an ordinary coordinate pair. It records the two numerical changes needed to move from $P$ to $Q$, but it has not yet been declared to be a free vector.
+is an ordinary coordinate pair. It records the two numerical changes needed to move from $P$ to $Q$, but it has not yet been turned into a free vector.
 
 <figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
   <div class="figure-toolbar">
@@ -67,30 +67,30 @@ is still an ordinary coordinate pair. It records the two numerical changes neede
     </label>
   </div>
   <div class="relation-readout"><span data-point-operation-readout></span></div>
-  <figcaption class="figure-caption">The ordinary operations use round coordinate pairs. The translation mode uses a square-bracketed free vector and the separate symbol $\oplus$.</figcaption>
+  <figcaption class="figure-caption">The ordinary operations use round coordinate pairs. Translation uses a square-bracketed free vector and the separate symbol $\oplus$.</figcaption>
 </figure>
 
 ### An ordered pair of points determines an anchored vector
 
-The ordered pair of points
+The ordered pair
 
 $$
 (P,Q)
 $$
 
-determines a directed motion beginning at $P$ and ending at $Q$. We represent it geometrically by the arrow
+determines a directed motion beginning at $P$ and ending at $Q$. We represent it geometrically by
 
 $$
 \overrightarrow{PQ}
 $$
 
-and call it an **anchored vector**. Its initial point is part of the object: changing $P$ or $Q$ produces a different anchored vector.
+and call it an **anchored vector**. Its initial point is part of the object: changing either endpoint produces a different anchored vector.
 
 <figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
   <div class="figure-toolbar">
     <div>
       <span class="figure-title">An anchored vector</span>
-      <span class="figure-step-title">Move $P$ and $Q$ to see the directed arrow determined by the ordered pair $(P,Q)$.</span>
+      <span class="figure-step-title">Move $P$ and $Q$ to see the directed arrow determined by $(P,Q)$.</span>
     </div>
     <button class="icon-button" type="button" data-fullscreen aria-label="Open anchored vector figure in full screen">⛶</button>
   </div>
@@ -105,12 +105,12 @@ $$
 \Delta(P,Q):=Q-P=(q_1-p_1,\,q_2-p_2).
 $$
 
-Its two entries answer two concrete questions:
+Its entries answer two questions:
 
 - how much must the horizontal coordinate change?
 - how much must the vertical coordinate change?
 
-Thus the anchored vector contains more information than $\Delta(P,Q)$: it records **where the motion begins and ends**, while $\Delta(P,Q)$ records only the two coordinate changes.
+The anchored vector contains more information than $\Delta(P,Q)$: it records **where the motion begins and ends**, while the difference records only the two coordinate changes.
 
 Its length is the distance between its endpoints:
 
@@ -126,25 +126,25 @@ $$
 
 ### Different anchored vectors can encode the same displacement
 
-Now consider two anchored vectors
+Consider
 
 $$
 \overrightarrow{PQ}\qquad\text{and}\qquad\overrightarrow{P'Q'}.
 $$
 
-If $(P,Q)\neq(P',Q')$, then they are different anchored vectors. Nevertheless, they may encode the same coordinate change. This happens precisely when
+They are different anchored vectors when $(P,Q)\neq(P',Q')$. They nevertheless encode the same displacement precisely when
 
 $$
 \Delta(P,Q)=\Delta(P',Q'),
 $$
 
-or equivalently when
+or equivalently
 
 $$
 Q-P=Q'-P'.
 $$
 
-We therefore introduce the relation
+We therefore define
 
 $$
 \boxed{
@@ -154,13 +154,13 @@ $$
 }
 $$
 
-The symbol $\sim$ does **not** say that the anchored vectors are literally the same ordered pair of points. It says that they encode the same displacement.
+The relation $\sim$ does not identify the endpoint pairs. It says only that the arrows encode the same coordinate change.
 
 <figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
   <div class="figure-toolbar">
     <div>
       <span class="figure-title">Different anchored vectors with the same displacement</span>
-      <span class="figure-step-title">The endpoint pairs differ, but the ordinary coordinate differences and the resulting free vectors agree.</span>
+      <span class="figure-step-title">The endpoint pairs differ, but the ordinary coordinate differences and resulting free vectors agree.</span>
     </div>
     <button class="icon-button" type="button" data-fullscreen aria-label="Open vector equivalence figure in full screen">⛶</button>
   </div>
@@ -168,23 +168,21 @@ The symbol $\sim$ does **not** say that the anchored vectors are literally the s
   <figcaption class="figure-caption">Both arrows change the horizontal coordinate by $3$ and the vertical coordinate by $2$.</figcaption>
 </figure>
 
-### Free vectors: extracting only the change of position
+### Free vectors: retaining only the displacement
 
-Often we do not care where a motion begins. We want an instruction that can be applied at any point:
+Often we want an instruction that can be applied at any point:
 
 > change the horizontal coordinate by $v_1$ and the vertical coordinate by $v_2$.
 
-To isolate exactly this information, we form a new abstract object.
-
 !!! definition "Free vector"
-    A **free vector** is the collection of all anchored vectors that encode one fixed coordinate change. If $\overrightarrow{PQ}$ is one representative, then
+    A **free vector** is the collection of all anchored vectors encoding one fixed coordinate change. If $\overrightarrow{PQ}$ is one representative, then
 
     $$
     [\overrightarrow{PQ}]
       :=\{\overrightarrow{AB}:\Delta(A,B)=\Delta(P,Q)\}.
     $$
 
-    Every member of this collection is called a **representative** of the free vector.
+    Every member of this collection is a **representative** of the free vector.
 
 If
 
@@ -192,24 +190,22 @@ $$
 Q-P=(v_1,v_2),
 $$
 
-then the resulting free vector is written
+then
 
 $$
 \boxed{\mathbf v=[\overrightarrow{PQ}]=[v_1,v_2].}
 $$
 
-The round pair $(v_1,v_2)$ is the ordinary coordinate difference of two points. The square pair $[v_1,v_2]$ is the free vector carrying that displacement.
+The round pair $(v_1,v_2)$ is the ordinary coordinate difference. The square pair $[v_1,v_2]$ is the free vector carrying that displacement.
 
-This is the central abstraction:
-
-- $\overrightarrow{PQ}$ says: “start at this particular point $P$ and finish at this particular point $Q$”;
-- $\mathbf v=[v_1,v_2]$ says: “wherever you start, change your position by $v_1$ horizontally and $v_2$ vertically”.
+- $\overrightarrow{PQ}$ says: “start at this particular point $P$ and finish at $Q$”;
+- $\mathbf v=[v_1,v_2]$ says: “wherever you start, make this coordinate change”.
 
 <figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
   <div class="figure-toolbar">
     <div>
       <span class="figure-title">One free vector, many anchored representatives</span>
-      <span class="figure-step-title">Move the endpoint $V$ of the representative beginning at $O=(0,0)$.</span>
+      <span class="figure-step-title">Move the endpoint $X$ of the representative beginning at $O=(0,0)$.</span>
     </div>
     <button class="icon-button" type="button" data-fullscreen aria-label="Open free vector representative figure in full screen">⛶</button>
   </div>
@@ -220,7 +216,7 @@ This is the central abstraction:
 
 ### Turning a point difference into a free vector
 
-The square brackets now define the required change of type.
+Square brackets now perform the required change of type.
 
 !!! definition "Free vector determined by two points"
     For points $P$ and $Q$, define
@@ -233,23 +229,23 @@ The square brackets now define the required change of type.
     }
     $$
 
-The expression $Q-P$ is the ordinary coordinate difference and is written with round brackets when expanded. The expression $[Q-P]$ is a free vector. In particular,
+The expression $Q-P$ is an ordinary point-coordinate difference. The expression $[Q-P]$ is a free vector. In particular,
 
 $$
 [Q-P]=-[P-Q].
 $$
 
-This notation will later make expressions such as
+This makes expressions such as
 
 $$
 \mathbf n\cdot[P-P_0]
 $$
 
-type-correct: both factors of the dot product are free vectors, so the result is a real number.
+type-correct: both factors are free vectors, so the result is a real number.
 
 ### Applying a free vector to a point
 
-A free vector is reusable because it can be anchored at any chosen point. We use a separate operation for this action.
+A free vector can be anchored at any point. We use a separate operation for this action.
 
 !!! definition "Point translated by a vector"
     For
@@ -269,7 +265,7 @@ A free vector is reusable because it can be anchored at any chosen point. We use
 
     The result is a point.
 
-Equivalently, the endpoint $Q$ is characterised by
+Equivalently,
 
 $$
 \boxed{
@@ -279,7 +275,7 @@ Q=P\oplus\mathbf v
 }
 $$
 
-Thus
+Hence
 
 $$
 \boxed{P\oplus[Q-P]=Q},
@@ -287,7 +283,7 @@ $$
 \boxed{[(P\oplus\mathbf v)-P]=\mathbf v}.
 $$
 
-The order of the types matters. The expression $P\oplus\mathbf v$ is defined, while $\mathbf v\oplus P$ is not. This is an action of a displacement on a point, not a commutative addition of two objects of the same kind.
+The order matters. The expression $P\oplus\mathbf v$ is defined, while $\mathbf v\oplus P$ is not. This is an action of a displacement on a point, not a commutative addition of two objects of the same type.
 
 ### The operations and their output types
 
@@ -314,7 +310,7 @@ V\times V&\longrightarrow\mathbb R,
 \end{aligned}
 $$
 
-The vector sum, scalar multiplication and dot product are developed in the following sections. The two bridge operations
+The vector sum, scalar multiplication and dot product are developed in the following sections. The bridge operations
 
 $$
 [Q-P]\in V,
@@ -322,11 +318,11 @@ $$
 P\oplus\mathbf v\in\mathcal P
 $$
 
-are what later make parametric and normal equations of lines and planes unambiguous.
+make the later parametric and normal equations of lines and planes unambiguous.
 
 ### The length of a free vector
 
-All representatives of one free vector have the same horizontal and vertical coordinate changes. The distance formula therefore gives them the same length. Length is consequently a property of the free vector itself, not of the particular representative chosen to draw it.
+All representatives of one free vector have the same coordinate changes, hence the same length.
 
 !!! definition "Euclidean norm"
     Let
@@ -347,7 +343,7 @@ All representatives of one free vector have the same horizontal and vertical coo
     }
     $$
 
-The definition is independent of the representative: equivalent anchored vectors have the same coordinate change and therefore the same length.
+This definition is independent of the representative because equivalent anchored vectors have the same coordinate change.
 
 In particular,
 
@@ -357,41 +353,31 @@ $$
 \mathbf v\neq\mathbf0\implies\|\mathbf v\|>0.
 $$
 
-For any two points $A$ and $B$,
+For points $A$ and $B$,
 
 $$
 \boxed{d_E(A,B)=\|[B-A]\|}.
 $$
 
-Thus a free vector carries two kinds of information: its components say **how the position changes**, and its norm says **how far the motion travels**.
+### Similar coordinates, different objects
 
-### Similar notation, different objects
+Let
 
-This distinction must remain explicit:
+$$
+O=(0,0),\qquad X=(v_1,v_2).
+$$
+
+Then
 
 $$
 \begin{aligned}
-V&=(v_1,v_2) &&\text{is a point},\\
-\overrightarrow{OV}& &&\text{is an anchored vector},\\
-[V-O]&=[\overrightarrow{OV}]=\mathbf v=[v_1,v_2] &&\text{is a free vector}.
+X&=(v_1,v_2) &&\text{is a point},\\
+\overrightarrow{OX}& &&\text{is an anchored vector},\\
+[X-O]&=[\overrightarrow{OX}]=\mathbf v=[v_1,v_2] &&\text{is a free vector}.
 \end{aligned}
 $$
 
-The expressions use the same numbers, but they do not denote the same kind of object.
-
-A representative beginning at the origin is especially convenient. If
-
-$$
-O=(0,0),\qquad V=(v_1,v_2),
-$$
-
-then
-
-$$
-\boxed{\mathbf v=[V-O]=[\overrightarrow{OV}]=[v_1,v_2].}
-$$
-
-The point $V$ is not identified with the free vector. It merely determines a canonical anchored representative from the origin.
+The point $X$ is not identified with the free vector. It merely determines the representative beginning at the origin.
 
 !!! principle "What the abstraction buys us"
-    A free vector is a reusable instruction for changing position. The operator $[Q-P]$ extracts such an instruction from two points, while $P\oplus\mathbf v$ applies an instruction at a chosen point.
+    The operator $[Q-P]$ extracts a reusable displacement from two points, while $P\oplus\mathbf v$ applies such a displacement at a chosen point.
