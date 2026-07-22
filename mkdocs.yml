@@ -16,7 +16,7 @@ theme:
 
 nav:
   - Home: index.md
-  - Manifest: manifest.md
+  - Introduction: manifest.md
   - Lecture 01 · Cartesian Geometry and Coordinates: lecture-01/index.md
   - Lecture 02 · Vectors, Bases, and Coordinate Systems: lecture-02/index.md
   - Lecture 03 · Lines and Planes: lecture-03/index.md
