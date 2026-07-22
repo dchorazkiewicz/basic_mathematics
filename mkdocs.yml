@@ -16,7 +16,10 @@ theme:
 
 nav:
   - Home: index.md
-  - Introduction: manifest.md
+  - Introduction:
+      - Purpose and Philosophy: introduction/purpose-and-philosophy.md
+      - How the Course Works: introduction/how-the-course-works.md
+      - How to Prepare Mathematical Notes: introduction/how-to-prepare-mathematical-notes.md
   - Lecture 01 · Cartesian Geometry and Coordinates: lecture-01/index.md
   - Lecture 02 · Vectors, Bases, and Coordinate Systems: lecture-02/index.md
   - Lecture 03 · Lines and Planes: lecture-03/index.md
