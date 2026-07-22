@@ -39,8 +39,8 @@
   });
 
   const P = board.create('point', [0.5, 0.5], { name: 'P', fillColor: colors.sum, strokeColor: colors.sum, ...draggable });
-  const Q = board.create('point', [3, 2], { name: 'Q', fillColor: colors.a, strokeColor: colors.a, ...draggable });
-  const R = board.create('point', [5.5, 4], { name: 'R', fillColor: colors.b, strokeColor: colors.b, ...draggable });
+  const Q = board.create('point', [6, -1], { name: 'Q', fillColor: colors.a, strokeColor: colors.a, ...draggable });
+  const R = board.create('point', [4, 4], { name: 'R', fillColor: colors.b, strokeColor: colors.b, ...draggable });
 
   board.create('arrow', [P, Q], { strokeColor: colors.a, strokeWidth: 5, ...fixed });
   board.create('arrow', [Q, R], { strokeColor: colors.b, strokeWidth: 5, ...fixed });
