@@ -46,16 +46,16 @@
   board.create('arrow', [Q, R], { strokeColor: colors.b, strokeWidth: 5, ...fixed });
   board.create('arrow', [P, R], { strokeColor: colors.sum, strokeWidth: 4, dash: 2, ...fixed });
 
-  board.create('text', [() => (P.X() + Q.X()) / 2, () => (P.Y() + Q.Y()) / 2 + 0.35, 'a = [PQ]'], label(colors.a));
-  board.create('text', [() => (Q.X() + R.X()) / 2, () => (Q.Y() + R.Y()) / 2 + 0.35, 'b = [QR]'], label(colors.b));
-  board.create('text', [() => (P.X() + R.X()) / 2, () => (P.Y() + R.Y()) / 2 - 0.45, 'a + b = [PR]'], label(colors.sum));
+  board.create('text', [() => (P.X() + Q.X()) / 2, () => (P.Y() + Q.Y()) / 2 + 0.35, 'a = [Q−P]'], label(colors.a));
+  board.create('text', [() => (Q.X() + R.X()) / 2, () => (Q.Y() + R.Y()) / 2 + 0.35, 'b = [R−Q]'], label(colors.b));
+  board.create('text', [() => (P.X() + R.X()) / 2, () => (P.Y() + R.Y()) / 2 - 0.45, 'a + b = [R−P]'], label(colors.sum));
 
   function updateReadout() {
     const ax = Q.X() - P.X();
     const ay = Q.Y() - P.Y();
     const bx = R.X() - Q.X();
     const by = R.Y() - Q.Y();
-    readout.textContent = `a = ${pair(ax, ay)};  b = ${pair(bx, by)};  a + b = ${pair(R.X() - P.X(), R.Y() - P.Y())}`;
+    readout.textContent = `[Q−P] = ${pair(ax, ay)};  [R−Q] = ${pair(bx, by)};  [R−P] = ${pair(R.X() - P.X(), R.Y() - P.Y())}`;
   }
 
   P.on('drag', updateReadout);
