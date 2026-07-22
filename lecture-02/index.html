@@ -74,15 +74,18 @@
 <div class="arithmatex">\[
 P=(p_1,p_2),\qquad Q=(q_1,q_2).
 \]</div>
-<p>The notation is deceptively similar throughout this lecture, so we will keep the types of objects explicit:</p>
+<p>The notation is deliberately type-sensitive:</p>
 <ul>
 <li><span class="arithmatex">\((p_1,p_2)\)</span> denotes a <strong>point</strong>;</li>
 <li><span class="arithmatex">\((P,Q)\)</span> denotes an <strong>ordered pair of points</strong>;</li>
 <li><span class="arithmatex">\(\overrightarrow{PQ}\)</span> denotes the <strong>anchored vector</strong> determined by that ordered pair;</li>
-<li><span class="arithmatex">\([v_1,v_2]\)</span> denotes a <strong>free vector</strong>, an abstract displacement independent of its starting point.</li>
+<li><span class="arithmatex">\([v_1,v_2]\)</span> denotes a <strong>free vector</strong>, an abstract displacement independent of its starting point;</li>
+<li><span class="arithmatex">\([Q-P]\)</span> denotes the free vector extracted from the ordinary coordinate difference of the two points;</li>
+<li><span class="arithmatex">\(P\oplus\mathbf v\)</span> denotes the point obtained by applying the free vector <span class="arithmatex">\(\mathbf v\)</span> at <span class="arithmatex">\(P\)</span>.</li>
 </ul>
+<p>Round and square brackets therefore carry different information. Round brackets describe points. Square brackets describe free vectors.</p>
 <h3 id="arithmetic-on-cartesian-point-coordinates">Arithmetic on Cartesian point coordinates</h3>
-<p>Because points are represented by ordered pairs of numbers, we may perform coordinatewise calculations on their descriptions. Write</p>
+<p>Because Cartesian points are represented by ordered pairs of numbers, their coordinate descriptions admit the usual coordinatewise arithmetic. Write</p>
 <div class="arithmatex">\[
 O=(0,0).
 \]</div>
@@ -95,24 +98,25 @@ Q-P&amp;=(q_1-p_1,\,q_2-p_2),\\
 \lambda P&amp;=(\lambda p_1,\lambda p_2).
 \end{aligned}
 \]</div>
-<p>At this stage these are operations on coordinate descriptions of points. They do not yet define free vectors. The expression that will matter geometrically is the difference</p>
+<p>These are operations on point coordinates, and their results are again written with round brackets. In particular,</p>
 <div class="arithmatex">\[
-Q-P=(q_1-p_1,\,q_2-p_2),
+Q-P=(q_1-p_1,q_2-p_2)
 \]</div>
-<p>because it records how the coordinates must change in order to move from <span class="arithmatex">\(P\)</span> to <span class="arithmatex">\(Q\)</span>.</p>
+<p>is still an ordinary coordinate pair. It records the two numerical changes needed to move from <span class="arithmatex">\(P\)</span> to <span class="arithmatex">\(Q\)</span>, but it has not yet been declared to be a free vector.</p>
 <figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
   <div class="figure-toolbar">
     <div>
       <span class="figure-title">Arithmetic on Cartesian points</span>
-      <span class="figure-step-title">Move $P$ and $Q$, then compare the four coordinatewise operations.</span>
+      <span class="figure-step-title">Compare coordinate arithmetic with the separate operation of translating a point by a vector.</span>
     </div>
     <button class="icon-button" type="button" data-fullscreen aria-label="Open point arithmetic figure in full screen">⛶</button>
   </div>
   <div class="curve-switcher" role="group" aria-label="Choose a point operation">
-    <button class="curve-mode is-active" type="button" data-point-operation="sum">Addition</button>
+    <button class="curve-mode is-active" type="button" data-point-operation="sum">Point addition</button>
     <button class="curve-mode" type="button" data-point-operation="opposite">Opposite point</button>
-    <button class="curve-mode" type="button" data-point-operation="difference">Subtraction</button>
-    <button class="curve-mode" type="button" data-point-operation="scalar">Scalar multiplication</button>
+    <button class="curve-mode" type="button" data-point-operation="difference">Point subtraction</button>
+    <button class="curve-mode" type="button" data-point-operation="scalar">Scale point coordinates</button>
+    <button class="curve-mode" type="button" data-point-operation="translate">Point $\oplus$ vector</button>
   </div>
   <div class="figure-stage jsx-stage"><div id="point-arithmetic-board" class="jxgbox" data-point-arithmetic></div></div>
   <div class="parameter-controls" data-point-lambda-control hidden>
@@ -122,7 +126,7 @@ Q-P=(q_1-p_1,\,q_2-p_2),
     </label>
   </div>
   <div class="relation-readout"><span data-point-operation-readout></span></div>
-  <figcaption class="figure-caption">These are calculations on ordered pairs representing points. The difference $Q-P$ will shortly be interpreted as a change of position.</figcaption>
+  <figcaption class="figure-caption">The ordinary operations use round coordinate pairs. The translation mode uses a square-bracketed free vector and the separate symbol $\oplus$.</figcaption>
 </figure>
 
 <h3 id="an-ordered-pair-of-points-determines-an-anchored-vector">An ordered pair of points determines an anchored vector</h3>
@@ -130,7 +134,7 @@ Q-P=(q_1-p_1,\,q_2-p_2),
 <div class="arithmatex">\[
 (P,Q)
 \]</div>
-<p>determines a directed motion beginning at <span class="arithmatex">\(P\)</span> and ending at <span class="arithmatex">\(Q\)</span>. We represent this ordered pair geometrically by the arrow</p>
+<p>determines a directed motion beginning at <span class="arithmatex">\(P\)</span> and ending at <span class="arithmatex">\(Q\)</span>. We represent it geometrically by the arrow</p>
 <div class="arithmatex">\[
 \overrightarrow{PQ}
 \]</div>
@@ -148,21 +152,21 @@ Q-P=(q_1-p_1,\,q_2-p_2),
   <figcaption class="figure-caption">The anchored vector remembers both its initial point and its endpoint. Reversing the ordered pair reverses the motion.</figcaption>
 </figure>
 
-<p>The coordinate change encoded by <span class="arithmatex">\(\overrightarrow{PQ}\)</span> is</p>
+<p>The coordinate change encoded by <span class="arithmatex">\(\overrightarrow{PQ}\)</span> is the ordinary point difference</p>
 <div class="arithmatex">\[
 \Delta(P,Q):=Q-P=(q_1-p_1,\,q_2-p_2).
 \]</div>
-<p>Its two entries answer a concrete question:</p>
+<p>Its two entries answer two concrete questions:</p>
 <ul>
 <li>how much must the horizontal coordinate change?</li>
 <li>how much must the vertical coordinate change?</li>
 </ul>
-<p>Thus the anchored vector contains more information than the pair of numbers <span class="arithmatex">\(Q-P\)</span>: it records <strong>where the motion begins and ends</strong>, while <span class="arithmatex">\(Q-P\)</span> records only <strong>how the position changes</strong>.</p>
+<p>Thus the anchored vector contains more information than <span class="arithmatex">\(\Delta(P,Q)\)</span>: it records <strong>where the motion begins and ends</strong>, while <span class="arithmatex">\(\Delta(P,Q)\)</span> records only the two coordinate changes.</p>
 <p>Its length is the distance between its endpoints:</p>
 <div class="arithmatex">\[
 \boxed{|\overrightarrow{PQ}|=d_E(P,Q)}.
 \]</div>
-<p>Reversing the order produces a different anchored vector and negates the coordinate change:</p>
+<p>Reversing the order negates the coordinate change:</p>
 <div class="arithmatex">\[
 \Delta(Q,P)=P-Q=-(Q-P).
 \]</div>
@@ -171,7 +175,11 @@ Q-P=(q_1-p_1,\,q_2-p_2),
 <div class="arithmatex">\[
 \overrightarrow{PQ}\qquad\text{and}\qquad\overrightarrow{P'Q'}.
 \]</div>
-<p>If <span class="arithmatex">\((P,Q)\neq(P',Q')\)</span>, then they are different anchored vectors. Nevertheless, they may carry the same information about how a position changes. This happens precisely when</p>
+<p>If <span class="arithmatex">\((P,Q)\neq(P',Q')\)</span>, then they are different anchored vectors. Nevertheless, they may encode the same coordinate change. This happens precisely when</p>
+<div class="arithmatex">\[
+\Delta(P,Q)=\Delta(P',Q'),
+\]</div>
+<p>or equivalently when</p>
 <div class="arithmatex">\[
 Q-P=Q'-P'.
 \]</div>
@@ -180,7 +188,7 @@ Q-P=Q'-P'.
 \boxed{
 \overrightarrow{PQ}\sim\overrightarrow{P'Q'}
 \quad\Longleftrightarrow\quad
-Q-P=Q'-P'.
+\Delta(P,Q)=\Delta(P',Q').
 }
 \]</div>
 <p>The symbol <span class="arithmatex">\(\sim\)</span> does <strong>not</strong> say that the anchored vectors are literally the same ordered pair of points. It says that they encode the same displacement.</p>
@@ -188,12 +196,12 @@ Q-P=Q'-P'.
   <div class="figure-toolbar">
     <div>
       <span class="figure-title">Different anchored vectors with the same displacement</span>
-      <span class="figure-step-title">The ordered pairs of endpoints differ, but both arrows encode the same coordinate change.</span>
+      <span class="figure-step-title">The endpoint pairs differ, but the ordinary coordinate differences and the resulting free vectors agree.</span>
     </div>
     <button class="icon-button" type="button" data-fullscreen aria-label="Open vector equivalence figure in full screen">⛶</button>
   </div>
   <div class="figure-stage jsx-stage"><div id="vector-equivalence-board" class="jxgbox" data-vector-equivalence></div></div>
-  <figcaption class="figure-caption">The arrows begin at different points, but both change the horizontal coordinate by $3$ and the vertical coordinate by $2$.</figcaption>
+  <figcaption class="figure-caption">Both arrows change the horizontal coordinate by $3$ and the vertical coordinate by $2$.</figcaption>
 </figure>
 
 <h3 id="free-vectors-extracting-only-the-change-of-position">Free vectors: extracting only the change of position</h3>
@@ -207,18 +215,19 @@ Q-P=Q'-P'.
 <p>A <strong>free vector</strong> is the collection of all anchored vectors that encode one fixed coordinate change. If <span class="arithmatex">\(\overrightarrow{PQ}\)</span> is one representative, then</p>
 <div class="arithmatex">\[
 [\overrightarrow{PQ}]
-  :=\{\overrightarrow{AB}:B-A=Q-P\}.
+  :=\{\overrightarrow{AB}:\Delta(A,B)=\Delta(P,Q)\}.
 \]</div>
 <p>Every member of this collection is called a <strong>representative</strong> of the free vector.</p>
 </div>
-<p>The square brackets mean that we have deliberately forgotten the initial and terminal points and retained only the common displacement. If</p>
+<p>If</p>
 <div class="arithmatex">\[
 Q-P=(v_1,v_2),
 \]</div>
-<p>then we write the resulting free vector as</p>
+<p>then the resulting free vector is written</p>
 <div class="arithmatex">\[
 \boxed{\mathbf v=[\overrightarrow{PQ}]=[v_1,v_2].}
 \]</div>
+<p>The round pair <span class="arithmatex">\((v_1,v_2)\)</span> is the ordinary coordinate difference of two points. The square pair <span class="arithmatex">\([v_1,v_2]\)</span> is the free vector carrying that displacement.</p>
 <p>This is the central abstraction:</p>
 <ul>
 <li><span class="arithmatex">\(\overrightarrow{PQ}\)</span> says: “start at this particular point <span class="arithmatex">\(P\)</span> and finish at this particular point <span class="arithmatex">\(Q\)</span>”;</li>
@@ -234,18 +243,101 @@ Q-P=(v_1,v_2),
   </div>
   <div class="figure-stage jsx-stage"><div id="free-vector-representatives-board" class="jxgbox" data-free-vector-representatives></div></div>
   <div class="relation-readout"><span data-free-vector-readout></span></div>
-  <figcaption class="figure-caption">Every displayed arrow is a different anchored vector, but all are representatives of the same free vector because every arrow encodes the same coordinate change.</figcaption>
+  <figcaption class="figure-caption">Every displayed arrow is a different anchored vector, but all are representatives of the same free vector.</figcaption>
 </figure>
 
+<h3 id="turning-a-point-difference-into-a-free-vector">Turning a point difference into a free vector</h3>
+<p>The square brackets now define the required change of type.</p>
+<div class="admonition definition">
+<p class="admonition-title">Free vector determined by two points</p>
+<p>For points <span class="arithmatex">\(P\)</span> and <span class="arithmatex">\(Q\)</span>, define</p>
+<div class="arithmatex">\[
+\boxed{
+[Q-P]
+  :=[\overrightarrow{PQ}]
+  =[q_1-p_1,\,q_2-p_2].
+}
+\]</div>
+</div>
+<p>The expression <span class="arithmatex">\(Q-P\)</span> is the ordinary coordinate difference and is written with round brackets when expanded. The expression <span class="arithmatex">\([Q-P]\)</span> is a free vector. In particular,</p>
+<div class="arithmatex">\[
+[Q-P]=-[P-Q].
+\]</div>
+<p>This notation will later make expressions such as</p>
+<div class="arithmatex">\[
+\mathbf n\cdot[P-P_0]
+\]</div>
+<p>type-correct: both factors of the dot product are free vectors, so the result is a real number.</p>
+<h3 id="applying-a-free-vector-to-a-point">Applying a free vector to a point</h3>
+<p>A free vector is reusable because it can be anchored at any chosen point. We use a separate operation for this action.</p>
+<div class="admonition definition">
+<p class="admonition-title">Point translated by a vector</p>
+<p>For</p>
+<div class="arithmatex">\[
+P=(p_1,p_2),\qquad \mathbf v=[v_1,v_2],
+\]</div>
+<p>define</p>
+<div class="arithmatex">\[
+\boxed{
+P\oplus\mathbf v
+  :=(p_1+v_1,\,p_2+v_2).
+}
+\]</div>
+<p>The result is a point.</p>
+</div>
+<p>Equivalently, the endpoint <span class="arithmatex">\(Q\)</span> is characterised by</p>
+<div class="arithmatex">\[
+\boxed{
+Q=P\oplus\mathbf v
+\quad\Longleftrightarrow\quad
+[Q-P]=\mathbf v.
+}
+\]</div>
+<p>Thus</p>
+<div class="arithmatex">\[
+\boxed{P\oplus[Q-P]=Q},
+\qquad
+\boxed{[(P\oplus\mathbf v)-P]=\mathbf v}.
+\]</div>
+<p>The order of the types matters. The expression <span class="arithmatex">\(P\oplus\mathbf v\)</span> is defined, while <span class="arithmatex">\(\mathbf v\oplus P\)</span> is not. This is an action of a displacement on a point, not a commutative addition of two objects of the same kind.</p>
+<h3 id="the-operations-and-their-output-types">The operations and their output types</h3>
+<p>Let <span class="arithmatex">\(\mathcal P\)</span> denote the set of Cartesian points and let <span class="arithmatex">\(V\)</span> denote the set of free vectors. The operations used from now on have the following types:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\mathcal P\times\mathcal P&amp;\longrightarrow\mathcal P,
+&amp; (P,Q)&amp;\longmapsto P+Q,\\
+\mathcal P\times\mathcal P&amp;\longrightarrow\mathcal P,
+&amp; (Q,P)&amp;\longmapsto Q-P,\\
+\mathbb R\times\mathcal P&amp;\longrightarrow\mathcal P,
+&amp; (\lambda,P)&amp;\longmapsto\lambda P,\\[2mm]
+\mathcal P\times\mathcal P&amp;\longrightarrow V,
+&amp; (Q,P)&amp;\longmapsto[Q-P],\\
+\mathcal P\times V&amp;\longrightarrow\mathcal P,
+&amp; (P,\mathbf v)&amp;\longmapsto P\oplus\mathbf v,\\[2mm]
+V\times V&amp;\longrightarrow V,
+&amp; (\mathbf u,\mathbf v)&amp;\longmapsto\mathbf u+\mathbf v,\\
+\mathbb R\times V&amp;\longrightarrow V,
+&amp; (t,\mathbf v)&amp;\longmapsto t\mathbf v,\\
+V\times V&amp;\longrightarrow\mathbb R,
+&amp; (\mathbf u,\mathbf v)&amp;\longmapsto\mathbf u\cdot\mathbf v.
+\end{aligned}
+\]</div>
+<p>The vector sum, scalar multiplication and dot product are developed in the following sections. The two bridge operations</p>
+<div class="arithmatex">\[
+[Q-P]\in V,
+\qquad
+P\oplus\mathbf v\in\mathcal P
+\]</div>
+<p>are what later make parametric and normal equations of lines and planes unambiguous.</p>
 <h3 id="the-length-of-a-free-vector">The length of a free vector</h3>
 <p>All representatives of one free vector have the same horizontal and vertical coordinate changes. The distance formula therefore gives them the same length. Length is consequently a property of the free vector itself, not of the particular representative chosen to draw it.</p>
 <div class="admonition definition">
 <p class="admonition-title">Euclidean norm</p>
 <p>Let</p>
 <div class="arithmatex">\[
-\mathbf v=[\overrightarrow{PQ}]=[v_1,v_2],
+\mathbf v=[\overrightarrow{PQ}]=[Q-P]=[v_1,v_2].
 \]</div>
-<p>where <span class="arithmatex">\(P=(p_1,p_2)\)</span> and <span class="arithmatex">\(Q=(q_1,q_2)\)</span>. The <strong>norm</strong> of <span class="arithmatex">\(\mathbf v\)</span> is the length of any anchored representative:</p>
+<p>The <strong>norm</strong> of <span class="arithmatex">\(\mathbf v\)</span> is the length of any anchored representative:</p>
 <div class="arithmatex">\[
 \boxed{
 \|\mathbf v\|
@@ -256,32 +348,25 @@ Q-P=(v_1,v_2),
 }
 \]</div>
 </div>
-<p>The definition is independent of the representative: if</p>
-<div class="arithmatex">\[
-\overrightarrow{PQ}\sim\overrightarrow{P'Q'},
-\]</div>
-<p>then both representatives have the same coordinate change, so the distance formula gives</p>
-<div class="arithmatex">\[
-|\overrightarrow{PQ}|=|\overrightarrow{P'Q'}|.
-\]</div>
+<p>The definition is independent of the representative: equivalent anchored vectors have the same coordinate change and therefore the same length.</p>
 <p>In particular,</p>
 <div class="arithmatex">\[
 \|\mathbf0\|=0,
 \qquad
 \mathbf v\neq\mathbf0\implies\|\mathbf v\|&gt;0.
 \]</div>
-<p>For any two points <span class="arithmatex">\(A\)</span> and <span class="arithmatex">\(B\)</span>, the free vector associated with the motion from <span class="arithmatex">\(A\)</span> to <span class="arithmatex">\(B\)</span> satisfies</p>
+<p>For any two points <span class="arithmatex">\(A\)</span> and <span class="arithmatex">\(B\)</span>,</p>
 <div class="arithmatex">\[
-\boxed{d_E(A,B)=\|B-A\|}.
+\boxed{d_E(A,B)=\|[B-A]\|}.
 \]</div>
-<p>Thus a free vector carries two kinds of information from the beginning: the coordinate change tells us <strong>how the position changes</strong>, and the norm tells us <strong>how far the motion travels</strong>.</p>
+<p>Thus a free vector carries two kinds of information: its components say <strong>how the position changes</strong>, and its norm says <strong>how far the motion travels</strong>.</p>
 <h3 id="similar-notation-different-objects">Similar notation, different objects</h3>
 <p>This distinction must remain explicit:</p>
 <div class="arithmatex">\[
 \begin{aligned}
 V&amp;=(v_1,v_2) &amp;&amp;\text{is a point},\\
 \overrightarrow{OV}&amp; &amp;&amp;\text{is an anchored vector},\\
-[\overrightarrow{OV}]&amp;=\mathbf v=[v_1,v_2] &amp;&amp;\text{is a free vector}.
+[V-O]&amp;=[\overrightarrow{OV}]=\mathbf v=[v_1,v_2] &amp;&amp;\text{is a free vector}.
 \end{aligned}
 \]</div>
 <p>The expressions use the same numbers, but they do not denote the same kind of object.</p>
@@ -291,12 +376,12 @@ O=(0,0),\qquad V=(v_1,v_2),
 \]</div>
 <p>then</p>
 <div class="arithmatex">\[
-\boxed{\mathbf v=[\overrightarrow{OV}]=[v_1,v_2].}
+\boxed{\mathbf v=[V-O]=[\overrightarrow{OV}]=[v_1,v_2].}
 \]</div>
 <p>The point <span class="arithmatex">\(V\)</span> is not identified with the free vector. It merely determines a canonical anchored representative from the origin.</p>
 <div class="admonition principle">
 <p class="admonition-title">What the abstraction buys us</p>
-<p>A free vector is a reusable instruction for changing position. Because it no longer depends on a particular starting point, we can apply the same displacement anywhere and, in the next section, compose several displacements into one.</p>
+<p>A free vector is a reusable instruction for changing position. The operator <span class="arithmatex">\([Q-P]\)</span> extracts such an instruction from two points, while <span class="arithmatex">\(P\oplus\mathbf v\)</span> applies an instruction at a chosen point.</p>
 </div>
 <h2 id="addition">Addition, opposite vectors, and subtraction</h2>
 <h3 id="why-free-vectors-should-be-addable">Why free vectors should be addable</h3>
