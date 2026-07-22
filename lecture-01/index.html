@@ -413,84 +413,108 @@ t\longmapsto (x(t),y(t)).
 </figure>
 
 <h2 id="cosine-difference">The cosine of a difference of angles</h2>
-<p>The coordinate construction already gives us orthogonal projection. We now use it to derive the formula for the cosine of a difference of angles without assuming a dot-product formula.</p>
-<p>Choose two unit segments <span class="arithmatex">\(OA\)</span> and <span class="arithmatex">\(OB\)</span> with common initial point <span class="arithmatex">\(O\)</span>. Let their directed angles from the positive horizontal axis be <span class="arithmatex">\(\alpha\)</span> and <span class="arithmatex">\(\beta\)</span>. Their endpoints therefore have coordinates</p>
+<p>The coordinate construction gives us points, distances and orthogonal projection. These are enough to derive the formula for the cosine of a difference of angles; vectors and the dot product are not needed.</p>
+<p>Choose two points <span class="arithmatex">\(A\)</span> and <span class="arithmatex">\(B\)</span> on the unit circle centred at <span class="arithmatex">\(O\)</span>. Let the angles of the radii <span class="arithmatex">\(OA\)</span> and <span class="arithmatex">\(OB\)</span> from the positive horizontal axis be <span class="arithmatex">\(\alpha\)</span> and <span class="arithmatex">\(\beta\)</span>. Then</p>
 <div class="arithmatex">\[
 A=(\cos\alpha,\sin\alpha),
 \qquad
-B=(\cos\beta,\sin\beta).
+B=(\cos\beta,\sin\beta),
 \]</div>
+<p>and</p>
+<div class="arithmatex">\[
+OA=OB=1.
+\]</div>
+<p>For the diagram assume <span class="arithmatex">\(0\leq\beta\leq\alpha\leq\pi\)</span> and put</p>
+<div class="arithmatex">\[
+\delta=\alpha-\beta.
+\]</div>
+<p>The same identity for arbitrary directed angles follows by periodicity and by the fact that cosine is even.</p>
 <figure class="figure-panel">
   <div class="figure-toolbar">
     <div>
-      <span class="figure-title">Two unit directions</span>
-      <span class="figure-step-title">The angle between them is $\alpha-\beta$.</span>
+      <span class="figure-title">Two points on the unit circle</span>
+      <span class="figure-step-title">The angle between $OA$ and $OB$ is $\delta=\alpha-\beta$.</span>
     </div>
   </div>
   <div class="figure-stage">
-    <img src="../assets/images/lecture-01/cosine-difference-unit-circle.svg" alt="Two unit radii at angles alpha and beta on a coordinate plane." loading="lazy">
+    <img src="../assets/images/lecture-01/cosine-difference-unit-circle.svg" alt="Two points A and B on a unit circle, with central angle alpha minus beta and chord AB." loading="lazy">
   </div>
-  <figcaption class="figure-caption">The endpoints of unit radii have coordinates $(\cos\theta,\sin\theta)$. The relative angle between the two directions is $\alpha-\beta$.</figcaption>
+  <figcaption class="figure-caption">We compute the same length $AB$ in two ways: first from the coordinates of $A$ and $B$, and then from an elementary right-triangle construction.</figcaption>
 </figure>
 
-<h3 id="the-same-projection-described-geometrically">The same projection described geometrically</h3>
-<p>Project the unit segment <span class="arithmatex">\(OA\)</span> orthogonally onto the direction of <span class="arithmatex">\(OB\)</span>. The angle between these two unit directions is <span class="arithmatex">\(\alpha-\beta\)</span>. By the elementary definition of cosine, the signed length of the projection is therefore</p>
+<h3 id="the-chord-length-from-coordinates">The chord length from coordinates</h3>
+<p>The coordinate formula for distance gives</p>
 <div class="arithmatex">\[
-\lambda=\cos(\alpha-\beta).
+AB^2
+=(\cos\alpha-\cos\beta)^2
+ +(\sin\alpha-\sin\beta)^2.
 \]</div>
-<p>Here the projection is signed: it is positive in the direction of <span class="arithmatex">\(OB\)</span> and negative in the opposite direction.</p>
-<h3 id="the-same-projection-described-by-coordinates">The same projection described by coordinates</h3>
-<p>Write the unit direction of <span class="arithmatex">\(OB\)</span> as</p>
-<div class="arithmatex">\[
-e_\beta=(\cos\beta,\sin\beta).
-\]</div>
-<p>A unit direction perpendicular to it is obtained by a quarter-turn:</p>
-<div class="arithmatex">\[
-n_\beta=(-\sin\beta,\cos\beta).
-\]</div>
-<p>The segment <span class="arithmatex">\(OA\)</span> can be decomposed into a component parallel to <span class="arithmatex">\(e_\beta\)</span> and a component parallel to <span class="arithmatex">\(n_\beta\)</span>:</p>
-<div class="arithmatex">\[
-OA=\lambda e_\beta+\mu n_\beta.
-\]</div>
-<figure class="figure-panel">
-  <div class="figure-toolbar">
-    <div>
-      <span class="figure-title">Parallel and perpendicular components</span>
-      <span class="figure-step-title">The coefficient $\lambda$ is the signed projection onto $e_\beta$.</span>
-    </div>
-  </div>
-  <div class="figure-stage">
-    <img src="../assets/images/lecture-01/cosine-difference-projection.svg" alt="A unit vector decomposed into components parallel and perpendicular to a rotated unit direction." loading="lazy">
-  </div>
-  <figcaption class="figure-caption">The decomposition uses only two perpendicular unit directions. The coefficient of $e_\beta$ is exactly the projection length we want to compute.</figcaption>
-</figure>
-
-<p>Since <span class="arithmatex">\(OA=(\cos\alpha,\sin\alpha)\)</span>, equality of coordinates gives</p>
-<div class="arithmatex">\[
-\begin{cases}
-\cos\alpha=\lambda\cos\beta-\mu\sin\beta,\\[2mm]
-\sin\alpha=\lambda\sin\beta+\mu\cos\beta.
-\end{cases}
-\]</div>
-<p>Multiply the first equation by <span class="arithmatex">\(\cos\beta\)</span> and the second by <span class="arithmatex">\(\sin\beta\)</span>:</p>
+<p>Expanding the squares,</p>
 <div class="arithmatex">\[
 \begin{aligned}
-\cos\alpha\cos\beta
-  &amp;=\lambda\cos^2\beta-\mu\sin\beta\cos\beta,\\
-\sin\alpha\sin\beta
-  &amp;=\lambda\sin^2\beta+\mu\sin\beta\cos\beta.
+AB^2
+&amp;=\cos^2\alpha-2\cos\alpha\cos\beta+\cos^2\beta\\
+&amp;\quad+\sin^2\alpha-2\sin\alpha\sin\beta+\sin^2\beta.
 \end{aligned}
 \]</div>
-<p>Adding the equations removes the perpendicular component:</p>
+<p>Using</p>
 <div class="arithmatex">\[
-\cos\alpha\cos\beta+\sin\alpha\sin\beta
-=\lambda(\cos^2\beta+\sin^2\beta).
+\cos^2\theta+\sin^2\theta=1,
 \]</div>
-<p>Because <span class="arithmatex">\(\cos^2\beta+\sin^2\beta=1\)</span>, we obtain</p>
+<p>once for <span class="arithmatex">\(\theta=\alpha\)</span> and once for <span class="arithmatex">\(\theta=\beta\)</span>, we obtain</p>
 <div class="arithmatex">\[
-\lambda=\cos\alpha\cos\beta+\sin\alpha\sin\beta.
+AB^2
+=2-2\bigl(\cos\alpha\cos\beta+\sin\alpha\sin\beta\bigr).
+\tag{1}
 \]</div>
-<p>But the geometric description of the same projection gave <span class="arithmatex">\(\lambda=\cos(\alpha-\beta)\)</span>. Hence</p>
+<h3 id="the-same-chord-length-from-projection">The same chord length from projection</h3>
+<p>Drop the perpendicular from <span class="arithmatex">\(A\)</span> to the straight line <span class="arithmatex">\(OB\)</span>, and denote its foot by <span class="arithmatex">\(H\)</span>. The triangle <span class="arithmatex">\(OAH\)</span> is right-angled at <span class="arithmatex">\(H\)</span>, its hypotenuse has length <span class="arithmatex">\(OA=1\)</span>, and its angle at <span class="arithmatex">\(O\)</span> is <span class="arithmatex">\(\delta\)</span>.</p>
+<p>Therefore, by the elementary definitions of sine and cosine,</p>
+<div class="arithmatex">\[
+OH=\cos\delta,
+\qquad
+AH=\sin\delta.
+\]</div>
+<p>Because <span class="arithmatex">\(OB=1\)</span>,</p>
+<div class="arithmatex">\[
+BH=OB-OH=1-\cos\delta.
+\]</div>
+<figure class="figure-panel">
+  <div class="figure-toolbar">
+    <div>
+      <span class="figure-title">The chord divided by an orthogonal projection</span>
+      <span class="figure-step-title">The perpendicular $AH$ produces two lengths determined by $\delta$.</span>
+    </div>
+  </div>
+  <div class="figure-stage">
+    <img src="../assets/images/lecture-01/cosine-difference-projection.svg" alt="Point A projected perpendicularly to the line OB at H, with OH equal to cosine delta and AH equal to sine delta." loading="lazy">
+  </div>
+  <figcaption class="figure-caption">The projection gives $OH=\cos\delta$ and hence $BH=1-\cos\delta$. The segment $AH$ has length $\sin\delta$.</figcaption>
+</figure>
+
+<p>The triangle <span class="arithmatex">\(AHB\)</span> is also right-angled at <span class="arithmatex">\(H\)</span>. Hence the Pythagorean theorem gives</p>
+<div class="arithmatex">\[
+\begin{aligned}
+AB^2
+&amp;=AH^2+BH^2\\
+&amp;=\sin^2\delta+(1-\cos\delta)^2\\
+&amp;=\sin^2\delta+1-2\cos\delta+\cos^2\delta\\
+&amp;=2-2\cos\delta.
+\end{aligned}
+\]</div>
+<p>Since <span class="arithmatex">\(\delta=\alpha-\beta\)</span>,</p>
+<div class="arithmatex">\[
+AB^2=2-2\cos(\alpha-\beta).
+\tag{2}
+\]</div>
+<h3 id="comparing-the-two-descriptions">Comparing the two descriptions</h3>
+<p>Equations (1) and (2) describe the same squared length <span class="arithmatex">\(AB^2\)</span>. Therefore</p>
+<div class="arithmatex">\[
+2-2\bigl(\cos\alpha\cos\beta+\sin\alpha\sin\beta\bigr)
+=
+2-2\cos(\alpha-\beta).
+\]</div>
+<p>After subtracting <span class="arithmatex">\(2\)</span> and dividing by <span class="arithmatex">\(-2\)</span>, we obtain</p>
 <div class="admonition theorem">
 <p class="admonition-title">Cosine of a difference</p>
 <div class="arithmatex">\[
@@ -500,7 +524,7 @@ OA=\lambda e_\beta+\mu n_\beta.
 </div>
 <div class="admonition interpretation">
 <p class="admonition-title">Why the formula appears</p>
-<p>The identity is not an algebraic coincidence. Both sides measure the same signed projection of one unit direction onto another: the left-hand side uses the angle between the directions, while the right-hand side computes that projection from their coordinates.</p>
+<p>Both sides arise from the same geometric object: the chord joining two points of the unit circle. The right-hand side appears when its length is calculated from Cartesian coordinates; the left-hand side appears when the same length is calculated from the angle between the two radii.</p>
 </div>
 <h2 id="exercises">Exercises</h2>
 <p>The first ten exercises reinforce the basic computational procedures of the lecture. The next ten require explanation, modelling and argument rather than only substitution into a formula.</p>
