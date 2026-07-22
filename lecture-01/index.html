@@ -64,6 +64,8 @@
         
           <a href="#cosine-difference">Cosine of an angle difference</a>
         
+          <a href="#computational-model">Computational model</a>
+        
           <a href="#exercises">Exercises</a>
         
       </aside>
@@ -603,6 +605,49 @@ AB^2=2-2\cos(\alpha-\beta).
 <p class="admonition-title">How the proof was constructed</p>
 <p>The proof did not begin with the desired formula. It began with one geometric quantity, the chord <span class="arithmatex">\(AB\)</span>. The coordinate description of its endpoints produced one expression for <span class="arithmatex">\(AB^2\)</span>. Rotating the picture, projecting <span class="arithmatex">\(A\)</span> onto the horizontal segment <span class="arithmatex">\(OB\)</span>, and applying the Pythagorean theorem produced another. The identity follows because both calculations describe exactly the same unchanged length.</p>
 </div>
+<h2 id="computational-model">Computational interlude: mathematical objects as types</h2>
+<p>Writing a program forces us to state which objects exist and what each operation returns. The following minimal model separates three roles already used in this lecture: a point is data, a parametric curve produces a point from a parameter, and a relation tests whether a point satisfies a condition.</p>
+<details class="example">
+<summary>Python implementation: points, curves, and relations</summary>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">hypot</span>
+
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Point2</span><span class="p">:</span>
+    <span class="n">x</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">y</span><span class="p">:</span> <span class="nb">float</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">distance_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Point2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">hypot</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ParametricCurve2</span><span class="p">:</span>
+    <span class="n">x_of_t</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">float</span><span class="p">]</span>
+    <span class="n">y_of_t</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">float</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">at</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Point2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Point2</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_of_t</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_of_t</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">CircleRelation</span><span class="p">:</span>
+    <span class="n">centre</span><span class="p">:</span> <span class="n">Point2</span>
+    <span class="n">radius</span><span class="p">:</span> <span class="nb">float</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The radius must be positive.&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">contains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">point</span><span class="p">:</span> <span class="n">Point2</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-9</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">centre</span><span class="o">.</span><span class="n">distance_to</span><span class="p">(</span><span class="n">point</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">tolerance</span>
+</code></pre></div>
+</details>
+<p>The return types encode the mathematics: <code>curve.at(t)</code> returns a <code>Point2</code>, whereas <code>circle.contains(P)</code> returns a truth value. A curve, a point, and a relation may all involve the same coordinates, but they are not the same kind of object.</p>
 <h2 id="exercises">Exercises</h2>
 <p>The first ten exercises reinforce the basic computational procedures of the lecture. The next ten require explanation, modelling and argument rather than only substitution into a formula.</p>
 <p><a class="exercise-download" download="download" href="lecture-01-exercises/">Download exercises as Markdown</a></p>
