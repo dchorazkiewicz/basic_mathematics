@@ -21,7 +21,15 @@ is the point obtained by applying the free vector $\mathbf v$ at $P$. Thus scala
 !!! definition "Data that determine a line"
     A line in the Cartesian plane is determined by one point $P_0$ on the line and one nonzero direction vector $\mathbf v$. Every point of the line is reached by applying a scalar multiple of $\mathbf v$ at $P_0$.
 
-Let $P_0=(x_0,y_0)$ be fixed and let $\mathbf v=[u,v]\neq\mathbf0$. Every permitted displacement is the free vector $t\mathbf v$, so the corresponding point is
+Let
+
+$$
+P_0=(x_0,y_0),
+\qquad
+\mathbf v=[v_1,v_2]\neq\mathbf0.
+$$
+
+Every permitted displacement is the free vector $t\mathbf v$, so the corresponding point is
 
 $$
 \boxed{P=P_0\oplus t\mathbf v},
@@ -44,7 +52,7 @@ $$
     In coordinates,
 
     $$
-    \boxed{x=x_0+tu,\qquad y=y_0+tv.}
+    \boxed{x=x_0+tv_1,\qquad y=y_0+tv_2.}
     $$
 
 <figure class="figure-panel jsx-panel" data-fullscreen-panel>
@@ -114,16 +122,18 @@ The general linear equation is not a second definition. It records the same line
 ### Slope form as a special coordinate description
 
 !!! derivation "Eliminating the parameter"
-    If $u\neq0$, then $t=(x-x_0)/u$. Substitution gives
+    If $v_1\neq0$, then $t=(x-x_0)/v_1$. Substitution gives
 
     $$
-    y-y_0=\frac vu(x-x_0),\qquad \boxed{m=\frac vu},
+    y-y_0=\frac{v_2}{v_1}(x-x_0),
+    \qquad
+    \boxed{m=\frac{v_2}{v_1}},
     $$
 
     and therefore $y=mx+b$ after collecting constants.
 
 !!! note "Vertical case"
-    If $u=0$, the line is vertical and is described by $x=x_0$. Parametric and normal forms need no exception; only slope notation fails.
+    If $v_1=0$, the line is vertical and is described by $x=x_0$. Parametric and normal forms need no exception; only slope notation fails.
 
 !!! summary "Three forms, three questions"
     | Form | What it reveals |
