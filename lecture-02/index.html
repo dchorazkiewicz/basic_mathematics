@@ -237,6 +237,44 @@ Q-P=(v_1,v_2),
   <figcaption class="figure-caption">Every displayed arrow is a different anchored vector, but all are representatives of the same free vector because every arrow encodes the same coordinate change.</figcaption>
 </figure>
 
+<h3 id="the-length-of-a-free-vector">The length of a free vector</h3>
+<p>All representatives of one free vector have the same horizontal and vertical coordinate changes. The distance formula therefore gives them the same length. Length is consequently a property of the free vector itself, not of the particular representative chosen to draw it.</p>
+<div class="admonition definition">
+<p class="admonition-title">Euclidean norm</p>
+<p>Let</p>
+<div class="arithmatex">\[
+\mathbf v=[\overrightarrow{PQ}]=[v_1,v_2],
+\]</div>
+<p>where <span class="arithmatex">\(P=(p_1,p_2)\)</span> and <span class="arithmatex">\(Q=(q_1,q_2)\)</span>. The <strong>norm</strong> of <span class="arithmatex">\(\mathbf v\)</span> is the length of any anchored representative:</p>
+<div class="arithmatex">\[
+\boxed{
+\|\mathbf v\|
+  :=|\overrightarrow{PQ}|
+  =d_E(P,Q)
+  =\sqrt{(q_1-p_1)^2+(q_2-p_2)^2}
+  =\sqrt{v_1^2+v_2^2}.
+}
+\]</div>
+</div>
+<p>The definition is independent of the representative: if</p>
+<div class="arithmatex">\[
+\overrightarrow{PQ}\sim\overrightarrow{P'Q'},
+\]</div>
+<p>then both representatives have the same coordinate change, so the distance formula gives</p>
+<div class="arithmatex">\[
+|\overrightarrow{PQ}|=|\overrightarrow{P'Q'}|.
+\]</div>
+<p>In particular,</p>
+<div class="arithmatex">\[
+\|\mathbf0\|=0,
+\qquad
+\mathbf v\neq\mathbf0\implies\|\mathbf v\|&gt;0.
+\]</div>
+<p>For any two points <span class="arithmatex">\(A\)</span> and <span class="arithmatex">\(B\)</span>, the free vector associated with the motion from <span class="arithmatex">\(A\)</span> to <span class="arithmatex">\(B\)</span> satisfies</p>
+<div class="arithmatex">\[
+\boxed{d_E(A,B)=\|B-A\|}.
+\]</div>
+<p>Thus a free vector carries two kinds of information from the beginning: the coordinate change tells us <strong>how the position changes</strong>, and the norm tells us <strong>how far the motion travels</strong>.</p>
 <h3 id="similar-notation-different-objects">Similar notation, different objects</h3>
 <p>This distinction must remain explicit:</p>
 <div class="arithmatex">\[
