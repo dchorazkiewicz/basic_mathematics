@@ -1,12 +1,12 @@
 ## How much motion and in which direction? {#length-direction}
 
-The coordinate pair of a vector records two changes, but it does not immediately answer two geometric questions:
+The norm introduced with free vectors already answers the first geometric question: it tells us how long the displacement is. We now combine that length with the direction in which the vector points.
 
 !!! question "Two questions carried by every nonzero vector"
     1. How long is the displacement?
     2. In which direction does it point?
 
-Let $\mathbf v=[v_1,v_2]$ be drawn from the origin. Its endpoint, together with its horizontal and vertical coordinate changes, forms a right triangle. The legs have lengths $|v_1|$ and $|v_2|$, while the vector itself is the hypotenuse.
+Let $\mathbf v=[v_1,v_2]$ be drawn from the origin. Its endpoint, together with its horizontal and vertical coordinate changes, forms a right triangle. The legs have lengths $|v_1|$ and $|v_2|$, while the representative of $\mathbf v$ is the hypotenuse.
 
 <figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
   <div class="figure-toolbar">
@@ -14,41 +14,16 @@ Let $\mathbf v=[v_1,v_2]$ be drawn from the origin. Its endpoint, together with 
     <button class="icon-button" type="button" data-fullscreen aria-label="Open vector direction figure in full screen">⛶</button>
   </div>
   <div class="figure-stage jsx-stage"><div id="vector-direction-board" class="jxgbox" data-vector-direction></div></div>
-  <figcaption class="figure-caption">The vector, its two coordinate changes, and its inclination are displayed simultaneously.</figcaption>
+  <figcaption class="figure-caption">The vector, its two coordinate changes, its norm and its inclination are displayed simultaneously.</figcaption>
 </figure>
 
-By the Pythagorean theorem,
+The distance formula used in the definition of the norm gives
 
 $$
-\|\mathbf v\|^2=v_1^2+v_2^2.
+\boxed{\|\mathbf v\|=\sqrt{v_1^2+v_2^2}}.
 $$
 
-Since length is nonnegative, this gives the Euclidean norm.
-
-!!! definition "Euclidean norm"
-    For $\mathbf v=[v_1,v_2]$,
-
-    $$
-    \boxed{\|\mathbf v\|=\sqrt{v_1^2+v_2^2}}.
-    $$
-
-    The double bars distinguish the vector from the number measuring its length.
-
-In particular,
-
-$$
-\|\mathbf0\|=0,
-\qquad
-\mathbf v\neq\mathbf0\implies\|\mathbf v\|>0.
-$$
-
-For points $A$ and $B$,
-
-$$
-\boxed{d_E(A,B)=\|B-A\|}.
-$$
-
-The vector $B-A$ records how to move from $A$ to $B$, while its norm records the Euclidean distance travelled. The same object therefore carries both directional and metric information.
+The point of the present section is not to define this length again, but to show how the same right triangle separates the vector into a magnitude and a direction.
 
 ### Separating magnitude from direction
 
