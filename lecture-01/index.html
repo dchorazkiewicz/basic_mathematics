@@ -413,64 +413,78 @@ t\longmapsto (x(t),y(t)).
 </figure>
 
 <h2 id="cosine-difference">The cosine of a difference of angles</h2>
-<p>We derive the formula by computing one and the same length in two different ways. No vectors and no dot product are used.</p>
-<p>Choose two points <span class="arithmatex">\(A\)</span> and <span class="arithmatex">\(B\)</span> on the unit circle centred at <span class="arithmatex">\(O\)</span>. Let</p>
+<p>We derive the formula by calculating the same length <span class="arithmatex">\(AB\)</span> in two different ways. The whole argument is organised around the following diagram.</p>
+<figure class="figure-panel">
+  <div class="figure-toolbar">
+    <div>
+      <span class="figure-title">The complete geometric setup</span>
+      <span class="figure-step-title">All points, angles and lengths used in the proof are defined here.</span>
+    </div>
+  </div>
+  <div class="figure-stage">
+    <img src="../assets/images/lecture-01/cosine-difference-unit-circle.svg" alt="Points A and B on the unit circle, with angles alpha and beta, the chord AB, and the perpendicular from A to OB meeting it at H." loading="lazy">
+  </div>
+  <figcaption class="figure-caption">The points $A$ and $B$ lie on the unit circle centred at $O$. The perpendicular from $A$ to $OB$ meets $OB$ at $H$.</figcaption>
+</figure>
+
+<p>Read the notation directly from the figure:</p>
+<ul>
+<li><span class="arithmatex">\(OA=OB=1\)</span> because <span class="arithmatex">\(A\)</span> and <span class="arithmatex">\(B\)</span> lie on the unit circle;</li>
+<li>the angles of <span class="arithmatex">\(OA\)</span> and <span class="arithmatex">\(OB\)</span> from the positive horizontal axis are <span class="arithmatex">\(\alpha\)</span> and <span class="arithmatex">\(eta\)</span>;</li>
+<li>therefore the angle between <span class="arithmatex">\(OA\)</span> and <span class="arithmatex">\(OB\)</span> is
+  $$
+  \delta=\alpha-\beta;
+  $$</li>
+<li>the point <span class="arithmatex">\(H\)</span> is the foot of the perpendicular from <span class="arithmatex">\(A\)</span> to the line <span class="arithmatex">\(OB\)</span>;</li>
+<li>hence the triangles <span class="arithmatex">\(OAH\)</span> and <span class="arithmatex">\(AHB\)</span> are right-angled at <span class="arithmatex">\(H\)</span>.</li>
+</ul>
+<p>For the displayed configuration assume</p>
+<div class="arithmatex">\[
+0\leq\beta\leq\alpha\leq\frac{\pi}{2}.
+\]</div>
+<p>The identity obtained below extends to arbitrary angles by the usual symmetry and periodicity properties of sine and cosine.</p>
+<h3 id="first-calculation-use-the-coordinates-of-a-and-b">First calculation: use the coordinates of <span class="arithmatex">\(A\)</span> and <span class="arithmatex">\(B\)</span></h3>
+<p>From the unit-circle definition of sine and cosine,</p>
 <div class="arithmatex">\[
 A=(\cos\alpha,\sin\alpha),
 \qquad
 B=(\cos\beta,\sin\beta).
 \]</div>
-<p>The angle between the radii <span class="arithmatex">\(OA\)</span> and <span class="arithmatex">\(OB\)</span> is</p>
-<div class="arithmatex">\[
-\delta=\alpha-\beta.
-\]</div>
-<p>For the diagram we assume <span class="arithmatex">\(0\leq\delta\leq\frac{\pi}{2}\)</span>. The general identity follows from the usual symmetry and periodicity properties of sine and cosine.</p>
-<h3 id="first-calculation-use-the-coordinates-of-a-and-b">First calculation: use the coordinates of <span class="arithmatex">\(A\)</span> and <span class="arithmatex">\(B\)</span></h3>
-<p>By the distance formula,</p>
+<p>The coordinate formula for distance gives</p>
 <div class="arithmatex">\[
 AB^2
 =(\cos\alpha-\cos\beta)^2
  +(\sin\alpha-\sin\beta)^2.
 \]</div>
-<p>Expanding and using <span class="arithmatex">\(\cos^2\theta+\sin^2\theta=1\)</span> twice gives</p>
+<p>Expanding the squares,</p>
 <div class="arithmatex">\[
 \begin{aligned}
 AB^2
 &amp;=\cos^2\alpha+\sin^2\alpha
   +\cos^2\beta+\sin^2\beta \\
 &amp;\quad-2\cos\alpha\cos\beta
-      -2\sin\alpha\sin\beta \\
-&amp;=2-2\bigl(\cos\alpha\cos\beta
-             +\sin\alpha\sin\beta\bigr).
+      -2\sin\alpha\sin\beta.
 \end{aligned}
+\]</div>
+<p>Using <span class="arithmatex">\(\cos^2\theta+\sin^2\theta=1\)</span> for both angles,</p>
+<div class="arithmatex">\[
+AB^2
+=2-2\bigl(\cos\alpha\cos\beta
+           +\sin\alpha\sin\beta\bigr).
 \tag{1}
 \]</div>
-<h3 id="second-calculation-use-only-the-angle-delta">Second calculation: use only the angle <span class="arithmatex">\(\delta\)</span></h3>
-<p>Drop the perpendicular from <span class="arithmatex">\(A\)</span> to the line <span class="arithmatex">\(OB\)</span>, and call its foot <span class="arithmatex">\(H\)</span>.</p>
-<p>Because <span class="arithmatex">\(OA=1\)</span> and the angle <span class="arithmatex">\(AOH\)</span> equals <span class="arithmatex">\(\delta\)</span>, the right triangle <span class="arithmatex">\(OAH\)</span> gives</p>
+<h3 id="second-calculation-read-the-lengths-from-the-right-triangles">Second calculation: read the lengths from the right triangles</h3>
+<p>In the right triangle <span class="arithmatex">\(OAH\)</span>, the hypotenuse is <span class="arithmatex">\(OA=1\)</span> and the angle at <span class="arithmatex">\(O\)</span> is <span class="arithmatex">\(\delta\)</span>. Therefore</p>
 <div class="arithmatex">\[
 OH=\cos\delta,
 \qquad
 AH=\sin\delta.
 \]</div>
-<p>Since <span class="arithmatex">\(OB=1\)</span>,</p>
+<p>Since <span class="arithmatex">\(OB=1\)</span> and <span class="arithmatex">\(H\)</span> lies between <span class="arithmatex">\(O\)</span> and <span class="arithmatex">\(B\)</span> in the displayed configuration,</p>
 <div class="arithmatex">\[
 HB=OB-OH=1-\cos\delta.
 \]</div>
-<figure class="figure-panel">
-  <div class="figure-toolbar">
-    <div>
-      <span class="figure-title">One chord, one perpendicular</span>
-      <span class="figure-step-title">The perpendicular from $A$ to $OB$ converts the angle $\delta$ into ordinary lengths.</span>
-    </div>
-  </div>
-  <div class="figure-stage">
-    <img src="../assets/images/lecture-01/cosine-difference-unit-circle.svg" alt="Triangle OAB with OA and OB of unit length and a perpendicular AH to OB." loading="lazy">
-  </div>
-  <figcaption class="figure-caption">The construction gives $OH=\cos\delta$, $AH=\sin\delta$ and $HB=1-\cos\delta$.</figcaption>
-</figure>
-
-<p>Now apply the Pythagorean theorem in the right triangle <span class="arithmatex">\(AHB\)</span>:</p>
+<p>Now use the right triangle <span class="arithmatex">\(AHB\)</span>. By the Pythagorean theorem,</p>
 <div class="arithmatex">\[
 \begin{aligned}
 AB^2
@@ -481,18 +495,18 @@ AB^2
 \end{aligned}
 \tag{2}
 \]</div>
-<p>Since <span class="arithmatex">\(\delta=\alpha-\beta\)</span>,</p>
+<p>Because <span class="arithmatex">\(\delta=\alpha-\beta\)</span>,</p>
 <div class="arithmatex">\[
 AB^2=2-2\cos(\alpha-\beta).
 \]</div>
-<h3 id="compare-the-two-results">Compare the two results</h3>
-<p>Equations (1) and (2) are two expressions for the same number <span class="arithmatex">\(AB^2\)</span>. Therefore</p>
+<h3 id="compare-the-two-calculations">Compare the two calculations</h3>
+<p>Equations (1) and (2) describe the same squared length <span class="arithmatex">\(AB^2\)</span>. Hence</p>
 <div class="arithmatex">\[
 2-2\bigl(\cos\alpha\cos\beta+\sin\alpha\sin\beta\bigr)
 =
 2-2\cos(\alpha-\beta).
 \]</div>
-<p>After cancelling the common terms,</p>
+<p>Cancelling the common terms gives</p>
 <div class="admonition theorem">
 <p class="admonition-title">Cosine of a difference</p>
 <div class="arithmatex">\[
@@ -501,8 +515,8 @@ AB^2=2-2\cos(\alpha-\beta).
 \]</div>
 </div>
 <div class="admonition interpretation">
-<p class="admonition-title">What was actually proved</p>
-<p>The proof uses one geometric object: the chord <span class="arithmatex">\(AB\)</span> of the unit circle. Its length is calculated once from the Cartesian coordinates of its endpoints and once from a perpendicular projection. Equating the two calculations produces the identity.</p>
+<p class="admonition-title">Structure of the proof</p>
+<p>The diagram supplies one chord <span class="arithmatex">\(AB\)</span>. Its squared length is calculated first from the coordinates of its endpoints and then from the two right triangles created by the perpendicular <span class="arithmatex">\(AH\)</span>. Equating the two calculations produces the identity.</p>
 </div>
 <h2 id="exercises">Exercises</h2>
 <p>The first ten exercises reinforce the basic computational procedures of the lecture. The next ten require explanation, modelling and argument rather than only substitution into a formula.</p>
