@@ -231,11 +231,29 @@ y-y_0=\frac vu(x-x_0),\qquad \boxed{m=\frac vu},
 <p>For <span class="arithmatex">\(y=-\tfrac12x+3\)</span>, the <span class="arithmatex">\(y\)</span>-intercept is <span class="arithmatex">\((0,3)\)</span> and the <span class="arithmatex">\(x\)</span>-intercept is <span class="arithmatex">\((6,0)\)</span>.</p>
 </div>
 <h3 id="the-line-through-two-points">The line through two points</h3>
-<p>Let <span class="arithmatex">\(P=(x_1,y_1)\)</span> and <span class="arithmatex">\(Q=(x_2,y_2)\)</span> be distinct. The displacement <span class="arithmatex">\(Q-P=[x_2-x_1,y_2-y_1]\)</span> is nonzero and therefore provides a direction.</p>
+<p>Let</p>
+<div class="arithmatex">\[
+P=(x_1,y_1),\qquad Q=(x_2,y_2)
+\]</div>
+<p>be distinct points. Their ordinary coordinate difference is</p>
+<div class="arithmatex">\[
+Q-P=(x_2-x_1,\,y_2-y_1),
+\]</div>
+<p>while the corresponding free direction vector is</p>
+<div class="arithmatex">\[
+\boxed{[Q-P]=[x_2-x_1,\,y_2-y_1]\neq\mathbf0.}
+\]</div>
+<p>Starting at <span class="arithmatex">\(P\)</span>, scalar multiples of this free vector generate the required line.</p>
 <div class="admonition theorem">
 <p class="admonition-title">Unique line through two points</p>
 <div class="arithmatex">\[
-\boxed{L=\{P+t(Q-P):t\in\mathbb R\}}.
+\boxed{
+L=\{P\oplus t[Q-P]:t\in\mathbb R\}.
+}
+\]</div>
+<p>At <span class="arithmatex">\(t=0\)</span> the point is <span class="arithmatex">\(P\)</span>. At <span class="arithmatex">\(t=1\)</span>,</p>
+<div class="arithmatex">\[
+P\oplus[Q-P]=Q.
 \]</div>
 <p>This handles vertical and nonvertical lines uniformly.</p>
 </div>
@@ -255,7 +273,7 @@ y-y_0=\frac vu(x-x_0),\qquad \boxed{m=\frac vu},
 <h3 id="parallel-lines-in-slope-notation">Parallel lines in slope notation</h3>
 <div class="admonition derivation">
 <p class="admonition-title">Why equal slopes mean equal directions</p>
-<p>The lines <span class="arithmatex">\(y=m_1x+b_1\)</span> and <span class="arithmatex">\(y=m_2x+b_2\)</span> have direction vectors <span class="arithmatex">\([1,m_1]\)</span> and <span class="arithmatex">\([1,m_2]\)</span>. These are parallel exactly when <span class="arithmatex">\(m_1=m_2\)</span>.</p>
+<p>The lines <span class="arithmatex">\(y=m_1x+b_1\)</span> and <span class="arithmatex">\(y=m_2x+b_2\)</span> have free direction vectors <span class="arithmatex">\([1,m_1]\)</span> and <span class="arithmatex">\([1,m_2]\)</span>. These are parallel exactly when <span class="arithmatex">\(m_1=m_2\)</span>.</p>
 </div>
 <div class="admonition theorem">
 <p class="admonition-title">Parallel nonvertical lines</p>
