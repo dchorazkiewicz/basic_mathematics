@@ -932,121 +932,83 @@ v_2=\|\mathbf v\|\sin\alpha.
 <p>The Cartesian coordinates <span class="arithmatex">\([4,2]\)</span> and the basis coordinates <span class="arithmatex">\([3,1]_B\)</span> are two numerical descriptions of the same geometric vector. Changing the basis means solving for the coefficients in one concrete linear combination; no additional general machinery is introduced here.</p>
 </div>
 <h2 id="computational-model">Computational interlude: controlling point and vector types</h2>
-<p>Coordinates alone do not determine the type of an object. The implementation therefore uses distinct classes for points, anchored vectors, and free vectors. In particular, <code>Point2</code> does not define point addition or point subtraction as vector operations. The bridges between points and vectors are explicit functions.</p>
+<p>Points, anchored vectors, and free vectors are represented by different classes. The two bridges are explicit: two points determine a displacement, and a point translated by a vector gives a point.</p>
 <details class="example">
 <summary>Python class: <code>Point2</code></summary>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
 
 
-<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">Point2</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;A location; it is not a free vector.&quot;&quot;&quot;</span>
-
     <span class="n">x</span><span class="p">:</span> <span class="nb">float</span>
     <span class="n">y</span><span class="p">:</span> <span class="nb">float</span>
-
-    <span class="c1"># No __add__ or __sub__ is supplied here.</span>
-    <span class="c1"># A program must not silently confuse points with vectors.</span>
 </code></pre></div>
 </details>
 <details class="example">
 <summary>Python class: <code>FreeVector2</code></summary>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">hypot</span>
 
 
-<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">FreeVector2</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;A displacement independent of its starting point.&quot;&quot;&quot;</span>
-
     <span class="n">dx</span><span class="p">:</span> <span class="nb">float</span>
     <span class="n">dy</span><span class="p">:</span> <span class="nb">float</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">FreeVector2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FreeVector2</span><span class="p">:</span>
-        <span class="c1"># Vector + vector -&gt; vector.</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">FreeVector2</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">NotImplemented</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="s2">&quot;FreeVector2&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;FreeVector2&quot;</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">FreeVector2</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dx</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">dx</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dy</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">dy</span><span class="p">)</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__neg__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FreeVector2</span><span class="p">:</span>
-        <span class="c1"># The opposite displacement reverses both components.</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__neg__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;FreeVector2&quot;</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">FreeVector2</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">dx</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">dy</span><span class="p">)</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">FreeVector2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FreeVector2</span><span class="p">:</span>
-        <span class="c1"># Vector subtraction is addition of the opposite vector.</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">FreeVector2</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">NotImplemented</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="s2">&quot;FreeVector2&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;FreeVector2&quot;</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="n">other</span><span class="p">)</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scalar</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FreeVector2</span><span class="p">:</span>
-        <span class="c1"># Scalar * vector -&gt; vector.</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">scalar</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
-            <span class="k">return</span> <span class="bp">NotImplemented</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scalar</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;FreeVector2&quot;</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">FreeVector2</span><span class="p">(</span><span class="n">scalar</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dx</span><span class="p">,</span> <span class="n">scalar</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dy</span><span class="p">)</span>
 
     <span class="fm">__rmul__</span> <span class="o">=</span> <span class="fm">__mul__</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">dot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">FreeVector2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-        <span class="c1"># Vector dot vector -&gt; scalar.</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">FreeVector2</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;The dot product requires two free vectors.&quot;</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="s2">&quot;FreeVector2&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="c1"># Vector dot vector gives a number.</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dx</span> <span class="o">*</span> <span class="n">other</span><span class="o">.</span><span class="n">dx</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">dy</span> <span class="o">*</span> <span class="n">other</span><span class="o">.</span><span class="n">dy</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">norm</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-        <span class="c1"># The norm is a nonnegative scalar.</span>
         <span class="k">return</span> <span class="n">hypot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dx</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dy</span><span class="p">)</span>
 </code></pre></div>
 </details>
 <details class="example">
 <summary>Python operations: points and free vectors</summary>
 <div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">displacement</span><span class="p">(</span><span class="n">start</span><span class="p">:</span> <span class="n">Point2</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="n">Point2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FreeVector2</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Construct the free vector represented by the ordered pair.&quot;&quot;&quot;</span>
-
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">Point2</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">end</span><span class="p">,</span> <span class="n">Point2</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;A displacement requires two points.&quot;</span><span class="p">)</span>
+    <span class="c1"># Ordered pair of points -&gt; free vector.</span>
     <span class="k">return</span> <span class="n">FreeVector2</span><span class="p">(</span><span class="n">end</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">start</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">end</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">start</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">translate</span><span class="p">(</span><span class="n">point</span><span class="p">:</span> <span class="n">Point2</span><span class="p">,</span> <span class="n">vector</span><span class="p">:</span> <span class="n">FreeVector2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Point2</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Apply a free displacement to a point.&quot;&quot;&quot;</span>
-
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="n">Point2</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;The first argument must be a point.&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">vector</span><span class="p">,</span> <span class="n">FreeVector2</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;The second argument must be a free vector.&quot;</span><span class="p">)</span>
+    <span class="c1"># Point and free vector -&gt; point.</span>
     <span class="k">return</span> <span class="n">Point2</span><span class="p">(</span><span class="n">point</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">vector</span><span class="o">.</span><span class="n">dx</span><span class="p">,</span> <span class="n">point</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">vector</span><span class="o">.</span><span class="n">dy</span><span class="p">)</span>
 </code></pre></div>
 </details>
 <details class="example">
 <summary>Python class: <code>AnchoredVector2</code></summary>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
 
 
-<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">AnchoredVector2</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;A directed segment with specified initial and terminal points.&quot;&quot;&quot;</span>
-
     <span class="n">start</span><span class="p">:</span> <span class="n">Point2</span>
     <span class="n">end</span><span class="p">:</span> <span class="n">Point2</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">free_vector</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FreeVector2</span><span class="p">:</span>
-        <span class="c1"># Forget the location and retain only the displacement.</span>
         <span class="k">return</span> <span class="n">displacement</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">end</span><span class="p">)</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">is_equivalent_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">AnchoredVector2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="c1"># Two anchored vectors are equivalent when their displacements agree.</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">AnchoredVector2</span><span class="p">):</span>
-            <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_equivalent_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="s2">&quot;AnchoredVector2&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">free_vector</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">free_vector</span>
 </code></pre></div>
 </details>
-<p>This implementation does not silently identify a pair of points with a free vector. The conversion is performed by <code>displacement</code>; applying a vector to a point is performed by <code>translate</code>. Vector addition, scalar multiplication, the norm, and the dot product exist only on the vector class.</p>
+<p>The implementation never identifies a point with a vector. <code>displacement</code> changes an ordered pair of points into a free vector; <code>translate</code> applies that vector to a point.</p>
 <h2 id="exercises">Exercises</h2>
 <p>The first ten consolidate calculation and construction. The next ten require explanation, proof, comparison, or modelling.</p>
 <p><a class="download-button" download="download" href="lecture-02-exercises/">Download exercises as Markdown</a></p>
