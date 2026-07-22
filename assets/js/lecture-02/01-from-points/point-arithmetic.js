@@ -30,80 +30,82 @@
   };
 
   const O = board.create('point', [0, 0], {
-    name: 'O',
-    size: 4,
-    fillColor: '#b1782b',
-    strokeColor: '#b1782b',
-    ...fixed
+    name: 'O', size: 4, fillColor: '#b1782b', strokeColor: '#b1782b', ...fixed
   });
 
   const P = board.create('point', [2, 1], {
-    name: 'P',
-    fillColor: '#2f6f9f',
-    strokeColor: '#2f6f9f',
-    ...draggable
+    name: 'P', fillColor: '#2f6f9f', strokeColor: '#2f6f9f', ...draggable
   });
 
   const Q = board.create('point', [-1, 3], {
-    name: 'Q',
-    fillColor: '#7a3f73',
-    strokeColor: '#7a3f73',
-    ...draggable
+    name: 'Q', fillColor: '#7a3f73', strokeColor: '#7a3f73', ...draggable
   });
 
   const Sum = board.create('point', [
     () => P.X() + Q.X(),
     () => P.Y() + Q.Y()
   ], {
-    name: 'P+Q',
-    size: 5,
-    fillColor: '#3f7f68',
-    strokeColor: '#3f7f68',
-    ...fixed
+    name: 'P+Q', size: 5, fillColor: '#3f7f68', strokeColor: '#3f7f68', ...fixed
   });
 
   const Opp = board.create('point', [
     () => -P.X(),
     () => -P.Y()
   ], {
-    name: '-P',
-    size: 5,
-    fillColor: '#b24c3a',
-    strokeColor: '#b24c3a',
-    ...fixed
+    name: '-P', size: 5, fillColor: '#b24c3a', strokeColor: '#b24c3a', ...fixed
   });
 
   const Diff = board.create('point', [
     () => Q.X() - P.X(),
     () => Q.Y() - P.Y()
   ], {
-    name: 'Q-P',
-    size: 5,
-    fillColor: '#17324d',
-    strokeColor: '#17324d',
-    ...fixed
+    name: 'Q-P', size: 5, fillColor: '#17324d', strokeColor: '#17324d', ...fixed
   });
 
   const Scaled = board.create('point', [
     () => Number(lambdaSlider.value) * P.X(),
     () => Number(lambdaSlider.value) * P.Y()
   ], {
-    name: 'λP',
-    size: 5,
-    fillColor: '#b1782b',
-    strokeColor: '#b1782b',
-    ...fixed
+    name: 'λP', size: 5, fillColor: '#b1782b', strokeColor: '#b1782b', ...fixed
+  });
+
+  const V = board.create('point', [2, -2], {
+    name: 'V', fillColor: '#7a3f73', strokeColor: '#7a3f73', ...draggable
+  });
+
+  const Translated = board.create('point', [
+    () => P.X() + V.X(),
+    () => P.Y() + V.Y()
+  ], {
+    name: 'P⊕v', size: 5, fillColor: '#3f7f68', strokeColor: '#3f7f68', ...fixed
+  });
+
+  const vectorArrow = board.create('arrow', [O, V], {
+    strokeColor: '#7a3f73', strokeWidth: 4, ...fixed
+  });
+  const translatedArrow = board.create('arrow', [P, Translated], {
+    strokeColor: '#3f7f68', strokeWidth: 5, ...fixed
+  });
+  const vectorText = board.create('text', [
+    () => V.X() / 2,
+    () => V.Y() / 2 + 0.35,
+    () => `$\\mathbf v=[${f(V.X())},${f(V.Y())}]$`
+  ], {
+    display: 'html', useMathJax: true, cssClass: 'vector-label-chip',
+    color: '#7a3f73', fontSize: 17, ...fixed
   });
 
   let mode = 'sum';
-  const results = [Sum, Opp, Diff, Scaled];
+  const results = [Sum, Opp, Diff, Scaled, Translated];
+  const translationObjects = [V, vectorArrow, translatedArrow, vectorText];
 
-  const f = value => {
+  function f(value) {
     const rounded = Math.round(value * 10) / 10;
     return Number.isInteger(rounded) ? String(rounded) : rounded.toFixed(1);
-  };
+  }
 
-  const pair = (x, y) => `(${f(x)}, ${f(y)})`;
+  const pointPair = (x, y) => `(${f(x)}, ${f(y)})`;
+  const vectorPair = (x, y) => `[${f(x)}, ${f(y)}]`;
 
   function setVisible(object, visible) {
     object.setAttribute({ visible });
@@ -114,23 +116,28 @@
     const py = P.Y();
     const qx = Q.X();
     const qy = Q.Y();
+    const vx = V.X();
+    const vy = V.Y();
     const lambda = Number(lambdaSlider.value);
     lambdaOutput.textContent = f(lambda);
 
     if (mode === 'sum') {
-      readout.textContent = `P ${pair(px, py)} + Q ${pair(qx, qy)} = P+Q ${pair(px + qx, py + qy)}`;
+      readout.textContent = `P ${pointPair(px, py)} + Q ${pointPair(qx, qy)} = P+Q ${pointPair(px + qx, py + qy)}`;
     } else if (mode === 'opposite') {
-      readout.textContent = `P ${pair(px, py)};  −P ${pair(-px, -py)};  P+(−P)=O ${pair(0, 0)}`;
+      readout.textContent = `P ${pointPair(px, py)};  −P ${pointPair(-px, -py)};  P+(−P)=O ${pointPair(0, 0)}`;
     } else if (mode === 'difference') {
-      readout.textContent = `Q ${pair(qx, qy)} − P ${pair(px, py)} = Q−P ${pair(qx - px, qy - py)}`;
+      readout.textContent = `Q ${pointPair(qx, qy)} − P ${pointPair(px, py)} = Q−P ${pointPair(qx - px, qy - py)};  [Q−P] = ${vectorPair(qx - px, qy - py)}`;
+    } else if (mode === 'scalar') {
+      readout.textContent = `λP = ${f(lambda)} · ${pointPair(px, py)} = ${pointPair(lambda * px, lambda * py)}`;
     } else {
-      readout.textContent = `λP = ${f(lambda)} · ${pair(px, py)} = ${pair(lambda * px, lambda * py)}`;
+      readout.textContent = `P ${pointPair(px, py)} ⊕ v ${vectorPair(vx, vy)} = P⊕v ${pointPair(px + vx, py + vy)}`;
     }
   }
 
   function setMode(nextMode) {
     mode = nextMode;
     results.forEach(object => setVisible(object, false));
+    translationObjects.forEach(object => setVisible(object, false));
 
     setVisible(P, true);
     setVisible(Q, mode === 'sum' || mode === 'difference');
@@ -140,6 +147,10 @@
     if (mode === 'opposite') setVisible(Opp, true);
     if (mode === 'difference') setVisible(Diff, true);
     if (mode === 'scalar') setVisible(Scaled, true);
+    if (mode === 'translate') {
+      setVisible(Translated, true);
+      translationObjects.forEach(object => setVisible(object, true));
+    }
 
     lambdaControl.hidden = mode !== 'scalar';
     buttons.forEach(button => {
@@ -161,6 +172,7 @@
 
   P.on('drag', updateReadout);
   Q.on('drag', updateReadout);
+  V.on('drag', updateReadout);
 
   setMode('sum');
   window.LectureJSX?.keepBoardFitted?.({ board, host, boundingBox: VIEW });
