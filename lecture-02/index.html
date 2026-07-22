@@ -11,6 +11,10 @@
   <link rel="stylesheet" href="../assets/css/figures.css">
   <link rel="stylesheet" href="../assets/css/exercises.css">
   <link rel="stylesheet" href="../assets/css/mkdocs-adapter.css">
+  
+    <link rel="stylesheet" href="https://pyscript.net/releases/2026.6.2/core.css">
+    <script type="module" src="https://pyscript.net/releases/2026.6.2/core.js"></script>
+  
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsxgraph@1.10.1/distrib/jsxgraph.css">
   <script>
     window.MathJax = {
@@ -1239,7 +1243,7 @@ P\oplus[Q-P]=Q.
 <li>only free vectors carry vector addition, scaling, norm, angle, dot product and projection.</li>
 </ul>
 <h2 id="python-lab">Live Python experiment</h2>
-<p>The editor below runs Python directly in the browser. Change the coordinates of the points, run the code, and inspect which operations return points, anchored vectors, free vectors, or numbers. The first execution downloads the Python runtime, so it may take a moment.</p>
+<p>The editor below runs Python directly in the browser. Change the coordinates of the points, run the code, and inspect which operations return points, anchored vectors, free vectors, or numbers. The first execution downloads the browser Python runtime, so it may take a moment.</p>
 <script type="py-editor" env="lecture-02-vectors" setup config='{"files":{"../assets/python/lecture-02/vector_model.py":"./vector_model.py"}}'>
 from vector_model import Point, AnchoredVector, FreeVector, Basis
 </script>
