@@ -386,85 +386,120 @@ O=(0,0),\qquad V=(v_1,v_2),
 <h2 id="addition">Addition, opposite vectors, and subtraction</h2>
 <h3 id="why-free-vectors-should-be-addable">Why free vectors should be addable</h3>
 <p>A free vector is an instruction for changing position, independent of the point at which the motion begins. Once such instructions exist, the next natural problem is to compose them.</p>
-<p>Suppose that a first displacement changes a position by</p>
+<p>Suppose that a first displacement is</p>
 <div class="arithmatex">\[
 \mathbf a=[a_1,a_2],
 \]</div>
-<p>and a second displacement changes the new position by</p>
+<p>and a second displacement is</p>
 <div class="arithmatex">\[
 \mathbf b=[b_1,b_2].
 \]</div>
-<p>Starting at an arbitrary point <span class="arithmatex">\(P\)</span>, choose an anchored representative <span class="arithmatex">\(\overrightarrow{PQ}\)</span> of <span class="arithmatex">\(\mathbf a\)</span>, and then an anchored representative <span class="arithmatex">\(\overrightarrow{QR}\)</span> of <span class="arithmatex">\(\mathbf b\)</span>:</p>
+<p>Starting at an arbitrary point <span class="arithmatex">\(P\)</span>, apply <span class="arithmatex">\(\mathbf a\)</span> and then <span class="arithmatex">\(\mathbf b\)</span>. Using the point--vector operation introduced above, define</p>
 <div class="arithmatex">\[
-P\longrightarrow Q\longrightarrow R.
+Q=P\oplus\mathbf a,
+\qquad
+R=Q\oplus\mathbf b.
 \]</div>
-<p>The two-stage journey has one initial point and one final point, so it also determines the direct anchored vector <span class="arithmatex">\(\overrightarrow{PR}\)</span>.</p>
+<p>Equivalently,</p>
+<div class="arithmatex">\[
+[Q-P]=\mathbf a,
+\qquad
+[R-Q]=\mathbf b.
+\]</div>
+<p>The two-stage journey is</p>
+<div class="arithmatex">\[
+P\longrightarrow Q\longrightarrow R,
+\]</div>
+<p>and the direct displacement from its initial point to its final point is the free vector</p>
+<div class="arithmatex">\[
+[R-P].
+\]</div>
 <div class="admonition problem">
 <p class="admonition-title">The composition problem</p>
-<p>Can the total change from <span class="arithmatex">\(P\)</span> to <span class="arithmatex">\(R\)</span> be described by one free vector that depends only on <span class="arithmatex">\(\mathbf a\)</span> and <span class="arithmatex">\(\mathbf b\)</span>, and not on the chosen starting point <span class="arithmatex">\(P\)</span>?</p>
+<p>Does <span class="arithmatex">\([R-P]\)</span> depend only on <span class="arithmatex">\(\mathbf a\)</span> and <span class="arithmatex">\(\mathbf b\)</span>, or does it also depend on the chosen starting point <span class="arithmatex">\(P\)</span>?</p>
 </div>
 <figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
   <div class="figure-toolbar">
     <div>
       <span class="figure-title">Two successive changes and one total change</span>
-      <span class="figure-step-title">Move $P$, $Q$, or $R$ and compare the route $P\to Q\to R$ with the direct change $P\to R$.</span>
+      <span class="figure-step-title">Move $P$, $Q$, or $R$ and compare $[Q-P]$, $[R-Q]$, and $[R-P]$.</span>
     </div>
     <button class="icon-button" type="button" data-fullscreen aria-label="Open point-chain addition figure in full screen">⛶</button>
   </div>
   <div class="figure-stage jsx-stage"><div id="vector-chain-board" class="jxgbox" data-vector-chain></div></div>
   <div class="relation-readout" data-vector-chain-readout></div>
-  <figcaption class="figure-caption">The two anchored vectors describe the two stages of the journey. The direct anchored vector records their total effect.</figcaption>
+  <figcaption class="figure-caption">The anchored arrows are different objects. Their square-bracketed point differences are the corresponding free vectors.</figcaption>
 </figure>
 
 <h3 id="the-total-displacement-is-independent-of-the-starting-point">The total displacement is independent of the starting point</h3>
-<p>Because <span class="arithmatex">\(\overrightarrow{PQ}\)</span> represents <span class="arithmatex">\(\mathbf a=[a_1,a_2]\)</span>, the point <span class="arithmatex">\(Q\)</span> is obtained from <span class="arithmatex">\(P\)</span> by the coordinate change <span class="arithmatex">\((a_1,a_2)\)</span>:</p>
+<p>Write</p>
 <div class="arithmatex">\[
-Q=P+(a_1,a_2).
+P=(p_1,p_2).
 \]</div>
-<p>Because <span class="arithmatex">\(\overrightarrow{QR}\)</span> represents <span class="arithmatex">\(\mathbf b=[b_1,b_2]\)</span>,</p>
+<p>Since <span class="arithmatex">\(Q=P\oplus\mathbf a\)</span>,</p>
 <div class="arithmatex">\[
-R=Q+(b_1,b_2).
+Q=(p_1+a_1,\,p_2+a_2).
 \]</div>
-<p>Substituting the first equation into the second gives</p>
+<p>Applying <span class="arithmatex">\(\mathbf b\)</span> at <span class="arithmatex">\(Q\)</span> gives</p>
 <div class="arithmatex">\[
 \begin{aligned}
 R
-  &amp;=Q+(b_1,b_2)\\
-  &amp;=\bigl(P+(a_1,a_2)\bigr)+(b_1,b_2)\\
-  &amp;=P+(a_1+b_1,\,a_2+b_2).
+  &amp;=Q\oplus\mathbf b\\
+  &amp;=(p_1+a_1+b_1,\,p_2+a_2+b_2).
 \end{aligned}
 \]</div>
-<p>Therefore</p>
+<p>The ordinary point difference is therefore</p>
 <div class="arithmatex">\[
-R-P=(a_1+b_1,\,a_2+b_2).
+R-P=(a_1+b_1,\,a_2+b_2),
 \]</div>
-<p>The starting point <span class="arithmatex">\(P\)</span> has disappeared from the final coordinate change. No matter where the journey begins, performing the displacement <span class="arithmatex">\(\mathbf a\)</span> and then the displacement <span class="arithmatex">\(\mathbf b\)</span> produces the same total displacement.</p>
-<p>This proves that the direct anchored vector <span class="arithmatex">\(\overrightarrow{PR}\)</span> is a representative of a free vector determined only by <span class="arithmatex">\(\mathbf a\)</span> and <span class="arithmatex">\(\mathbf b\)</span>.</p>
+<p>and the associated free vector is</p>
+<div class="arithmatex">\[
+[R-P]=[a_1+b_1,\,a_2+b_2].
+\]</div>
+<p>The coordinates of <span class="arithmatex">\(P\)</span> have disappeared. Hence the total displacement depends only on <span class="arithmatex">\(\mathbf a\)</span> and <span class="arithmatex">\(\mathbf b\)</span>.</p>
 <div class="admonition definition">
 <p class="admonition-title">Addition of free vectors</p>
-<p>The sum <span class="arithmatex">\(\mathbf a+\mathbf b\)</span> is the free vector that represents the total effect of first applying <span class="arithmatex">\(\mathbf a\)</span> and then applying <span class="arithmatex">\(\mathbf b\)</span>:</p>
+<p>The sum <span class="arithmatex">\(\mathbf a+\mathbf b\)</span> is the free vector representing the total effect of first applying <span class="arithmatex">\(\mathbf a\)</span> and then applying <span class="arithmatex">\(\mathbf b\)</span>:</p>
 <div class="arithmatex">\[
 \boxed{
 \mathbf a+\mathbf b
-  :=[\overrightarrow{PR}]
+  :=[R-P]
   =[a_1+b_1,\,a_2+b_2].
 }
 \]</div>
 </div>
-<p>The definition does not identify the anchored vectors <span class="arithmatex">\(\overrightarrow{PQ}\)</span>, <span class="arithmatex">\(\overrightarrow{QR}\)</span>, and <span class="arithmatex">\(\overrightarrow{PR}\)</span>. They are three different ordered pairs of points. The free vector <span class="arithmatex">\(\mathbf a+\mathbf b\)</span> abstracts only the total change encoded by <span class="arithmatex">\(\overrightarrow{PR}\)</span>.</p>
+<p>The definition is compatible with the action of vectors on points:</p>
+<div class="arithmatex">\[
+\boxed{
+(P\oplus\mathbf a)\oplus\mathbf b
+  =P\oplus(\mathbf a+\mathbf b).
+}
+\]</div>
+<p>For three points <span class="arithmatex">\(P,Q,R\)</span>, this same compatibility can be written as the chain rule for displacements:</p>
+<div class="arithmatex">\[
+\boxed{
+[R-P]=[Q-P]+[R-Q].
+}
+\]</div>
 <h3 id="the-order-of-two-displacements">The order of two displacements</h3>
-<p>The coordinate calculation gives</p>
+<p>Coordinatewise addition gives</p>
 <div class="arithmatex">\[
 [a_1+b_1,\,a_2+b_2]
   =[b_1+a_1,\,b_2+a_2].
 \]</div>
-<p>Hence the total displacement is the same whether we apply <span class="arithmatex">\(\mathbf a\)</span> and then <span class="arithmatex">\(\mathbf b\)</span>, or <span class="arithmatex">\(\mathbf b\)</span> and then <span class="arithmatex">\(\mathbf a\)</span>:</p>
+<p>Hence</p>
 <div class="arithmatex">\[
 \boxed{\mathbf a+\mathbf b=\mathbf b+\mathbf a.}
 \]</div>
-<p>Geometrically, the two possible orders trace adjacent sides of a parallelogram and lead to the same final point.</p>
+<p>This commutativity concerns two free vectors. It does not turn <span class="arithmatex">\(P\oplus\mathbf v\)</span> into a commutative operation: the expression <span class="arithmatex">\(\mathbf v\oplus P\)</span> remains undefined.</p>
+<p>Geometrically, the two possible orders trace adjacent sides of a parallelogram and lead to the same final point:</p>
+<div class="arithmatex">\[
+(P\oplus\mathbf a)\oplus\mathbf b
+=
+(P\oplus\mathbf b)\oplus\mathbf a.
+\]</div>
 <h3 id="opposite-displacement">Opposite displacement</h3>
-<p>For a free vector</p>
+<p>For</p>
 <div class="arithmatex">\[
 \mathbf a=[a_1,a_2],
 \]</div>
@@ -472,15 +507,19 @@ R-P=(a_1+b_1,\,a_2+b_2).
 <div class="arithmatex">\[
 \boxed{-\mathbf a=[-a_1,-a_2].}
 \]</div>
-<p>Applying <span class="arithmatex">\(\mathbf a\)</span> and then <span class="arithmatex">\(-\mathbf a\)</span> returns to the initial position, so</p>
+<p>Applying <span class="arithmatex">\(\mathbf a\)</span> and then <span class="arithmatex">\(-\mathbf a\)</span> returns to the initial point:</p>
+<div class="arithmatex">\[
+(P\oplus\mathbf a)\oplus(-\mathbf a)=P.
+\]</div>
+<p>Therefore</p>
 <div class="arithmatex">\[
 \mathbf a+(-\mathbf a)=\mathbf0,
 \qquad
 \mathbf0=[0,0].
 \]</div>
-<p>The opposite free vector has representatives with the same length as representatives of <span class="arithmatex">\(\mathbf a\)</span>, but with reversed orientation.</p>
-<h3 id="subtraction">Subtraction</h3>
-<p>Once the opposite vector has been defined, subtraction is simply addition of that opposite vector.</p>
+<p>The opposite vector has the same norm as <span class="arithmatex">\(\mathbf a\)</span> but the reverse orientation.</p>
+<h3 id="subtraction-of-free-vectors">Subtraction of free vectors</h3>
+<p>Once the opposite vector has been defined, subtraction is addition of the opposite.</p>
 <div class="admonition definition">
 <p class="admonition-title">Subtraction of free vectors</p>
 <p>For <span class="arithmatex">\(\mathbf a=[a_1,a_2]\)</span> and <span class="arithmatex">\(\mathbf b=[b_1,b_2]\)</span>,</p>
@@ -497,12 +536,16 @@ R-P=(a_1+b_1,\,a_2+b_2).
 \]</div>
 </div>
 <div class="admonition note">
-<p class="admonition-title">From two points to a displacement</p>
-<p>For points <span class="arithmatex">\(P\)</span> and <span class="arithmatex">\(Q\)</span>, the anchored vector <span class="arithmatex">\(\overrightarrow{PQ}\)</span> is the ordered pair of endpoints. Its associated free vector is</p>
+<p class="admonition-title">Do not confuse the two subtractions</p>
+<p>The ordinary point difference</p>
 <div class="arithmatex">\[
-[\overrightarrow{PQ}]=[q_1-p_1,\,q_2-p_2].
+Q-P=(q_1-p_1,\,q_2-p_2)
 \]</div>
-<p>The subtraction <span class="arithmatex">\(Q-P\)</span> is performed on point coordinates; square brackets then indicate that we retain only the resulting change of position.</p>
+<p>is a round coordinate pair. The free vector from <span class="arithmatex">\(P\)</span> to <span class="arithmatex">\(Q\)</span> is</p>
+<div class="arithmatex">\[
+\boxed{[Q-P]=[\overrightarrow{PQ}]=[q_1-p_1,\,q_2-p_2].}
+\]</div>
+<p>Vector subtraction <span class="arithmatex">\(\mathbf a-\mathbf b\)</span> is a separate operation on two free vectors.</p>
 </div>
 <h2 id="scaling">Scaling vectors</h2>
 <h3 id="multiplication-by-a-real-number">Multiplication by a real number</h3>
