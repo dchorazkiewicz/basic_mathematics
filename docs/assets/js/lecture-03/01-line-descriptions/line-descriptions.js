@@ -23,7 +23,7 @@
     snapToGrid: true, snapSizeX: .5, snapSizeY: .5
   });
   const V = board.create('point', [4, 3], {
-    name: 'P₀+v', size: 5, fillColor: '#2f6f9f', strokeColor: '#2f6f9f',
+    name: 'P₀⊕v', size: 5, fillColor: '#2f6f9f', strokeColor: '#2f6f9f',
     snapToGrid: true, snapSizeX: .5, snapSizeY: .5,
     label: window.LectureJSX?.pointLabelStyle?.({ offset: [12, 10], fontSize: 17 }) || {
       display: 'html', cssClass: 'vector-label-chip', offset: [12, 10], fontSize: 17
@@ -56,8 +56,8 @@
   function update() {
     const x0 = P0.X(), y0 = P0.Y(), u = V.X() - x0, v = V.Y() - y0;
     const a = -v, b = u, c = a * x0 + b * y0;
-    param.textContent = `P = (${fmt(x0)}, ${fmt(y0)}) + t[${fmt(u)}, ${fmt(v)}]`;
-    normal.textContent = `${fmt(a)}x + ${fmt(b)}y = ${fmt(c)}`;
+    param.textContent = `P = (${fmt(x0)}, ${fmt(y0)}) ⊕ t[${fmt(u)}, ${fmt(v)}]`;
+    normal.textContent = `n · [P−P₀] = 0  ⇔  ${fmt(a)}x + ${fmt(b)}y = ${fmt(c)}`;
     slope.textContent = Math.abs(u) < 1e-8 ? `vertical line: x = ${fmt(x0)}` : `m = ${fmt(v / u)}`;
   }
   board.on('update', update);
