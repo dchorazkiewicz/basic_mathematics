@@ -22,14 +22,26 @@ $$
     \boxed{x=x_0+tu,\qquad y=y_0+tv.}
     $$
 
-At $t=0$ we are at $P_0$; positive and negative values move in the two opposite orientations. Replacing $\mathbf v$ by a nonzero scalar multiple changes only how quickly the parameter traverses the points, not the geometric line.
-
 <figure class="figure-panel jsx-panel" data-fullscreen-panel>
-  <div class="figure-toolbar"><div><span class="figure-title">One line, three descriptions</span><span class="figure-step-title">Move the point and direction vector.</span></div><button class="icon-button" type="button" data-fullscreen>⛶</button></div>
-  <div class="figure-stage jsx-stage"><div id="line-descriptions-board" class="jxgbox" data-line-descriptions></div></div>
-  <div class="relation-readout"><span data-line-parametric></span><span data-line-normal></span><span data-line-slope></span></div>
-  <figcaption class="figure-caption">The geometric set remains the same while parametric, normal and slope descriptions expose different information.</figcaption>
+  <div class="figure-toolbar">
+    <div>
+      <span class="figure-title">Generating a line from one point and one direction</span>
+      <span class="figure-step-title">Move $P_0$ and $P_0+\mathbf v$, then vary $t$ to generate points of the line.</span>
+    </div>
+    <button class="icon-button" type="button" data-fullscreen aria-label="Open line generation figure in full screen">⛶</button>
+  </div>
+  <div class="figure-stage jsx-stage"><div id="line-generation-board" class="jxgbox" data-line-generation></div></div>
+  <div class="parameter-controls" style="--parameter-count:1">
+    <label class="parameter-control">
+      <span>$t$ = <output data-line-t-output>1</output></span>
+      <input type="range" min="-3" max="3" step="0.1" value="1" data-line-t-slider>
+    </label>
+  </div>
+  <div class="relation-readout"><span data-line-generation-readout></span></div>
+  <figcaption class="figure-caption">The fixed point $P_0$ gives the starting location. The direction vector $\mathbf v$ gives the only permitted direction of motion. As $t$ ranges over all real numbers, $P_0+t\mathbf v$ traces the entire line.</figcaption>
 </figure>
+
+At $t=0$ we are at $P_0$; positive and negative values move in the two opposite orientations. Replacing $\mathbf v$ by a nonzero scalar multiple changes only how quickly the parameter traverses the points, not the geometric line.
 
 ### The same line described by a perpendicular direction
 
