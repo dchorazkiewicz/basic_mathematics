@@ -93,4 +93,40 @@ The classes below implement the objects used in this lecture. Each method corres
             )
     ```
 
-`Function.graph_point(x)` and `ParametricCurve.at(t)` return points. `Relation.contains(P)` and `Circle.contains(P)` return truth values. The return type records the mathematical role of each construction.
+??? example "Using the classes"
+
+    ```python
+    from math import cos, pi, sin
+
+    P = Point(1, 2)
+    Q = Point(4, 6)
+
+    print(P.distance_to(Q))
+    # 5.0
+
+    square = Function(lambda x: x**2)
+    print(square(3))
+    # 9
+
+    print(square.graph_point(3))
+    # Point(x=3, y=9)
+
+    unit_circle_curve = ParametricCurve(cos, sin)
+    print(unit_circle_curve.at(pi / 2))
+    # Point(x=6.123233995736766e-17, y=1.0)
+
+    upper_half_plane = Relation(lambda point: point.y >= 0)
+    print(upper_half_plane.contains(Point(2, -1)))
+    # False
+
+    circle = Circle(Point(0, 0), 2)
+    point = circle.at(pi / 2)
+
+    print(point)
+    # Point(x=1.2246467991473532e-16, y=2.0)
+
+    print(circle.contains(Point(0, 2)))
+    # True
+    ```
+
+`Function.graph_point(x)` and `ParametricCurve.at(t)` return points. `Relation.contains(P)` and `Circle.contains(P)` return truth values. The examples show both the construction and the resulting object.
