@@ -4,23 +4,24 @@ This final argument shows how a mathematical proof is built. We begin with a com
 
 The quantity we shall calculate is the length of the chord $AB$.
 
-<figure class="figure-panel">
+<figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
   <div class="figure-toolbar">
     <div>
-      <span class="figure-title">Two points on the unit circle</span>
-      <span class="figure-step-title">The diagram introduces every object used in the proof.</span>
+      <span class="figure-title">Two movable points on the unit circle</span>
+      <span class="figure-step-title">Drag $A$ and $B$. Their distances from $O$ remain equal to $1$.</span>
     </div>
+    <button class="icon-button" type="button" data-fullscreen aria-label="Open the unit-circle diagram in full screen">⛶</button>
   </div>
-  <div class="figure-stage">
-    <img src="../assets/images/lecture-01/cosine-difference-unit-circle.svg" alt="Points A and B on the unit circle with angles alpha and beta, angle difference delta, radii OA and OB, and chord AB." loading="lazy">
+  <div class="figure-stage jsx-stage">
+    <div id="cosine-difference-unit-circle-board" class="jxgbox" data-cosine-unit-circle aria-label="Interactive unit circle with movable points A and B, their angles, coordinates, and chord AB"></div>
   </div>
-  <figcaption class="figure-caption">The same chord $AB$ will be calculated first from the coordinates of its endpoints and then from the angle $\delta=\alpha-eta$ between the two radii.</figcaption>
+  <figcaption class="figure-caption">Move $A$ and $B$ along the first-quadrant arc. The angles, coordinates and difference $\delta=|\alpha-\beta|$ change, but $OA=OB=1$ at every position.</figcaption>
 </figure>
 
-Let the radii $OA$ and $OB$ make angles $\alpha$ and $eta$ with the positive horizontal axis. For the displayed configuration assume
+Let the radii $OA$ and $OB$ make angles $\alpha$ and $\beta$ with the positive horizontal axis. For the displayed configuration we work in the first quadrant. When $\alpha\geq\beta$, the angle between the radii is
 
 $$
-0\leqeta\leq\alpha\leqrac{\pi}{2}.
+\delta=\alpha-\beta.
 $$
 
 Because the circle has radius $1$,
@@ -34,19 +35,13 @@ From the unit-circle definitions of sine and cosine, the endpoints of the two ra
 $$
 A=(\cos\alpha,\sin\alpha),
 \qquad
-B=(\coseta,\sineta).
-$$
-
-The angle between the radii is the difference of their angles from the horizontal axis. We therefore write
-
-$$
-\delta=\alpha-eta.
+B=(\cos\beta,\sin\beta).
 $$
 
 The proof now has a precise plan:
 
 1. calculate $AB^2$ from the coordinates of $A$ and $B$;
-2. calculate the same $AB^2$ using only the angle $\delta$ and elementary right triangles;
+2. rotate our view so that $OB$ becomes horizontal, and calculate the same $AB^2$ using only the angle $\delta$ and two right triangles;
 3. equate the two answers.
 
 ### First calculation: use the coordinates of $A$ and $B$
@@ -54,21 +49,21 @@ The proof now has a precise plan:
 The horizontal difference between $A$ and $B$ is
 
 $$
-\cos\alpha-\coseta,
+\cos\alpha-\cos\beta,
 $$
 
 and the vertical difference is
 
 $$
-\sin\alpha-\sineta.
+\sin\alpha-\sin\beta.
 $$
 
 The coordinate formula for distance therefore gives
 
 $$
 AB^2
-=(\cos\alpha-\coseta)^2
- +(\sin\alpha-\sineta)^2.
+=(\cos\alpha-\cos\beta)^2
+ +(\sin\alpha-\sin\beta)^2.
 $$
 
 We expand both squares without omitting any term:
@@ -99,7 +94,7 @@ $$
 \cos^2\theta+\sin^2\theta=1,
 $$
 
-we may use this identity once for $	heta=\alpha$ and once for $	heta=eta$. Hence
+we use this identity once for $\theta=\alpha$ and once for $\theta=\beta$. Hence
 
 $$
 AB^2
@@ -110,54 +105,62 @@ $$
 
 This is the first expression for the squared length of the chord.
 
-### Now forget the circle and keep only what is needed
+### Rotate the picture and keep only the angle difference
 
-For the second calculation the whole coordinate system and the whole circle are no longer needed. We retain only the triangle $OAB$, the unit lengths $OA=OB=1$, and the angle
+For the second calculation, the absolute positions of $OA$ and $OB$ relative to the original coordinate axes are irrelevant. Only their lengths and the angle between them matter.
 
-$$
-\angle AOB=\delta.
-$$
+We therefore rotate the whole configuration until $OB$ lies horizontally. A rotation does not change lengths or angles. After this change of viewpoint,
 
-From $A$, construct the perpendicular to the line $OB$. Let $H$ be its intersection with $OB$. This single construction divides the original triangle into the two right triangles $OAH$ and $AHB$.
+- $OB$ is the horizontal unit segment;
+- $OA$ still has length $1$;
+- the angle between $OA$ and $OB$ is still $\delta$;
+- the chord $AB$ has exactly the same length as before.
 
-<figure class="figure-panel">
+Now drop the perpendicular from $A$ to the horizontal segment $OB$, and call its foot $H$.
+
+<figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
   <div class="figure-toolbar">
     <div>
-      <span class="figure-title">The reduced geometric picture</span>
-      <span class="figure-step-title">The circle has disappeared; only the lengths needed for the second calculation remain.</span>
+      <span class="figure-title">The rotated geometric picture</span>
+      <span class="figure-step-title">Drag $A$ along the faint unit circle. The segment $OB$ stays horizontal and $AH$ stays perpendicular to it.</span>
     </div>
+    <button class="icon-button" type="button" data-fullscreen aria-label="Open the rotated projection diagram in full screen">⛶</button>
   </div>
-  <div class="figure-stage">
-    <img src="../assets/images/lecture-01/cosine-difference-projection.svg" alt="Triangle OAB with perpendicular AH to OB at H, angle delta, and the lengths OH, AH, and HB labelled." loading="lazy">
+  <div class="figure-stage jsx-stage">
+    <div id="cosine-difference-reduced-board" class="jxgbox" data-cosine-reduced aria-label="Interactive rotated triangle with horizontal OB, movable unit point A, perpendicular projection H, and the lengths OH, AH, and HB"></div>
   </div>
-  <figcaption class="figure-caption">The point $H$ is the foot of the perpendicular from $A$ to $OB$. The two right triangles make the lengths $OH$, $AH$, and $HB$ directly accessible.</figcaption>
+  <figcaption class="figure-caption">The faint circle shows that $A$ moves while $OA=1$ remains fixed. Since $OB$ is horizontal, the perpendicular $AH$ is vertical and the right angle at $H$ is immediately visible.</figcaption>
 </figure>
 
-### Second calculation: use the angle $\delta$
+### Second calculation: read the lengths from the rotated picture
 
 Start with the right triangle $OAH$.
 
-Its hypotenuse is $OA=1$, and the angle at $O$ is $\delta$. By the elementary definitions of cosine and sine,
+Its hypotenuse is $OA=1$, and the angle at $O$ is $\delta$. By the elementary definition of cosine,
 
 $$
-\cos\delta=\frac{OH}{OA}=OH,
+\cos\delta=\frac{OH}{OA}.
 $$
 
-and
+Since $OA=1$,
 
 $$
-\sin\delta=\frac{AH}{OA}=AH.
+OH=\cos\delta.
 $$
 
-Thus
+Similarly, by the elementary definition of sine,
 
 $$
-OH=\cos\delta,
-\qquad
+\sin\delta=\frac{AH}{OA},
+$$
+
+so
+
+$$
 AH=\sin\delta.
 $$
 
-The whole segment $OB$ has length $1$. Since $H$ lies between $O$ and $B$ in the displayed configuration,
+The whole horizontal segment $OB$ has length $1$. The point $H$ divides it into the two segments $OH$ and $HB$, so
 
 $$
 OB=OH+HB.
@@ -169,13 +172,13 @@ $$
 HB=OB-OH=1-\cos\delta.
 $$
 
-We now use the second right triangle, $AHB$. Its hypotenuse is precisely the chord $AB$ that was calculated earlier. The Pythagorean theorem gives
+We now use the second right triangle, $AHB$. Its hypotenuse is precisely the chord $AB$ calculated earlier. The Pythagorean theorem gives
 
 $$
 AB^2=AH^2+HB^2.
 $$
 
-Substitute the two lengths read from the preceding construction:
+Substitute the lengths obtained from the first right triangle:
 
 $$
 AB^2
@@ -209,7 +212,7 @@ AB^2=2-2\cos\delta.
 \tag{2}
 $$
 
-Since $\delta=\alpha-eta$,
+Since $\delta=\alpha-\beta$,
 
 $$
 AB^2=2-2\cos(\alpha-\beta).
@@ -245,4 +248,4 @@ Finally, divide both sides by $-2$:
     $$
 
 !!! interpretation "How the proof was constructed"
-    The proof did not begin with the desired formula. It began with one geometric quantity, the chord $AB$. The coordinate description of the endpoints produced one expression for $AB^2$. The angle between the radii, together with one perpendicular construction, produced another. The identity follows because both calculations describe exactly the same length.
+    The proof did not begin with the desired formula. It began with one geometric quantity, the chord $AB$. The coordinate description of its endpoints produced one expression for $AB^2$. Rotating the picture, projecting $A$ onto the horizontal segment $OB$, and applying the Pythagorean theorem produced another. The identity follows because both calculations describe exactly the same unchanged length.
