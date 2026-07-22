@@ -2,7 +2,7 @@
 
 The coordinate construction already gives us orthogonal projection. We now use it to derive the formula for the cosine of a difference of angles without assuming a dot-product formula.
 
-Choose two unit segments $OA$ and $OB$ with common initial point $O$. Let their directed angles from the positive horizontal axis be $\alpha$ and $eta$. Their endpoints therefore have coordinates
+Choose two unit segments $OA$ and $OB$ with common initial point $O$. Let their directed angles from the positive horizontal axis be $\alpha$ and $\beta$. Their endpoints therefore have coordinates
 
 $$
 A=(\cos\alpha,\sin\alpha),
@@ -18,7 +18,7 @@ $$
     </div>
   </div>
   <div class="figure-stage">
-    <img src="../../assets/images/lecture-01/cosine-difference-unit-circle.svg" alt="Two unit radii at angles alpha and beta on a coordinate plane." loading="lazy">
+    <img src="../assets/images/lecture-01/cosine-difference-unit-circle.svg" alt="Two unit radii at angles alpha and beta on a coordinate plane." loading="lazy">
   </div>
   <figcaption class="figure-caption">The endpoints of unit radii have coordinates $(\cos\theta,\sin\theta)$. The relative angle between the two directions is $\alpha-\beta$.</figcaption>
 </figure>
@@ -61,7 +61,7 @@ $$
     </div>
   </div>
   <div class="figure-stage">
-    <img src="../../assets/images/lecture-01/cosine-difference-projection.svg" alt="A unit vector decomposed into components parallel and perpendicular to a rotated unit direction." loading="lazy">
+    <img src="../assets/images/lecture-01/cosine-difference-projection.svg" alt="A unit vector decomposed into components parallel and perpendicular to a rotated unit direction." loading="lazy">
   </div>
   <figcaption class="figure-caption">The decomposition uses only two perpendicular unit directions. The coefficient of $e_\beta$ is exactly the projection length we want to compute.</figcaption>
 </figure>
