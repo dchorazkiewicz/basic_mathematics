@@ -228,7 +228,7 @@ The implementation follows the order used in the mathematics. Points come first.
     # (-3, 3)
 
     print(v.dot(w))
-    # -9
+    # -22
 
     basis = Basis(
         Point(0, 0).anchored_vector_to(Point(1, 1)).as_free_vector(),
