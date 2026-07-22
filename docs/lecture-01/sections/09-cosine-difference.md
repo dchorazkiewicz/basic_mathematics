@@ -1,45 +1,26 @@
 ## The cosine of a difference of angles {#cosine-difference}
 
-The coordinate construction gives us points, distances and orthogonal projection. These are enough to derive the formula for the cosine of a difference of angles; vectors and the dot product are not needed.
+We derive the formula by computing one and the same length in two different ways. No vectors and no dot product are used.
 
-Choose two points $A$ and $B$ on the unit circle centred at $O$. Let the angles of the radii $OA$ and $OB$ from the positive horizontal axis be $\alpha$ and $\beta$. Then
+Choose two points $A$ and $B$ on the unit circle centred at $O$. Let
 
 $$
 A=(\cos\alpha,\sin\alpha),
 \qquad
-B=(\cos\beta,\sin\beta),
+B=(\cos\beta,\sin\beta).
 $$
 
-and
-
-$$
-OA=OB=1.
-$$
-
-For the diagram assume $0\leq\beta\leq\alpha\leq\pi$ and put
+The angle between the radii $OA$ and $OB$ is
 
 $$
 \delta=\alpha-\beta.
 $$
 
-The same identity for arbitrary directed angles follows by periodicity and by the fact that cosine is even.
+For the diagram we assume $0\leq\delta\leq\frac{\pi}{2}$. The general identity follows from the usual symmetry and periodicity properties of sine and cosine.
 
-<figure class="figure-panel">
-  <div class="figure-toolbar">
-    <div>
-      <span class="figure-title">Two points on the unit circle</span>
-      <span class="figure-step-title">The angle between $OA$ and $OB$ is $\delta=\alpha-\beta$.</span>
-    </div>
-  </div>
-  <div class="figure-stage">
-    <img src="../assets/images/lecture-01/cosine-difference-unit-circle.svg" alt="Two points A and B on a unit circle, with central angle alpha minus beta and chord AB." loading="lazy">
-  </div>
-  <figcaption class="figure-caption">We compute the same length $AB$ in two ways: first from the coordinates of $A$ and $B$, and then from an elementary right-triangle construction.</figcaption>
-</figure>
+### First calculation: use the coordinates of $A$ and $B$
 
-### The chord length from coordinates
-
-The coordinate formula for distance gives
+By the distance formula,
 
 $$
 AB^2
@@ -47,35 +28,26 @@ AB^2
  +(\sin\alpha-\sin\beta)^2.
 $$
 
-Expanding the squares,
+Expanding and using $\cos^2\theta+\sin^2\theta=1$ twice gives
 
 $$
 \begin{aligned}
 AB^2
-&=\cos^2\alpha-2\cos\alpha\cos\beta+\cos^2\beta\\
-&\quad+\sin^2\alpha-2\sin\alpha\sin\beta+\sin^2\beta.
+&=\cos^2\alpha+\sin^2\alpha
+  +\cos^2\beta+\sin^2\beta \\
+&\quad-2\cos\alpha\cos\beta
+      -2\sin\alpha\sin\beta \\
+&=2-2\bigl(\cos\alpha\cos\beta
+             +\sin\alpha\sin\beta\bigr).
 \end{aligned}
-$$
-
-Using
-
-$$
-\cos^2\theta+\sin^2\theta=1,
-$$
-
-once for $\theta=\alpha$ and once for $\theta=\beta$, we obtain
-
-$$
-AB^2
-=2-2\bigl(\cos\alpha\cos\beta+\sin\alpha\sin\beta\bigr).
 \tag{1}
 $$
 
-### The same chord length from projection
+### Second calculation: use only the angle $\delta$
 
-Drop the perpendicular from $A$ to the straight line $OB$, and denote its foot by $H$. The triangle $OAH$ is right-angled at $H$, its hypotenuse has length $OA=1$, and its angle at $O$ is $\delta$.
+Drop the perpendicular from $A$ to the line $OB$, and call its foot $H$.
 
-Therefore, by the elementary definitions of sine and cosine,
+Because $OA=1$ and the angle $AOH$ equals $\delta$, the right triangle $OAH$ gives
 
 $$
 OH=\cos\delta,
@@ -83,47 +55,47 @@ OH=\cos\delta,
 AH=\sin\delta.
 $$
 
-Because $OB=1$,
+Since $OB=1$,
 
 $$
-BH=OB-OH=1-\cos\delta.
+HB=OB-OH=1-\cos\delta.
 $$
 
 <figure class="figure-panel">
   <div class="figure-toolbar">
     <div>
-      <span class="figure-title">The chord divided by an orthogonal projection</span>
-      <span class="figure-step-title">The perpendicular $AH$ produces two lengths determined by $\delta$.</span>
+      <span class="figure-title">One chord, one perpendicular</span>
+      <span class="figure-step-title">The perpendicular from $A$ to $OB$ converts the angle $\delta$ into ordinary lengths.</span>
     </div>
   </div>
   <div class="figure-stage">
-    <img src="../assets/images/lecture-01/cosine-difference-projection.svg" alt="Point A projected perpendicularly to the line OB at H, with OH equal to cosine delta and AH equal to sine delta." loading="lazy">
+    <img src="../assets/images/lecture-01/cosine-difference-unit-circle.svg" alt="Triangle OAB with OA and OB of unit length and a perpendicular AH to OB." loading="lazy">
   </div>
-  <figcaption class="figure-caption">The projection gives $OH=\cos\delta$ and hence $BH=1-\cos\delta$. The segment $AH$ has length $\sin\delta$.</figcaption>
+  <figcaption class="figure-caption">The construction gives $OH=\cos\delta$, $AH=\sin\delta$ and $HB=1-\cos\delta$.</figcaption>
 </figure>
 
-The triangle $AHB$ is also right-angled at $H$. Hence the Pythagorean theorem gives
+Now apply the Pythagorean theorem in the right triangle $AHB$:
 
 $$
 \begin{aligned}
 AB^2
-&=AH^2+BH^2\\
-&=\sin^2\delta+(1-\cos\delta)^2\\
-&=\sin^2\delta+1-2\cos\delta+\cos^2\delta\\
+&=AH^2+HB^2 \\
+&=\sin^2\delta+(1-\cos\delta)^2 \\
+&=\sin^2\delta+\cos^2\delta+1-2\cos\delta \\
 &=2-2\cos\delta.
 \end{aligned}
+\tag{2}
 $$
 
 Since $\delta=\alpha-\beta$,
 
 $$
 AB^2=2-2\cos(\alpha-\beta).
-\tag{2}
 $$
 
-### Comparing the two descriptions
+### Compare the two results
 
-Equations (1) and (2) describe the same squared length $AB^2$. Therefore
+Equations (1) and (2) are two expressions for the same number $AB^2$. Therefore
 
 $$
 2-2\bigl(\cos\alpha\cos\beta+\sin\alpha\sin\beta\bigr)
@@ -131,7 +103,7 @@ $$
 2-2\cos(\alpha-\beta).
 $$
 
-After subtracting $2$ and dividing by $-2$, we obtain
+After cancelling the common terms,
 
 !!! theorem "Cosine of a difference"
     $$
@@ -139,5 +111,5 @@ After subtracting $2$ and dividing by $-2$, we obtain
     =\cos\alpha\cos\beta+\sin\alpha\sin\beta.}
     $$
 
-!!! interpretation "Why the formula appears"
-    Both sides arise from the same geometric object: the chord joining two points of the unit circle. The right-hand side appears when its length is calculated from Cartesian coordinates; the left-hand side appears when the same length is calculated from the angle between the two radii.
+!!! interpretation "What was actually proved"
+    The proof uses one geometric object: the chord $AB$ of the unit circle. Its length is calculated once from the Cartesian coordinates of its endpoints and once from a perpendicular projection. Equating the two calculations produces the identity.
