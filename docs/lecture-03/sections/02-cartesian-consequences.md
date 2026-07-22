@@ -34,11 +34,37 @@ To find an intersection of two sets, impose both defining conditions at once. Ax
 
 ### The line through two points
 
-Let $P=(x_1,y_1)$ and $Q=(x_2,y_2)$ be distinct. The displacement $Q-P=[x_2-x_1,y_2-y_1]$ is nonzero and therefore provides a direction.
+Let
+
+$$
+P=(x_1,y_1),\qquad Q=(x_2,y_2)
+$$
+
+be distinct points. Their ordinary coordinate difference is
+
+$$
+Q-P=(x_2-x_1,\,y_2-y_1),
+$$
+
+while the corresponding free direction vector is
+
+$$
+\boxed{[Q-P]=[x_2-x_1,\,y_2-y_1]\neq\mathbf0.}
+$$
+
+Starting at $P$, scalar multiples of this free vector generate the required line.
 
 !!! theorem "Unique line through two points"
     $$
-    \boxed{L=\{P+t(Q-P):t\in\mathbb R\}}.
+    \boxed{
+    L=\{P\oplus t[Q-P]:t\in\mathbb R\}.
+    }
+    $$
+
+    At $t=0$ the point is $P$. At $t=1$,
+
+    $$
+    P\oplus[Q-P]=Q.
     $$
 
     This handles vertical and nonvertical lines uniformly.
@@ -61,7 +87,7 @@ Let $P=(x_1,y_1)$ and $Q=(x_2,y_2)$ be distinct. The displacement $Q-P=[x_2-x_1,
 ### Parallel lines in slope notation
 
 !!! derivation "Why equal slopes mean equal directions"
-    The lines $y=m_1x+b_1$ and $y=m_2x+b_2$ have direction vectors $[1,m_1]$ and $[1,m_2]$. These are parallel exactly when $m_1=m_2$.
+    The lines $y=m_1x+b_1$ and $y=m_2x+b_2$ have free direction vectors $[1,m_1]$ and $[1,m_2]$. These are parallel exactly when $m_1=m_2$.
 
 !!! theorem "Parallel nonvertical lines"
     $$
