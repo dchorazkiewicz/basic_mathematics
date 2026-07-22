@@ -693,7 +693,42 @@ AB^2=2-2\cos(\alpha-\beta).
         <span class="p">)</span>
 </code></pre></div>
 </details>
-<p><code>Function.graph_point(x)</code> and <code>ParametricCurve.at(t)</code> return points. <code>Relation.contains(P)</code> and <code>Circle.contains(P)</code> return truth values. The return type records the mathematical role of each construction.</p>
+<details class="example">
+<summary>Using the classes</summary>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">cos</span><span class="p">,</span> <span class="n">pi</span><span class="p">,</span> <span class="n">sin</span>
+
+<span class="n">P</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">Q</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">P</span><span class="o">.</span><span class="n">distance_to</span><span class="p">(</span><span class="n">Q</span><span class="p">))</span>
+<span class="c1"># 5.0</span>
+
+<span class="n">square</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">square</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="c1"># 9</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">square</span><span class="o">.</span><span class="n">graph_point</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="c1"># Point(x=3, y=9)</span>
+
+<span class="n">unit_circle_curve</span> <span class="o">=</span> <span class="n">ParametricCurve</span><span class="p">(</span><span class="n">cos</span><span class="p">,</span> <span class="n">sin</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">unit_circle_curve</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">))</span>
+<span class="c1"># Point(x=6.123233995736766e-17, y=1.0)</span>
+
+<span class="n">upper_half_plane</span> <span class="o">=</span> <span class="n">Relation</span><span class="p">(</span><span class="k">lambda</span> <span class="n">point</span><span class="p">:</span> <span class="n">point</span><span class="o">.</span><span class="n">y</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">upper_half_plane</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)))</span>
+<span class="c1"># False</span>
+
+<span class="n">circle</span> <span class="o">=</span> <span class="n">Circle</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">point</span> <span class="o">=</span> <span class="n">circle</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">point</span><span class="p">)</span>
+<span class="c1"># Point(x=1.2246467991473532e-16, y=2.0)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">circle</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
+<span class="c1"># True</span>
+</code></pre></div>
+</details>
+<p><code>Function.graph_point(x)</code> and <code>ParametricCurve.at(t)</code> return points. <code>Relation.contains(P)</code> and <code>Circle.contains(P)</code> return truth values. The examples show both the construction and the resulting object.</p>
 <h2 id="exercises">Exercises</h2>
 <p>The first ten exercises reinforce the basic computational procedures of the lecture. The next ten require explanation, modelling and argument rather than only substitution into a formula.</p>
 <p><a class="exercise-download" download="download" href="lecture-01-exercises/">Download exercises as Markdown</a></p>
