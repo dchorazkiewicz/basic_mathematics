@@ -1,3 +1,4 @@
+// Interactive construction of L = {P0 + t v : t in R}.
 (() => {
   const host = document.querySelector('[data-line-generation]');
   if (!host || !window.JXG) return;
