@@ -496,47 +496,69 @@ a(x-x_0)+b(y-y_0)+c(z-z_0)=0,
 <h2 id="three-points">A plane through three points</h2>
 <div class="admonition derivation">
 <p class="admonition-title">Extracting two independent directions</p>
-<p>Let <span class="arithmatex">\(P,Q,R\)</span> be three noncollinear points. Then</p>
+<p>Let <span class="arithmatex">\(P,Q,R\)</span> be three noncollinear points. Their ordinary coordinate differences are points, while the corresponding free direction vectors are</p>
 <div class="arithmatex">\[
-\mathbf u=Q-P,
+\mathbf u=[Q-P],
 \qquad
-\mathbf v=R-P
+\mathbf v=[R-P].
 \]</div>
-<p>are nonparallel and provide the two directions required to generate a plane. Their cross product</p>
+<p>Noncollinearity means that these two free vectors are nonparallel. Their cross product</p>
 <div class="arithmatex">\[
-\mathbf n=(Q-P)\times(R-P)
+\mathbf n=[Q-P]\times[R-P]
 \]</div>
 <p>is nonzero and perpendicular to the plane.</p>
 </div>
 <div class="admonition theorem">
 <p class="admonition-title">Unique plane through three noncollinear points</p>
 <div class="arithmatex">\[
-\boxed{\Pi=\{P+s(Q-P)+t(R-P):s,t\in\mathbb R\}},
+\boxed{
+\Pi=
+\left\{
+P\oplus\bigl(s[Q-P]+t[R-P]\bigr):s,t\in\mathbb R
+\right\}.
+}
 \]</div>
 <div class="arithmatex">\[
-\boxed{\mathbf n=(Q-P)\times(R-P)}.
+\boxed{\mathbf n=[Q-P]\times[R-P].}
 \]</div>
+<p>The two expressions have the correct types: the quantity inside the parentheses is a free vector, and applying it at <span class="arithmatex">\(P\)</span> produces a point of the plane.</p>
 </div>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
-<p>For <span class="arithmatex">\(P=(1,0,0)\)</span>, <span class="arithmatex">\(Q=(0,1,0)\)</span>, and <span class="arithmatex">\(R=(0,0,1)\)</span>,</p>
+<p>For</p>
 <div class="arithmatex">\[
-Q-P=[-1,1,0],
+P=(1,0,0),\qquad Q=(0,1,0),\qquad R=(0,0,1),
+\]</div>
+<p>the ordinary point differences are</p>
+<div class="arithmatex">\[
+Q-P=(-1,1,0),
 \qquad
-R-P=[-1,0,1],
+R-P=(-1,0,1),
 \]</div>
+<p>and the corresponding free vectors are</p>
 <div class="arithmatex">\[
-(Q-P)\times(R-P)=[1,1,1].
+[Q-P]=[-1,1,0],
+\qquad
+[R-P]=[-1,0,1].
 \]</div>
-<p>Using <span class="arithmatex">\(P\)</span> in the normal equation gives</p>
+<p>Therefore</p>
 <div class="arithmatex">\[
-(1,1,1)\cdot((x,y,z)-(1,0,0))=0,
+[Q-P]\times[R-P]=[1,1,1].
 \]</div>
+<p>Let <span class="arithmatex">\(X=(x,y,z)\)</span> be a variable point. Since</p>
+<div class="arithmatex">\[
+[X-P]=[x-1,\,y,\,z],
+\]</div>
+<p>the normal equation is</p>
+<div class="arithmatex">\[
+[1,1,1]\cdot[X-P]=0,
+\]</div>
+<p>so</p>
 <div class="arithmatex">\[
 \boxed{x+y+z=1}.
 \]</div>
 </div>
-<p>Noncollinearity is essential. If <span class="arithmatex">\(P,Q,R\)</span> are collinear, then <span class="arithmatex">\(Q-P\)</span> and <span class="arithmatex">\(R-P\)</span> are parallel and their cross product is zero, so they do not supply two independent directions.</p>
+<p>Noncollinearity is essential. If <span class="arithmatex">\(P,Q,R\)</span> are collinear, then <span class="arithmatex">\([Q-P]\)</span> and <span class="arithmatex">\([R-P]\)</span> are parallel and their cross product is zero, so they do not supply two independent directions.</p>
 <h2 id="plane-relations">Relative positions of planes</h2>
 <p>Let</p>
 <div class="arithmatex">\[
