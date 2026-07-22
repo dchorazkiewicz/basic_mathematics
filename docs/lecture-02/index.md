@@ -13,6 +13,7 @@ section_links:
   - { id: tests, title: Parallelism and dot product }
   - { id: projection, title: Projection }
   - { id: basis, title: Linear combinations and change of basis }
+  - { id: computational-model, title: Computational model }
   - { id: exercises, title: Exercises }
 ---
 
@@ -23,4 +24,5 @@ section_links:
 --8<-- "lecture-02/sections/05-tests.md"
 --8<-- "lecture-02/sections/07-projection.md"
 --8<-- "lecture-02/sections/08-basis.md"
+--8<-- "lecture-02/sections/computational-model.md"
 --8<-- "lecture-02/sections/09-exercises.md"
