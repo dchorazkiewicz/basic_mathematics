@@ -119,6 +119,19 @@ is the free displacement from $P_0$ to $P$. The point $P$ lies on the line preci
 
 The general linear equation is not a second definition. It records the same line by requiring the normal component of the displacement $[P-P_0]$ to vanish.
 
+<figure class="figure-panel jsx-panel" data-fullscreen-panel>
+  <div class="figure-toolbar">
+    <div>
+      <span class="figure-title">One line, three descriptions</span>
+      <span class="figure-step-title">Move the point and direction vector and compare the parametric, normal and slope descriptions.</span>
+    </div>
+    <button class="icon-button" type="button" data-fullscreen aria-label="Open line descriptions figure in full screen">⛶</button>
+  </div>
+  <div class="figure-stage jsx-stage"><div id="line-descriptions-board" class="jxgbox" data-line-descriptions></div></div>
+  <div class="relation-readout"><span data-line-parametric></span><span data-line-normal></span><span data-line-slope></span></div>
+  <figcaption class="figure-caption">The direction vector $\mathbf v$, the perpendicular normal $\mathbf n$, and the corresponding coordinate equations describe the same geometric line.</figcaption>
+</figure>
+
 ### Slope form as a special coordinate description
 
 !!! derivation "Eliminating the parameter"
