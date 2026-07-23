@@ -250,19 +250,90 @@ y-y_0=\frac{v_2}{v_1}(x-x_0),
 <p>The parametric, normal and slope forms are not competing definitions. They expose different information about the same geometric line.</p>
 </div>
 <h3 id="intersections-with-the-coordinate-axes">Intersections with the coordinate axes</h3>
-<div class="admonition derivation">
-<p class="admonition-title">Impose both defining conditions</p>
-<p>For <span class="arithmatex">\(y=mx+b\)</span>, setting <span class="arithmatex">\(x=0\)</span> imposes the <span class="arithmatex">\(y\)</span>-axis condition and gives <span class="arithmatex">\((0,b)\)</span>. If <span class="arithmatex">\(m\neq0\)</span>, setting <span class="arithmatex">\(y=0\)</span> gives <span class="arithmatex">\(x=-b/m\)</span>.</p>
+<p>Two sets intersect at those points which belong to both sets at the same time. Thus a point belongs to</p>
 <div class="arithmatex">\[
-\boxed{L\cap\{x=0\}=\{(0,b)\}},
+L\cap M
+\]</div>
+<p>precisely when it satisfies the defining condition of <span class="arithmatex">\(L\)</span> and the defining condition of <span class="arithmatex">\(M\)</span>.</p>
+<p>For the coordinate axes these conditions are especially simple:</p>
+<div class="arithmatex">\[
+\text{$y$-axis: }x=0,
 \qquad
+\text{$x$-axis: }y=0.
+\]</div>
+<p>Let the line be</p>
+<div class="arithmatex">\[
+L:\quad y=mx+b.
+\]</div>
+<div class="admonition derivation">
+<p class="admonition-title">Intersection with the <span class="arithmatex">\(y\)</span>-axis</p>
+<p>A point on the <span class="arithmatex">\(y\)</span>-axis has first coordinate equal to zero. We therefore impose both conditions</p>
+<div class="arithmatex">\[
+y=mx+b,
+\qquad
+x=0.
+\]</div>
+<p>Substituting <span class="arithmatex">\(x=0\)</span> into the equation of the line gives</p>
+<div class="arithmatex">\[
+y=m\cdot0+b=b.
+\]</div>
+<p>Hence the line meets the <span class="arithmatex">\(y\)</span>-axis at</p>
+<div class="arithmatex">\[
+\boxed{(0,b)}.
+\]</div>
+<p>In set notation,</p>
+<div class="arithmatex">\[
+\boxed{L\cap\{x=0\}=\{(0,b)\}}.
+\]</div>
+</div>
+<div class="admonition derivation">
+<p class="admonition-title">Intersection with the <span class="arithmatex">\(x\)</span>-axis</p>
+<p>A point on the <span class="arithmatex">\(x\)</span>-axis has second coordinate equal to zero. We therefore impose</p>
+<div class="arithmatex">\[
+y=mx+b,
+\qquad
+y=0.
+\]</div>
+<p>This gives</p>
+<div class="arithmatex">\[
+0=mx+b.
+\]</div>
+<p>If <span class="arithmatex">\(m\neq0\)</span>, then</p>
+<div class="arithmatex">\[
+x=-\frac{b}{m}.
+\]</div>
+<p>Hence the line meets the <span class="arithmatex">\(x\)</span>-axis at</p>
+<div class="arithmatex">\[
+\boxed{\left(-\frac{b}{m},0\right)}.
+\]</div>
+<p>In set notation,</p>
+<div class="arithmatex">\[
 \boxed{L\cap\{y=0\}=\left\{\left(-\frac bm,0\right)\right\}}.
 \]</div>
 </div>
-<p>To find an intersection of two sets, impose both defining conditions at once. Axis intercepts are the simplest example.</p>
+<p>The procedure is always the same: write the defining conditions of both sets and solve them simultaneously. For an axis, one of the coordinates is simply fixed to zero.</p>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
-<p>For <span class="arithmatex">\(y=-\tfrac12x+3\)</span>, the <span class="arithmatex">\(y\)</span>-intercept is <span class="arithmatex">\((0,3)\)</span> and the <span class="arithmatex">\(x\)</span>-intercept is <span class="arithmatex">\((6,0)\)</span>.</p>
+<p>Consider</p>
+<div class="arithmatex">\[
+y=-\frac12x+3.
+\]</div>
+<p>For the <span class="arithmatex">\(y\)</span>-axis set <span class="arithmatex">\(x=0\)</span>:</p>
+<div class="arithmatex">\[
+y=-\frac12\cdot0+3=3,
+\]</div>
+<p>so the intersection point is</p>
+<div class="arithmatex">\[
+(0,3).
+\]</div>
+<p>For the <span class="arithmatex">\(x\)</span>-axis set <span class="arithmatex">\(y=0\)</span>:</p>
+<div class="arithmatex">\[
+0=-\frac12x+3,
+\]</div>
+<p>hence <span class="arithmatex">\(x=6\)</span>, so the second intersection point is</p>
+<div class="arithmatex">\[
+(6,0).
+\]</div>
 </div>
 <h3 id="the-line-through-two-points">The line through two points</h3>
 <p>Let</p>
