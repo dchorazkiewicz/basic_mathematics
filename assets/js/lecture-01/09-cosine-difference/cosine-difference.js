@@ -150,23 +150,22 @@
       vertices: { visible: false }, ...fixed
     });
 
-    const delta = () => Math.atan2(A.Y(), A.X());
     board.create('angle', [B, O, A], {
       radius: 0.19, fillColor: colors.gold, fillOpacity: 0.14,
       strokeColor: colors.gold, strokeWidth: 2, name: '', ...fixed
     });
 
-    board.create('text', [0.10, 0.10, () => `δ = ${degrees(delta())}`],
+    board.create('text', [0.10, 0.10, 'δ'],
       { fontSize: 18, color: colors.gold, cssStyle: labelStyle, ...fixed });
     board.create('text', [0.34, -0.14, 'OB = 1'],
       { fontSize: 17, color: colors.green, cssStyle: labelStyle, ...fixed });
     board.create('text', [() => A.X() / 2 - 0.08, () => A.Y() / 2 + 0.08, 'OA = 1'],
       { fontSize: 17, color: colors.blue, cssStyle: labelStyle, ...fixed });
-    board.create('text', [() => A.X() / 2 - 0.02, -0.08, () => `OH = cos δ = ${A.X().toFixed(3)}`],
+    board.create('text', [() => A.X() / 2 - 0.02, -0.08, 'OH = cos δ'],
       { fontSize: 17, color: colors.green, cssStyle: labelStyle, ...fixed });
-    board.create('text', [() => A.X() + 0.08, () => A.Y() / 2, () => `AH = sin δ = ${A.Y().toFixed(3)}`],
+    board.create('text', [() => A.X() + 0.08, () => A.Y() / 2, 'AH = sin δ'],
       { fontSize: 17, color: colors.gold, cssStyle: labelStyle, ...fixed });
-    board.create('text', [() => (A.X() + 1) / 2, 0.10, () => `HB = 1 − cos δ = ${(1 - A.X()).toFixed(3)}`],
+    board.create('text', [() => (A.X() + 1) / 2, 0.10, 'HB = 1 − cos δ'],
       { fontSize: 17, color: colors.ink, cssStyle: labelStyle, ...fixed });
 
     fit(board, host, bbox);
