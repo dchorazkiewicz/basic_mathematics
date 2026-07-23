@@ -145,8 +145,33 @@ The general linear equation is not a second definition. It records the same line
 
     and therefore $y=mx+b$ after collecting constants.
 
+The quotient $v_2/v_1$ has a direct geometric meaning. If $\alpha$ is the oriented angle from the positive $x$-axis to the direction vector $\mathbf v=[v_1,v_2]$ with $v_1>0$, then the direction triangle has horizontal leg $v_1$ and vertical leg $v_2$. Hence
+
+$$
+\boxed{
+ m=\frac{v_2}{v_1}
+  =\frac{\Delta y}{\Delta x}
+  =\tan\alpha.
+}
+$$
+
+Thus the slope is not merely a coefficient obtained by eliminating $t$. It measures the vertical change per unit horizontal change and is the tangent of the inclination angle.
+
+<figure class="figure-panel jsx-panel" data-fullscreen-panel>
+  <div class="figure-toolbar">
+    <div>
+      <span class="figure-title">The direction triangle and the slope</span>
+      <span class="figure-step-title">Move the endpoint of $\mathbf v$ and compare its horizontal and vertical components.</span>
+    </div>
+    <button class="icon-button" type="button" data-fullscreen aria-label="Open slope triangle figure in full screen">⛶</button>
+  </div>
+  <div class="figure-stage jsx-stage"><div id="slope-triangle-board" class="jxgbox" data-slope-triangle></div></div>
+  <div class="relation-readout"><span>$m=\dfrac{\Delta y}{\Delta x}=\dfrac{v_2}{v_1}=\tan\alpha$</span></div>
+  <figcaption class="figure-caption">The same direction vector forms a right triangle: its horizontal component is $v_1=\Delta x$, its vertical component is $v_2=\Delta y$, and their quotient is the slope.</figcaption>
+</figure>
+
 !!! note "Vertical case"
-    If $v_1=0$, the line is vertical and is described by $x=x_0$. Parametric and normal forms need no exception; only slope notation fails.
+    If $v_1=0$, the line is vertical and is described by $x=x_0$. Parametric and normal forms need no exception; only slope notation fails because neither $v_2/v_1$ nor $\tan\alpha$ is finite.
 
 !!! summary "Three forms, three questions"
     | Form | What it reveals |
