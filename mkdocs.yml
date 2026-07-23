@@ -4,6 +4,9 @@ site_url: https://dchorazkiewicz.github.io/basic_mathematics/
 repo_url: https://github.com/dchorazkiewicz/basic_mathematics
 repo_name: dchorazkiewicz/basic_mathematics
 
+extra:
+  author: Damian Chorążkiewicz
+
 docs_dir: docs
 site_dir: site_build
 strict: true
