@@ -5,19 +5,120 @@
 
 ### Intersections with the coordinate axes
 
-!!! derivation "Impose both defining conditions"
-    For $y=mx+b$, setting $x=0$ imposes the $y$-axis condition and gives $(0,b)$. If $m\neq0$, setting $y=0$ gives $x=-b/m$.
+Two sets intersect at those points which belong to both sets at the same time. Thus a point belongs to
+
+$$
+L\cap M
+$$
+
+precisely when it satisfies the defining condition of $L$ and the defining condition of $M$.
+
+For the coordinate axes these conditions are especially simple:
+
+$$
+\text{$y$-axis: }x=0,
+\qquad
+\text{$x$-axis: }y=0.
+$$
+
+Let the line be
+
+$$
+L:\quad y=mx+b.
+$$
+
+!!! derivation "Intersection with the $y$-axis"
+    A point on the $y$-axis has first coordinate equal to zero. We therefore impose both conditions
 
     $$
-    \boxed{L\cap\{x=0\}=\{(0,b)\}},
+    y=mx+b,
     \qquad
+    x=0.
+    $$
+
+    Substituting $x=0$ into the equation of the line gives
+
+    $$
+    y=m\cdot0+b=b.
+    $$
+
+    Hence the line meets the $y$-axis at
+
+    $$
+    \boxed{(0,b)}.
+    $$
+
+    In set notation,
+
+    $$
+    \boxed{L\cap\{x=0\}=\{(0,b)\}}.
+    $$
+
+!!! derivation "Intersection with the $x$-axis"
+    A point on the $x$-axis has second coordinate equal to zero. We therefore impose
+
+    $$
+    y=mx+b,
+    \qquad
+    y=0.
+    $$
+
+    This gives
+
+    $$
+    0=mx+b.
+    $$
+
+    If $m\neq0$, then
+
+    $$
+    x=-\frac{b}{m}.
+    $$
+
+    Hence the line meets the $x$-axis at
+
+    $$
+    \boxed{\left(-\frac{b}{m},0\right)}.
+    $$
+
+    In set notation,
+
+    $$
     \boxed{L\cap\{y=0\}=\left\{\left(-\frac bm,0\right)\right\}}.
     $$
 
-To find an intersection of two sets, impose both defining conditions at once. Axis intercepts are the simplest example.
+The procedure is always the same: write the defining conditions of both sets and solve them simultaneously. For an axis, one of the coordinates is simply fixed to zero.
 
 !!! example "Example"
-    For $y=-\tfrac12x+3$, the $y$-intercept is $(0,3)$ and the $x$-intercept is $(6,0)$.
+    Consider
+
+    $$
+    y=-\frac12x+3.
+    $$
+
+    For the $y$-axis set $x=0$:
+
+    $$
+    y=-\frac12\cdot0+3=3,
+    $$
+
+    so the intersection point is
+
+    $$
+    (0,3).
+    $$
+
+    For the $x$-axis set $y=0$:
+
+    $$
+    0=-\frac12x+3,
+    $$
+
+    hence $x=6$, so the second intersection point is
+
+    $$
+    (6,0).
+    $$
 
 ### The line through two points
 
