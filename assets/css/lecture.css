@@ -8,6 +8,7 @@
 .lecture-header .eyebrow { margin-bottom: 16px; }
 .lecture-header h1 { margin: 0 0 20px; font-size: clamp(3rem, 6vw, 5.3rem); line-height: .98; font-weight: 600; }
 .lecture-header p { max-width: 640px; margin: 0; color: var(--muted); font-family: var(--serif); font-size: 1.25rem; }
+.lecture-header .lecture-author { margin: -8px 0 18px; color: var(--ink); font-family: var(--sans); font-size: .95rem; font-weight: 600; }
 .section { margin: 0 0 64px; }
 .section h2 { margin: 0 0 18px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 2rem; }
 .section p { font-family: var(--serif); font-size: 1.08rem; }
