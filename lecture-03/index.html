@@ -192,9 +192,31 @@ y-y_0=\frac{v_2}{v_1}(x-x_0),
 \]</div>
 <p>and therefore <span class="arithmatex">\(y=mx+b\)</span> after collecting constants.</p>
 </div>
+<p>The quotient <span class="arithmatex">\(v_2/v_1\)</span> has a direct geometric meaning. If <span class="arithmatex">\(\alpha\)</span> is the oriented angle from the positive <span class="arithmatex">\(x\)</span>-axis to the direction vector <span class="arithmatex">\(\mathbf v=[v_1,v_2]\)</span> with <span class="arithmatex">\(v_1&gt;0\)</span>, then the direction triangle has horizontal leg <span class="arithmatex">\(v_1\)</span> and vertical leg <span class="arithmatex">\(v_2\)</span>. Hence</p>
+<div class="arithmatex">\[
+\boxed{
+ m=\frac{v_2}{v_1}
+  =\frac{\Delta y}{\Delta x}
+  =\tan\alpha.
+}
+\]</div>
+<p>Thus the slope is not merely a coefficient obtained by eliminating <span class="arithmatex">\(t\)</span>. It measures the vertical change per unit horizontal change and is the tangent of the inclination angle.</p>
+<figure class="figure-panel jsx-panel" data-fullscreen-panel>
+  <div class="figure-toolbar">
+    <div>
+      <span class="figure-title">The direction triangle and the slope</span>
+      <span class="figure-step-title">Move the endpoint of $\mathbf v$ and compare its horizontal and vertical components.</span>
+    </div>
+    <button class="icon-button" type="button" data-fullscreen aria-label="Open slope triangle figure in full screen">⛶</button>
+  </div>
+  <div class="figure-stage jsx-stage"><div id="slope-triangle-board" class="jxgbox" data-slope-triangle></div></div>
+  <div class="relation-readout"><span>$m=\dfrac{\Delta y}{\Delta x}=\dfrac{v_2}{v_1}=\tan\alpha$</span></div>
+  <figcaption class="figure-caption">The same direction vector forms a right triangle: its horizontal component is $v_1=\Delta x$, its vertical component is $v_2=\Delta y$, and their quotient is the slope.</figcaption>
+</figure>
+
 <div class="admonition note">
 <p class="admonition-title">Vertical case</p>
-<p>If <span class="arithmatex">\(v_1=0\)</span>, the line is vertical and is described by <span class="arithmatex">\(x=x_0\)</span>. Parametric and normal forms need no exception; only slope notation fails.</p>
+<p>If <span class="arithmatex">\(v_1=0\)</span>, the line is vertical and is described by <span class="arithmatex">\(x=x_0\)</span>. Parametric and normal forms need no exception; only slope notation fails because neither <span class="arithmatex">\(v_2/v_1\)</span> nor <span class="arithmatex">\(\tan\alpha\)</span> is finite.</p>
 </div>
 <div class="admonition summary">
 <p class="admonition-title">Three forms, three questions</p>
