@@ -71,3 +71,19 @@ $$
       +\left\|\mathbf u-\operatorname{proj}_{\mathbf v}\mathbf u\right\|^2
     }.
     $$
+
+<figure class="figure-panel jsx-panel" data-fullscreen-panel tabindex="0">
+  <div class="figure-toolbar">
+    <div>
+      <span class="figure-title">The orthogonal decomposition as a vector sum</span>
+      <span class="figure-step-title">Move $\mathbf u$ or the direction $\mathbf v$ and follow the three terms in the formula.</span>
+    </div>
+    <button class="icon-button" type="button" data-fullscreen aria-label="Open orthogonal decomposition figure in full screen">⛶</button>
+  </div>
+  <div class="figure-stage jsx-stage"><div id="orthogonal-decomposition-board" class="jxgbox" data-orthogonal-decomposition></div></div>
+  <figcaption class="figure-caption">
+    The diagonal is $\mathbf u$. Its two perpendicular components are
+    $\operatorname{proj}_{\mathbf v}\mathbf u$ and
+    $\mathbf u-\operatorname{proj}_{\mathbf v}\mathbf u$; hence the same right triangle visualises both boxed formulas above.
+  </figcaption>
+</figure>
